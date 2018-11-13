@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B38882180C36300B03F99 /* MotionDataParser.swift */; };
+		C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B388C2180CB3500B03F99 /* DataPoint.swift */; };
 		C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */; };
 		C1BA12EF217CBD0A0024F2DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA12EE217CBD0A0024F2DA /* ViewController.swift */; };
 		C1BA12F2217CBD0A0024F2DA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1BA12F0217CBD0A0024F2DA /* Main.storyboard */; };
@@ -26,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C14B38882180C36300B03F99 /* MotionDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataParser.swift; sourceTree = "<group>"; };
+		C14B388C2180CB3500B03F99 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
 		C1BA12E9217CBD0A0024F2DA /* SBRA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBRA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1BA12EE217CBD0A0024F2DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +83,8 @@
 			children = (
 				C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */,
 				C1BA12EE217CBD0A0024F2DA /* ViewController.swift */,
+				C14B38882180C36300B03F99 /* MotionDataParser.swift */,
+				C14B388C2180CB3500B03F99 /* DataPoint.swift */,
 				C1BA12F0217CBD0A0024F2DA /* Main.storyboard */,
 				C1BA12F3217CBD0D0024F2DA /* Assets.xcassets */,
 				C1BA12F5217CBD0D0024F2DA /* LaunchScreen.storyboard */,
@@ -197,6 +203,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */,
+				C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */,
 				C1BA12EF217CBD0A0024F2DA /* ViewController.swift in Sources */,
 				C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */,
 			);
