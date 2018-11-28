@@ -17,10 +17,9 @@ class MotionDataParser: NSObject {
 	var data = [DataPoint]()
 	var speedValues = [Float]()
 	
-	func startDataCollection(handler: @escaping MotionDataHandler) {
+	func startDataCollection(updateInterval: TimeInterval, handler: @escaping MotionDataHandler) {
 		if (manager.isDeviceMotionAvailable) {
-			let interval = 0.01
-			manager.deviceMotionUpdateInterval = interval
+			manager.deviceMotionUpdateInterval = updateInterval
 			var timestamp: TimeInterval = 0.0
 			manager.startDeviceMotionUpdates(to: OperationQueue.main) { (motion, error) in
 				if error != nil {
@@ -28,7 +27,7 @@ class MotionDataParser: NSObject {
 				}
 				
 				if let motion = motion {
-					timestamp += interval
+					timestamp += updateInterval
 					let dataPoint = DataPoint(acceleration: motion.userAcceleration, rotationRate: motion.rotationRate, timestamp: timestamp)
 					
 					self.data.append(dataPoint)

@@ -23,11 +23,11 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-    override func viewDidLoad() {
-        super.viewDidLoad()
+	override func viewDidLoad() {
+		super.viewDidLoad()
 		
 		view.backgroundColor = UIColor.white
-	
+		
 		navigationItem.title = "Meting"
 		
 		let saveButton = UIBarButtonItem(title: "Sla op", style: .done, target: self, action: #selector(tappedSaveButton))
@@ -35,9 +35,21 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		
 		
 		setupCollectionView()
-
-        // Do any additional setup after loading the view.
-    }
+		let motionDataParser = MotionDataParser()
+		motionDataParser.startDataCollection(updateInterval: 0.1) { (dataPoint, error) in
+			for i in 0...4 {
+				if let cell = self.collectionView.cellForItem(at: IndexPath(row: i, section: 0)) as? GraphCollectionViewCell {
+					if let acceleration = dataPoint?.acceleration {
+						cell.addValues(values: [acceleration.x, acceleration.y, acceleration.z])
+						//graphView.add([acceleration.x, acceleration.y, acceleration.z])
+					}
+				}
+			}
+		}
+		
+		
+		// Do any additional setup after loading the view.
+	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 		return numberOfGraphs
@@ -62,7 +74,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		collectionView.dataSource = self
 		collectionView.delegate = self
 		view.addSubview(collectionView)
-	
+		
 		collectionView.reloadData()
 		collectionView.backgroundColor = UIColor.white
 		if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -71,22 +83,22 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 			layout.itemSize = CGSize(width: 153, height: 168)
 			layout.sectionInset = UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22)
 		}
-	
+		
 		collectionView.register(GraphCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
 	}
 	
 	@objc private func tappedSaveButton() {
 		self.presentingViewController?.dismiss(animated: true, completion: nil)
 	}
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	
+	/*
+	// MARK: - Navigation
+	
+	// In a storyboard-based application, you will often want to do a little preparation before navigation
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+	// Get the new view controller using segue.destination.
+	// Pass the selected object to the new view controller.
+	}
+	*/
+	
 }

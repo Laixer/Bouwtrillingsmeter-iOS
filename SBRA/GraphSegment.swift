@@ -19,7 +19,7 @@ class GraphSegment: UIView {
 	
 	private let valueRanges: [ClosedRange<Double>]
 	
-	static let lineColors: [UIColor] = [.red, .green, .blue]
+	var lineColors: [UIColor] = [.white, .white, .white]
 	
 	var gridLinePositions = [CGFloat]()
 	
@@ -62,11 +62,11 @@ class GraphSegment: UIView {
 		//context.drawGraphLines(in: bounds.size)
 		
 		// Plot lines for the 3 sets of values.
-		context.setShouldAntialias(false)
+		context.setShouldAntialias(true)
 		context.translateBy(x: 0, y: bounds.size.height / 2.0)
 		
 		for lineIndex in 0..<3 {
-			context.setStrokeColor(GraphSegment.lineColors[lineIndex].cgColor)
+			context.setStrokeColor(lineColors[lineIndex].cgColor)
 			
 			// Move to the start point for the current line.
 			let value = startPoint[lineIndex]

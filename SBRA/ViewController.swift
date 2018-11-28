@@ -18,7 +18,7 @@ class ViewController: UIViewController {
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
-		motionParser.startDataCollection { (data, error) in
+		motionParser.startDataCollection(updateInterval: 0.01) { (data, error) in
 			print(self.motionParser.speedValues.last ?? "no data")
 			/*
 			if let data = data {

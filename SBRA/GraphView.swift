@@ -17,6 +17,8 @@ class GraphView: UIView {
 		return segments.last
 	}
 	
+	var monochromeLines = true
+	
 	var valueRanges = [-4.0...4.0, -4.0...4.0, -4.0...4.0]
 	
 	// MARK: Initialization
@@ -34,7 +36,8 @@ class GraphView: UIView {
 	}
 	
 	private func commonInit() {
-		backgroundColor = .white
+		isUserInteractionEnabled = false
+		backgroundColor = .clear
 	}
 	
 	// MARK: UIView overrides
@@ -56,9 +59,16 @@ class GraphView: UIView {
 	
 	func add(_ values: double3) {
 		// Move all the segments horizontally.
-		for segment in segments {
-			segment.center.x += 1
-		}
+		/*UIView.animate(withDuration: 0.1) {
+			
+		}*/
+		
+		UIView.animate(withDuration: 0.1, delay: 0.0, options: [.beginFromCurrentState], animations: {
+			for segment in self.segments {
+				segment.center.x += 1
+			}
+		}, completion: nil)
+		
 		
 		// Add a new segment there are no segments or if the current segment is full.
 		if segments.isEmpty {
@@ -89,6 +99,11 @@ class GraphView: UIView {
 		
 		// Create and store a new segment.
 		let segment = GraphSegment(startPoint: startPoint, valueRanges: valueRanges)
+		if monochromeLines {
+			segment.lineColors = [UIColor.white, UIColor.white, UIColor.white]
+		} else {
+			segment.lineColors = [UIColor.red, UIColor.blue, UIColor.green]
+		}
 		segments.append(segment)
 		
 		// Add the segment to the view.
