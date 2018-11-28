@@ -53,6 +53,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let graphPageViewController = GraphPageViewController()
+		graphPageViewController.initiallyVisibleGraphType = GraphType.allCases[indexPath.row]
 		navigationController?.pushViewController(graphPageViewController, animated: true)
 	}
 	

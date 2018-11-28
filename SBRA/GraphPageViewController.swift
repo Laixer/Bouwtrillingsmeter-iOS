@@ -9,10 +9,11 @@
 import UIKit
 import simd
 
-class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSource {
+class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
 	
 	var motionDataParser = MotionDataParser()
 	var graphViewControllers = [GraphViewController]()
+	var initiallyVisibleGraphType = GraphType.SpeedTime
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -23,8 +24,12 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		
 		view.backgroundColor = UIColor.white
 		
-		setViewControllers([graphViewControllers.first!], direction: .forward, animated: true, completion: nil)
+		if let graphVC = graphViewControllers.filter({$0.graphType == initiallyVisibleGraphType }).first {
+			setViewControllers([graphVC], direction: .forward, animated: true, completion: nil)
+			title = graphVC.graphType.description
+		}
 		dataSource = self
+		delegate = self
 		
 		
 		// Do any additional setup after loading the view.
@@ -48,6 +53,12 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		}
 		
 		return nil
+	}
+	
+	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+		if let graphType = (pageViewController.viewControllers?.first as? GraphViewController)?.graphType {
+			title = graphType.description
+		}
 	}
 	
 	init() {
