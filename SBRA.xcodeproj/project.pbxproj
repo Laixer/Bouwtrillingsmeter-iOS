@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */; };
 		C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B38882180C36300B03F99 /* MotionDataParser.swift */; };
 		C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B388C2180CB3500B03F99 /* DataPoint.swift */; };
+		C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195421AC014900F7D004 /* GraphViewController.swift */; };
+		C1B2195721AC04AB00F7D004 /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195621AC04AB00F7D004 /* GraphType.swift */; };
 		C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */; };
 		C1BA12EF217CBD0A0024F2DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA12EE217CBD0A0024F2DA /* ViewController.swift */; };
 		C1BA12F4217CBD0D0024F2DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1BA12F3217CBD0D0024F2DA /* Assets.xcassets */; };
@@ -32,8 +35,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPageViewController.swift; sourceTree = "<group>"; };
 		C14B38882180C36300B03F99 /* MotionDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataParser.swift; sourceTree = "<group>"; };
 		C14B388C2180CB3500B03F99 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
+		C1B2195421AC014900F7D004 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
+		C1B2195621AC04AB00F7D004 /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
 		C1BA12E9217CBD0A0024F2DA /* SBRA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBRA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1BA12EE217CBD0A0024F2DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +100,9 @@
 				C14B38882180C36300B03F99 /* MotionDataParser.swift */,
 				C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */,
 				C1EA6B3021AAEFCC000841A3 /* MeasureViewController.swift */,
+				C1B2195421AC014900F7D004 /* GraphViewController.swift */,
+				C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */,
+				C1B2195621AC04AB00F7D004 /* GraphType.swift */,
 				C1EA6B3221AAF383000841A3 /* GraphCollectionViewCell.swift */,
 				C1EE40CF219F6E0E004776F0 /* GraphView.swift */,
 				C1EE40D1219F6EC2004776F0 /* GraphSegment.swift */,
@@ -215,13 +224,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1EE40D2219F6EC2004776F0 /* GraphSegment.swift in Sources */,
+				C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */,
 				C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */,
 				C1EE40CE219F6599004776F0 /* MeasurementsViewController.swift in Sources */,
+				C1B2195721AC04AB00F7D004 /* GraphType.swift in Sources */,
 				C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */,
 				C1BA12EF217CBD0A0024F2DA /* ViewController.swift in Sources */,
 				C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */,
 				C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */,
 				C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */,
+				C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */,
 				C1EA6B3121AAEFCC000841A3 /* MeasureViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

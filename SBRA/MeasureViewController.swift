@@ -51,6 +51,11 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		
 	}
 	
+	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+		let graphPageViewController = GraphPageViewController()
+		navigationController?.pushViewController(graphPageViewController, animated: true)
+	}
+	
 	private func setupCollectionView() {
 		collectionView.frame = view.bounds
 		collectionView.dataSource = self

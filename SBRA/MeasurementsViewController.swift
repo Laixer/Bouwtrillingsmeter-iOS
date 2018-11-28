@@ -20,16 +20,7 @@ class MeasurementsViewController: UIViewController {
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
 		
 		view.backgroundColor = UIColor.white
-		let graphView = GraphView()
-		view.addSubview(graphView)
-		graphView.bounds.size = CGSize(width: view.bounds.width, height: 300)
-		graphView.center = view.center
 		
-		motionParser.startDataCollection { (data, error) in
-			if let data = data {
-				graphView.add(double3(data.acceleration.x, data.acceleration.y, data.acceleration.z))
-			}
-		}
 
     }
 	
