@@ -27,12 +27,36 @@ class GraphCollectionViewCell: UICollectionViewCell {
 		
 		clipsToBounds = true
 		
-		addSubview(graphTypeLabel)
-		addSubview(graphView)
+		graphTypeLabel.textColor = UIColor.white
+		graphTypeLabel.numberOfLines = 0
+		graphTypeLabel.textAlignment = .center
 		
-		graphView.frame = CGRect(x: 0, y: 10, width: frame.width, height: frame.height - 10)
+		contentView.addSubview(graphTypeLabel)
+		contentView.addSubview(graphView)
+		
+		let height = floor(0.4 * frame.height)
+		// graphView.backgroundColor = UIColor.black
+		graphView.frame = CGRect(x: 0, y: frame.height - height, width: frame.width, height: height)
 		//graphView.backgroundColor = UIColor.blue
+		
+		setupConstraints()
 	}
+	
+	func setupConstraints() {
+		graphTypeLabel.translatesAutoresizingMaskIntoConstraints = false
+		
+		graphTypeLabel.allowsDefaultTighteningForTruncation = true
+		
+		graphTypeLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1.0).isActive = true
+		graphTypeLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8.0).isActive = true
+		graphTypeLabel.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1.0).isActive = true
+	}
+	
+	override func draw(_ rect: CGRect) {
+		graphTypeLabel.text = text
+	}
+	
+	
 	
 	
 	

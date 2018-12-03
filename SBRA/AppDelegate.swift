@@ -18,11 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		// Override point for customization after application launch.
 		
 		window = UIWindow(frame: UIScreen.main.bounds)
+		window?.tintColor = UIColor.rotterdamGreen
 		
 		let viewController = MeasurementsViewController() // your custom viewController. You can instantiate using nib too. UIViewController(nib name, bundle)
 		//let rootVC = UIViewController(nibName: "MainViewController", bundle: nil) //or MainViewController()
 		let navController = UINavigationController(rootViewController: viewController) // Integrate navigation controller programmatically if you want
 		window?.rootViewController = navController
+		navController.navigationBar.titleTextAttributes = [.font: UIFont.rotterdamNavigationTitleFont]
 		
 		
 		window?.makeKeyAndVisible()

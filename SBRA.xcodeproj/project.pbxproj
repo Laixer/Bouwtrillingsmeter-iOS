@@ -17,6 +17,8 @@
 		C1BA12F4217CBD0D0024F2DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1BA12F3217CBD0D0024F2DA /* Assets.xcassets */; };
 		C1BA12F7217CBD0D0024F2DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1BA12F5217CBD0D0024F2DA /* LaunchScreen.storyboard */; };
 		C1BA1302217CBD0D0024F2DA /* SBRATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA1301217CBD0D0024F2DA /* SBRATests.swift */; };
+		C1C9619C21B5CB34003A7396 /* UIColor+Rotterdam.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C9619B21B5CB34003A7396 /* UIColor+Rotterdam.swift */; };
+		C1C9619E21B5CD40003A7396 /* UIFont+Rotterdam.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C9619D21B5CD40003A7396 /* UIFont+Rotterdam.swift */; };
 		C1EA6B3121AAEFCC000841A3 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EA6B3021AAEFCC000841A3 /* MeasureViewController.swift */; };
 		C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EA6B3221AAF383000841A3 /* GraphCollectionViewCell.swift */; };
 		C1EE40CE219F6599004776F0 /* MeasurementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */; };
@@ -49,6 +51,8 @@
 		C1BA12FD217CBD0D0024F2DA /* SBRATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SBRATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1BA1301217CBD0D0024F2DA /* SBRATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBRATests.swift; sourceTree = "<group>"; };
 		C1BA1303217CBD0D0024F2DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1C9619B21B5CB34003A7396 /* UIColor+Rotterdam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Rotterdam.swift"; sourceTree = "<group>"; };
+		C1C9619D21B5CD40003A7396 /* UIFont+Rotterdam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Rotterdam.swift"; sourceTree = "<group>"; };
 		C1EA6B3021AAEFCC000841A3 /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
 		C1EA6B3221AAF383000841A3 /* GraphCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCollectionViewCell.swift; sourceTree = "<group>"; };
 		C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +104,8 @@
 				C14B38882180C36300B03F99 /* MotionDataParser.swift */,
 				C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */,
 				C1EA6B3021AAEFCC000841A3 /* MeasureViewController.swift */,
+				C1C9619B21B5CB34003A7396 /* UIColor+Rotterdam.swift */,
+				C1C9619D21B5CD40003A7396 /* UIFont+Rotterdam.swift */,
 				C1B2195421AC014900F7D004 /* GraphViewController.swift */,
 				C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */,
 				C1B2195621AC04AB00F7D004 /* GraphType.swift */,
@@ -224,10 +230,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1EE40D2219F6EC2004776F0 /* GraphSegment.swift in Sources */,
+				C1C9619E21B5CD40003A7396 /* UIFont+Rotterdam.swift in Sources */,
 				C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */,
 				C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */,
 				C1EE40CE219F6599004776F0 /* MeasurementsViewController.swift in Sources */,
 				C1B2195721AC04AB00F7D004 /* GraphType.swift in Sources */,
+				C1C9619C21B5CB34003A7396 /* UIColor+Rotterdam.swift in Sources */,
 				C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */,
 				C1BA12EF217CBD0A0024F2DA /* ViewController.swift in Sources */,
 				C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */,

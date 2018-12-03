@@ -56,9 +56,10 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-		cell.backgroundColor = UIColor.green
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! GraphCollectionViewCell
+		cell.backgroundColor = UIColor.rotterdamGreen
 		cell.layer.cornerRadius = 8.0
+		cell.text = GraphType.allCases[indexPath.row].description
 		return cell
 		
 	}
