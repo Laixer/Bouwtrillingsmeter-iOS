@@ -59,16 +59,9 @@ class GraphView: UIView {
 	
 	func add(_ values: double3) {
 		// Move all the segments horizontally.
-		/*UIView.animate(withDuration: 0.1) {
-			
-		}*/
-		
-		UIView.animate(withDuration: 0.1, delay: 0.0, options: [.beginFromCurrentState], animations: {
-			for segment in self.segments {
-				segment.center.x += 1
-			}
-		}, completion: nil)
-		
+		for segment in segments {
+			segment.center.x += 1
+		}
 		
 		// Add a new segment there are no segments or if the current segment is full.
 		if segments.isEmpty {
