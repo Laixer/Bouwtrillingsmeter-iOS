@@ -100,19 +100,11 @@
 			isa = PBXGroup;
 			children = (
 				C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */,
-				C1BA12EE217CBD0A0024F2DA /* ViewController.swift */,
 				C14B38882180C36300B03F99 /* MotionDataParser.swift */,
-				C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */,
-				C1EA6B3021AAEFCC000841A3 /* MeasureViewController.swift */,
-				C1C9619B21B5CB34003A7396 /* UIColor+Rotterdam.swift */,
-				C1C9619D21B5CD40003A7396 /* UIFont+Rotterdam.swift */,
-				C1B2195421AC014900F7D004 /* GraphViewController.swift */,
-				C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */,
-				C1B2195621AC04AB00F7D004 /* GraphType.swift */,
-				C1EA6B3221AAF383000841A3 /* GraphCollectionViewCell.swift */,
-				C1EE40CF219F6E0E004776F0 /* GraphView.swift */,
-				C1EE40D1219F6EC2004776F0 /* GraphSegment.swift */,
-				C14B388C2180CB3500B03F99 /* DataPoint.swift */,
+				C1C9619F21B6B08B003A7396 /* View Controller */,
+				C1C961A221B6B0C0003A7396 /* Model */,
+				C1C961A321B6B0CD003A7396 /* View */,
+				C1C961A121B6B0AD003A7396 /* Extensions */,
 				C1BA12F3217CBD0D0024F2DA /* Assets.xcassets */,
 				C1BA12F5217CBD0D0024F2DA /* LaunchScreen.storyboard */,
 				C1BA12F8217CBD0D0024F2DA /* Info.plist */,
@@ -127,6 +119,46 @@
 				C1BA1303217CBD0D0024F2DA /* Info.plist */,
 			);
 			path = SBRATests;
+			sourceTree = "<group>";
+		};
+		C1C9619F21B6B08B003A7396 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				C1BA12EE217CBD0A0024F2DA /* ViewController.swift */,
+				C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */,
+				C1EA6B3021AAEFCC000841A3 /* MeasureViewController.swift */,
+				C1B2195421AC014900F7D004 /* GraphViewController.swift */,
+				C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		C1C961A121B6B0AD003A7396 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C1C9619B21B5CB34003A7396 /* UIColor+Rotterdam.swift */,
+				C1C9619D21B5CD40003A7396 /* UIFont+Rotterdam.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C1C961A221B6B0C0003A7396 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C1B2195621AC04AB00F7D004 /* GraphType.swift */,
+				C14B388C2180CB3500B03F99 /* DataPoint.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C1C961A321B6B0CD003A7396 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C1EA6B3221AAF383000841A3 /* GraphCollectionViewCell.swift */,
+				C1EE40CF219F6E0E004776F0 /* GraphView.swift */,
+				C1EE40D1219F6EC2004776F0 /* GraphSegment.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
