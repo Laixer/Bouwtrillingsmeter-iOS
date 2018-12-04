@@ -37,18 +37,24 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		setupCollectionView()
 		let motionDataParser = MotionDataParser()
 		motionDataParser.startDataCollection(updateInterval: 0.1) { (dataPoint, error) in
-			for i in 0...4 {
-				if let cell = self.collectionView.cellForItem(at: IndexPath(row: i, section: 0)) as? GraphCollectionViewCell {
+			for i in 0...self.collectionView.numberOfItems(inSection: 0) {
+				let indexPath = IndexPath(row: i, section: 0)
+				if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell {
 					if let acceleration = dataPoint?.acceleration {
 						cell.addValues(values: [acceleration.x, acceleration.y, acceleration.z])
-						//graphView.add([acceleration.x, acceleration.y, acceleration.z])
+					}
+					
+					if let dataPoint = dataPoint {
+						self.updateCellAtIndexPathWithDataPoint(cell: cell, indexPath: indexPath, dataPoint: dataPoint)
 					}
 				}
 			}
 		}
 		
-		
-		// Do any additional setup after loading the view.
+	}
+	
+	private func updateCellAtIndexPathWithDataPoint(cell: GraphCollectionViewCell, indexPath: IndexPath, dataPoint: DataPoint) {
+		//TODO: implement
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -91,15 +97,4 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	@objc private func tappedSaveButton() {
 		self.presentingViewController?.dismiss(animated: true, completion: nil)
 	}
-	
-	/*
-	// MARK: - Navigation
-	
-	// In a storyboard-based application, you will often want to do a little preparation before navigation
-	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-	// Get the new view controller using segue.destination.
-	// Pass the selected object to the new view controller.
-	}
-	*/
-	
 }
