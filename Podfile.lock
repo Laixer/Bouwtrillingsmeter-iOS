@@ -1,0 +1,16 @@
+PODS:
+  - Surge (2.2.0)
+
+DEPENDENCIES:
+  - Surge (~> 2.2)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Surge
+
+SPEC CHECKSUMS:
+  Surge: 51fbaf8020dc2bc6416c07ed540f21536ba5a98b
+
+PODFILE CHECKSUM: 7cb32becbfac45b5866c8b11f789b4bf5c08d57f
+
+COCOAPODS: 1.5.3
