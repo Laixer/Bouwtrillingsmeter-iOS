@@ -11,6 +11,8 @@ import simd
 
 class GraphView: UIView {
 	
+	var singleLine = false
+	
 	private var segments = [GraphSegment]()
 	
 	private var currentSegment: GraphSegment? {
@@ -92,6 +94,7 @@ class GraphView: UIView {
 		
 		// Create and store a new segment.
 		let segment = GraphSegment(startPoint: startPoint, valueRanges: valueRanges)
+		segment.singleLine = singleLine
 		if monochromeLines {
 			segment.lineColors = [UIColor.white, UIColor.white, UIColor.white]
 		} else {
@@ -117,6 +120,10 @@ class GraphView: UIView {
 				return false
 			}
 		}
+	}
+	
+	func clear() {
+		segments.removeAll()
 	}
 
 }

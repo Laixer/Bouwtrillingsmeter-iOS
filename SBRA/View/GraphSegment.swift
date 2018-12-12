@@ -10,6 +10,8 @@ import UIKit
 import simd
 
 class GraphSegment: UIView {
+	
+	var singleLine = false
 
 	static let capacity = 32
 	
@@ -65,7 +67,8 @@ class GraphSegment: UIView {
 		context.setShouldAntialias(true)
 		context.translateBy(x: 0, y: bounds.size.height / 2.0)
 		
-		for lineIndex in 0..<3 {
+		let maxIndex = singleLine ? 1 : 3
+		for lineIndex in 0..<maxIndex {
 			context.setStrokeColor(lineColors[lineIndex].cgColor)
 			
 			// Move to the start point for the current line.
