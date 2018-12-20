@@ -8,6 +8,8 @@
 
 import UIKit
 import CoreMotion
+import Accelerate
+import Surge
 
 typealias MotionDataHandler = (DataPoint?, Error?) -> Void
 
@@ -15,7 +17,10 @@ class MotionDataParser: NSObject {
 	
 	let manager = CMMotionManager()
 	var data = [DataPoint]()
-	var speedValues = [Float]()
+	lazy var setup = {
+		return vDSP_create_fftsetup(UInt(ceil(log2(10000.0))), 0)
+	}()
+	//var speedValues = [Float]()
 	
 	func startDataCollection(updateInterval: TimeInterval, handler: @escaping MotionDataHandler) {
 		if (manager.isDeviceMotionAvailable) {
@@ -28,10 +33,15 @@ class MotionDataParser: NSObject {
 				
 				if let motion = motion {
 					timestamp += updateInterval
-					let dataPoint = DataPoint(acceleration: motion.userAcceleration, rotationRate: motion.rotationRate, timestamp: timestamp)
+					let speed = self.updateSpeed()
+					let frequency = self.updateFrequency()
+					let fft = Float(0.0)
+					let gravity = Float(0.0)
+					let dataPoint = DataPoint(acceleration: motion.userAcceleration, speed: speed, frequency: frequency, fft: fft, gravity: gravity, rotationRate: motion.rotationRate, timestamp: timestamp)
 					
 					self.data.append(dataPoint)
-					self.updateSpeed()
+					
+					//self.speedValues.append(self.updateSpeed())
 					handler(dataPoint, nil)
 					
 				} else {
@@ -41,8 +51,8 @@ class MotionDataParser: NSObject {
 		}
 	}
 	
-	private func updateSpeed() {
-		var speed = self.speedValues.last ?? 0
+	private func updateSpeed() -> Float {
+		var speed = self.data.last?.speed ?? 0
 		
 		var vx: Decimal = 0
 		var vy: Decimal = 0
@@ -59,8 +69,23 @@ class MotionDataParser: NSObject {
 			
 			let decimalSpeed = pow(vx, 2) + pow(vy, 2)
 			speed += Float(sqrt(Double(truncating: decimalSpeed as NSNumber)))
-			speedValues.append(speed)
+			return speed
 		}
+		
+		return 0.0
+	}
+	
+	private func updateFrequency() -> [Float] {
+		
+		let speeds = self.data.map({$0.speed})
+		
+		//print("speeds: \(speeds)")
+		
+		if speeds.count > 20 {
+			return Surge.fft(speeds)
+		}
+		
+		return [0.0]
 	}
 	
 	

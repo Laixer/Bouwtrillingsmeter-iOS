@@ -39,14 +39,8 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		motionDataParser.startDataCollection(updateInterval: 0.1) { (dataPoint, error) in
 			for i in 0...self.collectionView.numberOfItems(inSection: 0) {
 				let indexPath = IndexPath(row: i, section: 0)
-				if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell {
-					if let acceleration = dataPoint?.acceleration {
-						cell.addValues(values: [acceleration.x, acceleration.y, acceleration.z])
-					}
-					
-					if let dataPoint = dataPoint {
-						self.updateCellAtIndexPathWithDataPoint(cell: cell, indexPath: indexPath, dataPoint: dataPoint)
-					}
+				if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell, let dataPoint = dataPoint {
+					self.updateCellAtIndexPathWithDataPoint(cell: cell, indexPath: indexPath, dataPoint: dataPoint)
 				}
 			}
 		}
@@ -54,7 +48,20 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	}
 	
 	private func updateCellAtIndexPathWithDataPoint(cell: GraphCollectionViewCell, indexPath: IndexPath, dataPoint: DataPoint) {
-		//TODO: implement
+		switch indexPath.row {
+		case 0:
+			cell.addValues(values: [Double(dataPoint.speed), 0.0, 0.0])
+		case 1:
+			cell.graphView.clear()
+			if let frequency = dataPoint.frequency {
+				for element in frequency {
+					cell.addValues(values: [Double(element), 0.0, 0.0])
+				}
+			}
+			
+		default: break
+			
+		}
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -66,6 +73,10 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		cell.backgroundColor = UIColor.rotterdamGreen
 		cell.layer.cornerRadius = 8.0
 		cell.text = GraphType.allCases[indexPath.row].description
+		if (indexPath.row == 0) {
+			cell.graphView.singleLine = true
+		}
+		
 		return cell
 		
 	}

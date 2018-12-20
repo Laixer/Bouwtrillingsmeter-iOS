@@ -123,6 +123,7 @@ class GraphView: UIView {
 	}
 	
 	func clear() {
+		segments.forEach({$0.removeFromSuperview()})
 		segments.removeAll()
 	}
 

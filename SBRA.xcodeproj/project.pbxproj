@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		670611325E4EE8EC8A6E3873 /* Pods_SBRA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7648575BC029CAF6421FB1 /* Pods_SBRA.framework */; };
 		C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */; };
 		C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B38882180C36300B03F99 /* MotionDataParser.swift */; };
 		C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B388C2180CB3500B03F99 /* DataPoint.swift */; };
 		C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195421AC014900F7D004 /* GraphViewController.swift */; };
 		C1B2195721AC04AB00F7D004 /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195621AC04AB00F7D004 /* GraphType.swift */; };
 		C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */; };
-		C1BA12EF217CBD0A0024F2DA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA12EE217CBD0A0024F2DA /* ViewController.swift */; };
 		C1BA12F4217CBD0D0024F2DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1BA12F3217CBD0D0024F2DA /* Assets.xcassets */; };
 		C1BA12F7217CBD0D0024F2DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1BA12F5217CBD0D0024F2DA /* LaunchScreen.storyboard */; };
 		C1BA1302217CBD0D0024F2DA /* SBRATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA1301217CBD0D0024F2DA /* SBRATests.swift */; };
@@ -37,6 +37,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2C7648575BC029CAF6421FB1 /* Pods_SBRA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBRA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6F511BD27B300B9783B5BA4F /* Pods-SBRA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBRA.release.xcconfig"; path = "Pods/Target Support Files/Pods-SBRA/Pods-SBRA.release.xcconfig"; sourceTree = "<group>"; };
+		81B42AC13935647DFC95260F /* Pods-SBRA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBRA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SBRA/Pods-SBRA.debug.xcconfig"; sourceTree = "<group>"; };
 		C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPageViewController.swift; sourceTree = "<group>"; };
 		C14B38882180C36300B03F99 /* MotionDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataParser.swift; sourceTree = "<group>"; };
 		C14B388C2180CB3500B03F99 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
@@ -44,7 +47,6 @@
 		C1B2195621AC04AB00F7D004 /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
 		C1BA12E9217CBD0A0024F2DA /* SBRA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBRA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		C1BA12EE217CBD0A0024F2DA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		C1BA12F3217CBD0D0024F2DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C1BA12F6217CBD0D0024F2DA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C1BA12F8217CBD0D0024F2DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -65,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				670611325E4EE8EC8A6E3873 /* Pods_SBRA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,12 +81,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C94E6BB505B04685F96DA71 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2C7648575BC029CAF6421FB1 /* Pods_SBRA.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AC954403CD8586810C730375 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				81B42AC13935647DFC95260F /* Pods-SBRA.debug.xcconfig */,
+				6F511BD27B300B9783B5BA4F /* Pods-SBRA.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		C1BA12E0217CBD0A0024F2DA = {
 			isa = PBXGroup;
 			children = (
 				C1BA12EB217CBD0A0024F2DA /* SBRA */,
 				C1BA1300217CBD0D0024F2DA /* SBRATests */,
 				C1BA12EA217CBD0A0024F2DA /* Products */,
+				AC954403CD8586810C730375 /* Pods */,
+				5C94E6BB505B04685F96DA71 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,7 +146,6 @@
 		C1C9619F21B6B08B003A7396 /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				C1BA12EE217CBD0A0024F2DA /* ViewController.swift */,
 				C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */,
 				C1EA6B3021AAEFCC000841A3 /* MeasureViewController.swift */,
 				C1B2195421AC014900F7D004 /* GraphViewController.swift */,
@@ -168,9 +189,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = C1BA1306217CBD0D0024F2DA /* Build configuration list for PBXNativeTarget "SBRA" */;
 			buildPhases = (
+				4DEDBD45B6D9D5F7FA4A7BC4 /* [CP] Check Pods Manifest.lock */,
 				C1BA12E5217CBD0A0024F2DA /* Sources */,
 				C1BA12E6217CBD0A0024F2DA /* Frameworks */,
 				C1BA12E7217CBD0A0024F2DA /* Resources */,
+				22A43B98B2E52FA0F0512B63 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -256,6 +279,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		22A43B98B2E52FA0F0512B63 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SBRA/Pods-SBRA-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Surge/Surge.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Surge.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SBRA/Pods-SBRA-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4DEDBD45B6D9D5F7FA4A7BC4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SBRA-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		C1BA12E5217CBD0A0024F2DA /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -269,7 +339,6 @@
 				C1B2195721AC04AB00F7D004 /* GraphType.swift in Sources */,
 				C1C9619C21B5CB34003A7396 /* UIColor+Rotterdam.swift in Sources */,
 				C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */,
-				C1BA12EF217CBD0A0024F2DA /* ViewController.swift in Sources */,
 				C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */,
 				C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */,
 				C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */,
@@ -426,6 +495,7 @@
 		};
 		C1BA1307217CBD0D0024F2DA /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 81B42AC13935647DFC95260F /* Pods-SBRA.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -444,6 +514,7 @@
 		};
 		C1BA1308217CBD0D0024F2DA /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6F511BD27B300B9783B5BA4F /* Pods-SBRA.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
