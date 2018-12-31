@@ -10,7 +10,7 @@ enum GraphType: CaseIterable, CustomStringConvertible {
 	case SpeedTime
 	case FrequencyTime
 	case SpeedFrequency
-	case FFTDisplacement
+	case FFT1Second
 	case GravityTimeAccelerationTime
 	
 	var description: String {
@@ -21,8 +21,8 @@ enum GraphType: CaseIterable, CustomStringConvertible {
 			return "Frequentie/tijd"
 		case .SpeedFrequency:
 			return "Snelheid/frequentie"
-		case .FFTDisplacement:
-			return "FFT/plaats"
+		case .FFT1Second:
+			return "FFT (1 seconde)"
 		case .GravityTimeAccelerationTime:
 			return "Zwaartekracht/tijd + Versnelling/tijd"
 		}

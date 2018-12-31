@@ -51,13 +51,15 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		switch indexPath.row {
 		case 0:
 			cell.addValues(values: [Double(dataPoint.speed), 0.0, 0.0])
-		case 1:
+		case 3:
 			cell.graphView.clear()
-			if let frequency = dataPoint.frequency {
-				for element in frequency {
+			if let fft = dataPoint.fft {
+				for element in fft {
 					cell.addValues(values: [Double(element), 0.0, 0.0])
 				}
 			}
+		case 4:
+			cell.addValues(values: [dataPoint.acceleration.x, dataPoint.acceleration.y, dataPoint.acceleration.z])
 			
 		default: break
 			
@@ -98,7 +100,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
 			layout.minimumInteritemSpacing = 22
 			layout.minimumLineSpacing = 22
-			layout.itemSize = CGSize(width: 153, height: 168)
+			layout.itemSize = CGSize(width: 120, height: 168)
 			layout.sectionInset = UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22)
 		}
 		
