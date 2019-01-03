@@ -11,9 +11,9 @@ import CoreMotion
 struct DataPoint {
 	let acceleration: CMAcceleration
 	let speed: Float
-	let frequency: (x: DominantFrequency, y: DominantFrequency, z: DominantFrequency)?
+	let dominantFrequency: (x: DominantFrequency, y: DominantFrequency, z: DominantFrequency)?
 	let fft: [Float]?
-	let gravity: Float
+	let gravity: CMAcceleration?
 	let rotationRate: CMRotationRate
 	let timestamp: TimeInterval
 }

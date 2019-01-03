@@ -22,13 +22,27 @@ class MotionDataParser: NSObject {
 	}()
 	//var speedValues = [Float]()
 	
-	func startDataCollection(updateInterval: TimeInterval, handler: @escaping MotionDataHandler) {
+	func startDataCollection(updateInterval: TimeInterval,
+							 handler: @escaping MotionDataHandler) {
 		if (manager.isDeviceMotionAvailable) {
 			manager.deviceMotionUpdateInterval = updateInterval
 			var timestamp: TimeInterval = 0.0
 			var shouldReset = false
 			
-			var fft: [Float]?
+			var previousFFT: [Float]?
+			var previousDominantFrequency: (x: DominantFrequency, y: DominantFrequency, z: DominantFrequency)?
+			var latestGravity: CMAcceleration?
+			
+			manager.startAccelerometerUpdates(to: OperationQueue.main) { (motion, error) in
+				if (error != nil) {
+					return
+				}
+				
+				if let motion = motion {
+					latestGravity = motion.acceleration
+				}
+			
+			}
 			
 			manager.startDeviceMotionUpdates(to: OperationQueue.main) { (motion, error) in
 				if error != nil {
@@ -46,18 +60,28 @@ class MotionDataParser: NSObject {
 					}
 					
 					let speed = self.updateSpeed()
-					let frequency = self.updateFrequency()
+					var frequency = self.updateFrequency()
+					if (frequency == nil) {
+						frequency = previousDominantFrequency
+					} else {
+						previousDominantFrequency = frequency
+					}
 					if (timestamp > 2.0) {
 						shouldReset = true
-						fft = self.updateFFT()
+						previousFFT = self.updateFFT()
 					}
 					
-					let gravity = Float(0.0)
-					let dataPoint = DataPoint(acceleration: motion.userAcceleration, speed: speed, frequency: frequency, fft: fft, gravity: gravity, rotationRate: motion.rotationRate, timestamp: timestamp)
+					let gravity = latestGravity
+					let dataPoint = DataPoint(acceleration: motion.userAcceleration,
+											  speed: speed,
+											  dominantFrequency:frequency,
+											  fft: previousFFT,
+											  gravity: gravity,
+											  rotationRate: motion.rotationRate,
+											  timestamp: timestamp)
 					
 					self.data.append(dataPoint)
 					
-					//self.speedValues.append(self.updateSpeed())
 					handler(dataPoint, nil)
 					
 				} else {
@@ -185,39 +209,11 @@ class MotionDataParser: NSObject {
 		}
 		
 		if let x = x, let y = y, let z = z {
-			print("dom x: \(x) dom y: \(y) dom z: \(z)")
+			//print("dom x: \(x) dom y: \(y) dom z: \(z)")
 			return (x, y, z)
 		}
 		
 		return nil
-		
-		
-		/*
-		for (int i = 0; i < limitValues.size(); i++){
-			DataPoint<int[]> limitValue = limitValues.get(i);
-			DataPoint<int[]> velocity = velocities.get(i);
-			
-			if (velocity.values[0] / limitValue.values[0] > ratioX){
-				ratioX = velocity.values[0] / limitValue.values[0];
-				domFreqX = limitValue.domain[0];
-				domVelX = velocity.values[0];
-			}
-			
-			if (velocity.values[1] / limitValue.values[1] > ratioY){
-				ratioY = velocity.values[1] / limitValue.values[1];
-				domFreqY = limitValue.domain[1];
-				domVelY = velocity.values[1];
-			}
-			
-			if (velocity.values[2] / limitValue.values[2] > ratioZ){
-				ratioZ = velocity.values[2] / limitValue.values[2];
-				domFreqZ = limitValue.domain[2];
-				domVelZ = velocity.values[2];
-			}
-		}
-		return new Fdom(new int[]{domFreqX, domFreqY, domFreqZ}, new float[]{domVelX, domVelY, domVelZ}, new boolean[]{ratioX > 1, ratioY > 1, ratioZ > 1});
-		*/
-		
 	}
 	
 	
@@ -244,16 +240,10 @@ class MotionDataParser: NSObject {
 			velocity.append((x, y, z))
 		}
 		
-		
 		return velocity
 	}
 	
 	private static func getLimitValue(frequency: Float) -> Float {
 		return 35.0
 	}
-	
-
-	
-	
-	
 }

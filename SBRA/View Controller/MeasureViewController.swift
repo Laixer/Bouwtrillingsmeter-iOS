@@ -37,7 +37,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		setupCollectionView()
 		let motionDataParser = MotionDataParser()
 		motionDataParser.startDataCollection(updateInterval: 0.02) { (dataPoint, error) in
-			for i in 0...self.collectionView.numberOfItems(inSection: 0) {
+			for i in 0..<self.collectionView.numberOfItems(inSection: 0) {
 				let indexPath = IndexPath(row: i, section: 0)
 				if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell, let dataPoint = dataPoint {
 					self.updateCellAtIndexPathWithDataPoint(cell: cell, indexPath: indexPath, dataPoint: dataPoint)
@@ -50,16 +50,24 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	private func updateCellAtIndexPathWithDataPoint(cell: GraphCollectionViewCell, indexPath: IndexPath, dataPoint: DataPoint) {
 		switch indexPath.row {
 		case 0:
-			cell.addValues(values: [Double(dataPoint.speed), 0.0, 0.0])
+			cell.addValues(values: [Double(dataPoint.speed), 0, 0])
+		case 1:
+			if let dominantFrequency = dataPoint.dominantFrequency {
+				cell.addValues(values: [Double(dominantFrequency.x.frequency) / 100.0, Double(dominantFrequency.y.frequency) / 100.0, Double(dominantFrequency.z.frequency) / 100.0])
+			}
 		case 3:
 			cell.graphView.clear()
 			if let fft = dataPoint.fft {
 				for element in fft {
-					cell.addValues(values: [Double(element) * 100, 0.0, 0.0])
+					cell.addValues(values: [Double(element * 100.0), 0, 0])
 				}
 			}
 		case 4:
-			cell.addValues(values: [dataPoint.acceleration.x, dataPoint.acceleration.y, dataPoint.acceleration.z])
+			cell.addValues(values: [dataPoint.acceleration.x,
+									dataPoint.acceleration.y,
+									dataPoint.acceleration.z
+				/*, gravity.x, gravity.y, gravity.z*/])
+			
 			
 		default: break
 			
@@ -75,6 +83,15 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		cell.backgroundColor = UIColor.rotterdamGreen
 		cell.layer.cornerRadius = 8.0
 		cell.text = GraphType.allCases[indexPath.row].description
+		/*if (indexPath.row == 0) {
+			cell.graphView.numberOfLines = 1
+		} else if (indexPath.row == 4) {
+			cell.graphView.numberOfLines = 6
+		} else if (indexPath.row == 2) {
+			cell.graphView.numberOfLines = 0
+		} else {
+			cell.graphView.numberOfLines = 3
+		}*/
 		if (indexPath.row == 0) {
 			cell.graphView.singleLine = true
 		}
