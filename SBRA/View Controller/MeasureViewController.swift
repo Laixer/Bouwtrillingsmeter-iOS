@@ -36,7 +36,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		
 		setupCollectionView()
 		let motionDataParser = MotionDataParser()
-		motionDataParser.startDataCollection(updateInterval: 0.1) { (dataPoint, error) in
+		motionDataParser.startDataCollection(updateInterval: 0.02) { (dataPoint, error) in
 			for i in 0...self.collectionView.numberOfItems(inSection: 0) {
 				let indexPath = IndexPath(row: i, section: 0)
 				if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell, let dataPoint = dataPoint {
@@ -55,7 +55,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 			cell.graphView.clear()
 			if let fft = dataPoint.fft {
 				for element in fft {
-					cell.addValues(values: [Double(element), 0.0, 0.0])
+					cell.addValues(values: [Double(element) * 100, 0.0, 0.0])
 				}
 			}
 		case 4:

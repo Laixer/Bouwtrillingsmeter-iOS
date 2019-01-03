@@ -26,6 +26,10 @@ class MotionDataParser: NSObject {
 		if (manager.isDeviceMotionAvailable) {
 			manager.deviceMotionUpdateInterval = updateInterval
 			var timestamp: TimeInterval = 0.0
+			var shouldReset = false
+			
+			var fft: [Float]?
+			
 			manager.startDeviceMotionUpdates(to: OperationQueue.main) { (motion, error) in
 				if error != nil {
 					handler(nil, error)
@@ -33,9 +37,21 @@ class MotionDataParser: NSObject {
 				
 				if let motion = motion {
 					timestamp += updateInterval
+					
+					if (shouldReset == true) {
+						self.data.removeAll()
+						timestamp = 0.0
+						shouldReset = false
+						return
+					}
+					
 					let speed = self.updateSpeed()
-					let frequency = [DominantFrequency]() // self.updateFrequency()
-					let fft = [Float(0.0)] // self.updateFFT()
+					let frequency = self.updateFrequency()
+					if (timestamp > 2.0) {
+						shouldReset = true
+						fft = self.updateFFT()
+					}
+					
 					let gravity = Float(0.0)
 					let dataPoint = DataPoint(acceleration: motion.userAcceleration, speed: speed, frequency: frequency, fft: fft, gravity: gravity, rotationRate: motion.rotationRate, timestamp: timestamp)
 					
@@ -137,9 +153,6 @@ class MotionDataParser: NSObject {
 			let limitValueZ = limitValues.z[i]
 			let velocity = velocityInFrequencyDomain()
 			
-			
-
-			
 			if let velocityX = velocity?[i].x {
 				if (velocityX / limitValueX > ratioX) {
 					ratioX = velocityX / limitValueX
@@ -172,6 +185,7 @@ class MotionDataParser: NSObject {
 		}
 		
 		if let x = x, let y = y, let z = z {
+			print("dom x: \(x) dom y: \(y) dom z: \(z)")
 			return (x, y, z)
 		}
 		
