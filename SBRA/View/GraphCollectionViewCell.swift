@@ -48,7 +48,7 @@ class GraphCollectionViewCell: UICollectionViewCell {
 		graphTypeLabel.allowsDefaultTighteningForTruncation = true
 		
 		graphTypeLabel.leadingAnchor.constraint(equalToSystemSpacingAfter: contentView.leadingAnchor, multiplier: 1.0).isActive = true
-		graphTypeLabel.rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: -8.0).isActive = true
+		graphTypeLabel.rightAnchor.constraint(equalTo: contentView.layoutMarginsGuide.rightAnchor).isActive = true
 		graphTypeLabel.topAnchor.constraint(equalToSystemSpacingBelow: contentView.topAnchor, multiplier: 1.0).isActive = true
 	}
 	
