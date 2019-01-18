@@ -17,16 +17,16 @@ class MeasurementsViewController: UIViewController {
         super.viewDidLoad()
 		
 		title = "Metingen"
-		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTapped))
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tappedAddButton))
 		
 		view.backgroundColor = UIColor.white
 		
 
     }
 	
-	@objc private func addTapped() {
-		let measureViewController = MeasureViewController()
-		let navigationController = UINavigationController(rootViewController: measureViewController)
+	@objc private func tappedAddButton() {
+		let measurementSettingsVC = MeasurementSettingsViewController()
+		let navigationController = UINavigationController(rootViewController: measurementSettingsVC)
 		
 		present(navigationController, animated: true, completion: nil)
 	}
