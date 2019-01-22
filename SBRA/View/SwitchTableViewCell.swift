@@ -21,6 +21,7 @@ class SwitchTableViewCell: UITableViewCell {
 			switchElement.translatesAutoresizingMaskIntoConstraints = false
 			textLabel.translatesAutoresizingMaskIntoConstraints = false
 			
+			
 			contentView.addSubview(switchElement)
 			contentView.addSubview(textLabel)
 			
@@ -29,6 +30,7 @@ class SwitchTableViewCell: UITableViewCell {
 				textLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
 				switchElement.centerYAnchor.constraint(equalTo: centerYAnchor),
 				switchElement.rightAnchor.constraint(equalTo: layoutMarginsGuide.rightAnchor)
+				
 				])
 		}
 		
@@ -38,11 +40,4 @@ class SwitchTableViewCell: UITableViewCell {
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
-	
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }
