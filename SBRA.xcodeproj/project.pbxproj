@@ -18,6 +18,7 @@
 		C17447F022088FA600287C3E /* WizardQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447EF22088FA600287C3E /* WizardQuestion.swift */; };
 		C17447F22208902700287C3E /* WizardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447F12208902700287C3E /* WizardItem.swift */; };
 		C17447F42208926700287C3E /* WizardOutcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447F32208926700287C3E /* WizardOutcome.swift */; };
+		C17447F62208A15300287C3E /* CategoryWizardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447F52208A15300287C3E /* CategoryWizardViewController.swift */; };
 		C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195421AC014900F7D004 /* GraphViewController.swift */; };
 		C1B2195721AC04AB00F7D004 /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195621AC04AB00F7D004 /* GraphType.swift */; };
 		C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */; };
@@ -59,6 +60,7 @@
 		C17447EF22088FA600287C3E /* WizardQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardQuestion.swift; sourceTree = "<group>"; };
 		C17447F12208902700287C3E /* WizardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardItem.swift; sourceTree = "<group>"; };
 		C17447F32208926700287C3E /* WizardOutcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardOutcome.swift; sourceTree = "<group>"; };
+		C17447F52208A15300287C3E /* CategoryWizardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizardViewController.swift; sourceTree = "<group>"; };
 		C1B2195421AC014900F7D004 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		C1B2195621AC04AB00F7D004 /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
 		C1BA12E9217CBD0A0024F2DA /* SBRA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBRA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -168,6 +170,7 @@
 				C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */,
 				C1EA6B3021AAEFCC000841A3 /* MeasureViewController.swift */,
 				C1FE939F21EBAB21000B90FC /* MeasurementSettingsViewController.swift */,
+				C17447F52208A15300287C3E /* CategoryWizardViewController.swift */,
 				C1B2195421AC014900F7D004 /* GraphViewController.swift */,
 				C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */,
 			);
@@ -365,6 +368,7 @@
 				C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */,
 				C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */,
 				C1EE40CE219F6599004776F0 /* MeasurementsViewController.swift in Sources */,
+				C17447F62208A15300287C3E /* CategoryWizardViewController.swift in Sources */,
 				C1B2195721AC04AB00F7D004 /* GraphType.swift in Sources */,
 				C1C9619C21B5CB34003A7396 /* UIColor+Rotterdam.swift in Sources */,
 				C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */,

@@ -14,8 +14,8 @@ struct CategoryWizard {
 }
 
 extension CategoryWizard {
-	private func setupQuestions() {
-		let questions = [
+	private mutating func setupQuestions() {
+		questions = [
 			"Bestaat het gebouw waarin u wilt meten uit een betonnen bebouwing met metselwerk of gevelbekleding?\nVeel bebouwing na 1970 valt in deze categorie",
 			"Betreft de bebouwing een monument of beschermd stadsgezicht?",
 			"Bestaat het pand waarin u wilt meten uit gemetselde wanden?\nVeel bebouwing van voor 1970 valt in deze categorie",
@@ -55,13 +55,7 @@ extension CategoryWizard {
 		questions[4].negativeNext = outcomes[1]
 		questions[5].positiveNext = failureOutcomes[1]
 		questions[5].negativeNext = failureOutcomes[0]
-		
-		
-		
-		
-		
 	}
-	
 }
 
 

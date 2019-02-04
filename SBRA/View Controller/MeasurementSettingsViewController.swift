@@ -98,9 +98,9 @@ class MeasurementSettingsViewController: UIViewController {
 		let button = UIButton(type: .system)
 		button.setTitle("Ik weet het niet", for: .normal)
 		button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
-		
-		
 		view.addSubview(button)
+		
+		button.addTarget(self, action: #selector(tappedWizardButton), for: .touchUpInside)
 		
 		button.translatesAutoresizingMaskIntoConstraints = false
 		NSLayoutConstraint.activate([
@@ -109,6 +109,11 @@ class MeasurementSettingsViewController: UIViewController {
 			
 			]
 		)
+	}
+	
+	@objc private func tappedWizardButton() {
+		let wizardVC = CategoryWizardViewController()
+		navigationController?.pushViewController(wizardVC, animated: true)
 	}
 }
 
