@@ -9,15 +9,15 @@
 import UIKit
 
 enum BuildingCategory: String, CaseIterable {
-	case a = "A"
-	case b = "B"
-	case c = "C"
+	case category1 = "Categorie 1"
+	case category2 = "Categorie 2"
+	case category3 = "Categorie 3"
 }
 
 enum VibrationCategory: String, CaseIterable {
-	case d = "D"
-	case e = "E"
-	case f = "F"
+	case shortDuration = "Kortdurend"
+	case repeatedShortDuration = "Herhaald kortdurend"
+	case continuous = "Continu"
 }
 
 class MeasurementSettingsViewController: UIViewController {
@@ -25,10 +25,29 @@ class MeasurementSettingsViewController: UIViewController {
 	static let standardCellReuseIdentifier = "standardcell"
 	static let switchCellReuseIdentifier = "switchCell"
 	
-	var selectedBuildingCategory: BuildingCategory?
+	var selectedBuildingIndex: Int?
+	var selectedVibrationIndex: Int?
+	
+	var selectedBuildingCategory: BuildingCategory? {
+		get {
+			if let index = selectedBuildingIndex {
+				return BuildingCategory.allCases[index]
+			}
+			return nil
+		}
+	}
+	var selectedVibrationCategory: VibrationCategory? {
+		get {
+			if let index = selectedVibrationIndex {
+				return VibrationCategory.allCases[index]
+			}
+			return nil
+		}
+	}
 	
 	var pickerContainerView: UIView?
 	var pickerView: UIPickerView?
+	var tableView = UITableView(frame: .zero)
 	
 	var selectedTableIndex: Int?
 	
@@ -44,12 +63,12 @@ class MeasurementSettingsViewController: UIViewController {
 		
 		
 		setupTableView()
+		setupWizardButton()
 		
 		// Do any additional setup after loading the view.
 	}
 	
 	private func setupTableView() {
-		let tableView = UITableView(frame: CGRect.zero)
 		
 		tableView.dataSource = self
 		tableView.delegate = self
@@ -63,7 +82,7 @@ class MeasurementSettingsViewController: UIViewController {
 			tableView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 3.0),
 			tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 1.0),
 			tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0),
-			tableView.heightAnchor.constraint(equalToConstant: 200)
+			tableView.heightAnchor.constraint(equalToConstant: 133)
 			])
 		
 		tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -87,9 +106,25 @@ class MeasurementSettingsViewController: UIViewController {
 		present(navigationController, animated: true, completion: nil)
 	}
 	
-	
-	
+	private func setupWizardButton() {
+		let button = UIButton(type: .system)
+		button.setTitle("Ik weet het niet", for: .normal)
+		button.titleLabel?.font = UIFont.preferredFont(forTextStyle: .body)
+		
+		
+		view.addSubview(button)
+		
+		button.translatesAutoresizingMaskIntoConstraints = false
+		NSLayoutConstraint.activate([
+			button.topAnchor.constraint(equalToSystemSpacingBelow: tableView.bottomAnchor, multiplier: 1.0),
+			button.centerXAnchor.constraint(equalTo: tableView.centerXAnchor)
+			
+			]
+		)
+	}
 }
+
+
 
 extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 	
@@ -106,7 +141,11 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 					cell.textLabel?.text = "Kies categorie gebouw..."
 				}
 			} else if (indexPath.row == 1) {
-				cell.textLabel?.text = "Kies type trilling..."
+				if let category = selectedVibrationCategory {
+					cell.textLabel?.text = category.rawValue
+				} else {
+					cell.textLabel?.text = "Kies type trilling..."
+				}
 			}
 			
 			
@@ -131,18 +170,43 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		showPickerView()
+		
+		selectedTableIndex = indexPath.row
+		
+		if ((0...1).contains(indexPath.row)) {
+			if (selectedTableIndex == 0) {
+				if let index = selectedBuildingIndex {
+					pickerView?.selectRow(index, inComponent: 0, animated: false)
+				} else {
+					selectedBuildingIndex = 0
+					tableView.reloadData()
+					tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+				}
+			} else if (selectedTableIndex == 1) {
+				if let index = selectedVibrationIndex {
+					pickerView?.selectRow(index, inComponent: 0, animated: false)
+				} else {
+					selectedVibrationIndex = 0
+					tableView.reloadData()
+					tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+				}
+			}
+			
+			pickerView?.reloadAllComponents()
+		}
+	}
+	
+	func showPickerView() {
 		if (pickerContainerView == nil) {
 			let containerView = UIView(frame: .zero)
 			view.addSubview(containerView)
 			
 			let picker = UIPickerView(frame: CGRect.zero)
-			//picker.backgroundColor = .blue
 			picker.delegate = self
 			containerView.addSubview(picker)
 			
 			let buttonView = UIView(frame: .zero)
-			//buttonView.backgroundColor = .red
-			//buttonView.alpha = 0.5
 			containerView.addSubview(buttonView)
 			
 			let button = UIButton(frame: .zero)
@@ -150,17 +214,26 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 				titleLabel.font = UIFont.boldSystemFont(ofSize: titleLabel.font.pointSize)
 			}
 			button.setTitle("Gereed", for: .normal)
-			//button.backgroundColor = UIColor.blue
 			button.setTitleColor(.rotterdamGreen, for: .normal)
-			
+			button.isUserInteractionEnabled = true
+			button.addTarget(self, action: #selector(dismissPickerView), for: .touchUpInside)
+			button.adjustsImageWhenHighlighted = true
 			
 			buttonView.addSubview(button)
 			
+			// Add a separator above the picker container view
+			let px = 1 / UIScreen.main.scale
+			let frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: px)
+			let topLine = UIView(frame: frame)
+			topLine.backgroundColor = tableView.separatorColor
+			
+			containerView.addSubview(topLine)
 			
 			containerView.translatesAutoresizingMaskIntoConstraints = false
 			buttonView.translatesAutoresizingMaskIntoConstraints = false
 			picker.translatesAutoresizingMaskIntoConstraints = false
 			button.translatesAutoresizingMaskIntoConstraints = false
+			topLine.translatesAutoresizingMaskIntoConstraints = false
 			
 			NSLayoutConstraint.activate([
 				containerView.leftAnchor.constraint(equalTo: view.leftAnchor),
@@ -175,23 +248,33 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 				buttonView.topAnchor.constraint(equalTo: picker.topAnchor),
 				buttonView.leftAnchor.constraint(equalTo: picker.leftAnchor),
 				buttonView.rightAnchor.constraint(equalTo: picker.rightAnchor),
-				//buttonView.heightAnchor.constraint(equalToConstant: 44.0),
 				
 				button.rightAnchor.constraint(equalTo: buttonView.layoutMarginsGuide.rightAnchor),
 				button.topAnchor.constraint(equalTo: buttonView.layoutMarginsGuide.topAnchor),
-				button.bottomAnchor.constraint(equalTo: buttonView.layoutMarginsGuide.bottomAnchor)
+				button.bottomAnchor.constraint(equalTo: buttonView.layoutMarginsGuide.bottomAnchor),
+				
+				topLine.leftAnchor.constraint(equalTo: buttonView.leftAnchor),
+				topLine.rightAnchor.constraint(equalTo: buttonView.rightAnchor),
+				topLine.bottomAnchor.constraint(equalTo: buttonView.topAnchor),
+				topLine.heightAnchor.constraint(equalToConstant: px)
 				
 				])
 			
 			pickerContainerView = containerView
 			pickerView = picker
+			
+		}
+	}
+	
+	@objc func dismissPickerView() {
+		if let selectedIndexPath = tableView.indexPathForSelectedRow {
+			tableView.deselectRow(at: selectedIndexPath, animated: true)
 		}
 		
-		selectedTableIndex = indexPath.row
-		if ((0...1).contains(indexPath.row)) {
-			pickerView?.reloadAllComponents()
-		}
-		
+		pickerContainerView?.removeFromSuperview()
+		pickerView?.removeFromSuperview()
+		pickerView = nil
+		pickerContainerView = nil
 	}
 }
 
@@ -219,8 +302,17 @@ extension MeasurementSettingsViewController: UIPickerViewDelegate, UIPickerViewD
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-		selectedBuildingCategory = BuildingCategory.allCases[row]
-		//tablevie
+		let indexPaths: [IndexPath]
+		if (selectedTableIndex == 0) {
+			indexPaths = [IndexPath(row: 0, section: 0)]
+			selectedBuildingIndex = row
+		} else {
+			indexPaths = [IndexPath(row: 1, section: 0)]
+			selectedVibrationIndex = row
+		}
+		
+		tableView.reloadRows(at: indexPaths, with: .none)
+		tableView.selectRow(at: indexPaths[0], animated: false, scrollPosition: .none)
 	}
 	
 	
