@@ -6,4 +6,8 @@
 //  Copyright © 2019 Wander Siemers. All rights reserved.
 //
 
-import Foundation
+enum VibrationCategory: String, CaseIterable {
+	case shortDuration = "Kortdurend"
+	case repeatedShortDuration = "Herhaald kortdurend"
+	case continuous = "Continu"
+}
