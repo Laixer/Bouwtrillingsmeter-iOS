@@ -12,6 +12,8 @@
 		C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */; };
 		C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B38882180C36300B03F99 /* MotionDataParser.swift */; };
 		C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B388C2180CB3500B03F99 /* DataPoint.swift */; };
+		C17447EA2208732B00287C3E /* BuildingCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447E92208732B00287C3E /* BuildingCategory.swift */; };
+		C17447EC2208734200287C3E /* VibrationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447EB2208734200287C3E /* VibrationCategory.swift */; };
 		C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195421AC014900F7D004 /* GraphViewController.swift */; };
 		C1B2195721AC04AB00F7D004 /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195621AC04AB00F7D004 /* GraphType.swift */; };
 		C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */; };
@@ -47,6 +49,8 @@
 		C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPageViewController.swift; sourceTree = "<group>"; };
 		C14B38882180C36300B03F99 /* MotionDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataParser.swift; sourceTree = "<group>"; };
 		C14B388C2180CB3500B03F99 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
+		C17447E92208732B00287C3E /* BuildingCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCategory.swift; sourceTree = "<group>"; };
+		C17447EB2208734200287C3E /* VibrationCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationCategory.swift; sourceTree = "<group>"; };
 		C1B2195421AC014900F7D004 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		C1B2195621AC04AB00F7D004 /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
 		C1BA12E9217CBD0A0024F2DA /* SBRA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBRA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +178,8 @@
 		C1C961A221B6B0C0003A7396 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C17447E92208732B00287C3E /* BuildingCategory.swift */,
+				C17447EB2208734200287C3E /* VibrationCategory.swift */,
 				C1B2195621AC04AB00F7D004 /* GraphType.swift */,
 				C14B388C2180CB3500B03F99 /* DataPoint.swift */,
 			);
@@ -340,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C17447EA2208732B00287C3E /* BuildingCategory.swift in Sources */,
 				C1EE40D2219F6EC2004776F0 /* GraphSegment.swift in Sources */,
 				C1FE93A021EBAB21000B90FC /* MeasurementSettingsViewController.swift in Sources */,
 				C1C9619E21B5CD40003A7396 /* UIFont+Rotterdam.swift in Sources */,
@@ -355,6 +362,7 @@
 				C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */,
 				C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */,
 				C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */,
+				C17447EC2208734200287C3E /* VibrationCategory.swift in Sources */,
 				C1EA6B3121AAEFCC000841A3 /* MeasureViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
