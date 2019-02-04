@@ -14,6 +14,10 @@
 		C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B388C2180CB3500B03F99 /* DataPoint.swift */; };
 		C17447EA2208732B00287C3E /* BuildingCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447E92208732B00287C3E /* BuildingCategory.swift */; };
 		C17447EC2208734200287C3E /* VibrationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447EB2208734200287C3E /* VibrationCategory.swift */; };
+		C17447EE22088F8000287C3E /* CategoryWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447ED22088F8000287C3E /* CategoryWizard.swift */; };
+		C17447F022088FA600287C3E /* WizardQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447EF22088FA600287C3E /* WizardQuestion.swift */; };
+		C17447F22208902700287C3E /* WizardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447F12208902700287C3E /* WizardItem.swift */; };
+		C17447F42208926700287C3E /* WizardOutcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447F32208926700287C3E /* WizardOutcome.swift */; };
 		C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195421AC014900F7D004 /* GraphViewController.swift */; };
 		C1B2195721AC04AB00F7D004 /* GraphType.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195621AC04AB00F7D004 /* GraphType.swift */; };
 		C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */; };
@@ -51,6 +55,10 @@
 		C14B388C2180CB3500B03F99 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
 		C17447E92208732B00287C3E /* BuildingCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCategory.swift; sourceTree = "<group>"; };
 		C17447EB2208734200287C3E /* VibrationCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationCategory.swift; sourceTree = "<group>"; };
+		C17447ED22088F8000287C3E /* CategoryWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizard.swift; sourceTree = "<group>"; };
+		C17447EF22088FA600287C3E /* WizardQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardQuestion.swift; sourceTree = "<group>"; };
+		C17447F12208902700287C3E /* WizardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardItem.swift; sourceTree = "<group>"; };
+		C17447F32208926700287C3E /* WizardOutcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardOutcome.swift; sourceTree = "<group>"; };
 		C1B2195421AC014900F7D004 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
 		C1B2195621AC04AB00F7D004 /* GraphType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphType.swift; sourceTree = "<group>"; };
 		C1BA12E9217CBD0A0024F2DA /* SBRA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SBRA.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,6 +190,10 @@
 				C17447EB2208734200287C3E /* VibrationCategory.swift */,
 				C1B2195621AC04AB00F7D004 /* GraphType.swift */,
 				C14B388C2180CB3500B03F99 /* DataPoint.swift */,
+				C17447ED22088F8000287C3E /* CategoryWizard.swift */,
+				C17447EF22088FA600287C3E /* WizardQuestion.swift */,
+				C17447F32208926700287C3E /* WizardOutcome.swift */,
+				C17447F12208902700287C3E /* WizardItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -358,12 +370,16 @@
 				C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */,
 				C1D8A15B21F1349000921AE5 /* SwitchTableViewCell.swift in Sources */,
 				C108A00921CC48A900C6CCB2 /* DominantFrequency.swift in Sources */,
+				C17447F022088FA600287C3E /* WizardQuestion.swift in Sources */,
 				C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */,
 				C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */,
 				C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */,
 				C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */,
+				C17447EE22088F8000287C3E /* CategoryWizard.swift in Sources */,
 				C17447EC2208734200287C3E /* VibrationCategory.swift in Sources */,
 				C1EA6B3121AAEFCC000841A3 /* MeasureViewController.swift in Sources */,
+				C17447F22208902700287C3E /* WizardItem.swift in Sources */,
+				C17447F42208926700287C3E /* WizardOutcome.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
