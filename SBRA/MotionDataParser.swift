@@ -17,10 +17,6 @@ class MotionDataParser: NSObject {
 	
 	let manager = CMMotionManager()
 	var data = [DataPoint]()
-	lazy var setup = {
-		return vDSP_create_fftsetup(UInt(ceil(log2(10000.0))), 0)
-	}()
-	//var speedValues = [Float]()
 	
 	func startDataCollection(updateInterval: TimeInterval,
 							 handler: @escaping MotionDataHandler) {

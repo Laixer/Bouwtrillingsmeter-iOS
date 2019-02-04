@@ -40,14 +40,13 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 			for i in 0..<self.collectionView.numberOfItems(inSection: 0) {
 				let indexPath = IndexPath(row: i, section: 0)
 				if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell, let dataPoint = dataPoint {
-					self.updateCellAtIndexPathWithDataPoint(cell: cell, indexPath: indexPath, dataPoint: dataPoint)
+					self.updateCell(cell: cell, at: indexPath, with: dataPoint)
 				}
 			}
 		}
-		
 	}
 	
-	private func updateCellAtIndexPathWithDataPoint(cell: GraphCollectionViewCell, indexPath: IndexPath, dataPoint: DataPoint) {
+	private func updateCell(cell: GraphCollectionViewCell, at indexPath: IndexPath, with dataPoint: DataPoint) {
 		switch indexPath.row {
 		case 0:
 			cell.addValues(values: [Double(dataPoint.speed), 0, 0])

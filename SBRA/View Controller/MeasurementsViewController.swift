@@ -7,12 +7,9 @@
 //
 
 import UIKit
-import simd
 
 class MeasurementsViewController: UIViewController {
 	
-	let motionParser = MotionDataParser()
-
     override func viewDidLoad() {
         super.viewDidLoad()
 		
@@ -20,8 +17,6 @@ class MeasurementsViewController: UIViewController {
 		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tappedAddButton))
 		
 		view.backgroundColor = UIColor.white
-		
-
     }
 	
 	@objc private func tappedAddButton() {
@@ -30,18 +25,4 @@ class MeasurementsViewController: UIViewController {
 		
 		present(navigationController, animated: true, completion: nil)
 	}
-	
-	
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

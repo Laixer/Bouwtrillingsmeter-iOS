@@ -8,27 +8,15 @@
 
 import UIKit
 
-enum BuildingCategory: String, CaseIterable {
-	case category1 = "Categorie 1"
-	case category2 = "Categorie 2"
-	case category3 = "Categorie 3"
-}
-
-enum VibrationCategory: String, CaseIterable {
-	case shortDuration = "Kortdurend"
-	case repeatedShortDuration = "Herhaald kortdurend"
-	case continuous = "Continu"
-}
-
 class MeasurementSettingsViewController: UIViewController {
 	
-	static let standardCellReuseIdentifier = "standardcell"
-	static let switchCellReuseIdentifier = "switchCell"
+	private static let standardCellReuseIdentifier = "standardcell"
+	private static let switchCellReuseIdentifier = "switchCell"
 	
-	var selectedBuildingIndex: Int?
-	var selectedVibrationIndex: Int?
+	private var selectedBuildingIndex: Int?
+	private var selectedVibrationIndex: Int?
 	
-	var selectedBuildingCategory: BuildingCategory? {
+	private var selectedBuildingCategory: BuildingCategory? {
 		get {
 			if let index = selectedBuildingIndex {
 				return BuildingCategory.allCases[index]
@@ -36,7 +24,7 @@ class MeasurementSettingsViewController: UIViewController {
 			return nil
 		}
 	}
-	var selectedVibrationCategory: VibrationCategory? {
+	private var selectedVibrationCategory: VibrationCategory? {
 		get {
 			if let index = selectedVibrationIndex {
 				return VibrationCategory.allCases[index]
@@ -45,11 +33,11 @@ class MeasurementSettingsViewController: UIViewController {
 		}
 	}
 	
-	var pickerContainerView: UIView?
-	var pickerView: UIPickerView?
-	var tableView = UITableView(frame: .zero)
+	private var pickerContainerView: UIView?
+	private var pickerView: UIPickerView?
+	private var tableView = UITableView(frame: .zero)
 	
-	var selectedTableIndex: Int?
+	private var selectedTableIndex: Int?
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
