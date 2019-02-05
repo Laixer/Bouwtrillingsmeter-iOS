@@ -12,13 +12,32 @@ WizardOutcome is a wizard item which doesn't have successor in the graph, useful
 class WizardOutcome: WizardItem {
 	var text: String
 	var successful: Bool = true
+	var next: WizardQuestion?
+	var buildingCategory: BuildingCategory?
+	var vibrationCategory: VibrationCategory?
+	var sensitiveToVibrations: Bool?
 	
 	init(text: String) {
 		self.text = text
 	}
 	
-	init(text: String, isPositive: Bool) {
-		self.text = text
+	convenience init(text: String, isPositive: Bool) {
+		self.init(text: text)
 		self.successful = isPositive
+	}
+	
+	convenience init(text: String, buildingCategory: BuildingCategory) {
+		self.init(text: text)
+		self.buildingCategory = buildingCategory
+	}
+	
+	convenience init(text: String, vibrationCategory: VibrationCategory) {
+		self.init(text: text)
+		self.vibrationCategory = vibrationCategory
+	}
+	
+	convenience init(text: String, sensitiveToVibrations: Bool) {
+		self.init(text: text)
+		self.sensitiveToVibrations = sensitiveToVibrations
 	}
 }
