@@ -13,8 +13,22 @@ class MeasurementSettingsViewController: UIViewController {
 	private static let standardCellReuseIdentifier = "standardcell"
 	private static let switchCellReuseIdentifier = "switchCell"
 	
-	private var selectedBuildingIndex: Int?
-	private var selectedVibrationIndex: Int?
+	private var selectedBuildingIndex: Int? {
+		didSet {
+			tableView.reloadData()
+		}
+	}
+	private var selectedVibrationIndex: Int? {
+		didSet {
+			tableView.reloadData()
+		}
+	}
+	
+	private var sensitiveToVibrations: Bool? {
+		didSet {
+			tableView.reloadData()
+		}
+	}
 	
 	private var selectedBuildingCategory: BuildingCategory? {
 		get {
@@ -113,20 +127,25 @@ class MeasurementSettingsViewController: UIViewController {
 	
 	@objc private func tappedWizardButton() {
 		let wizardVC = CategoryWizardViewController()
+		wizardVC.delegate = self
 		let firstQuestion = CategoryWizard().questions.first
 		wizardVC.currentWizardItem = firstQuestion
-		navigationController?.pushViewController(wizardVC, animated: true)
+		let navigationController = UINavigationController(rootViewController: wizardVC)
+		let dismissButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissTapped))
+		wizardVC.navigationItem.rightBarButtonItem = dismissButton
+		present(navigationController, animated: true, completion: nil)
+	}
+	
+	@objc private func dismissTapped() {
+		navigationController?.dismiss(animated: true, completion: nil)
 	}
 }
-
-
 
 extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		if (indexPath.row <= 1) {
 			let cell = tableView.dequeueReusableCell(withIdentifier: MeasurementSettingsViewController.standardCellReuseIdentifier)!
-			
 			
 			cell.textLabel?.textColor = UIColor.rotterdamGreen
 			if (indexPath.row == 0) {
@@ -147,6 +166,12 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 			return cell
 		} else if (indexPath.row == 2) {
 			let cell = tableView.dequeueReusableCell(withIdentifier: MeasurementSettingsViewController.switchCellReuseIdentifier)!
+			
+			if let cell = cell as? SwitchTableViewCell {
+				if let isOn = sensitiveToVibrations {
+					cell.switchElement.isOn = isOn
+				}
+			}
 			
 			cell.textLabel?.text = "Trillingsgevoelig gebouw"
 			
@@ -309,8 +334,20 @@ extension MeasurementSettingsViewController: UIPickerViewDelegate, UIPickerViewD
 		tableView.reloadRows(at: indexPaths, with: .none)
 		tableView.selectRow(at: indexPaths[0], animated: false, scrollPosition: .none)
 	}
+}
+
+extension MeasurementSettingsViewController: CategoryWizardDelegate {
+	func categoryWizardDelegateDidFailWithMessage(message: String) {
+		print(message)
+	}
 	
-	
+	func categoryWizardDelegateDidPick(settings: MeasurementSettings) {
+		if let buildingIndex = settings.buildingCategory, let vibrationIndex = settings.vibrationCategory, let sensitive = settings.sensitiveToVibrations {
+			self.selectedBuildingIndex = BuildingCategory.allCases.firstIndex(of: buildingIndex)
+			self.selectedVibrationIndex = VibrationCategory.allCases.firstIndex(of: vibrationIndex)
+			self.sensitiveToVibrations = sensitive
+		}
+	}
 }
 
 

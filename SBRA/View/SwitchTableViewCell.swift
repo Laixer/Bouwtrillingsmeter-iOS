@@ -10,12 +10,14 @@ import UIKit
 
 class SwitchTableViewCell: UITableViewCell {
 	
+	var switchElement: UISwitch
 	
 	override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+		switchElement = UISwitch(frame: CGRect.zero)
+		
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		
 		if let textLabel = self.textLabel {			
-			let switchElement = UISwitch(frame: CGRect.zero)
 			switchElement.isOn = false
 			
 			switchElement.translatesAutoresizingMaskIntoConstraints = false
