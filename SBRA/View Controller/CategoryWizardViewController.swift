@@ -90,12 +90,13 @@ class CategoryWizardViewController: UIViewController {
 			secondaryTextLabel.topAnchor.constraint(equalToSystemSpacingBelow: textLabel.bottomAnchor, multiplier: 1.0),
 			
 			yesButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			yesButton.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: secondaryTextLabel.bottomAnchor, multiplier: 5.0),
+			yesButton.topAnchor.constraint(greaterThanOrEqualToSystemSpacingBelow: secondaryTextLabel.bottomAnchor, multiplier: 2.0),
 			yesButton.heightAnchor.constraint(equalToConstant: 48.0),
 			yesButton.widthAnchor.constraint(equalToConstant: 210.0),
 			
 			noButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 			noButton.topAnchor.constraint(equalToSystemSpacingBelow: yesButton.bottomAnchor, multiplier: 2.0),
+			noButton.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor, constant: -50.0),
 			noButton.heightAnchor.constraint(equalTo: yesButton.heightAnchor),
 			noButton.widthAnchor.constraint(equalTo: yesButton.widthAnchor),
 		])
