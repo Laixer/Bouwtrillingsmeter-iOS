@@ -16,10 +16,8 @@ class WizardQuestion: WizardItem {
 	var positiveNext: WizardItem?
 	var negativeNext: WizardItem?
 	
-	init(text: String, secondaryText: String?, positiveNext: WizardItem?, negativeNext: WizardItem?) {
+	init(text: String, secondaryText: String?) {
 		self.text = text
 		self.secondaryText = secondaryText
-		self.positiveNext = positiveNext
-		self.negativeNext = negativeNext
 	}
 }
