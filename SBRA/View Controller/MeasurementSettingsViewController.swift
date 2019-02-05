@@ -113,6 +113,8 @@ class MeasurementSettingsViewController: UIViewController {
 	
 	@objc private func tappedWizardButton() {
 		let wizardVC = CategoryWizardViewController()
+		let firstQuestion = CategoryWizard().questions.first
+		wizardVC.currentWizardItem = firstQuestion
 		navigationController?.pushViewController(wizardVC, animated: true)
 	}
 }
