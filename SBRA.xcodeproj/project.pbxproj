@@ -33,6 +33,8 @@
 		C1EE40CE219F6599004776F0 /* MeasurementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */; };
 		C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE40CF219F6E0E004776F0 /* GraphView.swift */; };
 		C1EE40D2219F6EC2004776F0 /* GraphSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE40D1219F6EC2004776F0 /* GraphSegment.swift */; };
+		C1FB6FD4220A371800D7BE5A /* CategoryWizardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */; };
+		C1FB6FD6220A376700D7BE5A /* MeasurementSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB6FD5220A376700D7BE5A /* MeasurementSettings.swift */; };
 		C1FE93A021EBAB21000B90FC /* MeasurementSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FE939F21EBAB21000B90FC /* MeasurementSettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -79,6 +81,8 @@
 		C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsViewController.swift; sourceTree = "<group>"; };
 		C1EE40CF219F6E0E004776F0 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		C1EE40D1219F6EC2004776F0 /* GraphSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphSegment.swift; sourceTree = "<group>"; };
+		C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizardDelegate.swift; sourceTree = "<group>"; };
+		C1FB6FD5220A376700D7BE5A /* MeasurementSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSettings.swift; sourceTree = "<group>"; };
 		C1FE939F21EBAB21000B90FC /* MeasurementSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +193,8 @@
 		C1C961A221B6B0C0003A7396 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */,
+				C1FB6FD5220A376700D7BE5A /* MeasurementSettings.swift */,
 				C17447E92208732B00287C3E /* BuildingCategory.swift */,
 				C17447EB2208734200287C3E /* VibrationCategory.swift */,
 				C1B2195621AC04AB00F7D004 /* GraphType.swift */,
@@ -363,6 +369,7 @@
 			files = (
 				C17447EA2208732B00287C3E /* BuildingCategory.swift in Sources */,
 				C1EE40D2219F6EC2004776F0 /* GraphSegment.swift in Sources */,
+				C1FB6FD6220A376700D7BE5A /* MeasurementSettings.swift in Sources */,
 				C1FE93A021EBAB21000B90FC /* MeasurementSettingsViewController.swift in Sources */,
 				C1C9619E21B5CD40003A7396 /* UIFont+Rotterdam.swift in Sources */,
 				C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */,
@@ -378,6 +385,7 @@
 				C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */,
 				C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */,
 				C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */,
+				C1FB6FD4220A371800D7BE5A /* CategoryWizardDelegate.swift in Sources */,
 				C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */,
 				C17447EE22088F8000287C3E /* CategoryWizard.swift in Sources */,
 				C17447EC2208734200287C3E /* VibrationCategory.swift in Sources */,

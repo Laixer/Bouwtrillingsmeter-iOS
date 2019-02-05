@@ -14,7 +14,9 @@ class CategoryWizardViewController: UIViewController {
 	var textLabel: UILabel?
 	var secondaryTextLabel: UILabel?
 	
-	var result: (BuildingCategory?, VibrationCategory?, Bool?)
+	var delegate: CategoryWizardDelegate?
+	
+	var result: MeasurementSettings = MeasurementSettings()
 	
 	var yesButton: UIButton?
 	var noButton: UIButton?
@@ -125,14 +127,18 @@ class CategoryWizardViewController: UIViewController {
 					updateUI()
 				} else if let outcome = currentWizardItem as? WizardOutcome {
 					if let buildingCategory = outcome.buildingCategory {
-						result.0 = buildingCategory
+						result.buildingCategory = buildingCategory
 					}
 					if let vibrationCategory = outcome.vibrationCategory {
-						result.1 = vibrationCategory
+						result.vibrationCategory = vibrationCategory
 					}
 					if let sensitivityCategory = outcome.sensitiveToVibrations {
-						result.2 = sensitivityCategory
-						// We're done
+						result.sensitiveToVibrations = sensitivityCategory
+						delegate?.categoryWizardDelegateDidPick(settings: result)
+					}
+					
+					if (outcome.successful == false) {
+						delegate?.categoryWizardDelegateDidFailWithMessage(message: outcome.text)
 					}
 					
 					currentWizardItem = outcome.next
