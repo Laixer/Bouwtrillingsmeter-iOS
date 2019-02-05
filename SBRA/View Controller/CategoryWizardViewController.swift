@@ -10,11 +10,17 @@ import UIKit
 
 class CategoryWizardViewController: UIViewController {
 	
-	var wizardItem: WizardItem?
+	var currentWizardItem: WizardItem?
+	var textLabel: UILabel?
+	var secondaryTextLabel: UILabel?
+	
+	var result: (BuildingCategory?, VibrationCategory?, Bool?)
+	
+	var yesButton: UIButton?
+	var noButton: UIButton?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		
 		setupUI()
     }
 	
@@ -35,7 +41,7 @@ class CategoryWizardViewController: UIViewController {
 		secondaryTextLabel.text = "Veel bebouwing van na 1970 heeft hiv net als deze categorie."
 		secondaryTextLabel.font = UIFont.italicSystemFont(ofSize: textLabel.font.pointSize)
 		
-		if let item = wizardItem as? WizardQuestion {
+		if let item = currentWizardItem as? WizardQuestion {
 			textLabel.text = item.text
 			secondaryTextLabel.text = item.secondaryText
 		}
@@ -60,6 +66,9 @@ class CategoryWizardViewController: UIViewController {
 		
 		yesButton.layer.cornerRadius = 8.0
 		noButton.layer.cornerRadius = 8.0
+		
+		yesButton.addTarget(self, action: #selector(tappedYesButton), for: .touchUpInside)
+		noButton.addTarget(self, action: #selector(tappedNoButton), for: .touchUpInside)
 		
 		view.addSubview(yesButton)
 		view.addSubview(noButton)
@@ -87,20 +96,64 @@ class CategoryWizardViewController: UIViewController {
 			noButton.topAnchor.constraint(equalToSystemSpacingBelow: yesButton.bottomAnchor, multiplier: 2.0),
 			noButton.heightAnchor.constraint(equalTo: yesButton.heightAnchor),
 			noButton.widthAnchor.constraint(equalTo: yesButton.widthAnchor),
-			
-			])
-
+		])
+		
+		self.textLabel = textLabel
+		self.secondaryTextLabel = secondaryTextLabel
+		self.yesButton = yesButton
+		self.noButton = noButton
 	}
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+	
+	@objc private func tappedYesButton() {
+		handleButtonTap(positive: true)
+	}
+	
+	@objc private func tappedNoButton() {
+		handleButtonTap(positive: false)
+	}
+	
+	private func handleButtonTap(positive: Bool) {
+		
+		if let currentItem = currentWizardItem {
+			//print(currentItem.text)
+			
+			if let question = currentItem as? WizardQuestion {
+				// save state for question
+				
+				currentWizardItem = positive ? question.positiveNext : question.negativeNext
+				if (currentWizardItem as? WizardQuestion) != nil {
+					updateUI()
+				} else if let outcome = currentWizardItem as? WizardOutcome {
+					if let buildingCategory = outcome.buildingCategory {
+						result.0 = buildingCategory
+					}
+					if let vibrationCategory = outcome.vibrationCategory {
+						result.1 = vibrationCategory
+					}
+					if let sensitivityCategory = outcome.sensitiveToVibrations {
+						result.2 = sensitivityCategory
+						// We're done
+					}
+					
+					currentWizardItem = outcome.next
+					updateUI()
+				}
+			}
+			
+			if let outcome = currentItem as? WizardOutcome {
+				currentWizardItem = outcome.next
+				updateUI()
+			}
+		}
+		
+		
+	}
+	
+	private func updateUI() {
+		if let question = currentWizardItem as? WizardQuestion {
+			textLabel?.text = question.text
+			secondaryTextLabel?.text = question.secondaryText
+		}
+		
+	}
 }
