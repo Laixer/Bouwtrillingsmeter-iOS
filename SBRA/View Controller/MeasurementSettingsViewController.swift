@@ -31,25 +31,24 @@ class MeasurementSettingsViewController: UIViewController {
 	}
 	
 	private var selectedBuildingCategory: BuildingCategory? {
-		get {
-			if let index = selectedBuildingIndex {
-				return BuildingCategory.allCases[index]
-			}
-			return nil
+		if let index = selectedBuildingIndex {
+			return BuildingCategory.allCases[index]
 		}
+		return nil
 	}
 	private var selectedVibrationCategory: VibrationCategory? {
-		get {
-			if let index = selectedVibrationIndex {
-				return VibrationCategory.allCases[index]
-			}
-			return nil
+		if let index = selectedVibrationIndex {
+			return VibrationCategory.allCases[index]
 		}
+		return nil
 	}
 	
-	private var pickerContainerView: UIView?
-	private var pickerView: UIPickerView?
 	private var tableView = UITableView(frame: .zero)
+	private var pickerContainerView: UIView?
+	private var picker: UIPickerView?
+	private var buttonView: UIView?
+	private var button: UIButton?
+	private var topLine: UIView?
 	
 	private var selectedTableIndex: Int?
 	
@@ -63,7 +62,6 @@ class MeasurementSettingsViewController: UIViewController {
 															target: self,
 															action: #selector(tappedBeginButton))
 		
-		
 		setupTableView()
 		setupWizardButton()
 		
@@ -75,8 +73,10 @@ class MeasurementSettingsViewController: UIViewController {
 		tableView.dataSource = self
 		tableView.delegate = self
 		
-		tableView.register(UITableViewCell.self, forCellReuseIdentifier: MeasurementSettingsViewController.standardCellReuseIdentifier)
-		tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: MeasurementSettingsViewController.switchCellReuseIdentifier)
+		tableView.register(UITableViewCell.self,
+						   forCellReuseIdentifier: MeasurementSettingsViewController.standardCellReuseIdentifier)
+		tableView.register(SwitchTableViewCell.self,
+						   forCellReuseIdentifier: MeasurementSettingsViewController.switchCellReuseIdentifier)
 		
 		view.addSubview(tableView)
 		
@@ -94,8 +94,8 @@ class MeasurementSettingsViewController: UIViewController {
 		view.layoutIfNeeded()
 		
 		// Add an extra "separator" to the top of the table view
-		let px = 1 / UIScreen.main.scale
-		let frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: px)
+		let height = 1 / UIScreen.main.scale
+		let frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: height)
 		let line = UIView(frame: frame)
 		tableView.tableHeaderView = line
 		line.backgroundColor = tableView.separatorColor
@@ -144,17 +144,18 @@ class MeasurementSettingsViewController: UIViewController {
 extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		if (indexPath.row <= 1) {
-			let cell = tableView.dequeueReusableCell(withIdentifier: MeasurementSettingsViewController.standardCellReuseIdentifier)!
+		if indexPath.row <= 1 {
+			let reuseIdentifier = MeasurementSettingsViewController.standardCellReuseIdentifier
+			let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)!
 			
 			cell.textLabel?.textColor = UIColor.rotterdamGreen
-			if (indexPath.row == 0) {
+			if indexPath.row == 0 {
 				if let category = selectedBuildingCategory {
 					cell.textLabel?.text = category.rawValue
 				} else {
 					cell.textLabel?.text = "Kies categorie gebouw..."
 				}
-			} else if (indexPath.row == 1) {
+			} else if indexPath.row == 1 {
 				if let category = selectedVibrationCategory {
 					cell.textLabel?.text = category.rawValue
 				} else {
@@ -162,10 +163,10 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 				}
 			}
 			
-			
 			return cell
-		} else if (indexPath.row == 2) {
-			let cell = tableView.dequeueReusableCell(withIdentifier: MeasurementSettingsViewController.switchCellReuseIdentifier)!
+		} else if indexPath.row == 2 {
+			let reuseIdentifier = MeasurementSettingsViewController.switchCellReuseIdentifier
+			let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)!
 			
 			if let cell = cell as? SwitchTableViewCell {
 				if let isOn = sensitiveToVibrations {
@@ -194,18 +195,18 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 		
 		selectedTableIndex = indexPath.row
 		
-		if ((0...1).contains(indexPath.row)) {
-			if (selectedTableIndex == 0) {
+		if (0...1).contains(indexPath.row) {
+			if selectedTableIndex == 0 {
 				if let index = selectedBuildingIndex {
-					pickerView?.selectRow(index, inComponent: 0, animated: false)
+					picker?.selectRow(index, inComponent: 0, animated: false)
 				} else {
 					selectedBuildingIndex = 0
 					tableView.reloadData()
 					tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
 				}
-			} else if (selectedTableIndex == 1) {
+			} else if selectedTableIndex == 1 {
 				if let index = selectedVibrationIndex {
-					pickerView?.selectRow(index, inComponent: 0, animated: false)
+					picker?.selectRow(index, inComponent: 0, animated: false)
 				} else {
 					selectedVibrationIndex = 0
 					tableView.reloadData()
@@ -213,12 +214,12 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 				}
 			}
 			
-			pickerView?.reloadAllComponents()
+			picker?.reloadAllComponents()
 		}
 	}
 	
 	func showPickerView() {
-		if (pickerContainerView == nil) {
+		if pickerContainerView == nil {
 			let containerView = UIView(frame: .zero)
 			view.addSubview(containerView)
 			
@@ -242,9 +243,7 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 			buttonView.addSubview(button)
 			
 			// Add a separator above the picker container view
-			let px = 1 / UIScreen.main.scale
-			let frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: px)
-			let topLine = UIView(frame: frame)
+			let topLine = UIView(frame: .zero)
 			topLine.backgroundColor = tableView.separatorColor
 			
 			containerView.addSubview(topLine)
@@ -255,6 +254,22 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 			button.translatesAutoresizingMaskIntoConstraints = false
 			topLine.translatesAutoresizingMaskIntoConstraints = false
 			
+			self.pickerContainerView = containerView
+			self.picker = picker
+			self.buttonView = buttonView
+			self.button = button
+			self.topLine = topLine
+			
+			setupConstraints()
+		}
+	}
+	
+	private func setupConstraints() {
+		if let containerView = pickerContainerView,
+			let picker = picker,
+			let buttonView = buttonView,
+			let button = button,
+			let topLine = topLine {
 			NSLayoutConstraint.activate([
 				containerView.leftAnchor.constraint(equalTo: view.leftAnchor),
 				containerView.rightAnchor.constraint(equalTo: view.rightAnchor),
@@ -276,13 +291,9 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 				topLine.leftAnchor.constraint(equalTo: buttonView.leftAnchor),
 				topLine.rightAnchor.constraint(equalTo: buttonView.rightAnchor),
 				topLine.bottomAnchor.constraint(equalTo: buttonView.topAnchor),
-				topLine.heightAnchor.constraint(equalToConstant: px)
+				topLine.heightAnchor.constraint(equalToConstant: 1 / UIScreen.main.scale)
 				
-				])
-			
-			pickerContainerView = containerView
-			pickerView = picker
-			
+			])
 		}
 	}
 	
@@ -292,8 +303,8 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 		}
 		
 		pickerContainerView?.removeFromSuperview()
-		pickerView?.removeFromSuperview()
-		pickerView = nil
+		picker?.removeFromSuperview()
+		picker = nil
 		pickerContainerView = nil
 	}
 }
@@ -308,9 +319,9 @@ extension MeasurementSettingsViewController: UIPickerViewDelegate, UIPickerViewD
 	}
 	
 	func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-		if (selectedTableIndex == 0) {
+		if selectedTableIndex == 0 {
 			return BuildingCategory.allCases[row].rawValue
-		} else if (selectedTableIndex == 1) {
+		} else if selectedTableIndex == 1 {
 			return VibrationCategory.allCases[row].rawValue
 		}
 		
@@ -323,7 +334,7 @@ extension MeasurementSettingsViewController: UIPickerViewDelegate, UIPickerViewD
 	
 	func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
 		let indexPaths: [IndexPath]
-		if (selectedTableIndex == 0) {
+		if selectedTableIndex == 0 {
 			indexPaths = [IndexPath(row: 0, section: 0)]
 			selectedBuildingIndex = row
 		} else {
@@ -342,12 +353,12 @@ extension MeasurementSettingsViewController: CategoryWizardDelegate {
 	}
 	
 	func categoryWizardDelegateDidPick(settings: MeasurementSettings) {
-		if let buildingIndex = settings.buildingCategory, let vibrationIndex = settings.vibrationCategory, let sensitive = settings.sensitiveToVibrations {
+		if let buildingIndex = settings.buildingCategory,
+			let vibrationIndex = settings.vibrationCategory,
+			let sensitive = settings.sensitiveToVibrations {
 			self.selectedBuildingIndex = BuildingCategory.allCases.firstIndex(of: buildingIndex)
 			self.selectedVibrationIndex = VibrationCategory.allCases.firstIndex(of: vibrationIndex)
 			self.sensitiveToVibrations = sensitive
 		}
 	}
 }
-
-

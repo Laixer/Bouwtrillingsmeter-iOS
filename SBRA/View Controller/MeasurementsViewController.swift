@@ -14,7 +14,9 @@ class MeasurementsViewController: UIViewController {
         super.viewDidLoad()
 		
 		title = "Metingen"
-		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(tappedAddButton))
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
+															target: self,
+															action: #selector(tappedAddButton))
 		
 		view.backgroundColor = UIColor.white
     }

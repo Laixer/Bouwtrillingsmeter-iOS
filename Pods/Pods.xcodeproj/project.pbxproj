@@ -7,28 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		04410D25439143E6A30C2EAE214B1C8E /* Trigonometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187BC728756BC57CC752E0F2FF2E35EF /* Trigonometric.swift */; };
+		04410D25439143E6A30C2EAE214B1C8E /* Trigonometric.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7D074F041A7ADE9C6F31C40EA54AA91 /* Trigonometric.swift */; };
 		044BFC18CABC72E01A04CEB4092E95C2 /* Pods-SBRA-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DEE90F509E43C921360FCDCDF5F95F0 /* Pods-SBRA-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		072CBAFE170B43F0C52895BB1A3BBBB2 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB5754A70755D7AA85852482036DB94 /* Matrix.swift */; };
-		17B43E177FCE227ECB4010A06887C351 /* ArrayUnsafeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96CF016AEEE1513FE88C88B8798DEA88 /* ArrayUnsafeMemory.swift */; };
-		1A9F8751FE19BF93C0611371D86B14E4 /* Surge-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CA0A40EE24A3B3BADDA6C31E5FA51813 /* Surge-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		20B18D11FCF2EFAC64F88641A779597B /* Auxiliary.swift in Sources */ = {isa = PBXBuildFile; fileRef = F640A416E45BB8A18FA3B2C808A4F02E /* Auxiliary.swift */; };
+		072CBAFE170B43F0C52895BB1A3BBBB2 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5838BFC4CE5812B9FE087330B7AB4105 /* Matrix.swift */; };
+		17B43E177FCE227ECB4010A06887C351 /* ArrayUnsafeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26671EF4C1C0F6FB2C8C7E843744F8D3 /* ArrayUnsafeMemory.swift */; };
+		1A9F8751FE19BF93C0611371D86B14E4 /* Surge-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DD88DF0FD2D2B4357E5E70539095E61 /* Surge-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		20B18D11FCF2EFAC64F88641A779597B /* Auxiliary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF68EFB4DE0791B6F15E7A3FD4617AF /* Auxiliary.swift */; };
 		20B28FA6FBA6FB859DBBC70D69B7684C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93F233BACB7ED53A6CAA1D18DCD681C6 /* Accelerate.framework */; };
-		22CED1A2D451C7993DB64BAFADEA9890 /* Convolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF7BBF04CE1BD7F65662E6C9A1F80E2A /* Convolution.swift */; };
-		22E276B5D9ADC635C192308C47383829 /* Hyperbolic.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFBFF47E2C729C96A4BB7F450D51A30F /* Hyperbolic.swift */; };
-		45E3A17A6D425A9EDB6A4B2660940335 /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7988028E191D4BBE0AD6F72AE47A4DB9 /* FFT.swift */; };
-		46239F08B7D489F9AFD8E003965F2B3C /* ArraySliceUnsafeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28A0BB9B54CE8F478CCE768D49B5C416 /* ArraySliceUnsafeMemory.swift */; };
-		58896B1794EE9FA13648BEC25C717CE7 /* Exponential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7441FC117FB9F6E52E740982C539DB39 /* Exponential.swift */; };
+		22CED1A2D451C7993DB64BAFADEA9890 /* Convolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98F6192F239AC839A2902D0B3EC76332 /* Convolution.swift */; };
+		22E276B5D9ADC635C192308C47383829 /* Hyperbolic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9D7630366221A740884166D388985D /* Hyperbolic.swift */; };
+		45E3A17A6D425A9EDB6A4B2660940335 /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96F92AE2383D4D11D2246788D1F60E39 /* FFT.swift */; };
+		46239F08B7D489F9AFD8E003965F2B3C /* ArraySliceUnsafeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B1972907C09A0D45686350953D146E1 /* ArraySliceUnsafeMemory.swift */; };
+		58896B1794EE9FA13648BEC25C717CE7 /* Exponential.swift in Sources */ = {isa = PBXBuildFile; fileRef = 580756ADB43E9C07267078D0D4C52A3A /* Exponential.swift */; };
 		69FB0C8D7003E6DF0AADB309ADE124D6 /* Pods-SBRA-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 81CFEBE9C0F162BF7CAB40EBAF49BE35 /* Pods-SBRA-dummy.m */; };
-		6A33EC2B89FD9CA5B4B80DA99A64A49B /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67C2D228D08932054CB7E93FCEDBBF59 /* Statistics.swift */; };
+		6A33EC2B89FD9CA5B4B80DA99A64A49B /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D0D466ABCE8BE5E41E93A749E57CE5F /* Statistics.swift */; };
 		83379939D21C20A0B348CC4921835780 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186E907C87910085CFD3339B6AF42ED9 /* Foundation.framework */; };
-		94A25DE01B5232BE95E2A77CEE459F03 /* Surge-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E0536C931509E91D9A8084CBEE01D12A /* Surge-dummy.m */; };
-		95E9CA5CFC3A713416CF80B209DC1B59 /* UnsafeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DB7EA8AD877247E317ACB5E3FF113FD /* UnsafeMemory.swift */; };
-		AD52D8FEDF58F64BE75537BAB7BBD176 /* Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F10650D8E5FE077BEB5DE285D37CFE /* Arithmetic.swift */; };
+		94A25DE01B5232BE95E2A77CEE459F03 /* Surge-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EEABFC2DE7D1D8042D562FA5086CC4C2 /* Surge-dummy.m */; };
+		95E9CA5CFC3A713416CF80B209DC1B59 /* UnsafeMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3B10E80A56265639F0A11C73FB96A9E /* UnsafeMemory.swift */; };
+		AD52D8FEDF58F64BE75537BAB7BBD176 /* Arithmetic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A93F21E64A4C8008269F5EE1C14012A /* Arithmetic.swift */; };
 		B20DDC0024B468FB89AFBEC06C9D604D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 186E907C87910085CFD3339B6AF42ED9 /* Foundation.framework */; };
-		CA54D459D6B4EA2C9E02C4CED13DCEBB /* UnsafeMutableMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9323FA97FD8EA8B2FD995668A207539 /* UnsafeMutableMemory.swift */; };
-		E1C90480F7010518EC021C8169D88563 /* Pointers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E3741EE9E601A5906BF24974690ABC2 /* Pointers.swift */; };
-		EE4A881C269EB39A6B5F79BCE18BA1BF /* Power.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFF0F56996D21C2637CBC7312F9AB5D /* Power.swift */; };
+		CA54D459D6B4EA2C9E02C4CED13DCEBB /* UnsafeMutableMemory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2549C337E8AA3593C1C3EF5B06CF792 /* UnsafeMutableMemory.swift */; };
+		E1C90480F7010518EC021C8169D88563 /* Pointers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9405DE993FCADE3EF15D2106F8505CA6 /* Pointers.swift */; };
+		EE4A881C269EB39A6B5F79BCE18BA1BF /* Power.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F3CE71009A27DCF63C5F23FC6108EF8 /* Power.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,42 +42,42 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0DB7EA8AD877247E317ACB5E3FF113FD /* UnsafeMemory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnsafeMemory.swift; path = Sources/Surge/UnsafeMemory.swift; sourceTree = "<group>"; };
-		0E3741EE9E601A5906BF24974690ABC2 /* Pointers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Pointers.swift; path = Sources/Surge/Pointers.swift; sourceTree = "<group>"; };
-		10862013BB7F89B07F1BADF195F68BD0 /* Surge.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Surge.modulemap; sourceTree = "<group>"; };
 		14EDB378706CAF0D94D2734BCF2AA60E /* Pods_SBRA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SBRA.framework; path = "Pods-SBRA.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		157B40E3E8FEF04F26AC231004080BAE /* Surge.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Surge.modulemap; sourceTree = "<group>"; };
 		186E907C87910085CFD3339B6AF42ED9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		187BC728756BC57CC752E0F2FF2E35EF /* Trigonometric.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Trigonometric.swift; path = Sources/Surge/Trigonometric.swift; sourceTree = "<group>"; };
 		1D4378B4E5B45DFF2917E972DE7DD278 /* Pods-SBRA.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-SBRA.modulemap"; sourceTree = "<group>"; };
-		28A0BB9B54CE8F478CCE768D49B5C416 /* ArraySliceUnsafeMemory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArraySliceUnsafeMemory.swift; path = Sources/Surge/ArraySliceUnsafeMemory.swift; sourceTree = "<group>"; };
+		26671EF4C1C0F6FB2C8C7E843744F8D3 /* ArrayUnsafeMemory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArrayUnsafeMemory.swift; path = Sources/Surge/ArrayUnsafeMemory.swift; sourceTree = "<group>"; };
 		30ADEFDF5539AFF0C59371129FA7152A /* Pods-SBRA-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SBRA-acknowledgements.plist"; sourceTree = "<group>"; };
 		36667D33DF629727341F2D7D45AF8FC8 /* Pods-SBRA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SBRA.release.xcconfig"; sourceTree = "<group>"; };
+		3A93F21E64A4C8008269F5EE1C14012A /* Arithmetic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Arithmetic.swift; path = Sources/Surge/Arithmetic.swift; sourceTree = "<group>"; };
+		4B1972907C09A0D45686350953D146E1 /* ArraySliceUnsafeMemory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArraySliceUnsafeMemory.swift; path = Sources/Surge/ArraySliceUnsafeMemory.swift; sourceTree = "<group>"; };
 		4B5C8F50B39714224D8109BFED99F957 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4EF68EFB4DE0791B6F15E7A3FD4617AF /* Auxiliary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Auxiliary.swift; path = Sources/Surge/Auxiliary.swift; sourceTree = "<group>"; };
+		580756ADB43E9C07267078D0D4C52A3A /* Exponential.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Exponential.swift; path = Sources/Surge/Exponential.swift; sourceTree = "<group>"; };
+		5838BFC4CE5812B9FE087330B7AB4105 /* Matrix.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Matrix.swift; path = Sources/Surge/Matrix.swift; sourceTree = "<group>"; };
+		5D0D466ABCE8BE5E41E93A749E57CE5F /* Statistics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Statistics.swift; path = Sources/Surge/Statistics.swift; sourceTree = "<group>"; };
+		5DD88DF0FD2D2B4357E5E70539095E61 /* Surge-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Surge-umbrella.h"; sourceTree = "<group>"; };
 		5DEE90F509E43C921360FCDCDF5F95F0 /* Pods-SBRA-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SBRA-umbrella.h"; sourceTree = "<group>"; };
-		67C2D228D08932054CB7E93FCEDBBF59 /* Statistics.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Statistics.swift; path = Sources/Surge/Statistics.swift; sourceTree = "<group>"; };
-		71F10650D8E5FE077BEB5DE285D37CFE /* Arithmetic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Arithmetic.swift; path = Sources/Surge/Arithmetic.swift; sourceTree = "<group>"; };
-		7441FC117FB9F6E52E740982C539DB39 /* Exponential.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Exponential.swift; path = Sources/Surge/Exponential.swift; sourceTree = "<group>"; };
-		7988028E191D4BBE0AD6F72AE47A4DB9 /* FFT.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FFT.swift; path = Sources/Surge/FFT.swift; sourceTree = "<group>"; };
+		6B9D7630366221A740884166D388985D /* Hyperbolic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Hyperbolic.swift; path = Sources/Surge/Hyperbolic.swift; sourceTree = "<group>"; };
 		81CFEBE9C0F162BF7CAB40EBAF49BE35 /* Pods-SBRA-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SBRA-dummy.m"; sourceTree = "<group>"; };
+		864644FD175E35E4E25CD0FBAED264AD /* Surge-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Surge-prefix.pch"; sourceTree = "<group>"; };
 		8E3E3E517D47AE1B6432ADED5284C432 /* Pods-SBRA-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SBRA-frameworks.sh"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93F233BACB7ED53A6CAA1D18DCD681C6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.0.sdk/System/Library/Frameworks/Accelerate.framework; sourceTree = DEVELOPER_DIR; };
-		96CF016AEEE1513FE88C88B8798DEA88 /* ArrayUnsafeMemory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ArrayUnsafeMemory.swift; path = Sources/Surge/ArrayUnsafeMemory.swift; sourceTree = "<group>"; };
-		9BB5754A70755D7AA85852482036DB94 /* Matrix.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Matrix.swift; path = Sources/Surge/Matrix.swift; sourceTree = "<group>"; };
+		9405DE993FCADE3EF15D2106F8505CA6 /* Pointers.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Pointers.swift; path = Sources/Surge/Pointers.swift; sourceTree = "<group>"; };
+		96F92AE2383D4D11D2246788D1F60E39 /* FFT.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FFT.swift; path = Sources/Surge/FFT.swift; sourceTree = "<group>"; };
+		98F6192F239AC839A2902D0B3EC76332 /* Convolution.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Convolution.swift; path = Sources/Surge/Convolution.swift; sourceTree = "<group>"; };
+		9F3CE71009A27DCF63C5F23FC6108EF8 /* Power.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Power.swift; path = Sources/Surge/Power.swift; sourceTree = "<group>"; };
+		A7D074F041A7ADE9C6F31C40EA54AA91 /* Trigonometric.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Trigonometric.swift; path = Sources/Surge/Trigonometric.swift; sourceTree = "<group>"; };
 		AB3DA88E80BD8720449591B2C86CF667 /* Pods-SBRA-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SBRA-resources.sh"; sourceTree = "<group>"; };
-		ADFF0F56996D21C2637CBC7312F9AB5D /* Power.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Power.swift; path = Sources/Surge/Power.swift; sourceTree = "<group>"; };
-		BF7BBF04CE1BD7F65662E6C9A1F80E2A /* Convolution.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Convolution.swift; path = Sources/Surge/Convolution.swift; sourceTree = "<group>"; };
-		CA0A40EE24A3B3BADDA6C31E5FA51813 /* Surge-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Surge-umbrella.h"; sourceTree = "<group>"; };
+		C9C0095EC3539BE8BEE6E9D36F77A57D /* Surge.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Surge.xcconfig; sourceTree = "<group>"; };
 		CB1F2AC27B2904F64772EDF2E0B7592C /* Pods-SBRA-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SBRA-acknowledgements.markdown"; sourceTree = "<group>"; };
 		CBAE78207E4C2B5B37668C037EFD9EFB /* Pods-SBRA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SBRA.debug.xcconfig"; sourceTree = "<group>"; };
-		CEF509D2838A10C1DD0E8239588A39C2 /* Surge-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Surge-prefix.pch"; sourceTree = "<group>"; };
-		CFBFF47E2C729C96A4BB7F450D51A30F /* Hyperbolic.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Hyperbolic.swift; path = Sources/Surge/Hyperbolic.swift; sourceTree = "<group>"; };
-		D59D2B4F87492EE2912592436EDF5E79 /* Surge.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Surge.xcconfig; sourceTree = "<group>"; };
-		E0536C931509E91D9A8084CBEE01D12A /* Surge-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Surge-dummy.m"; sourceTree = "<group>"; };
+		E2549C337E8AA3593C1C3EF5B06CF792 /* UnsafeMutableMemory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnsafeMutableMemory.swift; path = Sources/Surge/UnsafeMutableMemory.swift; sourceTree = "<group>"; };
 		E8AB63B8E7D9B4F294B18CFD674FB4F1 /* Surge.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Surge.framework; path = Surge.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E9323FA97FD8EA8B2FD995668A207539 /* UnsafeMutableMemory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnsafeMutableMemory.swift; path = Sources/Surge/UnsafeMutableMemory.swift; sourceTree = "<group>"; };
-		F30F314E6E72F88ACBC73FEE56226F53 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F640A416E45BB8A18FA3B2C808A4F02E /* Auxiliary.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Auxiliary.swift; path = Sources/Surge/Auxiliary.swift; sourceTree = "<group>"; };
+		EEABFC2DE7D1D8042D562FA5086CC4C2 /* Surge-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Surge-dummy.m"; sourceTree = "<group>"; };
+		F3B10E80A56265639F0A11C73FB96A9E /* UnsafeMemory.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = UnsafeMemory.swift; path = Sources/Surge/UnsafeMemory.swift; sourceTree = "<group>"; };
+		FB42D34EA56FFB0EA0AB25C07441E07D /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +101,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2AA2E40A282744AC8D8963C8F2F5CE01 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				FB42D34EA56FFB0EA0AB25C07441E07D /* Info.plist */,
+				157B40E3E8FEF04F26AC231004080BAE /* Surge.modulemap */,
+				C9C0095EC3539BE8BEE6E9D36F77A57D /* Surge.xcconfig */,
+				EEABFC2DE7D1D8042D562FA5086CC4C2 /* Surge-dummy.m */,
+				864644FD175E35E4E25CD0FBAED264AD /* Surge-prefix.pch */,
+				5DD88DF0FD2D2B4357E5E70539095E61 /* Surge-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/Surge";
+			sourceTree = "<group>";
+		};
 		2C64A6DE3368AC2DABBC572091363BE5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -126,28 +140,36 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		60DE459B48E5E513BDA8FFD011F11F47 /* Surge */ = {
+		4CBBA11ECB77804E5EF5E0BAEE9065AA /* Surge */ = {
 			isa = PBXGroup;
 			children = (
-				71F10650D8E5FE077BEB5DE285D37CFE /* Arithmetic.swift */,
-				28A0BB9B54CE8F478CCE768D49B5C416 /* ArraySliceUnsafeMemory.swift */,
-				96CF016AEEE1513FE88C88B8798DEA88 /* ArrayUnsafeMemory.swift */,
-				F640A416E45BB8A18FA3B2C808A4F02E /* Auxiliary.swift */,
-				BF7BBF04CE1BD7F65662E6C9A1F80E2A /* Convolution.swift */,
-				7441FC117FB9F6E52E740982C539DB39 /* Exponential.swift */,
-				7988028E191D4BBE0AD6F72AE47A4DB9 /* FFT.swift */,
-				CFBFF47E2C729C96A4BB7F450D51A30F /* Hyperbolic.swift */,
-				9BB5754A70755D7AA85852482036DB94 /* Matrix.swift */,
-				0E3741EE9E601A5906BF24974690ABC2 /* Pointers.swift */,
-				ADFF0F56996D21C2637CBC7312F9AB5D /* Power.swift */,
-				67C2D228D08932054CB7E93FCEDBBF59 /* Statistics.swift */,
-				187BC728756BC57CC752E0F2FF2E35EF /* Trigonometric.swift */,
-				0DB7EA8AD877247E317ACB5E3FF113FD /* UnsafeMemory.swift */,
-				E9323FA97FD8EA8B2FD995668A207539 /* UnsafeMutableMemory.swift */,
-				8EC6251136B25E6408D745BB43DF8324 /* Support Files */,
+				3A93F21E64A4C8008269F5EE1C14012A /* Arithmetic.swift */,
+				4B1972907C09A0D45686350953D146E1 /* ArraySliceUnsafeMemory.swift */,
+				26671EF4C1C0F6FB2C8C7E843744F8D3 /* ArrayUnsafeMemory.swift */,
+				4EF68EFB4DE0791B6F15E7A3FD4617AF /* Auxiliary.swift */,
+				98F6192F239AC839A2902D0B3EC76332 /* Convolution.swift */,
+				580756ADB43E9C07267078D0D4C52A3A /* Exponential.swift */,
+				96F92AE2383D4D11D2246788D1F60E39 /* FFT.swift */,
+				6B9D7630366221A740884166D388985D /* Hyperbolic.swift */,
+				5838BFC4CE5812B9FE087330B7AB4105 /* Matrix.swift */,
+				9405DE993FCADE3EF15D2106F8505CA6 /* Pointers.swift */,
+				9F3CE71009A27DCF63C5F23FC6108EF8 /* Power.swift */,
+				5D0D466ABCE8BE5E41E93A749E57CE5F /* Statistics.swift */,
+				A7D074F041A7ADE9C6F31C40EA54AA91 /* Trigonometric.swift */,
+				F3B10E80A56265639F0A11C73FB96A9E /* UnsafeMemory.swift */,
+				E2549C337E8AA3593C1C3EF5B06CF792 /* UnsafeMutableMemory.swift */,
+				2AA2E40A282744AC8D8963C8F2F5CE01 /* Support Files */,
 			);
 			name = Surge;
 			path = Surge;
+			sourceTree = "<group>";
+		};
+		51BF1B44A6B41EC1A4DF84A00A64D503 /* SwiftLint */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SwiftLint;
+			path = SwiftLint;
 			sourceTree = "<group>";
 		};
 		616DC8396195F1858814E7C626DDEF23 /* iOS */ = {
@@ -159,37 +181,15 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		6BBD120EFE6EB4B669A0955523028CB3 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				60DE459B48E5E513BDA8FFD011F11F47 /* Surge */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
 				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				6BBD120EFE6EB4B669A0955523028CB3 /* Pods */,
+				B439478F2E5A7B9D7FBD2707057F7C11 /* Pods */,
 				2C64A6DE3368AC2DABBC572091363BE5 /* Products */,
 				3D6F5FAE949FF81B736B8BCB124C6FDA /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		8EC6251136B25E6408D745BB43DF8324 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				F30F314E6E72F88ACBC73FEE56226F53 /* Info.plist */,
-				10862013BB7F89B07F1BADF195F68BD0 /* Surge.modulemap */,
-				D59D2B4F87492EE2912592436EDF5E79 /* Surge.xcconfig */,
-				E0536C931509E91D9A8084CBEE01D12A /* Surge-dummy.m */,
-				CEF509D2838A10C1DD0E8239588A39C2 /* Surge-prefix.pch */,
-				CA0A40EE24A3B3BADDA6C31E5FA51813 /* Surge-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Surge";
 			sourceTree = "<group>";
 		};
 		8ED7B288CE03C27A6627FA3B9D703705 /* Pods-SBRA */ = {
@@ -208,6 +208,15 @@
 			);
 			name = "Pods-SBRA";
 			path = "Target Support Files/Pods-SBRA";
+			sourceTree = "<group>";
+		};
+		B439478F2E5A7B9D7FBD2707057F7C11 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4CBBA11ECB77804E5EF5E0BAEE9065AA /* Surge */,
+				51BF1B44A6B41EC1A4DF84A00A64D503 /* SwiftLint */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -359,7 +368,7 @@
 /* Begin XCBuildConfiguration section */
 		148A6CE9BF4F155DDB78B7AEDCFCD147 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D59D2B4F87492EE2912592436EDF5E79 /* Surge.xcconfig */;
+			baseConfigurationReference = C9C0095EC3539BE8BEE6E9D36F77A57D /* Surge.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -432,7 +441,7 @@
 		};
 		6765BF8C1C6FCE44E1B3E34F3C39CDEB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D59D2B4F87492EE2912592436EDF5E79 /* Surge.xcconfig */;
+			baseConfigurationReference = C9C0095EC3539BE8BEE6E9D36F77A57D /* Surge.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";

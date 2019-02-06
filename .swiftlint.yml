@@ -1,0 +1,7 @@
+disabled_rules:
+  - vertical_parameter_alignment # because of SwiftLint issue #1573 which hasn't been fixed yet
+  - large_tuple # this project uses a bunch of 3-tuples and I'm fine with that
+excluded:
+  - Pods
+trailing_whitespace:
+  ignores_empty_lines: true # this is the xcode default and actually a nice behavior

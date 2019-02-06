@@ -20,7 +20,7 @@ class GraphViewController: UIViewController {
 		let graphView = GraphView(frame: view.bounds)
 		graphView.monochromeLines = false
 		
-		motionDataParser.startDataCollection(updateInterval: 0.01) { (dataPoint, error) in
+		motionDataParser.startDataCollection(updateInterval: 0.01) { (dataPoint, _) in
 			if let acceleration = dataPoint?.acceleration {
 				graphView.add([acceleration.x, acceleration.y, acceleration.z])
 			}
@@ -46,7 +46,6 @@ class GraphViewController: UIViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-
     /*
     // MARK: - Navigation
 

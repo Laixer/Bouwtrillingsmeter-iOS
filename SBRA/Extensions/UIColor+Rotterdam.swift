@@ -21,5 +21,3 @@ extension UIColor {
 		return UIColor(displayP3Red: 218.0/255.0, green: 104.0/255.0, blue: 79.0/255.0, alpha: 1.0)
 	}
 }
-
-

@@ -14,23 +14,23 @@ import Surge
 typealias MotionDataHandler = (DataPoint?, Error?) -> Void
 
 class MotionDataParser: NSObject {
-	
+
 	let manager = CMMotionManager()
 	var data = [DataPoint]()
-	
+
 	func startDataCollection(updateInterval: TimeInterval,
 							 handler: @escaping MotionDataHandler) {
-		if (manager.isDeviceMotionAvailable) {
+		if manager.isDeviceMotionAvailable {
 			manager.deviceMotionUpdateInterval = updateInterval
 			var timestamp: TimeInterval = 0.0
 			var shouldReset = false
-			
+
 			var previousFFT: [Float]?
 			var previousDominantFrequency: (x: DominantFrequency, y: DominantFrequency, z: DominantFrequency)?
 			var latestGravity: CMAcceleration?
-			
+
 			manager.startAccelerometerUpdates(to: OperationQueue.main) { (motion, error) in
-				if (error != nil) {
+				if error != nil {
 					return
 				}
 				
@@ -48,7 +48,7 @@ class MotionDataParser: NSObject {
 				if let motion = motion {
 					timestamp += updateInterval
 					
-					if (shouldReset == true) {
+					if shouldReset == true {
 						self.data.removeAll()
 						timestamp = 0.0
 						shouldReset = false
@@ -57,23 +57,20 @@ class MotionDataParser: NSObject {
 					
 					let speed = self.updateSpeed()
 					var frequency = self.updateFrequency()
-					if (frequency == nil) {
+					if frequency == nil {
 						frequency = previousDominantFrequency
 					} else {
 						previousDominantFrequency = frequency
 					}
-					if (timestamp > 2.0) {
+					if timestamp > 2.0 {
 						shouldReset = true
 						previousFFT = self.updateFFT()
 					}
 					
 					let gravity = latestGravity
-					let dataPoint = DataPoint(acceleration: motion.userAcceleration,
-											  speed: speed,
-											  dominantFrequency:frequency,
-											  fft: previousFFT,
-											  gravity: gravity,
-											  rotationRate: motion.rotationRate,
+					let dataPoint = DataPoint(acceleration: motion.userAcceleration, speed: speed,
+											  dominantFrequency: frequency, fft: previousFFT,
+											  gravity: gravity, rotationRate: motion.rotationRate,
 											  timestamp: timestamp)
 					
 					self.data.append(dataPoint)
@@ -90,20 +87,19 @@ class MotionDataParser: NSObject {
 	private func updateSpeed() -> Float {
 		var speed = self.data.last?.speed ?? 0
 		
-		var vx: Decimal = 0
-		var vy: Decimal = 0
-		var vz: Decimal = 0
+		var xSpeed: Decimal = 0
+		var ySpeed: Decimal = 0
+		var zSpeed: Decimal = 0
 		
 		if let data = data.last {
-			let ax = Decimal(data.acceleration.x)
-			let ay = Decimal(data.acceleration.y)
-			let az = Decimal(data.acceleration.z)
-			vx += ax * 0.01
-			vy += ay * 0.01
-			vz += az * 0.01
+			let xAcceleration = Decimal(data.acceleration.x)
+			let yAcceleration = Decimal(data.acceleration.y)
+			let zAcceleration = Decimal(data.acceleration.z)
+			xSpeed += xAcceleration * 0.01
+			ySpeed += yAcceleration * 0.01
+			zSpeed += zAcceleration * 0.01
 			
-			
-			let decimalSpeed = pow(vx, 2) + pow(vy, 2) + pow(vz, 2)
+			let decimalSpeed = pow(xSpeed, 2) + pow(ySpeed, 2) + pow(zSpeed, 2)
 			speed += Float(sqrt(Double(truncating: decimalSpeed as NSNumber)))
 			return speed
 		}
@@ -130,13 +126,13 @@ class MotionDataParser: NSObject {
 		
 		if let velocities = velocityFrequencyDomain {
 			for velocity in velocities {
-				let x = velocity.0
-				let y = velocity.1
-				let z = velocity.2
+				let xVelocity = velocity.0
+				let yVelocity = velocity.1
+				let zVelocity = velocity.2
 				
-				let xLimit = MotionDataParser.getLimitValue(frequency: x)
-				let yLimit = MotionDataParser.getLimitValue(frequency: y)
-				let zLimit = MotionDataParser.getLimitValue(frequency: z)
+				let xLimit = MotionDataParser.getLimitValue(frequency: xVelocity)
+				let yLimit = MotionDataParser.getLimitValue(frequency: yVelocity)
+				let zLimit = MotionDataParser.getLimitValue(frequency: zVelocity)
 				
 				xLimits.append(xLimit)
 				yLimits.append(yLimit)
@@ -147,73 +143,60 @@ class MotionDataParser: NSObject {
 		
 		return calculateDominantFrequencies(limitValues: (xLimits, yLimits, zLimits))
 	}
-	
-	
-	private func calculateDominantFrequencies(limitValues: (x: [Float], y: [Float], z: [Float])) -> (x: DominantFrequency, y: DominantFrequency, z: DominantFrequency)? {
-		var dominantFrequencyX: Int
-		var ratioX: Float = 0.0
-		var dominantVelocityX: Float
+
+	private func calculateDominantFrequencies(limitValues: (x: [Float], y: [Float], z: [Float]))
+		-> (x: DominantFrequency, y: DominantFrequency, z: DominantFrequency)? {
+		let ratioX: Float = 0.0
+		let ratioY: Float = 0.0
+		let ratioZ: Float = 0.0
 		
-		var dominantFrequencyY: Int
-		var ratioY: Float = 0.0
-		var dominantVelocityY: Float
+		var dominantX: DominantFrequency?
+		var dominantY: DominantFrequency?
+		var dominantZ: DominantFrequency?
 		
-		var dominantFrequencyZ: Int
-		var ratioZ: Float = 0.0
-		var dominantVelocityZ: Float
-		
-		
-		var x: DominantFrequency?
-		var y: DominantFrequency?
-		var z: DominantFrequency?
-		
-		for i in 0..<limitValues.x.count {
-			let limitValueX = limitValues.x[i]
-			let limitValueY = limitValues.y[i]
-			let limitValueZ = limitValues.z[i]
+		for index in 0..<limitValues.x.count {
+			let limitValueX = limitValues.x[index]
+			let limitValueY = limitValues.y[index]
+			let limitValueZ = limitValues.z[index]
 			let velocity = velocityInFrequencyDomain()
 			
-			if let velocityX = velocity?[i].x {
-				if (velocityX / limitValueX > ratioX) {
-					ratioX = velocityX / limitValueX
-					dominantFrequencyX = i
-					dominantVelocityX = velocityX
-					
-					x = DominantFrequency(frequency: dominantFrequencyX, velocity: dominantVelocityX, exceedsLimit: ratioX > 1.0)
-				}
+			if let velocityX = velocity?[index].x {
+				dominantX = dominantFrequency(velocity: velocityX, limitValue: limitValueX, ratio: ratioX, index: index)
 			}
 			
-			if let velocityY = velocity?[i].y {
-				if (velocityY / limitValueY > ratioY) {
-					ratioY = velocityY / limitValueY
-					dominantFrequencyY = i
-					dominantVelocityY = velocityY
-					
-					y = DominantFrequency(frequency: dominantFrequencyY, velocity: dominantVelocityY, exceedsLimit: ratioY > 1.0)
-				}
+			if let velocityY = velocity?[index].y {
+				dominantY = dominantFrequency(velocity: velocityY, limitValue: limitValueY, ratio: ratioY, index: index)
 			}
 			
-			if let velocityZ = velocity?[i].z {
-				if (velocityZ / limitValueZ > ratioZ) {
-					ratioZ = velocityZ / limitValueZ
-					dominantFrequencyZ = i
-					dominantVelocityZ = velocityZ
-					
-					z = DominantFrequency(frequency: dominantFrequencyZ, velocity: dominantVelocityZ, exceedsLimit: ratioZ > 1.0)
-				}
+			if let velocityZ = velocity?[index].z {
+				dominantZ = dominantFrequency(velocity: velocityZ, limitValue: limitValueZ, ratio: ratioZ, index: index)
 			}
 		}
 		
-		if let x = x, let y = y, let z = z {
-			//print("dom x: \(x) dom y: \(y) dom z: \(z)")
-			return (x, y, z)
+		if let domX = dominantX, let domY = dominantY, let domZ = dominantZ {
+			return (domX, domY, domZ)
 		}
 		
 		return nil
 	}
 	
+	func dominantFrequency(velocity: Float, limitValue: Float, ratio: Float, index: Int) -> DominantFrequency? {
+		var ratio = ratio
+		var dominantFrequency: Int
+		if velocity / limitValue > ratio {
+			ratio = velocity / limitValue
+			dominantFrequency = index
+			let dominantVelocity = velocity
+			
+			return DominantFrequency(frequency: dominantFrequency,
+										  velocity: dominantVelocity,
+										  exceedsLimit: ratio > 1.0)
+		}
+		
+		return nil
+	}
 	
-	private func velocityInFrequencyDomain() -> [(x: Float, y: Float, z: Float)]?  {
+	private func velocityInFrequencyDomain() -> [(x: Float, y: Float, z: Float)]? {
 		let acceleration = self.data.map({$0.acceleration})
 		guard acceleration.count > 15 else { return nil }
 		
@@ -221,19 +204,16 @@ class MotionDataParser: NSObject {
 		let yAcceleration = acceleration.map({$0.y})
 		let zAcceleration = acceleration.map({$0.z})
 		
-
-		
 		var velocity = [(Float, Float, Float)]()
 		
-		for i in 0..<xAcceleration.count {
-			let acceleration = CMAcceleration(x: xAcceleration[i], y: yAcceleration[i], z: zAcceleration[i])
+		for index in 0..<xAcceleration.count {
+			let acceleration = CMAcceleration(x: xAcceleration[index], y: yAcceleration[index], z: zAcceleration[index])
 			
+			let xVelocity = Float(acceleration.x) / Float(2) * Float.pi * Float(index)
+			let yVelocity = Float(acceleration.y) / Float(2) * Float.pi * Float(index)
+			let zVelocity = Float(acceleration.z) / Float(2) * Float.pi * Float(index)
 			
-			let x = Float(acceleration.x) / Float(2) * Float.pi * Float(i)
-			let y = Float(acceleration.y) / Float(2) * Float.pi * Float(i)
-			let z = Float(acceleration.z) / Float(2) * Float.pi * Float(i)
-			
-			velocity.append((x, y, z))
+			velocity.append((xVelocity, yVelocity, zVelocity))
 		}
 		
 		return velocity

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Wander Siemers. All rights reserved.
 //
 
-protocol CategoryWizardDelegate {
+protocol CategoryWizardDelegate: class {
 	func categoryWizardDelegateDidPick(settings: MeasurementSettings)
 	func categoryWizardDelegateDidFailWithMessage(message: String)
 }

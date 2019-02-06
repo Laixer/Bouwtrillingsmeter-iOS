@@ -17,12 +17,11 @@ class SwitchTableViewCell: UITableViewCell {
 		
 		super.init(style: style, reuseIdentifier: reuseIdentifier)
 		
-		if let textLabel = self.textLabel {			
+		if let textLabel = self.textLabel {
 			switchElement.isOn = false
 			
 			switchElement.translatesAutoresizingMaskIntoConstraints = false
 			textLabel.translatesAutoresizingMaskIntoConstraints = false
-			
 			
 			contentView.addSubview(switchElement)
 			contentView.addSubview(textLabel)
@@ -35,8 +34,6 @@ class SwitchTableViewCell: UITableViewCell {
 				
 				])
 		}
-		
-		
 	}
 	
 	required init?(coder aDecoder: NSCoder) {

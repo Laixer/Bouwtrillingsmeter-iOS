@@ -68,8 +68,7 @@ class GraphView: UIView {
 		// Add a new segment there are no segments or if the current segment is full.
 		if segments.isEmpty {
 			addSegment()
-		}
-		else if let segment = currentSegment, segment.isFull {
+		} else if let segment = currentSegment, segment.isFull {
 			addSegment()
 			purgeSegments()
 		}
@@ -87,8 +86,7 @@ class GraphView: UIView {
 		let startPoint: double3
 		if let currentSegment = currentSegment {
 			startPoint = currentSegment.dataPoints.last!
-		}
-		else {
+		} else {
 			startPoint = [0, 0, 0]
 		}
 		
@@ -113,8 +111,7 @@ class GraphView: UIView {
 			if segment.frame.origin.x < bounds.size.width {
 				// Include the segment if it's still visible.
 				return true
-			}
-			else {
+			} else {
 				// Remove the segment before excluding it from the filtered array.
 				segment.removeFromSuperview()
 				return false

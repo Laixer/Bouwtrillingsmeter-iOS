@@ -7,23 +7,23 @@
 //
 
 enum GraphType: CaseIterable, CustomStringConvertible {
-	case SpeedTime
-	case FrequencyTime
-	case SpeedFrequency
-	case FFT1Second
-	case GravityTimeAccelerationTime
+	case speedTime
+	case frequencyTime
+	case speedFrequency
+	case fft1Second
+	case gravityTimeAccelerationTime
 	
 	var description: String {
 		switch self {
-		case .SpeedTime:
+		case .speedTime:
 			return "Snelheid/tijd"
-		case .FrequencyTime:
+		case .frequencyTime:
 			return "Frequentie/tijd"
-		case .SpeedFrequency:
+		case .speedFrequency:
 			return "Snelheid/frequentie"
-		case .FFT1Second:
+		case .fft1Second:
 			return "FFT (1 seconde)"
-		case .GravityTimeAccelerationTime:
+		case .gravityTimeAccelerationTime:
 			return "Zwaartekracht/tijd + Versnelling/tijd"
 		}
 	}

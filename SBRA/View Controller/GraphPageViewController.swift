@@ -13,7 +13,7 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 	
 	var motionDataParser = MotionDataParser()
 	var graphViewControllers = [GraphViewController]()
-	var initiallyVisibleGraphType = GraphType.SpeedTime
+	var initiallyVisibleGraphType = GraphType.speedTime
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -31,11 +31,11 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		dataSource = self
 		delegate = self
 		
-		
 		// Do any additional setup after loading the view.
 	}
 	
-	func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+	func pageViewController(_ pageViewController: UIPageViewController,
+							viewControllerBefore viewController: UIViewController) -> UIViewController? {
 		if let graphVC = viewController as? GraphViewController {
 			if let index = graphViewControllers.firstIndex(of: graphVC), index > 0 {
 				return graphViewControllers[index - 1]
@@ -45,7 +45,8 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		return nil
 	}
 	
-	func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+	func pageViewController(_ pageViewController: UIPageViewController,
+							viewControllerAfter viewController: UIViewController) -> UIViewController? {
 		if let graphVC = viewController as? GraphViewController {
 			if let index = graphViewControllers.firstIndex(of: graphVC), index < GraphType.allCases.count - 1 {
 				return graphViewControllers[index + 1]
@@ -55,7 +56,10 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		return nil
 	}
 	
-	func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+	func pageViewController(_ pageViewController: UIPageViewController,
+							didFinishAnimating finished: Bool,
+							previousViewControllers: [UIViewController],
+							transitionCompleted completed: Bool) {
 		if let graphType = (pageViewController.viewControllers?.first as? GraphViewController)?.graphType {
 			title = graphType.description
 		}

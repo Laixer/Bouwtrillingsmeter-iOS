@@ -7,7 +7,8 @@
 //
 
 /**
-WizardOutcome is a wizard item which doesn't have successor in the graph, useful for outcomes. A WizardOutcome can be denoted successful/unsuccessful. By default, it's successful.
+WizardOutcome is a wizard item which doesn't have successor in the graph, useful for outcomes.
+A WizardOutcome can be denoted successful/unsuccessful. By default, it's successful.
 */
 class WizardOutcome: WizardItem {
 	var text: String

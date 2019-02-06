@@ -6,7 +6,6 @@
 //  Copyright © 2019 Wander Siemers. All rights reserved.
 //
 
-
 enum BuildingCategory: String, CaseIterable {
 	case category1 = "Categorie 1"
 	case category2 = "Categorie 2"

@@ -14,5 +14,4 @@ struct DominantFrequency {
 	var velocity: Float
 	var exceedsLimit: Bool
 	
-	
 }

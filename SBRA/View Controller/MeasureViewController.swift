@@ -18,7 +18,6 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 	}
 	
-	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
@@ -33,14 +32,15 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		let saveButton = UIBarButtonItem(title: "Sla op", style: .done, target: self, action: #selector(tappedSaveButton))
 		navigationItem.rightBarButtonItem = saveButton
 		
-		
 		setupCollectionView()
 		let motionDataParser = MotionDataParser()
-		motionDataParser.startDataCollection(updateInterval: 0.02) { (dataPoint, error) in
-			for i in 0..<self.collectionView.numberOfItems(inSection: 0) {
-				let indexPath = IndexPath(row: i, section: 0)
-				if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell, let dataPoint = dataPoint {
-					self.updateCell(cell: cell, at: indexPath, with: dataPoint)
+		motionDataParser.startDataCollection(updateInterval: 0.02) { (dataPoint, _) in
+			for index in 0..<self.collectionView.numberOfItems(inSection: 0) {
+				let indexPath = IndexPath(row: index, section: 0)
+				if let dataPoint = dataPoint {
+					if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell {
+						self.updateCell(cell: cell, at: indexPath, with: dataPoint)
+					}
 				}
 			}
 		}
@@ -52,7 +52,9 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 			cell.addValues(values: [Double(dataPoint.speed), 0, 0])
 		case 1:
 			if let dominantFrequency = dataPoint.dominantFrequency {
-				cell.addValues(values: [Double(dominantFrequency.x.frequency) / 100.0, Double(dominantFrequency.y.frequency) / 100.0, Double(dominantFrequency.z.frequency) / 100.0])
+				cell.addValues(values: [Double(dominantFrequency.x.frequency) / 100.0,
+										Double(dominantFrequency.y.frequency) / 100.0,
+										Double(dominantFrequency.z.frequency) / 100.0])
 			}
 		case 3:
 			cell.graphView.clear()
@@ -67,7 +69,6 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 									dataPoint.acceleration.z
 				/*, gravity.x, gravity.y, gravity.z*/])
 			
-			
 		default: break
 			
 		}
@@ -78,24 +79,28 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! GraphCollectionViewCell
-		cell.backgroundColor = UIColor.rotterdamGreen
-		cell.layer.cornerRadius = 8.0
-		cell.text = GraphType.allCases[indexPath.row].description
-		/*if (indexPath.row == 0) {
+		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? GraphCollectionViewCell
+		if let cell = cell {
+			cell.backgroundColor = UIColor.rotterdamGreen
+			cell.layer.cornerRadius = 8.0
+			cell.text = GraphType.allCases[indexPath.row].description
+			/*if (indexPath.row == 0) {
 			cell.graphView.numberOfLines = 1
-		} else if (indexPath.row == 4) {
+			} else if (indexPath.row == 4) {
 			cell.graphView.numberOfLines = 6
-		} else if (indexPath.row == 2) {
+			} else if (indexPath.row == 2) {
 			cell.graphView.numberOfLines = 0
-		} else {
+			} else {
 			cell.graphView.numberOfLines = 3
-		}*/
-		if (indexPath.row == 0) {
-			cell.graphView.singleLine = true
+			}*/
+			if indexPath.row == 0 {
+				cell.graphView.singleLine = true
+			}
+			
+			return cell
 		}
 		
-		return cell
+		fatalError("couldn't dequeue cell")
 		
 	}
 	

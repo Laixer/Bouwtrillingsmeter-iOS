@@ -6,7 +6,6 @@
 //  Copyright © 2019 Wander Siemers. All rights reserved.
 //
 
-
 /**
 WizardQuestion is a wizard item which has a succeeding item, useful for questions.
 */

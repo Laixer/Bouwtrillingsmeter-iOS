@@ -1,16 +1,20 @@
 PODS:
   - Surge (2.2.0)
+  - SwiftLint (0.29.1)
 
 DEPENDENCIES:
   - Surge (~> 2.2)
+  - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Surge
+    - SwiftLint
 
 SPEC CHECKSUMS:
   Surge: 51fbaf8020dc2bc6416c07ed540f21536ba5a98b
+  SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
 
-PODFILE CHECKSUM: 7cb32becbfac45b5866c8b11f789b4bf5c08d57f
+PODFILE CHECKSUM: 4a3f74dceba90e2a66c2c5c726cf9391095d8e34
 
 COCOAPODS: 1.5.3
