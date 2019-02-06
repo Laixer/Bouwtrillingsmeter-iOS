@@ -58,9 +58,14 @@ class MeasurementSettingsViewController: UIViewController {
 		view.backgroundColor = UIColor.white
 		title = "Nieuwe meting"
 		navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Begin",
-															style: .plain,
+															style: .done,
 															target: self,
 															action: #selector(tappedBeginButton))
+		
+		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Sluit",
+														   style: .plain,
+														   target: self,
+														   action: #selector(dismissTapped))
 		
 		setupTableView()
 		setupWizardButton()
@@ -139,6 +144,7 @@ class MeasurementSettingsViewController: UIViewController {
 	@objc private func dismissTapped() {
 		navigationController?.dismiss(animated: true, completion: nil)
 	}
+	
 }
 
 extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDataSource {
