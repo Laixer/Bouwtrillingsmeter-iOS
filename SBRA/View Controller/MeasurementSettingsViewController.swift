@@ -361,7 +361,7 @@ extension MeasurementSettingsViewController: CategoryWizardDelegate {
 	func categoryWizardDelegateDidPick(settings: MeasurementSettings) {
 		if let buildingIndex = settings.buildingCategory,
 			let vibrationIndex = settings.vibrationCategory,
-			let sensitive = settings.sensitiveToVibrations {
+			let sensitive = settings.isSensitiveToVibrations {
 			self.selectedBuildingIndex = BuildingCategory.allCases.firstIndex(of: buildingIndex)
 			self.selectedVibrationIndex = VibrationCategory.allCases.firstIndex(of: vibrationIndex)
 			self.sensitiveToVibrations = sensitive

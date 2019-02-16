@@ -9,5 +9,5 @@
 struct MeasurementSettings {
 	var buildingCategory: BuildingCategory?
 	var vibrationCategory: VibrationCategory?
-	var sensitiveToVibrations: Bool?
+	var isSensitiveToVibrations: Bool?
 }

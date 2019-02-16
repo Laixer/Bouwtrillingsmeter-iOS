@@ -36,7 +36,6 @@ class CategoryWizardViewController: UIViewController {
 		
 		wizardView.yesButton.addTarget(self, action: #selector(tappedYesButton), for: .touchUpInside)
 		wizardView.noButton.addTarget(self, action: #selector(tappedNoButton), for: .touchUpInside)
-		
 	}
 	
 	@objc private func tappedYesButton() {
@@ -50,11 +49,7 @@ class CategoryWizardViewController: UIViewController {
 	private func handleButtonTap(positive: Bool) {
 		
 		if let currentItem = currentWizardItem {
-			//print(currentItem.text)
-			
 			if let question = currentItem as? WizardQuestion {
-				// save state for question
-				
 				currentWizardItem = positive ? question.positiveNext : question.negativeNext
 				if (currentWizardItem as? WizardQuestion) != nil {
 					updateUI()
@@ -66,7 +61,8 @@ class CategoryWizardViewController: UIViewController {
 						result.vibrationCategory = vibrationCategory
 					}
 					if let sensitivityCategory = outcome.sensitiveToVibrations {
-						result.sensitiveToVibrations = sensitivityCategory
+						result.isSensitiveToVibrations = sensitivityCategory
+						showResultsView()
 						delegate?.categoryWizardDelegateDidPick(settings: result)
 					}
 					
@@ -91,5 +87,21 @@ class CategoryWizardViewController: UIViewController {
 			wizardView?.textLabel.text = question.text
 			wizardView?.secondaryTextLabel.text = question.secondaryText
 		}
+	}
+	
+	private func showResultsView() {
+		let resultsView = CategoryWizardResultsView(frame: CGRect(x: 0.0,
+																  y: 100.0,
+																  width: view.bounds.width,
+																  height: view.bounds.width))
+		resultsView.buildingCategoryLabel.text = result.buildingCategory?.rawValue
+		resultsView.vibrationCategoryLabel.text = result.vibrationCategory?.rawValue
+		if let sensitive = result.isSensitiveToVibrations {
+			resultsView.sensitiveToVibrationsLabel.text = sensitive ? "Ja" : "Nee"
+		}
+	
+		view.addSubview(resultsView)
+		wizardView?.yesButton.isHidden = true
+		wizardView?.noButton.isHidden = true
 	}
 }
