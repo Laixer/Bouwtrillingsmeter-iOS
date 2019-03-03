@@ -12,6 +12,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	
 	var collectionView: UICollectionView
 	let numberOfGraphs = 5
+	var dataPoints = [DataPoint]()
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -34,10 +35,11 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		
 		setupCollectionView()
 		let motionDataParser = MotionDataParser()
-		motionDataParser.startDataCollection(updateInterval: 0.02) { (dataPoint, _) in
+		motionDataParser.startDataCollection(updateInterval: 0.02) { [weak weakSelf = self] (dataPoint, _) in
 			for index in 0..<self.collectionView.numberOfItems(inSection: 0) {
 				let indexPath = IndexPath(row: index, section: 0)
 				if let dataPoint = dataPoint {
+					weakSelf?.dataPoints.append(dataPoint)
 					if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell {
 						self.updateCell(cell: cell, at: indexPath, with: dataPoint)
 					}
