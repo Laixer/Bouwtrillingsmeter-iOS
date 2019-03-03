@@ -15,6 +15,7 @@ class CategoryWizardViewController: UIViewController {
 	var result: MeasurementSettings = MeasurementSettings()
 	
 	var wizardView: CategoryWizardView?
+	var resultsView: CategoryWizardResultsView?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,6 +69,7 @@ class CategoryWizardViewController: UIViewController {
 					
 					if outcome.successful == false {
 						delegate?.categoryWizardDelegateDidFailWithMessage(message: outcome.text)
+						showFailureResultsView()
 					}
 					
 					currentWizardItem = outcome.next
@@ -94,6 +96,7 @@ class CategoryWizardViewController: UIViewController {
 																  y: 100.0,
 																  width: view.bounds.width,
 																  height: view.bounds.width))
+		
 		resultsView.buildingCategoryLabel.text = result.buildingCategory?.rawValue
 		resultsView.vibrationCategoryLabel.text = result.vibrationCategory?.rawValue
 		if let sensitive = result.isSensitiveToVibrations {
@@ -101,7 +104,26 @@ class CategoryWizardViewController: UIViewController {
 		}
 	
 		view.addSubview(resultsView)
+		
+		resultsView.translatesAutoresizingMaskIntoConstraints = false
+		
+		NSLayoutConstraint.activate([
+			resultsView.leftAnchor.constraint(equalTo: view.leftAnchor),
+			resultsView.rightAnchor.constraint(equalTo: view.rightAnchor),
+			resultsView.topAnchor.constraint(equalToSystemSpacingBelow: view.layoutMarginsGuide.topAnchor, multiplier: 3.0),
+			resultsView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+			])
+		
 		wizardView?.yesButton.isHidden = true
 		wizardView?.noButton.isHidden = true
+		
+		self.resultsView = resultsView
+	}
+	
+	private func showFailureResultsView() {
+		wizardView?.yesButton.isHidden = true
+		wizardView?.noButton.isHidden = true
+		
+		wizardView?.textLabel.text = currentWizardItem?.text
 	}
 }
