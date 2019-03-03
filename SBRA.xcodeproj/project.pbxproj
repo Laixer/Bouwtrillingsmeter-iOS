@@ -27,6 +27,7 @@
 		C1BA12F4217CBD0D0024F2DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1BA12F3217CBD0D0024F2DA /* Assets.xcassets */; };
 		C1BA12F7217CBD0D0024F2DA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1BA12F5217CBD0D0024F2DA /* LaunchScreen.storyboard */; };
 		C1BA1302217CBD0D0024F2DA /* SBRATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA1301217CBD0D0024F2DA /* SBRATests.swift */; };
+		C1BA5876221A15CF00EF2480 /* MeasurementTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1BA5875221A15CF00EF2480 /* MeasurementTableViewCell.swift */; };
 		C1C9619C21B5CB34003A7396 /* UIColor+Rotterdam.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C9619B21B5CB34003A7396 /* UIColor+Rotterdam.swift */; };
 		C1C9619E21B5CD40003A7396 /* UIFont+Rotterdam.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1C9619D21B5CD40003A7396 /* UIFont+Rotterdam.swift */; };
 		C1D8A15B21F1349000921AE5 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D8A15A21F1349000921AE5 /* SwitchTableViewCell.swift */; };
@@ -77,6 +78,7 @@
 		C1BA12FD217CBD0D0024F2DA /* SBRATests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SBRATests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1BA1301217CBD0D0024F2DA /* SBRATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SBRATests.swift; sourceTree = "<group>"; };
 		C1BA1303217CBD0D0024F2DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C1BA5875221A15CF00EF2480 /* MeasurementTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementTableViewCell.swift; sourceTree = "<group>"; };
 		C1C9619B21B5CB34003A7396 /* UIColor+Rotterdam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Rotterdam.swift"; sourceTree = "<group>"; };
 		C1C9619D21B5CD40003A7396 /* UIFont+Rotterdam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+Rotterdam.swift"; sourceTree = "<group>"; };
 		C1D8A15A21F1349000921AE5 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
@@ -214,6 +216,7 @@
 		C1C961A321B6B0CD003A7396 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				C1BA5875221A15CF00EF2480 /* MeasurementTableViewCell.swift */,
 				C1856311220B37540073999B /* CategoryWizardView.swift */,
 				C17CDC93220B76C800F008E8 /* CategoryWizardResultsView.swift */,
 				C1D8A15A21F1349000921AE5 /* SwitchTableViewCell.swift */,
@@ -413,6 +416,7 @@
 				C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */,
 				C1FB6FD4220A371800D7BE5A /* CategoryWizardDelegate.swift in Sources */,
 				C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */,
+				C1BA5876221A15CF00EF2480 /* MeasurementTableViewCell.swift in Sources */,
 				C17447EE22088F8000287C3E /* CategoryWizard.swift in Sources */,
 				C17447EC2208734200287C3E /* VibrationCategory.swift in Sources */,
 				C1EA6B3121AAEFCC000841A3 /* MeasureViewController.swift in Sources */,
