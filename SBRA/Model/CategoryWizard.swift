@@ -53,7 +53,7 @@ struct CategoryWizard {
 		buildingCategoryOutcomes[2].buildingCategory = BuildingCategory.category3
 		
 		let buildingCategoryFailureOutcomes = [
-			"Er is geen kwalificatie voor het type bebouwing kunnen maken",
+			"Het is niet mogelijk om een kwalificatie voor dit type bebouwing te maken",
 			"Het pand kan niet worden ingedeeld in een categorie van de SBR-A richtlijn"
 			].map({WizardOutcome(text: $0, isPositive: false)})
 		
@@ -135,7 +135,7 @@ struct CategoryWizard {
 		vibrationCategoryQuestions[1].positiveNext = vibrationCategoryOutcomes[1]
 		vibrationCategoryQuestions[1].negativeNext = vibrationCategoryQuestions[2]
 		vibrationCategoryQuestions[2].positiveNext = vibrationCategoryOutcomes[2]
-		let text = "Er is geen kwalificatie van het type trilling kunnen maken"
+		let text = "Het is niet mogelijk om een kwalificatie voor dit type trilling te maken"
 		vibrationCategoryQuestions[2].negativeNext = WizardOutcome(text: text,
 																   isPositive: false)
 		vibrationCategoryOutcomes[0].next = sensitiveToVibrationsCategoryQuestions[0]
