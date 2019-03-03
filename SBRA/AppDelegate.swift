@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		let viewController = MeasurementsViewController()
 		let navController = UINavigationController(rootViewController: viewController)
 		window?.rootViewController = navController
-		navController.navigationBar.titleTextAttributes = [.font: UIFont.rotterdamNavigationTitleFont]
 		
 		window?.makeKeyAndVisible()
 		
