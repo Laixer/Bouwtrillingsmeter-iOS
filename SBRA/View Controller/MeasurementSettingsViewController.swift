@@ -103,7 +103,7 @@ class MeasurementSettingsViewController: UIViewController {
 		let frame = CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: height)
 		let line = UIView(frame: frame)
 		tableView.tableHeaderView = line
-		line.backgroundColor = tableView.separatorColor
+		line.backgroundColor = .clear
 	}
 	
 	@objc private func tappedBeginButton() {
