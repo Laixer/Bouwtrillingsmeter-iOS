@@ -197,11 +197,11 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		showPickerView()
-		
 		selectedTableIndex = indexPath.row
 		
 		if (0...1).contains(indexPath.row) {
+			showPickerView()
+			
 			if selectedTableIndex == 0 {
 				if let index = selectedBuildingIndex {
 					picker?.selectRow(index, inComponent: 0, animated: false)
@@ -216,11 +216,15 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 				} else {
 					selectedVibrationIndex = 0
 					tableView.reloadData()
-					tableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+					tableView.selectRow(at: IndexPath(row: 1, section: 0), animated: false, scrollPosition: .none)
 				}
 			}
 			
 			picker?.reloadAllComponents()
+		} else {
+			tableView.deselectRow(at: indexPath, animated: true)
+			pickerContainerView?.removeFromSuperview()
+			pickerContainerView = nil
 		}
 	}
 	
