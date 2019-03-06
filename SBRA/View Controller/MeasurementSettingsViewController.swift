@@ -78,6 +78,8 @@ class MeasurementSettingsViewController: UIViewController {
 		tableView.dataSource = self
 		tableView.delegate = self
 		
+		tableView.isScrollEnabled = false
+		
 		tableView.register(UITableViewCell.self,
 						   forCellReuseIdentifier: MeasurementSettingsViewController.standardCellReuseIdentifier)
 		tableView.register(SwitchTableViewCell.self,
