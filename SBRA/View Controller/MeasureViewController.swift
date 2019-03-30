@@ -172,7 +172,7 @@ extension MeasureViewController: CLLocationManagerDelegate {
 		let coder = CLGeocoder()
 		
 		if let location = locations.last {
-			coder.reverseGeocodeLocation(location) { [weak weakSelf = self] (placemarks, error)  in				
+			coder.reverseGeocodeLocation(location) { [weak weakSelf = self] (placemarks, error) in
 				weakSelf?.placemark = placemarks?.first
 				
 				if let error = error {

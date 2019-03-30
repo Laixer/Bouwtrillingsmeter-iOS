@@ -283,9 +283,11 @@
 				TargetAttributes = {
 					C1BA12E8217CBD0A0024F2DA = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 					};
 					C1BA12FC217CBD0D0024F2DA = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 						TestTargetID = C1BA12E8217CBD0A0024F2DA;
 					};
 				};
@@ -589,7 +591,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gemeenterotterdam.trillingsmeter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -608,7 +610,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.gemeenterotterdam.trillingsmeter;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -628,7 +630,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wandersiemers.SBRATests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SBRA.app/SBRA";
 			};
@@ -649,7 +651,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.wandersiemers.SBRATests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SBRA.app/SBRA";
 			};
