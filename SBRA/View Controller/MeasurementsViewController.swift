@@ -16,7 +16,7 @@ class MeasurementsViewController: UIViewController {
 	let tableView: UITableView
 	let backgroundColor = UIColor(white: 0.9, alpha: 1.0)
 	
-	var numberOfCells = 3
+	var numberOfCells = 6
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		rotterdamIconView = UIImageView(image: UIImage(named: "rotterdamicon"))
@@ -61,6 +61,10 @@ class MeasurementsViewController: UIViewController {
 	
 	@objc private func tappedAddButton() {
 		let measurementSettingsVC = MeasurementSettingsViewController()
+		measurementSettingsVC.completionHandler = { (measurement) in
+			print("measurement \(measurement.dataPoints.count)")
+		}
+		
 		let navigationController = UINavigationController(rootViewController: measurementSettingsVC)
 		
 		present(navigationController, animated: true, completion: nil)
@@ -114,9 +118,6 @@ extension MeasurementsViewController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "bigcell", for: indexPath)
-		cell.layer.shadowPath = CGPath(rect: cell.bounds, transform: nil)
-		cell.layer.shadowColor = UIColor.red.cgColor
-		cell.clipsToBounds = false
 		return cell
 	}
 	
@@ -129,7 +130,7 @@ extension MeasurementsViewController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 		let view = UIView()
-		view.backgroundColor = UIColor(white: 0.9, alpha: 1.0)
+		view.backgroundColor = .clear
 		return view
 	}
 }
