@@ -19,6 +19,7 @@
 		C17447F22208902700287C3E /* WizardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447F12208902700287C3E /* WizardItem.swift */; };
 		C17447F42208926700287C3E /* WizardOutcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447F32208926700287C3E /* WizardOutcome.swift */; };
 		C17447F62208A15300287C3E /* CategoryWizardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447F52208A15300287C3E /* CategoryWizardViewController.swift */; };
+		C17A3FA1224FC7DE00575905 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17A3FA0224FC7DE00575905 /* Database.swift */; };
 		C17CDC94220B76C800F008E8 /* CategoryWizardResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17CDC93220B76C800F008E8 /* CategoryWizardResultsView.swift */; };
 		C1856312220B37540073999B /* CategoryWizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1856311220B37540073999B /* CategoryWizardView.swift */; };
 		C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195421AC014900F7D004 /* GraphViewController.swift */; };
@@ -67,6 +68,7 @@
 		C17447F12208902700287C3E /* WizardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardItem.swift; sourceTree = "<group>"; };
 		C17447F32208926700287C3E /* WizardOutcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardOutcome.swift; sourceTree = "<group>"; };
 		C17447F52208A15300287C3E /* CategoryWizardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizardViewController.swift; sourceTree = "<group>"; };
+		C17A3FA0224FC7DE00575905 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		C17CDC93220B76C800F008E8 /* CategoryWizardResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizardResultsView.swift; sourceTree = "<group>"; };
 		C1856311220B37540073999B /* CategoryWizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizardView.swift; sourceTree = "<group>"; };
 		C1B2195421AC014900F7D004 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 		C1C961A221B6B0C0003A7396 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C17A3FA0224FC7DE00575905 /* Database.swift */,
 				C1D1C4C622307D40000B7D99 /* Measurement.swift */,
 				C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */,
 				C1FB6FD5220A376700D7BE5A /* MeasurementSettings.swift */,
@@ -340,12 +343,16 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SBRA/Pods-SBRA-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Surge/Surge.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Surge.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +424,7 @@
 				C17447F022088FA600287C3E /* WizardQuestion.swift in Sources */,
 				C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */,
 				C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */,
+				C17A3FA1224FC7DE00575905 /* Database.swift in Sources */,
 				C1856312220B37540073999B /* CategoryWizardView.swift in Sources */,
 				C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */,
 				C1FB6FD4220A371800D7BE5A /* CategoryWizardDelegate.swift in Sources */,

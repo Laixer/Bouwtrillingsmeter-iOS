@@ -1,20 +1,30 @@
 PODS:
+  - Realm (3.14.0):
+    - Realm/Headers (= 3.14.0)
+  - Realm/Headers (3.14.0)
+  - RealmSwift (3.14.0):
+    - Realm (= 3.14.0)
   - Surge (2.2.0)
-  - SwiftLint (0.29.1)
+  - SwiftLint (0.31.0)
 
 DEPENDENCIES:
+  - RealmSwift (~> 3)
   - Surge (~> 2.2)
   - SwiftLint
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Realm
+    - RealmSwift
     - Surge
     - SwiftLint
 
 SPEC CHECKSUMS:
+  Realm: 221b25919bb5a010a3c597d707f8df3492dcd93a
+  RealmSwift: 28f22dfa6a27b9a778cfb09471558b6afcf1022c
   Surge: 51fbaf8020dc2bc6416c07ed540f21536ba5a98b
-  SwiftLint: 6772320e40b52049053a518c17db9b0634a0b45a
+  SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
 
-PODFILE CHECKSUM: 4a3f74dceba90e2a66c2c5c726cf9391095d8e34
+PODFILE CHECKSUM: 394a611d2af1c5a520bf2c5a462867ee490fb9ca
 
 COCOAPODS: 1.5.3
