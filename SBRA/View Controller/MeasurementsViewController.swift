@@ -61,6 +61,10 @@ class MeasurementsViewController: UIViewController {
 	
 	@objc private func tappedAddButton() {
 		let measurementSettingsVC = MeasurementSettingsViewController()
+		measurementSettingsVC.completionHandler = { (measurement) in
+			print("measurement \(measurement.dataPoints.count)")
+		}
+		
 		let navigationController = UINavigationController(rootViewController: measurementSettingsVC)
 		
 		present(navigationController, animated: true, completion: nil)

@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MeasureViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	
 	var collectionView: UICollectionView
 	let numberOfGraphs = 5
 	var dataPoints = [DataPoint]()
+	var completionHandler: ((Measurement) -> Void)?
+	var locationManager: CLLocationManager?
+	var placemark: CLPlacemark?
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -34,6 +38,13 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		navigationItem.rightBarButtonItem = saveButton
 		
 		setupCollectionView()
+	}
+	
+	func beginMeasurement(completionHandler: @escaping (Measurement) -> Void) {
+		getLocation()
+		
+		self.completionHandler = completionHandler
+		
 		let motionDataParser = MotionDataParser()
 		motionDataParser.startDataCollection(updateInterval: 0.02) { [weak weakSelf = self] (dataPoint, _) in
 			for index in 0..<self.collectionView.numberOfItems(inSection: 0) {
@@ -131,6 +142,57 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	}
 	
 	@objc private func tappedSaveButton() {
+		let measurement = Measurement(dataPoints: dataPoints, date: Date(), placemark: placemark)
+		
+		if let handler = completionHandler {
+			handler(measurement)
+		}
+		
 		self.presentingViewController?.dismiss(animated: true, completion: nil)
+	}
+	
+	private func getLocation() {
+		let locationManager = CLLocationManager()
+		
+		guard CLLocationManager.locationServicesEnabled() else {
+			print("ERROR: Can't retrieve location, reason: location services are disabled")
+			return
+		}
+		
+		locationManager.delegate = self
+		locationManager.requestWhenInUseAuthorization()
+		
+		locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+		self.locationManager = locationManager
+	}
+}
+
+extension MeasureViewController: CLLocationManagerDelegate {
+	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		let coder = CLGeocoder()
+		
+		if let location = locations.last {
+			coder.reverseGeocodeLocation(location) { [weak weakSelf = self] (placemarks, error)  in				
+				weakSelf?.placemark = placemarks?.first
+				
+				if let error = error {
+					print(error)
+				}
+			}
+			print("location: \(location.coordinate)")
+		}
+		
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+		print("error \(error)")
+	}
+	
+	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+		if status == .authorizedWhenInUse {
+			manager.requestLocation()
+		} else {
+			print("error: not authorized to retrieve location")
+		}
 	}
 }
