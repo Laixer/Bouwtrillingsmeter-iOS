@@ -18,6 +18,8 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	var locationManager: CLLocationManager?
 	var placemark: CLPlacemark?
 	
+	let motionDataParser = MotionDataParser()
+	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
@@ -45,7 +47,6 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		
 		self.completionHandler = completionHandler
 		
-		let motionDataParser = MotionDataParser()
 		motionDataParser.startDataCollection(updateInterval: 0.02) { [weak weakSelf = self] (dataPoint, _) in
 			for index in 0..<self.collectionView.numberOfItems(inSection: 0) {
 				let indexPath = IndexPath(row: index, section: 0)
@@ -57,6 +58,10 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 				}
 			}
 		}
+	}
+	
+	override func viewDidDisappear(_ animated: Bool) {
+		motionDataParser.stopDataCollection()
 	}
 	
 	private func updateCell(cell: GraphCollectionViewCell, at indexPath: IndexPath, with dataPoint: DataPoint) {
@@ -142,13 +147,31 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	}
 	
 	@objc private func tappedSaveButton() {
-		let measurement = Measurement(dataPoints: dataPoints, date: Date(), placemark: placemark)
+		var wrappedLat: NSNumber?
+		var wrappedLong: NSNumber?
+		
+		if let lat = placemark?.location?.coordinate.latitude {
+			wrappedLat = NSNumber(value: lat)
+		}
+		
+		if let long = placemark?.location?.coordinate.longitude {
+			wrappedLong = NSNumber(value: long)
+		}
+		
+		let measurement = Measurement(dataPoints: dataPoints,
+									  date: Date(),
+									  latCoordinate: wrappedLat?.floatValue,
+									  longCoordinate: wrappedLong?.floatValue,
+									  locationString: placemark?.locality,
+									  persistableMeasurement: nil)
+		
+		print("created measurement")
 		
 		if let handler = completionHandler {
 			handler(measurement)
 		}
 		
-		self.presentingViewController?.dismiss(animated: true, completion: nil)
+		presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
 	}
 	
 	private func getLocation() {
@@ -162,7 +185,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		locationManager.delegate = self
 		locationManager.requestWhenInUseAuthorization()
 		
-		locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 		self.locationManager = locationManager
 	}
 }
@@ -178,6 +201,9 @@ extension MeasureViewController: CLLocationManagerDelegate {
 				if let error = error {
 					print(error)
 				}
+				
+				print("locality: \(String(describing: placemarks?.first?.locality))")
+
 			}
 			print("location: \(location.coordinate)")
 		}
