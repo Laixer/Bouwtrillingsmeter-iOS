@@ -22,7 +22,8 @@ class PersistableMeasurement: Object {
 									  date: date,
 									  latCoordinate: latCoordinate.value,
 									  longCoordinate: longCoordinate.value,
-									  locationString: locationString)
+									  locationString: locationString,
+									  persistableMeasurement: self)
 		return measurement
 	}
 	

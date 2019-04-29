@@ -12,5 +12,9 @@ import CoreLocation
 struct Measurement {
 	var dataPoints: [DataPoint]
 	var date: Date
-	var placemark: CLPlacemark?
+	var latCoordinate: Float?
+	var longCoordinate: Float?
+	var locationString: String?
+	
+	var persistableMeasurement: PersistableMeasurement?
 }
