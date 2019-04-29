@@ -84,6 +84,11 @@ class MotionDataParser: NSObject {
 		}
 	}
 	
+	internal func stopDataCollection() {
+		manager.stopAccelerometerUpdates()
+		manager.stopDeviceMotionUpdates()
+	}
+	
 	private func updateSpeed() -> Float {
 		var speed = self.data.last?.speed ?? 0
 		
