@@ -16,7 +16,7 @@ class MeasurementsViewController: UIViewController {
 	let tableView: UITableView
 	let backgroundColor = UIColor(white: 0.9, alpha: 1.0)
 	
-	var numberOfCells = 6
+	var measurements = [Measurement]()
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		rotterdamIconView = UIImageView(image: UIImage(named: "rotterdamicon"))
@@ -47,6 +47,8 @@ class MeasurementsViewController: UIViewController {
 															target: self,
 															action: #selector(tappedAddButton))
 		
+		measurements = Database().measurements
+		
 		updateTableViewVisibility()
 		
 		view.backgroundColor = UIColor.white
@@ -59,15 +61,30 @@ class MeasurementsViewController: UIViewController {
 		setupConstraints()
     }
 	
+	override func viewWillAppear(_ animated: Bool) {
+		super.viewWillAppear(animated)
+		
+		updateTableViewVisibility()
+		tableView.reloadData()
+	}
+	
 	@objc private func tappedAddButton() {
 		let measurementSettingsVC = MeasurementSettingsViewController()
-		measurementSettingsVC.completionHandler = { (measurement) in
-			print("measurement \(measurement.dataPoints.count)")
+		measurementSettingsVC.completionHandler = { [weak self] (measurement) in
+			self?.addMeasurement(measurement: measurement)
+			print("number of measurements: \(Database().numberOfMeasurements())")
+			self?.updateTableViewVisibility()
+			self?.tableView.reloadData()
 		}
 		
 		let navigationController = UINavigationController(rootViewController: measurementSettingsVC)
 		
 		present(navigationController, animated: true, completion: nil)
+	}
+	
+	private func addMeasurement(measurement: Measurement) {
+		Database().addMeasurement(measurement: measurement)
+		measurements = Database().measurements
 	}
 	
 	private func setupConstraints() {
@@ -113,12 +130,15 @@ extension MeasurementsViewController: UITableViewDataSource {
 	}
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
-		return numberOfCells
+		return Database().numberOfMeasurements()
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "bigcell", for: indexPath)
-		return cell
+		let cell = tableView.dequeueReusableCell(withIdentifier: "bigcell", for: indexPath) as? MeasurementTableViewCell
+		let measurement = measurements[indexPath.row]
+		cell?.nameLabel.text = "Meting in " + (measurement.locationString ?? "nil")
+		
+		return cell!
 	}
 	
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -144,10 +164,11 @@ extension MeasurementsViewController: UITableViewDelegate {
 				   commit editingStyle: UITableViewCell.EditingStyle,
 				   forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
-			numberOfCells -= 1
+			Database().removeMeasurement(measurement: measurements[indexPath.row])
+			measurements = Database().measurements
 			let indexSet = IndexSet(integer: indexPath.section)
 			
-			tableView.deleteSections(indexSet, with: .fade)
+			tableView.deleteSections(indexSet, with: .automatic)
 			
 			updateTableViewVisibility()
 		}
