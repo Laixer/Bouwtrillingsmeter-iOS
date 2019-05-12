@@ -135,8 +135,12 @@ extension MeasurementsViewController: UITableViewDataSource {
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "bigcell", for: indexPath) as? MeasurementTableViewCell
-		let measurement = measurements[indexPath.row]
+		let measurement = measurements[indexPath.section]
 		cell?.nameLabel.text = "Meting in " + (measurement.locationString ?? "nil")
+		
+		let formatter = DateFormatter()
+		formatter.dateStyle = .long
+		cell?.dateLabel.text = formatter.string(from: measurement.date)
 		
 		return cell!
 	}

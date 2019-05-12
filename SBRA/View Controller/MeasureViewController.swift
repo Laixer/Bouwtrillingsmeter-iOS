@@ -39,7 +39,31 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		let saveButton = UIBarButtonItem(title: "Sla op", style: .done, target: self, action: #selector(tappedSaveButton))
 		navigationItem.rightBarButtonItem = saveButton
 		
-		setupCollectionView()
+		//setupCollectionView()
+		setupMeasuringLabel()
+	}
+	
+	private func setupMeasuringLabel() {
+		let label = UILabel()
+		label.text = "Aan het meten..."
+		view.addSubview(label)
+		
+		let indicator = UIActivityIndicatorView(style: .gray)
+		view.addSubview(indicator)
+		indicator.startAnimating()
+		
+		label.translatesAutoresizingMaskIntoConstraints = false
+		indicator.translatesAutoresizingMaskIntoConstraints = false
+		
+		view.addConstraints([
+			label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+			label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+			
+			indicator.centerYAnchor.constraint(equalTo: label.centerYAnchor),
+			indicator.leftAnchor.constraint(equalToSystemSpacingAfter: label.rightAnchor, multiplier: 1.0)
+			
+			
+		])
 	}
 	
 	func beginMeasurement(completionHandler: @escaping (Measurement) -> Void) {
