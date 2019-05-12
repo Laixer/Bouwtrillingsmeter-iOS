@@ -12,6 +12,7 @@
 		C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */; };
 		C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B38882180C36300B03F99 /* MotionDataParser.swift */; };
 		C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B388C2180CB3500B03F99 /* DataPoint.swift */; };
+		C162EFF0228862CD005E71CE /* PowerLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C162EFEF228862CD005E71CE /* PowerLimit.swift */; };
 		C17447EA2208732B00287C3E /* BuildingCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447E92208732B00287C3E /* BuildingCategory.swift */; };
 		C17447EC2208734200287C3E /* VibrationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447EB2208734200287C3E /* VibrationCategory.swift */; };
 		C17447EE22088F8000287C3E /* CategoryWizard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447ED22088F8000287C3E /* CategoryWizard.swift */; };
@@ -63,6 +64,7 @@
 		C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPageViewController.swift; sourceTree = "<group>"; };
 		C14B38882180C36300B03F99 /* MotionDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataParser.swift; sourceTree = "<group>"; };
 		C14B388C2180CB3500B03F99 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
+		C162EFEF228862CD005E71CE /* PowerLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PowerLimit.swift; path = Model/PowerLimit.swift; sourceTree = "<group>"; };
 		C17447E92208732B00287C3E /* BuildingCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCategory.swift; sourceTree = "<group>"; };
 		C17447EB2208734200287C3E /* VibrationCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationCategory.swift; sourceTree = "<group>"; };
 		C17447ED22088F8000287C3E /* CategoryWizard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizard.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */,
 				C14B38882180C36300B03F99 /* MotionDataParser.swift */,
+				C162EFEF228862CD005E71CE /* PowerLimit.swift */,
 				C108A00821CC48A900C6CCB2 /* DominantFrequency.swift */,
 				C1C9619F21B6B08B003A7396 /* View Controller */,
 				C1C961A221B6B0C0003A7396 /* Model */,
@@ -417,6 +420,7 @@
 				C1FB6FD6220A376700D7BE5A /* MeasurementSettings.swift in Sources */,
 				C1FE93A021EBAB21000B90FC /* MeasurementSettingsViewController.swift in Sources */,
 				C1C9619E21B5CD40003A7396 /* UIFont+Rotterdam.swift in Sources */,
+				C162EFF0228862CD005E71CE /* PowerLimit.swift in Sources */,
 				C17CDC94220B76C800F008E8 /* CategoryWizardResultsView.swift in Sources */,
 				C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */,
 				C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */,
