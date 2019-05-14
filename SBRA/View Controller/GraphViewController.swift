@@ -20,7 +20,7 @@ class GraphViewController: UIViewController {
 		let graphView = GraphView(frame: view.bounds)
 		graphView.monochromeLines = false
 		
-		motionDataParser.startDataCollection(updateInterval: 0.01) { (dataPoint, _) in
+		motionDataParser.startDataCollection(updateInterval: 0.01, settings: nil) { (dataPoint, _) in
 			if let acceleration = dataPoint?.acceleration {
 				graphView.add([acceleration.x, acceleration.y, acceleration.z])
 			}

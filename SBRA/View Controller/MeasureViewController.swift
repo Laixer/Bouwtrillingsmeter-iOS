@@ -61,8 +61,6 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 			
 			indicator.centerYAnchor.constraint(equalTo: label.centerYAnchor),
 			indicator.leftAnchor.constraint(equalToSystemSpacingAfter: label.rightAnchor, multiplier: 1.0)
-			
-			
 		])
 	}
 	
@@ -71,7 +69,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		
 		self.completionHandler = completionHandler
 		
-		motionDataParser.startDataCollection(updateInterval: 0.02) { [weak weakSelf = self] (dataPoint, _) in
+		motionDataParser.startDataCollection(updateInterval: 0.02, settings: nil) { [weak weakSelf = self] (dataPoint, _) in
 			for index in 0..<self.collectionView.numberOfItems(inSection: 0) {
 				let indexPath = IndexPath(row: index, section: 0)
 				if let dataPoint = dataPoint {

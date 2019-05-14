@@ -17,9 +17,14 @@ class MotionDataParser: NSObject {
 
 	let manager = CMMotionManager()
 	var data = [DataPoint]()
+	var settings: MeasurementSettings?
 
 	func startDataCollection(updateInterval: TimeInterval,
+							 settings: MeasurementSettings?,
 							 handler: @escaping MotionDataHandler) {
+		
+		self.settings = settings
+		
 		if manager.isDeviceMotionAvailable {
 			manager.deviceMotionUpdateInterval = updateInterval
 			var timestamp: TimeInterval = 0.0
@@ -37,7 +42,6 @@ class MotionDataParser: NSObject {
 				if let motion = motion {
 					latestGravity = motion.acceleration
 				}
-			
 			}
 			
 			manager.startDeviceMotionUpdates(to: OperationQueue.main) { (motion, error) in
@@ -135,14 +139,15 @@ class MotionDataParser: NSObject {
 				let yVelocity = velocity.1
 				let zVelocity = velocity.2
 				
-				let xLimit = MotionDataParser.getLimitValue(frequency: xVelocity)
-				let yLimit = MotionDataParser.getLimitValue(frequency: yVelocity)
-				let zLimit = MotionDataParser.getLimitValue(frequency: zVelocity)
-				
-				xLimits.append(xLimit)
-				yLimits.append(yLimit)
-				zLimits.append(zLimit)
-				
+				if let settings = settings {
+					let xLimit = MotionDataParser.getLimitValue(frequency: xVelocity, settings: settings)
+					let yLimit = MotionDataParser.getLimitValue(frequency: yVelocity, settings: settings)
+					let zLimit = MotionDataParser.getLimitValue(frequency: zVelocity, settings: settings)
+					
+					xLimits.append(xLimit)
+					yLimits.append(yLimit)
+					zLimits.append(zLimit)
+				}
 			}
 		}
 		
@@ -224,7 +229,27 @@ class MotionDataParser: NSObject {
 		return velocity
 	}
 	
-	private static func getLimitValue(frequency: Float) -> Float {
-		return 35.0
+	private static func getLimitValue(frequency: Float, settings: MeasurementSettings) -> Float {
+		var index = 0
+		let limit: [[Float]] = PowerLimit.limitForSettings(settings: settings)
+		while limit[0][index + 1] < frequency && index < limit[0].count - 2 {
+			index += 1
+		}
+		
+		let xc1 = limit[0][index]
+		let yc1 = limit[1][index]
+		let xc2 = limit[0][index+1]
+		let yc2 = limit[1][index+1]
+		
+		let diffX = xc2-xc1
+		let diffY = yc2-yc1
+		
+		if diffX == 0 {
+			return limit[1][index]
+		}
+		
+		let diff = diffY/diffX
+		let limitAmplitude = yc1 + diff * (frequency - xc1)
+		return limitAmplitude
 	}
 }

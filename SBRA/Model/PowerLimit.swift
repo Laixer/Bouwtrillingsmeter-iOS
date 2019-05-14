@@ -61,7 +61,7 @@ private enum YTFactor {
 
 struct PowerLimit {
 	
-	func limitForSettings(settings: MeasurementSettings) -> [LimitPoint] {
+	static func limitForSettings(settings: MeasurementSettings) -> [LimitPoint] {
 		let amplitudes = amplitudesForSettings(settings: settings)
 		
 		var limits = [LimitPoint]()
@@ -78,21 +78,36 @@ struct PowerLimit {
 		return limits
 	}
 	
-	private let frequencyValues: [Float] = [0, 10, 50, 100]
+	static func limitForSettings(settings: MeasurementSettings) -> [[Float]] {
+		let yvFactor = YVFactor(from: settings)
+		
+		if var amplitudes = amplitudesForSettings(settings: settings), let factor = yvFactor?.value {
+			for index in amplitudes.indices {
+				amplitudes[index] = amplitudes[index] * factor
+			}
+			
+			return [frequencyValues, amplitudes]
+		} else {
+			fatalError("illegal amplitudes or yv factor")
+		}
+		
+	}
 	
-	private let shortVibrationAmplitudes: [[Float]] = [[20, 20, 40, 50],
+	private static let frequencyValues: [Float] = [0, 10, 50, 100]
+	
+	private static let shortVibrationAmplitudes: [[Float]] = [[20, 20, 40, 50],
 												   [5, 5, 15, 20],
 												   [3, 3, 8, 10]]
 	
-	private let repeatedShortVibrationAmplitudes: [[Float]] = [[(13.33333), (13.33333), (26.66666), (33.33333)],
+	private static let repeatedShortVibrationAmplitudes: [[Float]] = [[(13.33333), (13.33333), (26.66666), (33.33333)],
 														   [(3.33333), (3.33333), 10, (13.33333)],
 														   [2, 2, 5.33333, (6.66666)]]
 	
-	private let continuousVibrationAmplitudes: [[Float]] = [[10, 10, 20, 25],
+	private static let continuousVibrationAmplitudes: [[Float]] = [[10, 10, 20, 25],
 														[2.5, 2.5, 7.5, 10],
 														[1.5, 1.5, 4, 5]]
 	
-	private func amplitudesForSettings(settings: MeasurementSettings) -> [Float]? {
+	private static func amplitudesForSettings(settings: MeasurementSettings) -> [Float]? {
 		var index: Int?
 		if let buildingCategory = settings.buildingCategory {
 			switch buildingCategory {
@@ -109,7 +124,6 @@ struct PowerLimit {
 				case .repeatedShortDuration: return repeatedShortVibrationAmplitudes[index]
 				case .continuous: return continuousVibrationAmplitudes[index]
 				}
-				
 			}
 		}
 		
