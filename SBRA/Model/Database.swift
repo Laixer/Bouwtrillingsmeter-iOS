@@ -39,7 +39,7 @@ class Database {
 			let realm = try Realm()
 			let objs: Results<PersistableMeasurement> = realm.objects(PersistableMeasurement.self)
 			
-			return objs.map({$0.toMeasurement()})
+			return objs.map({$0.toMeasurement()}).reversed()
 		} catch {
 			print("error adding measurement: " + error.localizedDescription)
 		}
