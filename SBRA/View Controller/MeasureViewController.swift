@@ -18,11 +18,21 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	var locationManager: CLLocationManager?
 	var placemark: CLPlacemark?
 	
+	var settings: MeasurementSettings?
+	
 	let motionDataParser = MotionDataParser()
 	
-	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+	init(settings: MeasurementSettings?) {
 		collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		
+		self.settings = settings
+		motionDataParser.settings = settings
+		
+		super.init(nibName: nil, bundle: nil)
+	}
+	
+	override convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+		self.init(settings: nil)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -69,7 +79,8 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		
 		self.completionHandler = completionHandler
 		
-		motionDataParser.startDataCollection(updateInterval: 0.02, settings: nil) { [weak weakSelf = self] (dataPoint, _) in
+		motionDataParser.startDataCollection(updateInterval: 0.02,
+											 settings: settings) { [weak weakSelf = self] (dataPoint, _) in
 			for index in 0..<self.collectionView.numberOfItems(inSection: 0) {
 				let indexPath = IndexPath(row: index, section: 0)
 				if let dataPoint = dataPoint {
@@ -199,13 +210,14 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	private func getLocation() {
 		let locationManager = CLLocationManager()
 		
+		locationManager.requestWhenInUseAuthorization()
+		
 		guard CLLocationManager.locationServicesEnabled() else {
 			print("ERROR: Can't retrieve location, reason: location services are disabled")
 			return
 		}
 		
 		locationManager.delegate = self
-		locationManager.requestWhenInUseAuthorization()
 		
 		locationManager.desiredAccuracy = kCLLocationAccuracyBest
 		self.locationManager = locationManager
