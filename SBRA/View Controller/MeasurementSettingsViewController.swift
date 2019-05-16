@@ -111,7 +111,15 @@ class MeasurementSettingsViewController: UIViewController {
 	}
 	
 	@objc private func tappedBeginButton() {
-		let measureViewController = MeasureViewController()
+		var settings: MeasurementSettings?
+		if let buildingCategory = selectedBuildingCategory,
+			let vibrationCategory = selectedVibrationCategory {
+			settings = MeasurementSettings(buildingCategory: buildingCategory,
+										   vibrationCategory: vibrationCategory,
+										   isSensitiveToVibrations: sensitiveToVibrations)
+		}
+		
+		let measureViewController = MeasureViewController(settings: settings)
 		let navigationController = UINavigationController(rootViewController: measureViewController)
 		
 		present(navigationController, animated: true, completion: nil)
