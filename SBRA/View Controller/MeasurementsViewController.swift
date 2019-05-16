@@ -18,6 +18,8 @@ class MeasurementsViewController: UIViewController {
 	
 	var measurements = [Measurement]()
 	
+	let formatter = DateFormatter()
+	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		rotterdamIconView = UIImageView(image: UIImage(named: "rotterdamicon"))
 		graphIconView = UIImageView(image: UIImage(named: "graphicon"))
@@ -34,6 +36,9 @@ class MeasurementsViewController: UIViewController {
 		
 		tableView.delegate = self
 		tableView.dataSource = self
+		
+		formatter.dateStyle = .long
+		formatter.timeStyle = .short
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -138,8 +143,6 @@ extension MeasurementsViewController: UITableViewDataSource {
 		let measurement = measurements[indexPath.section]
 		cell?.nameLabel.text = "Meting in " + (measurement.locationString ?? "nil")
 		
-		let formatter = DateFormatter()
-		formatter.dateStyle = .long
 		cell?.dateLabel.text = formatter.string(from: measurement.date)
 		
 		return cell!
