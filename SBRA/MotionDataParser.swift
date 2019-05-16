@@ -198,6 +198,10 @@ class MotionDataParser: NSObject {
 			dominantFrequency = index
 			let dominantVelocity = velocity
 			
+			if ratio > 1.0 {
+				print("exceeded limit \(ratio)")
+			}
+			
 			return DominantFrequency(frequency: dominantFrequency,
 										  velocity: dominantVelocity,
 										  exceedsLimit: ratio > 1.0)
