@@ -33,13 +33,7 @@ private enum YVFactor {
 	}
 	
 	init?(from measurementSettings: MeasurementSettings) {
-		if let sensitive = measurementSettings.isSensitiveToVibrations {
-			if sensitive == true {
-				self = .vibrationSensitive
-			}
-		}
-		
-		return nil
+		self = .vibrationSensitive
 	}
 }
 
