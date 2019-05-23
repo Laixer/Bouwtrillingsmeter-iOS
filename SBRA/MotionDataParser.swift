@@ -18,6 +18,8 @@ class MotionDataParser: NSObject {
 	let manager = CMMotionManager()
 	var data = [DataPoint]()
 	var settings: MeasurementSettings?
+	
+	var exceedanceCallback: ((Int, Float) -> Void)?
 
 	func startDataCollection(updateInterval: TimeInterval,
 							 settings: MeasurementSettings?,
@@ -199,7 +201,9 @@ class MotionDataParser: NSObject {
 			let dominantVelocity = velocity
 			
 			if ratio > 1.0 {
-				print("exceeded limit \(ratio)")
+				if let callback = exceedanceCallback {
+					callback(dominantFrequency, ratio)
+				}
 			}
 			
 			return DominantFrequency(frequency: dominantFrequency,

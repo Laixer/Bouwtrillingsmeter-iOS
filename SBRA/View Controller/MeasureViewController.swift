@@ -12,6 +12,10 @@ import CoreLocation
 class MeasureViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	
 	var collectionView: UICollectionView
+	
+	var indicator = UIActivityIndicatorView(style: .gray)
+	var measuringLabel = UILabel()
+	
 	let numberOfGraphs = 5
 	var dataPoints = [DataPoint]()
 	var completionHandler: ((Measurement) -> Void)?
@@ -29,6 +33,10 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		motionDataParser.settings = settings
 		
 		super.init(nibName: nil, bundle: nil)
+		
+		motionDataParser.exceedanceCallback = { (frequency, ratio) in
+			print("exceeded limit \(ratio) with dom freq: \(frequency)")
+		}
 	}
 	
 	override convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -49,28 +57,32 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		let saveButton = UIBarButtonItem(title: "Sla op", style: .done, target: self, action: #selector(tappedSaveButton))
 		navigationItem.rightBarButtonItem = saveButton
 		
-		//setupCollectionView()
+		setupCollectionView()
 		setupMeasuringLabel()
+		collectionView.isHidden = true
+		
+		let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleGraphs))
+		gestureRecognizer.numberOfTapsRequired = 7
+		view.addGestureRecognizer(gestureRecognizer)
+		
 	}
 	
 	private func setupMeasuringLabel() {
-		let label = UILabel()
-		label.text = "Aan het meten..."
-		view.addSubview(label)
+		measuringLabel.text = "Aan het meten..."
+		view.addSubview(measuringLabel)
 		
-		let indicator = UIActivityIndicatorView(style: .gray)
 		view.addSubview(indicator)
 		indicator.startAnimating()
 		
-		label.translatesAutoresizingMaskIntoConstraints = false
+		measuringLabel.translatesAutoresizingMaskIntoConstraints = false
 		indicator.translatesAutoresizingMaskIntoConstraints = false
 		
 		view.addConstraints([
-			label.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			label.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+			measuringLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+			measuringLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 			
-			indicator.centerYAnchor.constraint(equalTo: label.centerYAnchor),
-			indicator.leftAnchor.constraint(equalToSystemSpacingAfter: label.rightAnchor, multiplier: 1.0)
+			indicator.centerYAnchor.constraint(equalTo: measuringLabel.centerYAnchor),
+			indicator.leftAnchor.constraint(equalToSystemSpacingAfter: measuringLabel.rightAnchor, multiplier: 1.0)
 		])
 	}
 	
@@ -177,6 +189,12 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		}
 		
 		collectionView.register(GraphCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+	}
+	
+	@objc private func toggleGraphs() {
+		collectionView.isHidden = !collectionView.isHidden
+		indicator.isHidden = !indicator.isHidden
+		measuringLabel.isHidden = !measuringLabel.isHidden
 	}
 	
 	@objc private func tappedSaveButton() {
