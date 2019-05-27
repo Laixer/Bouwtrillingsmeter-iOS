@@ -22,11 +22,8 @@ class MotionDataParser: NSObject {
 	var exceedanceCallback: ((Int, Float) -> Void)?
 
 	func startDataCollection(updateInterval: TimeInterval,
-							 settings: MeasurementSettings?,
 							 handler: @escaping MotionDataHandler) {
-		
-		self.settings = settings
-		
+				
 		if manager.isDeviceMotionAvailable {
 			manager.deviceMotionUpdateInterval = updateInterval
 			var timestamp: TimeInterval = 0.0
@@ -149,6 +146,8 @@ class MotionDataParser: NSObject {
 					xLimits.append(xLimit)
 					yLimits.append(yLimit)
 					zLimits.append(zLimit)
+				} else {
+					print("settings not set")
 				}
 			}
 		}

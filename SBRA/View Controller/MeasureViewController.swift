@@ -91,8 +91,8 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		
 		self.completionHandler = completionHandler
 		
-		motionDataParser.startDataCollection(updateInterval: 0.02,
-											 settings: settings) { [weak weakSelf = self] (dataPoint, _) in
+		motionDataParser.settings = settings
+		motionDataParser.startDataCollection(updateInterval: 0.02) { [weak weakSelf = self] (dataPoint, _) in
 			for index in 0..<self.collectionView.numberOfItems(inSection: 0) {
 				let indexPath = IndexPath(row: index, section: 0)
 				if let dataPoint = dataPoint {
@@ -164,12 +164,12 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		}
 		
 		fatalError("couldn't dequeue cell")
-		
 	}
 	
 	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 		let graphPageViewController = GraphPageViewController()
 		graphPageViewController.initiallyVisibleGraphType = GraphType.allCases[indexPath.row]
+		graphPageViewController.motionDataParser.settings = settings
 		navigationController?.pushViewController(graphPageViewController, animated: true)
 	}
 	
