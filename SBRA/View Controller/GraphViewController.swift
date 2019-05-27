@@ -13,17 +13,18 @@ class GraphViewController: UIViewController {
 	
 	var graphType: GraphType
 	var motionDataParser = MotionDataParser()
+	var updateGraphHandler: MotionDataHandler?
+	
+	var graphView = GraphView(frame: .zero)
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		let graphView = GraphView(frame: view.bounds)
+		graphView.frame = view.bounds
 		graphView.monochromeLines = false
 		
-		motionDataParser.startDataCollection(updateInterval: 0.01, settings: nil) { (dataPoint, _) in
-			if let acceleration = dataPoint?.acceleration {
-				graphView.add([acceleration.x, acceleration.y, acceleration.z])
-			}
+		if let updateGraphHandler = updateGraphHandler {
+			motionDataParser.startDataCollection(updateInterval: 0.01, handler: updateGraphHandler)
 		}
 		
 		view.addSubview(graphView)
@@ -35,7 +36,51 @@ class GraphViewController: UIViewController {
 	
 	init(graphType: GraphType) {
 		self.graphType = graphType
+		
 		super.init(nibName: nil, bundle: nil)
+		
+		switch graphType {
+		case .speedTime:
+			updateGraphHandler = { [unowned self] (dataPoint: DataPoint?, error: Error?) in
+				if let dataPoint = dataPoint {
+					self.graphView.add([Double(dataPoint.speed), 0, 0])
+				}
+			}
+		case .frequencyTime:
+			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
+				if let dataPoint = dataPoint {
+					if let dominantFrequency = dataPoint.dominantFrequency {
+						self.graphView.add([Double(dominantFrequency.x.frequency) / 100.0,
+												Double(dominantFrequency.y.frequency) / 100.0,
+												Double(dominantFrequency.z.frequency) / 100.0])
+					}
+				}
+			}
+		case .speedFrequency:
+			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
+				
+			}
+			
+		case .fft1Second:
+			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
+				self.graphView.clear()
+				if let fft = dataPoint?.fft {
+					for element in fft {
+						self.graphView.add([Double(element * 100.0), 0, 0])
+					}
+				}
+			}
+		case .gravityTimeAccelerationTime:
+			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
+				if let dataPoint = dataPoint {
+					self.graphView.add([dataPoint.acceleration.x,
+										dataPoint.acceleration.y,
+										dataPoint.acceleration.z
+						/*, gravity.x, gravity.y, gravity.z*/])
+				}
+				
+			}
+		}
 	}
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
