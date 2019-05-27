@@ -193,6 +193,7 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 			let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)!
 			
 			if let cell = cell as? SwitchTableViewCell {
+				cell.switchElement.addTarget(self, action: #selector(toggleSensitivity), for: .valueChanged)
 				if let isOn = sensitiveToVibrations {
 					cell.switchElement.isOn = isOn
 				}
@@ -244,6 +245,10 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 			pickerContainerView?.removeFromSuperview()
 			pickerContainerView = nil
 		}
+	}
+	
+	@objc func toggleSensitivity(sender: UISwitch) {
+		sensitiveToVibrations = sender.isOn
 	}
 	
 	func showPickerView() {
