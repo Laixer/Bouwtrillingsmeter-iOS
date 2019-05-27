@@ -65,7 +65,7 @@ class MotionDataParser: NSObject {
 					} else {
 						previousDominantFrequency = frequency
 					}
-					if timestamp > 2.0 {
+					if timestamp > 1.0 {
 						shouldReset = true
 						previousFFT = self.updateFFT()
 					}
