@@ -19,7 +19,9 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		super.viewDidLoad()
 		
 		graphViewControllers = GraphType.allCases.map { (graphType) -> GraphViewController in
-			return GraphViewController(graphType: graphType)
+			let vc = GraphViewController(graphType: graphType)
+			vc.motionDataParser.settings = motionDataParser.settings
+			return vc
 		}
 		
 		view.backgroundColor = UIColor.white
@@ -60,6 +62,9 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 							didFinishAnimating finished: Bool,
 							previousViewControllers: [UIViewController],
 							transitionCompleted completed: Bool) {
+		let previous = previousViewControllers.first as? GraphViewController
+		previous?.motionDataParser.stopDataCollection()
+		
 		if let graphType = (pageViewController.viewControllers?.first as? GraphViewController)?.graphType {
 			title = graphType.description
 		}
