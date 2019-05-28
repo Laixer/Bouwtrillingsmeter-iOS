@@ -96,7 +96,7 @@ class GraphView: UIView {
 		if monochromeLines {
 			segment.lineColors = [UIColor.white, UIColor.white, UIColor.white]
 		} else {
-			segment.lineColors = [UIColor.red, UIColor.blue, UIColor.green]
+			segment.lineColors = [UIColor.red, UIColor.green, UIColor.blue]
 		}
 		segments.append(segment)
 		
