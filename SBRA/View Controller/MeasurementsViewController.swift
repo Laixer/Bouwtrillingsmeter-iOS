@@ -1,5 +1,5 @@
 //
-//  GraphViewController.swift
+//  MeasurementsViewController.swift
 //  SBRA
 //
 //  Created by Wander Siemers on 16/11/2018.
