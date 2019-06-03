@@ -12,18 +12,22 @@ import CoreMotion
 
 class PersistableDataPoint: Object {
 	var acceleration: CMAcceleration = CMAcceleration(x: 0, y: 0, z: 0)
-	var speed: Float = 0.0
+	var speedX: Float = 0.0
+	var speedY: Float = 0.0
+	var speedZ: Float = 0.0
 	var dominantFrequency: (x: DominantFrequency, y: DominantFrequency, z: DominantFrequency)?
-	var fft: [Float]?
+	var fftX: [Float]?
+	var fftY: [Float]?
+	var fftZ: [Float]?
 	var gravity: CMAcceleration?
 	var rotationRate: CMRotationRate = CMRotationRate(x: 0, y: 0, z: 0)
 	var timestamp: TimeInterval = 0
 	
 	func toDataPoint() -> DataPoint {
 		let dataPoint = DataPoint(acceleration: acceleration,
-								  speed: speed,
+								  speed: (speedX, speedY, speedZ),
 								  dominantFrequency: dominantFrequency,
-								  fft: fft,
+								  fft: (x: fftX, y: fftY, z: fftZ),
 								  gravity: gravity,
 								  rotationRate: rotationRate,
 								  timestamp: timestamp)
@@ -35,9 +39,13 @@ class PersistableDataPoint: Object {
 		let persistable = PersistableDataPoint()
 		
 		persistable.acceleration = dataPoint.acceleration
-		persistable.speed = dataPoint.speed
+		persistable.speedX = dataPoint.speed.x
+		persistable.speedY = dataPoint.speed.y
+		persistable.speedZ = dataPoint.speed.z
 		persistable.dominantFrequency = dataPoint.dominantFrequency
-		persistable.fft = dataPoint.fft
+		persistable.fftX = dataPoint.fft.x
+		persistable.fftY = dataPoint.fft.y
+		persistable.fftZ = dataPoint.fft.z
 		persistable.gravity = dataPoint.gravity
 		persistable.rotationRate = dataPoint.rotationRate
 		persistable.acceleration = dataPoint.acceleration

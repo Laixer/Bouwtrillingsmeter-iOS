@@ -19,6 +19,8 @@ class MotionDataParser: NSObject {
 	var data = [DataPoint]()
 	var settings: MeasurementSettings?
 	
+	var previousTick: Date?
+	
 	var exceedanceCallback: ((Int, Float) -> Void)?
 
 	func startDataCollection(updateInterval: TimeInterval,
@@ -29,7 +31,7 @@ class MotionDataParser: NSObject {
 			var timestamp: TimeInterval = 0.0
 			var shouldReset = false
 
-			var previousFFT: [Float]?
+			var previousFFT: ([Float]?, [Float]?, [Float]?)
 			var previousDominantFrequency: (x: DominantFrequency, y: DominantFrequency, z: DominantFrequency)?
 			var latestGravity: CMAcceleration?
 
@@ -92,36 +94,40 @@ class MotionDataParser: NSObject {
 		manager.stopDeviceMotionUpdates()
 	}
 	
-	private func updateSpeed() -> Float {
-		var speed = self.data.last?.speed ?? 0
+	private func updateSpeed() -> (Float, Float, Float) {
+		// Use 0.02 (the sensor interval) if there is no previous tick
+		// otherwise calculate a more accurate offset from the last measurement
+		var offset = 0.02
+		if let previousTick = previousTick {
+			offset = Date().timeIntervalSince(previousTick)
+		}
+		previousTick = Date()
 		
-		var xSpeed: Decimal = 0
-		var ySpeed: Decimal = 0
-		var zSpeed: Decimal = 0
+		var speed = self.data.last?.speed ?? (0.0, 0.0, 0.0)
 		
 		if let data = data.last {
-			let xAcceleration = Decimal(data.acceleration.x)
-			let yAcceleration = Decimal(data.acceleration.y)
-			let zAcceleration = Decimal(data.acceleration.z)
-			xSpeed += xAcceleration * 0.01
-			ySpeed += yAcceleration * 0.01
-			zSpeed += zAcceleration * 0.01
+			let xAcceleration = data.acceleration.x
+			let yAcceleration = data.acceleration.y
+			let zAcceleration = data.acceleration.z
+			speed.0 += Float(xAcceleration * offset)
+			speed.1 += Float(yAcceleration * offset)
+			speed.2 += Float(zAcceleration * offset)
 			
-			let decimalSpeed = pow(xSpeed, 2) + pow(ySpeed, 2) + pow(zSpeed, 2)
-			speed += Float(sqrt(Double(truncating: decimalSpeed as NSNumber)))
+			//let decimalSpeed = pow(xSpeed, 2) + pow(ySpeed, 2) + pow(zSpeed, 2)
+			//speed += Float(sqrt(Double(truncating: decimalSpeed as NSNumber)))
 			return speed
 		}
 		
-		return 0.0
+		return speed
 	}
 	
-	private func updateFFT() -> [Float]? {
+	private func updateFFT() -> ([Float]?, [Float]?, [Float]?) {
 		
 		let speed = self.data.map({$0.speed})
 		
-		guard speed.count > 10 else { return nil }
+		guard speed.count > 10 else { return (nil, nil, nil) }
 		
-		return Surge.fft(speed)
+		return (Surge.fft(speed.map({$0.x})), Surge.fft(speed.map({$0.y})), Surge.fft(speed.map({$0.z})))
 	}
 	
 	private func updateFrequency() -> (x: DominantFrequency, y: DominantFrequency, z: DominantFrequency)? {

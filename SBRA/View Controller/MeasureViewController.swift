@@ -112,17 +112,17 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	private func updateCell(cell: GraphCollectionViewCell, at indexPath: IndexPath, with dataPoint: DataPoint) {
 		switch indexPath.row {
 		case 0:
-			cell.addValues(values: [Double(dataPoint.speed), 0, 0])
+			cell.addValues(values: [Double(dataPoint.speed.x) * 100, Double(dataPoint.speed.y) * 100, Double(dataPoint.speed.y) * 100])
 		case 1:
 			if let dominantFrequency = dataPoint.dominantFrequency {
-				cell.addValues(values: [Double(dominantFrequency.x.frequency) / 100.0,
-										Double(dominantFrequency.y.frequency) / 100.0,
-										Double(dominantFrequency.z.frequency) / 100.0])
+				cell.addValues(values: [Double(dominantFrequency.x.frequency) / 10.0,
+										Double(dominantFrequency.y.frequency) / 10.0,
+										Double(dominantFrequency.z.frequency) / 10.0])
 			}
 		case 3:
 			cell.graphView.clear()
-			if let fft = dataPoint.fft {
-				for element in fft {
+			if let fftX = dataPoint.fft.x, let fftY = dataPoint.fft.y, let fftZ = dataPoint.fft.z {
+				for (index, element) in fftX.enumerated() {
 					cell.addValues(values: [Double(element * 100.0), 0, 0])
 				}
 			}
