@@ -15,7 +15,7 @@ class GraphViewController: UIViewController {
 	var motionDataParser = MotionDataParser()
 	var updateGraphHandler: MotionDataHandler?
 	
-	var graphView = GraphView(frame: .zero)
+	var graphView: GraphView
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,46 +34,84 @@ class GraphViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 	
-	init(graphType: GraphType) {
+	override func viewDidDisappear(_ animated: Bool) {
+		motionDataParser.stopDataCollection()
+	}
+	
+	init(graphType: GraphType, settings: MeasurementSettings?) {
 		self.graphType = graphType
+		motionDataParser.settings = settings
+		
+		self.graphView = GraphView(frame: .zero)
 		
 		super.init(nibName: nil, bundle: nil)
 		
 		switch graphType {
 		case .speedTime:
-			updateGraphHandler = { [unowned self] (dataPoint: DataPoint?, error: Error?) in
+			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
 				if let dataPoint = dataPoint {
-					self.graphView.add([Double(dataPoint.speed), 0, 0])
+					self?.graphView.add([Double(dataPoint.speed.x) * 10.0,
+										 Double(dataPoint.speed.y) * 10.0,
+										 Double(dataPoint.speed.z)] * 10.0)
 				}
 			}
 		case .frequencyTime:
-			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
+			graphView = GraphView(frame: .zero)
+
+			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
 				if let dataPoint = dataPoint {
 					if let dominantFrequency = dataPoint.dominantFrequency {
-						self.graphView.add([Double(dominantFrequency.x.frequency) / 100.0,
-												Double(dominantFrequency.y.frequency) / 100.0,
-												Double(dominantFrequency.z.frequency) / 100.0])
+						self?.graphView.add([Double(dominantFrequency.x.frequency) / 10.0,
+												Double(dominantFrequency.y.frequency) / 10.0,
+												Double(dominantFrequency.z.frequency) / 10.0])
 					}
 				}
 			}
-		case .speedFrequency:
-			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
+		case .dominantFrequency:
+			graphView = DominantFrequencyGraphView(frame: .zero)
+			
+			var counter = 0
+			
+			if let settings = settings, let graphView = self.graphView as? DominantFrequencyGraphView {
+				graphView.limitPoints = PowerLimit.limitForSettings(settings: settings)
+				print("setting limit points")
+			} else {
+				print("is nil")
+			}
+			
+			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
 				
+				if let dominantFrequency = dataPoint?.dominantFrequency, let graphView = self?.graphView as? DominantFrequencyGraphView {
+					if graphView.dominantFrequencies == nil {
+						graphView.dominantFrequencies = [(DominantFrequency, DominantFrequency, DominantFrequency)]()
+					}
+					
+					if counter % 50 == 0 {
+						graphView.dominantFrequencies!.append(dominantFrequency)
+						graphView.setNeedsDisplay()
+					}
+					
+					counter += 1
+				}
 			}
 			
 		case .fft1Second:
-			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
-				self.graphView.clear()
-				if let fft = dataPoint?.fft {
-					for element in fft {
-						self.graphView.add([Double(element * 100.0), 0, 0])
+			graphView = GraphView(frame: .zero)
+
+			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
+				self?.graphView.clear()
+				if let fftX = dataPoint?.fft.x, let fftY = dataPoint?.fft.y, let fftZ = dataPoint?.fft.z {
+					for (index, element) in fftX.enumerated() {
+						self?.graphView.add([Double(element * 100.0), Double(fftY[index] * 100.0), Double(fftZ[index] * 100.0)])
 					}
 				}
 			}
 		case .gravityTimeAccelerationTime:
-			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
+			graphView = GraphView(frame: .zero)
+
+			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
 				if let dataPoint = dataPoint {
-					self.graphView.add([dataPoint.acceleration.x,
+					self?.graphView.add([dataPoint.acceleration.x,
 										dataPoint.acceleration.y,
 										dataPoint.acceleration.z
 						/*, gravity.x, gravity.y, gravity.z*/])
