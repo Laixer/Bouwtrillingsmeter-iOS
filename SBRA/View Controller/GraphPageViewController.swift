@@ -19,9 +19,8 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		super.viewDidLoad()
 		
 		graphViewControllers = GraphType.allCases.map { (graphType) -> GraphViewController in
-			let vc = GraphViewController(graphType: graphType)
-			vc.motionDataParser.settings = motionDataParser.settings
-			return vc
+			let graphVC = GraphViewController(graphType: graphType, settings: motionDataParser.settings)
+			return graphVC
 		}
 		
 		view.backgroundColor = UIColor.white
