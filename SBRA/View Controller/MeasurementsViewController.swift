@@ -141,7 +141,11 @@ extension MeasurementsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "bigcell", for: indexPath) as? MeasurementTableViewCell
 		let measurement = measurements[indexPath.section]
-		cell?.nameLabel.text = "Meting in " + (measurement.locationString ?? "nil")
+		if let location = measurement.locationString {
+			cell?.nameLabel.text = "Meting in " + location
+		} else {
+			cell?.nameLabel.text = "Meting op onbekende locatie"
+		}
 		
 		cell?.dateLabel.text = formatter.string(from: measurement.date)
 		
