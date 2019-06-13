@@ -124,8 +124,11 @@ class MeasurementsViewController: UIViewController {
 			title = "Metingen"
 			tableView.isHidden = false
 			tableView.frame = view.bounds
-			
 		}
+	}
+	
+	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+		return .portrait
 	}
 }
 

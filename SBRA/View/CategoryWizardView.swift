@@ -65,10 +65,12 @@ class CategoryWizardView: UIView {
 	private func setupConstraints() {
 		NSLayoutConstraint.activate([
 			textLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor),
+			textLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
 			textLabel.rightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.rightAnchor),
 			textLabel.topAnchor.constraint(equalToSystemSpacingBelow: layoutMarginsGuide.topAnchor, multiplier: 3.0),
 			
 			secondaryTextLabel.leftAnchor.constraint(equalTo: layoutMarginsGuide.leftAnchor),
+			secondaryTextLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
 			secondaryTextLabel.rightAnchor.constraint(lessThanOrEqualTo: layoutMarginsGuide.rightAnchor),
 			secondaryTextLabel.topAnchor.constraint(equalToSystemSpacingBelow: textLabel.bottomAnchor, multiplier: 1.0),
 			

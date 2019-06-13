@@ -22,10 +22,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		let viewController = MeasurementsViewController()
 		let navController = UINavigationController(rootViewController: viewController)
+		navController.delegate = self
 		window?.rootViewController = navController
 		
 		window?.makeKeyAndVisible()
 		
 		return true
+	}
+}
+
+extension AppDelegate: UINavigationControllerDelegate {
+	func navigationControllerSupportedInterfaceOrientations(_
+		navigationController: UINavigationController) -> UIInterfaceOrientationMask {
+		if let topVC = navigationController.topViewController {
+			return topVC.supportedInterfaceOrientations
+		} else {
+			return .allButUpsideDown
+		}
 	}
 }
