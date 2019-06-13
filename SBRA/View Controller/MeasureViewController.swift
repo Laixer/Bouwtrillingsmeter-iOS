@@ -195,10 +195,10 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		collectionView.translatesAutoresizingMaskIntoConstraints = false
 		
 		view.addConstraints([
-			collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-			collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
-			collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
-			collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+			collectionView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
+			collectionView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
+			collectionView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
+			collectionView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
 		])
 	}
 	

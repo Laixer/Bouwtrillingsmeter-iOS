@@ -163,6 +163,10 @@ class MeasurementSettingsViewController: UIViewController {
 		navigationController?.dismiss(animated: true, completion: nil)
 	}
 	
+	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+		return .portrait
+	}
+	
 }
 
 extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDataSource {

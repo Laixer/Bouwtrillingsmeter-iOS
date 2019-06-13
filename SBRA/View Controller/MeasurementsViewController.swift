@@ -84,6 +84,13 @@ class MeasurementsViewController: UIViewController {
 		
 		let navigationController = UINavigationController(rootViewController: measurementSettingsVC)
 		
+		// Reuse the app delegate's implementation of the navigation controller delegate
+		if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+			navigationController.delegate = appDelegate
+		} else {
+			fatalError("unknown app delegate")
+		}
+		
 		present(navigationController, animated: true, completion: nil)
 	}
 	
