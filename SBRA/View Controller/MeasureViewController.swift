@@ -174,10 +174,10 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	}
 	
 	private func setupCollectionView() {
-		collectionView.frame = view.bounds
 		collectionView.dataSource = self
 		collectionView.delegate = self
 		view.addSubview(collectionView)
+		setupCollectionViewConstraints()
 		
 		collectionView.reloadData()
 		collectionView.backgroundColor = UIColor.white
@@ -189,6 +189,17 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		}
 		
 		collectionView.register(GraphCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+	}
+	
+	private func setupCollectionViewConstraints() {
+		collectionView.translatesAutoresizingMaskIntoConstraints = false
+		
+		view.addConstraints([
+			collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+			collectionView.leftAnchor.constraint(equalTo: view.leftAnchor),
+			collectionView.rightAnchor.constraint(equalTo: view.rightAnchor),
+			collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+		])
 	}
 	
 	@objc private func toggleGraphs() {
