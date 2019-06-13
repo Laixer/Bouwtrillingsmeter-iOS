@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		670611325E4EE8EC8A6E3873 /* Pods_SBRA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7648575BC029CAF6421FB1 /* Pods_SBRA.framework */; };
 		C108A00921CC48A900C6CCB2 /* DominantFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108A00821CC48A900C6CCB2 /* DominantFrequency.swift */; };
+		C11C019D22B2987B003CE368 /* AppSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C019C22B2987B003CE368 /* AppSettingsViewController.swift */; };
 		C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */; };
 		C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B38882180C36300B03F99 /* MotionDataParser.swift */; };
 		C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B388C2180CB3500B03F99 /* DataPoint.swift */; };
@@ -62,6 +63,7 @@
 		6F511BD27B300B9783B5BA4F /* Pods-SBRA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBRA.release.xcconfig"; path = "Pods/Target Support Files/Pods-SBRA/Pods-SBRA.release.xcconfig"; sourceTree = "<group>"; };
 		81B42AC13935647DFC95260F /* Pods-SBRA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBRA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SBRA/Pods-SBRA.debug.xcconfig"; sourceTree = "<group>"; };
 		C108A00821CC48A900C6CCB2 /* DominantFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DominantFrequency.swift; path = Model/DominantFrequency.swift; sourceTree = "<group>"; };
+		C11C019C22B2987B003CE368 /* AppSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsViewController.swift; sourceTree = "<group>"; };
 		C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPageViewController.swift; sourceTree = "<group>"; };
 		C14B38882180C36300B03F99 /* MotionDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataParser.swift; sourceTree = "<group>"; };
 		C14B388C2180CB3500B03F99 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				C17447F52208A15300287C3E /* CategoryWizardViewController.swift */,
 				C1B2195421AC014900F7D004 /* GraphViewController.swift */,
 				C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */,
+				C11C019C22B2987B003CE368 /* AppSettingsViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -450,6 +453,7 @@
 				C17447EC2208734200287C3E /* VibrationCategory.swift in Sources */,
 				C1EA6B3121AAEFCC000841A3 /* MeasureViewController.swift in Sources */,
 				C17447F22208902700287C3E /* WizardItem.swift in Sources */,
+				C11C019D22B2987B003CE368 /* AppSettingsViewController.swift in Sources */,
 				C1D1C4C722307D40000B7D99 /* Measurement.swift in Sources */,
 				C17447F42208926700287C3E /* WizardOutcome.swift in Sources */,
 			);

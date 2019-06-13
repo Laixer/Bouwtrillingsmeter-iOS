@@ -52,6 +52,11 @@ class MeasurementsViewController: UIViewController {
 															target: self,
 															action: #selector(tappedAddButton))
 		
+		navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Instellingen",
+														   style: .plain,
+														   target: self,
+														   action: #selector(tappedSettingsButton))
+		
 		measurements = Database().measurements
 		
 		updateTableViewVisibility()
@@ -84,7 +89,22 @@ class MeasurementsViewController: UIViewController {
 		
 		let navigationController = UINavigationController(rootViewController: measurementSettingsVC)
 		
-		// Reuse the app delegate's implementation of the navigation controller delegate
+		// Reuse the app delegate's implementation of the navigation controller delegate for rotation
+		if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+			navigationController.delegate = appDelegate
+		} else {
+			fatalError("unknown app delegate")
+		}
+		
+		present(navigationController, animated: true, completion: nil)
+	}
+	
+	@objc private func tappedSettingsButton() {
+		let appSettingsVC = AppSettingsViewController()
+		
+		let navigationController = UINavigationController(rootViewController: appSettingsVC)
+		
+		// Reuse the app delegate's implementation of the navigation controller delegate for rotation
 		if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
 			navigationController.delegate = appDelegate
 		} else {
