@@ -37,6 +37,12 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		motionDataParser.exceedanceCallback = { (frequency, ratio) in
 			print("exceeded limit \(ratio) with dom freq: \(frequency)")
 		}
+		
+		let saveButton = UIBarButtonItem(title: "Sla op", style: .done, target: self, action: #selector(tappedSaveButton))
+		
+		navigationItem.title = "Meting"
+		
+		navigationItem.rightBarButtonItem = saveButton
 	}
 	
 	override convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -51,11 +57,6 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		super.viewDidLoad()
 		
 		view.backgroundColor = UIColor.white
-		
-		navigationItem.title = "Meting"
-		
-		let saveButton = UIBarButtonItem(title: "Sla op", style: .done, target: self, action: #selector(tappedSaveButton))
-		navigationItem.rightBarButtonItem = saveButton
 		
 		setupCollectionView()
 		setupMeasuringLabel()
