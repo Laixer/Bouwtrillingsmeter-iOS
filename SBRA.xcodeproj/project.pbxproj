@@ -46,6 +46,8 @@
 		C1FB6FD4220A371800D7BE5A /* CategoryWizardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */; };
 		C1FB6FD6220A376700D7BE5A /* MeasurementSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB6FD5220A376700D7BE5A /* MeasurementSettings.swift */; };
 		C1FE93A021EBAB21000B90FC /* MeasurementSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FE939F21EBAB21000B90FC /* MeasurementSettingsViewController.swift */; };
+		C1FF889122B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF889022B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift */; };
+		C1FF889322B6C5F100E1EDB5 /* PreferencesKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF889222B6C5F100E1EDB5 /* PreferencesKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +106,8 @@
 		C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizardDelegate.swift; sourceTree = "<group>"; };
 		C1FB6FD5220A376700D7BE5A /* MeasurementSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSettings.swift; sourceTree = "<group>"; };
 		C1FE939F21EBAB21000B90FC /* MeasurementSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSettingsViewController.swift; sourceTree = "<group>"; };
+		C1FF889022B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedAppSettingsViewController.swift; sourceTree = "<group>"; };
+		C1FF889222B6C5F100E1EDB5 /* PreferencesKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,7 @@
 				C1C961A221B6B0C0003A7396 /* Model */,
 				C1C961A321B6B0CD003A7396 /* View */,
 				C1C961A121B6B0AD003A7396 /* Extensions */,
+				C1FF889422B6C5FA00E1EDB5 /* Resources */,
 				C1BA12F3217CBD0D0024F2DA /* Assets.xcassets */,
 				C1BA12F5217CBD0D0024F2DA /* LaunchScreen.storyboard */,
 				C1BA12F8217CBD0D0024F2DA /* Info.plist */,
@@ -198,6 +203,7 @@
 				C1B2195421AC014900F7D004 /* GraphViewController.swift */,
 				C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */,
 				C11C019C22B2987B003CE368 /* AppSettingsViewController.swift */,
+				C1FF889022B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift */,
 			);
 			path = "View Controller";
 			sourceTree = "<group>";
@@ -246,6 +252,14 @@
 				C1EE40D1219F6EC2004776F0 /* GraphSegment.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		C1FF889422B6C5FA00E1EDB5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C1FF889222B6C5F100E1EDB5 /* PreferencesKeys.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -429,6 +443,7 @@
 				C162EFF0228862CD005E71CE /* PowerLimit.swift in Sources */,
 				C17CDC94220B76C800F008E8 /* CategoryWizardResultsView.swift in Sources */,
 				C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */,
+				C1FF889322B6C5F100E1EDB5 /* PreferencesKeys.swift in Sources */,
 				C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */,
 				C1EE40CE219F6599004776F0 /* MeasurementsViewController.swift in Sources */,
 				C15F79A222A576AB00FFD334 /* DominantFrequencyGraphView.swift in Sources */,
@@ -442,6 +457,7 @@
 				C17A3FA3224FFC8400575905 /* PersistableMeasurement.swift in Sources */,
 				C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */,
 				C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */,
+				C1FF889122B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift in Sources */,
 				C17A3FA1224FC7DE00575905 /* Database.swift in Sources */,
 				C1856312220B37540073999B /* CategoryWizardView.swift in Sources */,
 				C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */,

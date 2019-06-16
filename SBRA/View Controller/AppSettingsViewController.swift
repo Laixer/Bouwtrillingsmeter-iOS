@@ -8,11 +8,24 @@
 
 import UIKit
 
-class AppSettingsViewController: UIViewController {
-	let tableView = UITableView(frame: .zero)
+class AppSettingsViewController: UITableViewController {
+	
+	private func sharedInit() {
+		title = "Instellingen"
+		
+		navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done,
+															target: self,
+															action: #selector(dismissTapped))
+	}
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+		sharedInit()
+	}
+	
+	override init(style: UITableView.Style) {
+		super.init(style: style)
+		sharedInit()
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -21,31 +34,26 @@ class AppSettingsViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-		
-		view.backgroundColor = .white
-		
-		view.addSubview(tableView)
-		setupTableView()
 	}
 	
-	private func setupTableView() {
-		view.translatesAutoresizingMaskIntoConstraints = false
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+		return 1
+	}
+	
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+		let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
 		
-		view.addConstraints([
-			tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-			tableView.topAnchor.constraint(equalTo: view.topAnchor),
-			tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
-			tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-		])
+		cell.textLabel?.text = "Geavanceerde instellingen"
+		cell.accessoryType = .disclosureIndicator
 		
-		/*let button = UIButton()
-		button.setTitle("Geavanceerde opties", for: .normal)
-		view.addSubview(button)
-		
-		button.translatesAutoresizingMaskIntoConstraints = false
-		view.addConstraints([
-			//button.topanch
-			])*/
+		return cell
+	}
+	
+	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+		navigationController?.pushViewController(AdvancedAppSettingsViewController(style: .grouped), animated: true)
+	}
+	
+	@objc private func dismissTapped() {
+		presentingViewController?.dismiss(animated: true, completion: nil)
 	}
 }

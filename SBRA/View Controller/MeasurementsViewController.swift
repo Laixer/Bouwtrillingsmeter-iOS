@@ -100,7 +100,7 @@ class MeasurementsViewController: UIViewController {
 	}
 	
 	@objc private func tappedSettingsButton() {
-		let appSettingsVC = AppSettingsViewController()
+		let appSettingsVC = AppSettingsViewController(style: .grouped)
 		
 		let navigationController = UINavigationController(rootViewController: appSettingsVC)
 		
