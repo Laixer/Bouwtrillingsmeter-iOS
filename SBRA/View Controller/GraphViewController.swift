@@ -57,10 +57,9 @@ class GraphViewController: UIViewController {
 				timer += 1
 				if timer == 100 {
 					if let dataPoint = dataPoint {
-						print("adding (\(count), \(abs(Double(dataPoint.speed.x))))")
-						xDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.x * 1))))
-						yDataSet.append(ChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.y * 1))))
-						zDataSet.append(ChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.z * 1))))
+						xDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.x * 1000))))
+						yDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.y * 1000))))
+						zDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.z * 1000))))
 						count += 1
 					}
 					
@@ -71,18 +70,6 @@ class GraphViewController: UIViewController {
 					
 					timer = 0
 				}
-				
-				/*self?.graphView.leftAxis.axisMinimum = 0
-				self?.graphView.leftAxis.axisMaximum = 0.01
-				self?.graphView.xAxis.axisMinimum = 0
-				self?.graphView.xAxis.axisMaximum = 100*/
-				
-				/*print("min x \(self?.graphView.chartXMin)")
-				print("max x \(self?.graphView.chartXMax)")
-				print("max y \(self?.graphView.chartYMax)")
-				print("max y \(self?.graphView.chartYMax)")*/
-
-				//self?.graphView.data = BarChartData(dataSets: [xDataSet, yDataSet, zDataSet])
 			}
 			
 		default: print("no graph provided")
