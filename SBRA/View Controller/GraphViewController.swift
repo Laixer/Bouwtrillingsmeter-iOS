@@ -8,6 +8,7 @@
 
 import UIKit
 import simd
+import Charts
 
 class GraphViewController: UIViewController {
 	
@@ -15,13 +16,12 @@ class GraphViewController: UIViewController {
 	var motionDataParser = MotionDataParser()
 	var updateGraphHandler: MotionDataHandler?
 	
-	var graphView: GraphView
+	var graphView: BarChartView
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		
 		graphView.frame = view.bounds
-		graphView.monochromeLines = false
 		
 		if let updateGraphHandler = updateGraphHandler {
 			motionDataParser.startDataCollection(updateInterval: 0.01, handler: updateGraphHandler)
@@ -42,22 +42,60 @@ class GraphViewController: UIViewController {
 		self.graphType = graphType
 		motionDataParser.settings = settings
 		
-		self.graphView = GraphView(frame: .zero)
-		
+		self.graphView = BarChartView(frame: .zero)
 		super.init(nibName: nil, bundle: nil)
 		
 		switch graphType {
 		case .speedTime:
+			let xDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "X")
+			let yDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Y")
+			let zDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Z")
+			
+			var timer = 0
+			var count = 0
 			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
-				if let dataPoint = dataPoint {
-					self?.graphView.add([Double(dataPoint.speed.x) * 10.0,
-										 Double(dataPoint.speed.y) * 10.0,
-										 Double(dataPoint.speed.z)] * 10.0)
+				timer += 1
+				if timer == 100 {
+					if let dataPoint = dataPoint {
+						print("adding (\(count), \(abs(Double(dataPoint.speed.x))))")
+						xDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.x * 1))))
+						yDataSet.append(ChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.y * 1))))
+						zDataSet.append(ChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.z * 1))))
+						count += 1
+					}
+					
+					let data = BarChartData(dataSets: [xDataSet, yDataSet, zDataSet])
+					data.groupBars(fromX: 0, groupSpace: 0.1, barSpace: 0.01)
+					
+					self?.graphView.data = data
+					
+					timer = 0
 				}
-			}
-		case .frequencyTime:
-			graphView = GraphView(frame: .zero)
+				
+				/*self?.graphView.leftAxis.axisMinimum = 0
+				self?.graphView.leftAxis.axisMaximum = 0.01
+				self?.graphView.xAxis.axisMinimum = 0
+				self?.graphView.xAxis.axisMaximum = 100*/
+				
+				/*print("min x \(self?.graphView.chartXMin)")
+				print("max x \(self?.graphView.chartXMax)")
+				print("max y \(self?.graphView.chartYMax)")
+				print("max y \(self?.graphView.chartYMax)")*/
 
+				//self?.graphView.data = BarChartData(dataSets: [xDataSet, yDataSet, zDataSet])
+			}
+			
+		default: print("no graph provided")
+			
+		/*
+		case .frequencyTime:
+
+			let xDataSet = LineChartDataSet([ChartDataEntry]())
+			let yDataSet = LineChartDataSet([ChartDataEntry]())
+			let zDataSet = LineChartDataSet([ChartDataEntry]())
+			
+			graphView.data = LineChartData(dataSets: [xDataSet, yDataSet, zDataSet])
+			
 			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
 				if let dataPoint = dataPoint {
 					if let dominantFrequency = dataPoint.dominantFrequency {
@@ -118,6 +156,7 @@ class GraphViewController: UIViewController {
 				}
 				
 			}
+			*/
 		}
 	}
 	
