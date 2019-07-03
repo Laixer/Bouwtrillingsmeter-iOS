@@ -21,6 +21,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	var completionHandler: ((Measurement) -> Void)?
 	var locationManager: CLLocationManager?
 	var placemark: CLPlacemark?
+	var exceededLimit = false
 	
 	var settings: MeasurementSettings?
 	
@@ -34,8 +35,9 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		
 		super.init(nibName: nil, bundle: nil)
 		
-		motionDataParser.exceedanceCallback = { (frequency, ratio) in
+		motionDataParser.exceedanceCallback = { [weak self] (frequency, ratio) in
 			print("exceeded limit \(ratio) with dom freq: \(frequency)")
+			self?.exceededLimit = true
 		}
 		
 		let saveButton = UIBarButtonItem(title: "Sla op", style: .done, target: self, action: #selector(tappedSaveButton))
@@ -226,6 +228,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 									  latCoordinate: wrappedLat?.floatValue,
 									  longCoordinate: wrappedLong?.floatValue,
 									  locationString: placemark?.locality,
+									  exceededLimit: exceededLimit,
 									  persistableMeasurement: nil)
 		
 		print("created measurement")

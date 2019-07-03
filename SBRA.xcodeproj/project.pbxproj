@@ -43,6 +43,7 @@
 		C1EE40CE219F6599004776F0 /* MeasurementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */; };
 		C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE40CF219F6E0E004776F0 /* GraphView.swift */; };
 		C1EE40D2219F6EC2004776F0 /* GraphSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE40D1219F6EC2004776F0 /* GraphSegment.swift */; };
+		C1F188B822CBB28A0056B77B /* MeasurementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F188B722CBB28A0056B77B /* MeasurementDetailViewController.swift */; };
 		C1FB6FD4220A371800D7BE5A /* CategoryWizardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */; };
 		C1FB6FD6220A376700D7BE5A /* MeasurementSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB6FD5220A376700D7BE5A /* MeasurementSettings.swift */; };
 		C1FE93A021EBAB21000B90FC /* MeasurementSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FE939F21EBAB21000B90FC /* MeasurementSettingsViewController.swift */; };
@@ -103,6 +104,7 @@
 		C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsViewController.swift; sourceTree = "<group>"; };
 		C1EE40CF219F6E0E004776F0 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		C1EE40D1219F6EC2004776F0 /* GraphSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphSegment.swift; sourceTree = "<group>"; };
+		C1F188B722CBB28A0056B77B /* MeasurementDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementDetailViewController.swift; sourceTree = "<group>"; };
 		C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizardDelegate.swift; sourceTree = "<group>"; };
 		C1FB6FD5220A376700D7BE5A /* MeasurementSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSettings.swift; sourceTree = "<group>"; };
 		C1FE939F21EBAB21000B90FC /* MeasurementSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSettingsViewController.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 				C1FE939F21EBAB21000B90FC /* MeasurementSettingsViewController.swift */,
 				C17447F52208A15300287C3E /* CategoryWizardViewController.swift */,
 				C1B2195421AC014900F7D004 /* GraphViewController.swift */,
+				C1F188B722CBB28A0056B77B /* MeasurementDetailViewController.swift */,
 				C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */,
 				C11C019C22B2987B003CE368 /* AppSettingsViewController.swift */,
 				C1FF889022B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift */,
@@ -461,6 +464,7 @@
 				C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */,
 				C1FF889122B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift in Sources */,
 				C17A3FA1224FC7DE00575905 /* Database.swift in Sources */,
+				C1F188B822CBB28A0056B77B /* MeasurementDetailViewController.swift in Sources */,
 				C1856312220B37540073999B /* CategoryWizardView.swift in Sources */,
 				C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */,
 				C1FB6FD4220A371800D7BE5A /* CategoryWizardDelegate.swift in Sources */,

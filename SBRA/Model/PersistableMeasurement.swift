@@ -16,6 +16,7 @@ class PersistableMeasurement: Object {
 	let latCoordinate =  RealmOptional<Float>()
 	let longCoordinate = RealmOptional<Float>()
 	@objc dynamic var locationString: String?
+	var exceededLimit = false
 	
 	func toMeasurement() -> Measurement {
 		let measurement = Measurement(dataPoints: dataPoints.map({$0.toDataPoint()}),
@@ -23,6 +24,7 @@ class PersistableMeasurement: Object {
 									  latCoordinate: latCoordinate.value,
 									  longCoordinate: longCoordinate.value,
 									  locationString: locationString,
+									  exceededLimit: exceededLimit,
 									  persistableMeasurement: self)
 		return measurement
 	}
@@ -36,6 +38,7 @@ class PersistableMeasurement: Object {
 		persistable.latCoordinate.value = measurement.latCoordinate
 		persistable.longCoordinate.value = measurement.longCoordinate
 		persistable.locationString = measurement.locationString
+		persistable.exceededLimit = measurement.exceededLimit
 		
 		return persistable
 	}

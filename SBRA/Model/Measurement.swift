@@ -15,6 +15,7 @@ struct Measurement {
 	var latCoordinate: Float?
 	var longCoordinate: Float?
 	var locationString: String?
+	var exceededLimit: Bool
 	
 	var persistableMeasurement: PersistableMeasurement?
 }
