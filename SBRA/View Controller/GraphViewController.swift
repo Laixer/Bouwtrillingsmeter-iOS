@@ -139,7 +139,6 @@ class GraphViewController: UIViewController {
 				}
 			}
 			
-			
 		case .fft1Second:
 			let graphView = LineChartView(frame: .zero)
 			
@@ -147,9 +146,7 @@ class GraphViewController: UIViewController {
 			
 			graphView.setVisibleXRangeMaximum(500.0)
 			
-			var count = 0
-			
-			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
+			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
 				if let fftX = dataPoint?.fft.x, let fftY = dataPoint?.fft.y, let fftZ = dataPoint?.fft.z {
 					let xDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "X")
 					let yDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Y")
@@ -172,11 +169,7 @@ class GraphViewController: UIViewController {
 					let data = LineChartData(dataSets: [xDataSet, yDataSet, zDataSet])
 					
 					graphView.data = data
-
-
 				}
-				
-				
 			}
 			
 		case .gravityTimeAccelerationTime:
@@ -201,7 +194,7 @@ class GraphViewController: UIViewController {
 			
 			var count = 0
 			
-			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
+			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
 				if let dataPoint = dataPoint {
 					xDataSet.append(ChartDataEntry(x: Double(count), y: dataPoint.acceleration.x))
 					yDataSet.append(ChartDataEntry(x: Double(count), y: dataPoint.acceleration.y))
