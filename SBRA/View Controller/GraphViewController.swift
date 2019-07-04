@@ -16,28 +16,29 @@ class GraphViewController: UIViewController {
 	var motionDataParser = MotionDataParser()
 	var updateGraphHandler: MotionDataHandler?
 	
-	var graphView: ChartViewBase!
+	var graphView: ChartViewBase?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 		
-		graphView.frame = view.bounds
+		graphView?.frame = view.bounds
 		
 		if let updateGraphHandler = updateGraphHandler {
 			motionDataParser.startDataCollection(updateInterval: 0.01, handler: updateGraphHandler)
 		}
 		
-		view.addSubview(graphView)
-		
-		graphView.setNeedsDisplay()
-
-        // Do any additional setup after loading the view.
+		if let graphView = graphView {
+			view.addSubview(graphView)
+			
+			graphView.setNeedsDisplay()
+		}
     }
 	
 	override func viewDidDisappear(_ animated: Bool) {
 		motionDataParser.stopDataCollection()
 	}
 	
+	// swiftlint:disable:next function_body_length
 	init(graphType: GraphType, settings: MeasurementSettings?) {
 		self.graphType = graphType
 		motionDataParser.settings = settings
@@ -49,9 +50,9 @@ class GraphViewController: UIViewController {
 			
 			self.graphView = BarChartView(frame: .zero)
 			
-			let xDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "X")
-			let yDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Y")
-			let zDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Z")
+			let xDataSet = BarChartDataSet(entries: [ChartDataEntry](), label: "X")
+			let yDataSet = BarChartDataSet(entries: [ChartDataEntry](), label: "Y")
+			let zDataSet = BarChartDataSet(entries: [ChartDataEntry](), label: "Z")
 			
 			xDataSet.setColor(UIColor.xDimensionColor)
 			yDataSet.setColor(UIColor.yDimensionColor)
@@ -80,7 +81,7 @@ class GraphViewController: UIViewController {
 					let data = BarChartData(dataSets: [xDataSet, yDataSet, zDataSet])
 					data.groupBars(fromX: 0, groupSpace: 0.1, barSpace: 0.01)
 					
-					self?.graphView.data = data
+					self?.graphView?.data = data
 					
 					timer = 0
 					
@@ -108,6 +109,7 @@ class GraphViewController: UIViewController {
 					}
 				}
 			}
+			*/
 		case .dominantFrequency:
 			graphView = DominantFrequencyGraphView(frame: .zero)
 			
@@ -117,12 +119,13 @@ class GraphViewController: UIViewController {
 				graphView.limitPoints = PowerLimit.limitForSettings(settings: settings)
 				print("setting limit points")
 			} else {
-				print("is nil")
+				print("settings or graphview is nil")
 			}
 			
 			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
 				
-				if let dominantFrequency = dataPoint?.dominantFrequency, let graphView = self?.graphView as? DominantFrequencyGraphView {
+				if let dominantFrequency = dataPoint?.dominantFrequency,
+					let graphView = self?.graphView as? DominantFrequencyGraphView {
 					if graphView.dominantFrequencies == nil {
 						graphView.dominantFrequencies = [(DominantFrequency, DominantFrequency, DominantFrequency)]()
 					}
@@ -136,33 +139,61 @@ class GraphViewController: UIViewController {
 				}
 			}
 			
+			
 		case .fft1Second:
-			graphView = GraphView(frame: .zero)
-
+			let graphView = LineChartView(frame: .zero)
+			
+			self.graphView = graphView
+			
+			graphView.setVisibleXRangeMaximum(500.0)
+			
+			var count = 0
+			
 			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
-				self?.graphView.clear()
 				if let fftX = dataPoint?.fft.x, let fftY = dataPoint?.fft.y, let fftZ = dataPoint?.fft.z {
-					for (index, element) in fftX.enumerated() {
-						self?.graphView.add([Double(element * 100.0), Double(fftY[index] * 100.0), Double(fftZ[index] * 100.0)])
+					let xDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "X")
+					let yDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Y")
+					let zDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Z")
+					
+					xDataSet.drawCirclesEnabled = false
+					yDataSet.drawCirclesEnabled = false
+					zDataSet.drawCirclesEnabled = false
+					
+					xDataSet.setColor(UIColor.xDimensionColor)
+					yDataSet.setColor(UIColor.yDimensionColor)
+					zDataSet.setColor(UIColor.zDimensionColor)
+					
+					for (index, _) in fftX.enumerated() {
+						xDataSet.append(ChartDataEntry(x: Double(index), y: Double(fftX[index] * 100.0)))
+						yDataSet.append(ChartDataEntry(x: Double(index), y: Double(fftY[index] * 100.0)))
+						zDataSet.append(ChartDataEntry(x: Double(index), y: Double(fftZ[index] * 100.0)))
 					}
+					
+					let data = LineChartData(dataSets: [xDataSet, yDataSet, zDataSet])
+					
+					graphView.data = data
+
+
 				}
+				
+				
 			}
-			*/
+			
 		case .gravityTimeAccelerationTime:
 			
 			let graphView = LineChartView(frame: .zero)
 			
 			self.graphView = graphView
 			
-			
-			let xDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "X")
-			let yDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Y")
-			let zDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Z")
-			
+			let xDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "X")
+			let yDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Y")
+			let zDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Z")
 			
 			xDataSet.drawCirclesEnabled = false
 			yDataSet.drawCirclesEnabled = false
 			zDataSet.drawCirclesEnabled = false
+			
+			graphView.setVisibleXRangeMaximum(500.0)
 			
 			xDataSet.setColor(UIColor.xDimensionColor)
 			yDataSet.setColor(UIColor.yDimensionColor)
@@ -172,21 +203,19 @@ class GraphViewController: UIViewController {
 			
 			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
 				if let dataPoint = dataPoint {
-					xDataSet.append(BarChartDataEntry(x: Double(count), y: dataPoint.acceleration.x))
-					yDataSet.append(BarChartDataEntry(x: Double(count), y: dataPoint.acceleration.y))
-					zDataSet.append(BarChartDataEntry(x: Double(count), y: dataPoint.acceleration.z))
+					xDataSet.append(ChartDataEntry(x: Double(count), y: dataPoint.acceleration.x))
+					yDataSet.append(ChartDataEntry(x: Double(count), y: dataPoint.acceleration.y))
+					zDataSet.append(ChartDataEntry(x: Double(count), y: dataPoint.acceleration.z))
 					
 					count += 1
 					
 					let data = LineChartData(dataSets: [xDataSet, yDataSet, zDataSet])
-					//data.groupBars(fromX: 0, groupSpace: 0.1, barSpace: 0.01)
 					
-					self?.graphView.data = data
+					graphView.data = data
 				}
-				
 			}
 			
-		default: print("no graph provided")
+		default: print("no graph provided for " + graphType.description)
 
 		}
 	}
