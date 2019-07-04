@@ -1,18 +1,18 @@
 PODS:
-  - Charts (3.2.2):
-    - Charts/Core (= 3.2.2)
-  - Charts/Core (3.2.2)
-  - Realm (3.14.0):
-    - Realm/Headers (= 3.14.0)
-  - Realm/Headers (3.14.0)
-  - RealmSwift (3.14.0):
-    - Realm (= 3.14.0)
+  - Charts (3.3.0):
+    - Charts/Core (= 3.3.0)
+  - Charts/Core (3.3.0)
+  - Realm (3.17.0):
+    - Realm/Headers (= 3.17.0)
+  - Realm/Headers (3.17.0)
+  - RealmSwift (3.17.0):
+    - Realm (= 3.17.0)
   - Surge (2.2.0)
-  - SwiftLint (0.31.0)
+  - SwiftLint (0.33.0)
 
 DEPENDENCIES:
   - Charts
-  - RealmSwift (~> 3)
+  - RealmSwift (~> 3.17)
   - Surge (~> 2.2)
   - SwiftLint
 
@@ -25,12 +25,12 @@ SPEC REPOS:
     - SwiftLint
 
 SPEC CHECKSUMS:
-  Charts: f69cf0518b6d1d62608ca504248f1bbe0b6ae77e
-  Realm: 221b25919bb5a010a3c597d707f8df3492dcd93a
-  RealmSwift: 28f22dfa6a27b9a778cfb09471558b6afcf1022c
+  Charts: e0dd4cd8f257bccf98407b58183ddca8e8d5b578
+  Realm: b30db41ff34fc858ffc25ba8d44a82c164e7ccd0
+  RealmSwift: fe733e459d60dc7b6971d4cbee2eb4854097d12c
   Surge: 51fbaf8020dc2bc6416c07ed540f21536ba5a98b
-  SwiftLint: 7a0227733d786395817373b2d0ca799fd0093ff3
+  SwiftLint: fed9c66336e41fc74dc48a73678380718f0c8b0e
 
-PODFILE CHECKSUM: ddc3136b3f1e2859779e83882f57b4d192361906
+PODFILE CHECKSUM: ede86a61b1bd1a26fb17d4702860e074d90d2759
 
 COCOAPODS: 1.5.3

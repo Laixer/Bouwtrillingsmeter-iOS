@@ -16,7 +16,7 @@ class GraphViewController: UIViewController {
 	var motionDataParser = MotionDataParser()
 	var updateGraphHandler: MotionDataHandler?
 	
-	var graphView: BarChartView
+	var graphView: ChartViewBase!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,26 +42,40 @@ class GraphViewController: UIViewController {
 		self.graphType = graphType
 		motionDataParser.settings = settings
 		
-		self.graphView = BarChartView(frame: .zero)
 		super.init(nibName: nil, bundle: nil)
 		
 		switch graphType {
 		case .speedTime:
+			
+			self.graphView = BarChartView(frame: .zero)
+			
 			let xDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "X")
 			let yDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Y")
 			let zDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Z")
 			
+			xDataSet.setColor(UIColor.xDimensionColor)
+			yDataSet.setColor(UIColor.yDimensionColor)
+			zDataSet.setColor(UIColor.zDimensionColor)
+			
 			var timer = 0
 			var count = 0
+			var maxXSpeed = 0.0
+			var maxYSpeed = 0.0
+			var maxZSpeed = 0.0
+			
 			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
 				timer += 1
+				
+				maxXSpeed = max(maxXSpeed, Double(dataPoint?.speed.x ?? 0.0))
+				maxYSpeed = max(maxYSpeed, Double(dataPoint?.speed.y ?? 0.0))
+				maxZSpeed = max(maxZSpeed, Double(dataPoint?.speed.z ?? 0.0))
+				
 				if timer == 100 {
-					if let dataPoint = dataPoint {
-						xDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.x * 1000))))
-						yDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.y * 1000))))
-						zDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(dataPoint.speed.z * 1000))))
-						count += 1
-					}
+					xDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(maxXSpeed * 1000))))
+					yDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(maxYSpeed * 1000))))
+					zDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(maxZSpeed * 1000))))
+					
+					count += 1
 					
 					let data = BarChartData(dataSets: [xDataSet, yDataSet, zDataSet])
 					data.groupBars(fromX: 0, groupSpace: 0.1, barSpace: 0.01)
@@ -69,10 +83,12 @@ class GraphViewController: UIViewController {
 					self?.graphView.data = data
 					
 					timer = 0
+					
+					maxXSpeed = 0
+					maxYSpeed = 0
+					maxZSpeed = 0
 				}
 			}
-			
-		default: print("no graph provided")
 			
 		/*
 		case .frequencyTime:
@@ -131,19 +147,47 @@ class GraphViewController: UIViewController {
 					}
 				}
 			}
+			*/
 		case .gravityTimeAccelerationTime:
-			graphView = GraphView(frame: .zero)
-
+			
+			let graphView = LineChartView(frame: .zero)
+			
+			self.graphView = graphView
+			
+			
+			let xDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "X")
+			let yDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Y")
+			let zDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Z")
+			
+			
+			xDataSet.drawCirclesEnabled = false
+			yDataSet.drawCirclesEnabled = false
+			zDataSet.drawCirclesEnabled = false
+			
+			xDataSet.setColor(UIColor.xDimensionColor)
+			yDataSet.setColor(UIColor.yDimensionColor)
+			zDataSet.setColor(UIColor.zDimensionColor)
+			
+			var count = 0
+			
 			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
 				if let dataPoint = dataPoint {
-					self?.graphView.add([dataPoint.acceleration.x,
-										dataPoint.acceleration.y,
-										dataPoint.acceleration.z
-						/*, gravity.x, gravity.y, gravity.z*/])
+					xDataSet.append(BarChartDataEntry(x: Double(count), y: dataPoint.acceleration.x))
+					yDataSet.append(BarChartDataEntry(x: Double(count), y: dataPoint.acceleration.y))
+					zDataSet.append(BarChartDataEntry(x: Double(count), y: dataPoint.acceleration.z))
+					
+					count += 1
+					
+					let data = LineChartData(dataSets: [xDataSet, yDataSet, zDataSet])
+					//data.groupBars(fromX: 0, groupSpace: 0.1, barSpace: 0.01)
+					
+					self?.graphView.data = data
 				}
 				
 			}
-			*/
+			
+		default: print("no graph provided")
+
 		}
 	}
 	
