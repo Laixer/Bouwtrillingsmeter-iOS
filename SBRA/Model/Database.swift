@@ -53,12 +53,10 @@ class Database {
 				let realm = try Realm()
 				try realm.write {
 					realm.delete(persistable)
-					
 				}
 			} catch {
 				print("error deleting measurement: " + error.localizedDescription)
 			}
 		}
-		
 	}
 }
