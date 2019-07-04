@@ -81,6 +81,9 @@ class MeasurementsViewController: UIViewController {
 	@objc private func tappedAddButton() {
 		let measurementSettingsVC = MeasurementSettingsViewController()
 		measurementSettingsVC.completionHandler = { [weak self] (measurement) in
+			let detailViewController = MeasurementDetailViewController(measurement: measurement)
+			self?.navigationController?.pushViewController(detailViewController, animated: false)
+			
 			self?.addMeasurement(measurement: measurement)
 			print("number of measurements: \(Database().numberOfMeasurements())")
 			self?.updateTableViewVisibility()
