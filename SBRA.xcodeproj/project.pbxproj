@@ -11,6 +11,7 @@
 		C108A00921CC48A900C6CCB2 /* DominantFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108A00821CC48A900C6CCB2 /* DominantFrequency.swift */; };
 		C11C019D22B2987B003CE368 /* AppSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C019C22B2987B003CE368 /* AppSettingsViewController.swift */; };
 		C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */; };
+		C137A92322BD072100770750 /* UIColor+Graphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C137A92222BD072100770750 /* UIColor+Graphs.swift */; };
 		C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B38882180C36300B03F99 /* MotionDataParser.swift */; };
 		C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B388C2180CB3500B03F99 /* DataPoint.swift */; };
 		C15F79A222A576AB00FFD334 /* DominantFrequencyGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F79A122A576AB00FFD334 /* DominantFrequencyGraphView.swift */; };
@@ -68,6 +69,7 @@
 		C108A00821CC48A900C6CCB2 /* DominantFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DominantFrequency.swift; path = Model/DominantFrequency.swift; sourceTree = "<group>"; };
 		C11C019C22B2987B003CE368 /* AppSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsViewController.swift; sourceTree = "<group>"; };
 		C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPageViewController.swift; sourceTree = "<group>"; };
+		C137A92222BD072100770750 /* UIColor+Graphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Graphs.swift"; sourceTree = "<group>"; };
 		C14B38882180C36300B03F99 /* MotionDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataParser.swift; sourceTree = "<group>"; };
 		C14B388C2180CB3500B03F99 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
 		C15F79A122A576AB00FFD334 /* DominantFrequencyGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DominantFrequencyGraphView.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				C1C9619B21B5CB34003A7396 /* UIColor+Rotterdam.swift */,
+				C137A92222BD072100770750 /* UIColor+Graphs.swift */,
 				C1C9619D21B5CD40003A7396 /* UIFont+Rotterdam.swift */,
 			);
 			path = Extensions;
@@ -477,6 +480,7 @@
 				C17447F22208902700287C3E /* WizardItem.swift in Sources */,
 				C11C019D22B2987B003CE368 /* AppSettingsViewController.swift in Sources */,
 				C1D1C4C722307D40000B7D99 /* Measurement.swift in Sources */,
+				C137A92322BD072100770750 /* UIColor+Graphs.swift in Sources */,
 				C17447F42208926700287C3E /* WizardOutcome.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
