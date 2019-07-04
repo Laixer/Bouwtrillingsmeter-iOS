@@ -17,6 +17,7 @@ class PersistableMeasurement: Object {
 	let longCoordinate = RealmOptional<Float>()
 	@objc dynamic var locationString: String?
 	var exceededLimit = false
+	@objc var measurementID = UUID().uuidString
 	
 	func toMeasurement() -> Measurement {
 		let measurement = Measurement(dataPoints: dataPoints.map({$0.toDataPoint()}),
@@ -41,5 +42,9 @@ class PersistableMeasurement: Object {
 		persistable.exceededLimit = measurement.exceededLimit
 		
 		return persistable
+	}
+	
+	override class func primaryKey() -> String? {
+		return "measurementID"
 	}
 }
