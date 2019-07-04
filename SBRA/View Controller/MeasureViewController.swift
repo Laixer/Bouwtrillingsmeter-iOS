@@ -47,9 +47,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		
 		navigationItem.title = "Meting"
 		
-		navigationItem.rightBarButtonItem = saveButton
-		
-		indicator.hidesWhenStopped
+		navigationItem.rightBarButtonItem = saveButton		
 	}
 	
 	override convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
