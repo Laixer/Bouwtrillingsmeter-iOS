@@ -7,10 +7,15 @@
 //
 
 import UIKit
+import Charts
 
-class DominantFrequencyGraphView: GraphView {
+class DominantFrequencyGraphView: BubbleChartView {
 	
 	var dominantFrequencies: [(DominantFrequency, DominantFrequency, DominantFrequency)]?
+	
+	private let xDataSet = BubbleChartDataSet(entries: [BubbleChartDataEntry](), label: "X")
+	private let yDataSet = BubbleChartDataSet(entries: [BubbleChartDataEntry](), label: "Y")
+	private let zDataSet = BubbleChartDataSet(entries: [BubbleChartDataEntry](), label: "Z")
 	
 	var yMax: CGFloat?
 	var xMax: CGFloat?
@@ -18,14 +23,11 @@ class DominantFrequencyGraphView: GraphView {
 	var limitPoints: [LimitPoint]?
 	
 	override func draw(_ rect: CGRect) {
-		super.draw(rect)
 		
 		let context = UIGraphicsGetCurrentContext()!
 		
 		if let dominantFrequencies = dominantFrequencies {
-			addPointForDominantFrequencies(rect: rect, dominantFrequencies: dominantFrequencies.map({$0.0}))
-			addPointForDominantFrequencies(rect: rect, dominantFrequencies: dominantFrequencies.map({$0.1}))
-			addPointForDominantFrequencies(rect: rect, dominantFrequencies: dominantFrequencies.map({$0.2}))
+			addPointForDominantFrequencies(rect: rect, dominantFrequencies: dominantFrequencies)
 		}
 		
 		UIColor.black.setFill()
@@ -37,25 +39,36 @@ class DominantFrequencyGraphView: GraphView {
 			drawLimitLines(rect: rect, limitPoints: limitPoints)
 		}
 		
-		setNeedsDisplay()
+		super.draw(rect)
 	}
 	
-	func addPointForDominantFrequencies(rect: CGRect, dominantFrequencies: [DominantFrequency]) {
-		let context = UIGraphicsGetCurrentContext()!
-		
-		var maxFrequency = 0
-		var maxVelocity: Float = 0.0
-		for value in dominantFrequencies {
-			maxFrequency = max(value.frequency, maxFrequency)
-			maxVelocity = max(value.velocity, maxVelocity)
+	func addPointForDominantFrequencies(rect: CGRect, dominantFrequencies: [(DominantFrequency, DominantFrequency, DominantFrequency)]) {
+
+		var maxFrequency = (0, 0, 0)
+		var maxVelocity: (Float, Float, Float) = (0.0, 0.0, 0.0)
+		for (xDimension, yDimension, zDimension) in dominantFrequencies {
+			maxFrequency.0 = max(xDimension.frequency, maxFrequency.0)
+			maxVelocity.0 = max(xDimension.velocity, maxVelocity.0)
+			
+			maxFrequency.1 = max(yDimension.frequency, maxFrequency.1)
+			maxVelocity.1 = max(yDimension.velocity, maxVelocity.1)
+			
+			maxFrequency.2 = max(zDimension.frequency, maxFrequency.2)
+			maxVelocity.2 = max(zDimension.velocity, maxVelocity.2)
 		}
 		
 		for value in dominantFrequencies {
-			context.addEllipse(in: CGRect(x: CGFloat(value.frequency) /*/ CGFloat(maxFrequency) * rect.width*/,
-				y: rect.height - CGFloat(value.velocity * 1000.0) /*/ CGFloat(maxVelocity) *  rect.height*/,
-				width: 3.0,
-				height: 3.0))
+			xDataSet.append(BubbleChartDataEntry(x: Double(value.0.frequency),
+												 y: abs(Double(value.0.velocity * 1000)), size: 3.0))
+			yDataSet.append(BubbleChartDataEntry(x: Double(value.1.frequency),
+												 y: abs(Double(value.1.velocity * 1000)), size: 3.0))
+			zDataSet.append(BubbleChartDataEntry(x: Double(value.2.frequency),
+												 y: abs(Double(value.2.velocity * 1000)), size: 3.0))
 		}
+		
+		let data = BubbleChartData(dataSets: [xDataSet, yDataSet, zDataSet])
+		
+		self.data = data
 		
 	}
 	
@@ -76,7 +89,8 @@ class DominantFrequencyGraphView: GraphView {
 			context?.setLineWidth(3.0)
 			UIColor.black.setStroke()
 			
-			context?.move(to: CGPoint(x: CGFloat(limit[0].xValue) * scaleFactorX, y: rect.height - CGFloat(limit[0].yValue) * scaleFactorY))
+			context?.move(to: CGPoint(x: CGFloat(limit[0].xValue) * scaleFactorX,
+									  y: rect.height - CGFloat(limit[0].yValue) * scaleFactorY))
 			limit.remove(at: 0)
 			
 			for point in limit {
