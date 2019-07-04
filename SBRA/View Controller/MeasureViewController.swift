@@ -13,19 +13,22 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	
 	var collectionView: UICollectionView
 	
-	var indicator = UIActivityIndicatorView(style: .gray)
-	var measuringLabel = UILabel()
+	private var showingGraphs = false
+	private var indicator = UIActivityIndicatorView(style: .gray)
+	private var measuringLabel = UILabel()
 	
-	let numberOfGraphs = 5
-	var dataPoints = [DataPoint]()
-	var completionHandler: ((Measurement) -> Void)?
-	var locationManager: CLLocationManager?
-	var placemark: CLPlacemark?
-	var exceededLimit = false
+	private let numberOfGraphs = 5
+	private var dataPoints = [DataPoint]()
+	private var completionHandler: ((Measurement) -> Void)?
+	private var locationManager: CLLocationManager?
+	private var placemark: CLPlacemark?
+	private var exceededLimit = false
 	
-	var settings: MeasurementSettings?
+	private var settings: MeasurementSettings?
 	
-	let motionDataParser = MotionDataParser()
+	private let motionDataParser = MotionDataParser()
+	
+	private var updateHandler: MotionDataHandler?
 	
 	init(settings: MeasurementSettings?) {
 		collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
@@ -45,6 +48,8 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		navigationItem.title = "Meting"
 		
 		navigationItem.rightBarButtonItem = saveButton
+		
+		indicator.hidesWhenStopped
 	}
 	
 	override convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -95,21 +100,23 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		self.completionHandler = completionHandler
 		
 		motionDataParser.settings = settings
-		motionDataParser.startDataCollection(updateInterval: 0.02) { [weak weakSelf = self] (dataPoint, _) in
-			for index in 0..<self.collectionView.numberOfItems(inSection: 0) {
-				let indexPath = IndexPath(row: index, section: 0)
-				if let dataPoint = dataPoint {
-					weakSelf?.dataPoints.append(dataPoint)
-					if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell {
-						self.updateCell(cell: cell, at: indexPath, with: dataPoint)
+		
+		updateHandler = { [weak self] (dataPoint, error) in
+			if let self = self {
+				for index in 0..<self.collectionView.numberOfItems(inSection: 0) {
+					let indexPath = IndexPath(row: index, section: 0)
+					if let dataPoint = dataPoint {
+						self.dataPoints.append(dataPoint)
+						if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell {
+							self.updateCell(cell: cell, at: indexPath, with: dataPoint)
+						}
 					}
 				}
 			}
+			
 		}
-	}
-	
-	override func viewDidDisappear(_ animated: Bool) {
-		motionDataParser.stopDataCollection()
+		
+		motionDataParser.startDataCollection(updateInterval: 0.02, handler: updateHandler!)
 	}
 	
 	private func updateCell(cell: GraphCollectionViewCell, at indexPath: IndexPath, with dataPoint: DataPoint) {
@@ -150,15 +157,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 			cell.backgroundColor = UIColor.rotterdamGreen
 			cell.layer.cornerRadius = 8.0
 			cell.text = GraphType.allCases[indexPath.row].description
-			/*if (indexPath.row == 0) {
-			cell.graphView.numberOfLines = 1
-			} else if (indexPath.row == 4) {
-			cell.graphView.numberOfLines = 6
-			} else if (indexPath.row == 2) {
-			cell.graphView.numberOfLines = 0
-			} else {
-			cell.graphView.numberOfLines = 3
-			}*/
+			
 			if indexPath.row == 0 {
 				cell.graphView.singleLine = true
 			}
@@ -207,7 +206,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	
 	@objc private func toggleGraphs() {
 		collectionView.isHidden = !collectionView.isHidden
-		indicator.isHidden = !indicator.isHidden
+		indicator.isAnimating ? indicator.stopAnimating() : indicator.startAnimating()
 		measuringLabel.isHidden = !measuringLabel.isHidden
 	}
 	
@@ -268,11 +267,7 @@ extension MeasureViewController: CLLocationManagerDelegate {
 				if let error = error {
 					print(error)
 				}
-				
-				print("locality: \(String(describing: placemarks?.first?.locality))")
-
 			}
-			print("location: \(location.coordinate)")
 		}
 		
 	}
