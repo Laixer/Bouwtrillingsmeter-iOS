@@ -197,14 +197,13 @@ class MotionDataParser: NSObject {
 		return nil
 	}
 	
-	func dominantFrequency(velocity: Float, limitValue: Float, ratio: Float, index: Int) -> DominantFrequency? {
+	func dominantFrequency(velocity: Float, limitValue: Float, ratio: Float, index: Int) -> DominantFrequency {
 		var ratio = ratio
 		var dominantFrequency: Int
-		if velocity / limitValue > ratio {
+		//if velocity / limitValue > ratio {
 			ratio = velocity / limitValue
 			dominantFrequency = index
-			let dominantVelocity = velocity
-			
+		
 			if ratio > 1.0 {
 				if let callback = exceedanceCallback {
 					callback(dominantFrequency, ratio)
@@ -212,11 +211,11 @@ class MotionDataParser: NSObject {
 			}
 			
 			return DominantFrequency(frequency: dominantFrequency,
-										  velocity: dominantVelocity,
+										  velocity: velocity,
 										  exceedsLimit: ratio > 1.0)
-		}
+		//}
 		
-		return nil
+		//return nil
 	}
 	
 	private func velocityInFrequencyDomain() -> [(x: Float, y: Float, z: Float)]? {
