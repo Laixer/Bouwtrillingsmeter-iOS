@@ -186,8 +186,7 @@ class GraphViewController: UIViewController {
 			yDataSet.drawCirclesEnabled = false
 			zDataSet.drawCirclesEnabled = false
 			
-			graphView.setVisibleXRangeMaximum(500.0)
-			
+
 			xDataSet.setColor(UIColor.xDimensionColor)
 			yDataSet.setColor(UIColor.yDimensionColor)
 			zDataSet.setColor(UIColor.zDimensionColor)
@@ -204,7 +203,9 @@ class GraphViewController: UIViewController {
 					
 					let data = LineChartData(dataSets: [xDataSet, yDataSet, zDataSet])
 					
+					graphView.setVisibleXRangeMaximum(100)
 					graphView.data = data
+					graphView.moveViewToX(Double(count))
 				}
 			}
 			
