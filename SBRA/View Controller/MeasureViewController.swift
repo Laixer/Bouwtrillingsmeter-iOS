@@ -120,7 +120,9 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	private func updateCell(cell: GraphCollectionViewCell, at indexPath: IndexPath, with dataPoint: DataPoint) {
 		switch indexPath.row {
 		case 0:
-			cell.addValues(values: [Double(dataPoint.speed.x) * 100, Double(dataPoint.speed.y) * 100, Double(dataPoint.speed.y) * 100])
+			cell.addValues(values: [Double(dataPoint.speed.x) * 100,
+									Double(dataPoint.speed.y) * 100,
+									Double(dataPoint.speed.y) * 100])
 		case 1:
 			if let dominantFrequency = dataPoint.dominantFrequency {
 				cell.addValues(values: [Double(dominantFrequency.x.frequency) / 10.0,
