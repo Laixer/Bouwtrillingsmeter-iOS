@@ -73,6 +73,14 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
 	}
 	
+	override func viewWillDisappear(_ animated: Bool) {
+		for graphController in graphViewControllers {
+			graphController.motionDataParser.stopDataCollection()
+		}
+		
+		super.viewWillDisappear(animated)
+	}
+	
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
