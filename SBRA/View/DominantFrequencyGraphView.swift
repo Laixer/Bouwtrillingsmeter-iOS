@@ -9,40 +9,18 @@
 import UIKit
 import Charts
 
-class DominantFrequencyGraphView: BubbleChartView {
+class DominantFrequencyGraphView: ScatterChartView {
 	
-	var dominantFrequencies: [(DominantFrequency, DominantFrequency, DominantFrequency)]?
-	
-	private let xDataSet = BubbleChartDataSet(entries: [BubbleChartDataEntry](), label: "X")
-	private let yDataSet = BubbleChartDataSet(entries: [BubbleChartDataEntry](), label: "Y")
-	private let zDataSet = BubbleChartDataSet(entries: [BubbleChartDataEntry](), label: "Z")
+	private var xDataSet = ScatterChartDataSet(entries: [ChartDataEntry](), label: "X")
+	private var yDataSet = ScatterChartDataSet(entries: [ChartDataEntry](), label: "Y")
+	private var zDataSet = ScatterChartDataSet(entries: [ChartDataEntry](), label: "Z")
 	
 	var yMax: CGFloat?
 	var xMax: CGFloat?
 	
 	var limitPoints: [LimitPoint]?
 	
-	override func draw(_ rect: CGRect) {
-		
-		let context = UIGraphicsGetCurrentContext()!
-		
-		if let dominantFrequencies = dominantFrequencies {
-			addPointForDominantFrequencies(rect: rect, dominantFrequencies: dominantFrequencies)
-		}
-		
-		UIColor.black.setFill()
-		
-		context.drawPath(using: .fill)
-		context.strokePath()
-		
-		if let limitPoints = limitPoints {
-			drawLimitLines(rect: rect, limitPoints: limitPoints)
-		}
-		
-		super.draw(rect)
-	}
-	
-	func addPointForDominantFrequencies(rect: CGRect, dominantFrequencies: [(DominantFrequency, DominantFrequency, DominantFrequency)]) {
+	func addPointForDominantFrequencies(dominantFrequencies: [(DominantFrequency, DominantFrequency, DominantFrequency)]) {
 
 		var maxFrequency = (0, 0, 0)
 		var maxVelocity: (Float, Float, Float) = (0.0, 0.0, 0.0)
@@ -58,21 +36,29 @@ class DominantFrequencyGraphView: BubbleChartView {
 		}
 		
 		for value in dominantFrequencies {
-			xDataSet.append(BubbleChartDataEntry(x: Double(value.0.frequency),
-												 y: abs(Double(value.0.velocity * 1000)), size: 3.0))
-			yDataSet.append(BubbleChartDataEntry(x: Double(value.1.frequency),
-												 y: abs(Double(value.1.velocity * 1000)), size: 3.0))
-			zDataSet.append(BubbleChartDataEntry(x: Double(value.2.frequency),
-												 y: abs(Double(value.2.velocity * 1000)), size: 3.0))
+			xDataSet.append(ChartDataEntry(x: Double(value.0.frequency),
+												 y: abs(Double(value.0.velocity * 1000))))
+			yDataSet.append(ChartDataEntry(x: Double(value.1.frequency),
+												 y: abs(Double(value.1.velocity * 1000))))
+			zDataSet.append(ChartDataEntry(x: Double(value.2.frequency),
+												 y: abs(Double(value.2.velocity * 1000))))
 		}
 		
-		let data = BubbleChartData(dataSets: [xDataSet, yDataSet, zDataSet])
+		let sortClosure = { (left: ChartDataEntry, right: ChartDataEntry) -> Bool in
+			return left.x < right.x
+		}
+		
+		xDataSet.sort(by: sortClosure)
+		yDataSet.sort(by: sortClosure)
+		zDataSet.sort(by: sortClosure)
+		
+		let data = ScatterChartData(dataSets: [xDataSet, yDataSet, zDataSet])
 		
 		self.data = data
 		
 	}
 	
-	func drawLimitLines(rect: CGRect, limitPoints: [LimitPoint]) {
+	/*func drawLimitLines(rect: CGRect, limitPoints: [LimitPoint]) {
 		var limit = limitPoints
 		
 		let maxX = limit.map({return $0.xValue}).max()
@@ -106,7 +92,6 @@ class DominantFrequencyGraphView: BubbleChartView {
 			}
 			
 			context?.strokePath()
-			
 		}
-	}
+	}*/
 }

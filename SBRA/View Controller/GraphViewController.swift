@@ -30,7 +30,9 @@ class GraphViewController: UIViewController {
 		if let graphView = graphView {
 			view.addSubview(graphView)
 			
-			graphView.setNeedsDisplay()
+			if (!graphView.isKind(of: DominantFrequencyGraphView.self)) {
+				graphView.setNeedsDisplay()
+			}
 		}
     }
 	
@@ -115,8 +117,7 @@ class GraphViewController: UIViewController {
 			
 			var counter = 0
 			
-			if let settings = settings, let graphView = self.graphView as? DominantFrequencyGraphView {
-				graphView.limitPoints = PowerLimit.limitForSettings(settings: settings)
+			if settings != nil {
 				print("setting limit points")
 			} else {
 				print("settings or graphview is nil")
@@ -126,13 +127,9 @@ class GraphViewController: UIViewController {
 				
 				if let dominantFrequency = dataPoint?.dominantFrequency,
 					let graphView = self?.graphView as? DominantFrequencyGraphView {
-					if graphView.dominantFrequencies == nil {
-						graphView.dominantFrequencies = [(DominantFrequency, DominantFrequency, DominantFrequency)]()
-					}
 					
 					if counter % 50 == 0 {
-						graphView.dominantFrequencies!.append(dominantFrequency)
-						graphView.setNeedsDisplay()
+						graphView.addPointForDominantFrequencies(dominantFrequencies: [dominantFrequency])
 					}
 					
 					counter += 1
@@ -186,7 +183,6 @@ class GraphViewController: UIViewController {
 			yDataSet.drawCirclesEnabled = false
 			zDataSet.drawCirclesEnabled = false
 			
-
 			xDataSet.setColor(UIColor.xDimensionColor)
 			yDataSet.setColor(UIColor.yDimensionColor)
 			zDataSet.setColor(UIColor.zDimensionColor)
