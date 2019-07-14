@@ -69,9 +69,9 @@ class GraphViewController: UIViewController {
 			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
 				timer += 1
 				
-				maxXSpeed = max(maxXSpeed, Double(dataPoint?.speed.x ?? 0.0))
-				maxYSpeed = max(maxYSpeed, Double(dataPoint?.speed.y ?? 0.0))
-				maxZSpeed = max(maxZSpeed, Double(dataPoint?.speed.z ?? 0.0))
+				maxXSpeed = max(maxXSpeed, Double(abs(dataPoint?.speed.x ?? 0.0)))
+				maxYSpeed = max(maxYSpeed, Double(abs(dataPoint?.speed.y ?? 0.0)))
+				maxZSpeed = max(maxZSpeed, Double(abs(dataPoint?.speed.z ?? 0.0)))
 				
 				if timer == 100 {
 					xDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(maxXSpeed * 1000))))
