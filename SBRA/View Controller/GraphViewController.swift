@@ -93,25 +93,39 @@ class GraphViewController: UIViewController {
 				}
 			}
 			
-		/*
 		case .frequencyTime:
 
-			let xDataSet = LineChartDataSet([ChartDataEntry]())
-			let yDataSet = LineChartDataSet([ChartDataEntry]())
-			let zDataSet = LineChartDataSet([ChartDataEntry]())
+			let xDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "X")
+			let yDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Y")
+			let zDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Z")
 			
-			graphView.data = LineChartData(dataSets: [xDataSet, yDataSet, zDataSet])
+			xDataSet.drawCirclesEnabled = false
+			yDataSet.drawCirclesEnabled = false
+			zDataSet.drawCirclesEnabled = false
 			
-			updateGraphHandler = { [weak self] (dataPoint: DataPoint?, error: Error?) in
+			xDataSet.setColor(UIColor.xDimensionColor)
+			yDataSet.setColor(UIColor.yDimensionColor)
+			zDataSet.setColor(UIColor.zDimensionColor)
+
+			let graphView = LineChartView(frame: .zero)
+			self.graphView = graphView
+			
+			var count = 0
+			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
 				if let dataPoint = dataPoint {
 					if let dominantFrequency = dataPoint.dominantFrequency {
-						self?.graphView.add([Double(dominantFrequency.x.frequency) / 10.0,
-												Double(dominantFrequency.y.frequency) / 10.0,
-												Double(dominantFrequency.z.frequency) / 10.0])
+						print("dom x \(dominantFrequency.x.frequency) speed \(dominantFrequency.x.velocity)")
+						xDataSet.append(ChartDataEntry(x: Double(count), y: Double(dominantFrequency.x.frequency)))
+						yDataSet.append(ChartDataEntry(x: Double(count), y: Double(dominantFrequency.y.frequency)))
+						zDataSet.append(ChartDataEntry(x: Double(count), y: Double(dominantFrequency.z.frequency)))
+						
+						graphView.data = LineChartData(dataSets: [xDataSet, yDataSet, zDataSet])
+						
+						count += 1
 					}
 				}
 			}
-			*/
+
 		case .dominantFrequency:
 			graphView = DominantFrequencyGraphView(frame: .zero)
 			
@@ -204,9 +218,6 @@ class GraphViewController: UIViewController {
 					graphView.moveViewToX(Double(count))
 				}
 			}
-			
-		default: print("no graph provided for " + graphType.description)
-
 		}
 	}
 	
