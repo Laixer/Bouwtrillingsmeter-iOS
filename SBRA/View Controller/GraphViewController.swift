@@ -30,7 +30,7 @@ class GraphViewController: UIViewController {
 		if let graphView = graphView {
 			view.addSubview(graphView)
 			
-			if (!graphView.isKind(of: DominantFrequencyGraphView.self)) {
+			if !(graphView is DominantFrequencyGraphView) {
 				graphView.setNeedsDisplay()
 			}
 		}
@@ -171,7 +171,7 @@ class GraphViewController: UIViewController {
 					yDataSet.setColor(UIColor.yDimensionColor)
 					zDataSet.setColor(UIColor.zDimensionColor)
 					
-					for (index, _) in fftX.enumerated() {
+					for index in fftX.indices {
 						xDataSet.append(ChartDataEntry(x: Double(index), y: Double(fftX[index] * 100.0)))
 						yDataSet.append(ChartDataEntry(x: Double(index), y: Double(fftY[index] * 100.0)))
 						zDataSet.append(ChartDataEntry(x: Double(index), y: Double(fftZ[index] * 100.0)))
