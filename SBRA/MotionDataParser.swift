@@ -19,6 +19,7 @@ class MotionDataParser: NSObject {
 	var data = [DataPoint]()
 	var settings: MeasurementSettings?
     
+    // hallo
 	
 	var previousTick: Date?
 	
