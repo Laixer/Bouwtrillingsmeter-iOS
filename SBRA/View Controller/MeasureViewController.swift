@@ -12,6 +12,8 @@ import CoreLocation
 class MeasureViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 	
 	var collectionView: UICollectionView
+    
+    private var pageView: UIPageViewController!
 	
 	private var showingGraphs = false
 	private var indicator = UIActivityIndicatorView(style: .gray)
@@ -48,6 +50,7 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		navigationItem.title = "Meting"
 		
 		navigationItem.rightBarButtonItem = saveButton
+        
 	}
 	
 	override convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -57,19 +60,40 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	required init?(coder aDecoder: NSCoder) {
 		fatalError("init(coder:) has not been implemented")
 	}
+    
+    func setupPageViewController(){
+        pageView = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
+        
+        let graphPageViewController = GraphPageViewController()
+        graphPageViewController.initiallyVisibleGraphType = GraphType.allCases[1]
+        graphPageViewController.motionDataParser.settings = settings
+        
+        let viewControllers = [
+            graphPageViewController
+        ]
+        
+        
+        
+        pageView.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
+        
+        view.addSubview(pageView.view)
+        
+    }
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
 		view.backgroundColor = UIColor.white
+        
+        setupPageViewController()
 		
-		setupCollectionView()
-		setupMeasuringLabel()
-		collectionView.isHidden = true
-		
-		let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleGraphs))
-		gestureRecognizer.numberOfTapsRequired = 7
-		view.addGestureRecognizer(gestureRecognizer)
+//        setupCollectionView()
+//        setupMeasuringLabel()
+//        collectionView.isHidden = true
+//
+//        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleGraphs))
+//        gestureRecognizer.numberOfTapsRequired = 7
+//        view.addGestureRecognizer(gestureRecognizer)
 		
 	}
 	
