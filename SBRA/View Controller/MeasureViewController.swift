@@ -95,57 +95,6 @@ class MeasureViewController: UIViewController {
 		])
 	}
 	
-	private func updateCell(cell: GraphCollectionViewCell, at indexPath: IndexPath, with dataPoint: DataPoint) {
-		switch indexPath.row {
-		case 0:
-			cell.addValues(values: [Double(dataPoint.speed.x) * 100,
-									Double(dataPoint.speed.y) * 100,
-									Double(dataPoint.speed.y) * 100])
-		case 1:
-			if let dominantFrequency = dataPoint.dominantFrequency {
-				cell.addValues(values: [Double(dominantFrequency.x.frequency) / 10.0,
-										Double(dominantFrequency.y.frequency) / 10.0,
-										Double(dominantFrequency.z.frequency) / 10.0])
-			}
-		case 3:
-			cell.graphView.clear()
-			if let fftX = dataPoint.fft.x, let fftY = dataPoint.fft.y, let fftZ = dataPoint.fft.z {
-				for (index, element) in fftX.enumerated() {
-					cell.addValues(values: [Double(element * 100.0), 0, 0])
-				}
-			}
-		case 4:
-			cell.addValues(values: [dataPoint.acceleration.x,
-									dataPoint.acceleration.y,
-									dataPoint.acceleration.z
-				/*, gravity.x, gravity.y, gravity.z*/])
-			
-		default: break
-			
-		}
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-		return numberOfGraphs
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-		let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? GraphCollectionViewCell
-		if let cell = cell {
-			cell.backgroundColor = UIColor.rotterdamGreen
-			cell.layer.cornerRadius = 8.0
-			cell.text = GraphType.allCases[indexPath.row].description
-			
-			if indexPath.row == 0 {
-				cell.graphView.singleLine = true
-			}
-			
-			return cell
-		}
-		
-		fatalError("couldn't dequeue cell")
-	}
-	
 	@objc private func tappedSaveButton() {
 		var wrappedLat: NSNumber?
 		var wrappedLong: NSNumber?
