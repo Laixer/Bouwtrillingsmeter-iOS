@@ -4,7 +4,7 @@ use_frameworks!
 
 target 'SBRA' do
     pod 'Surge', '~> 2.2'
-    pod 'SwiftLint'
+    pod 'SwiftLint', '~> 0.28.2'
     pod 'RealmSwift', '~> 3.17'
-	pod 'Charts'
+    pod 'Charts', '3.2.2'
 end
