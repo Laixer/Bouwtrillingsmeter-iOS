@@ -11,9 +11,9 @@ import Charts
 
 class DominantFrequencyGraphView: ScatterChartView {
 	
-	private var xDataSet = ScatterChartDataSet(entries: [ChartDataEntry](), label: "X")
-	private var yDataSet = ScatterChartDataSet(entries: [ChartDataEntry](), label: "Y")
-	private var zDataSet = ScatterChartDataSet(entries: [ChartDataEntry](), label: "Z")
+    private var xDataSet = ScatterChartDataSet(values: [ChartDataEntry](), label: "X")
+    private var yDataSet = ScatterChartDataSet(values: [ChartDataEntry](), label: "Y")
+    private var zDataSet = ScatterChartDataSet(values: [ChartDataEntry](), label: "Z")
 	
 	var yMax: CGFloat?
 	var xMax: CGFloat?

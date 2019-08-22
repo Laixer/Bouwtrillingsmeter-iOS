@@ -11,7 +11,7 @@ import RealmSwift
 import CoreLocation
 
 class PersistableMeasurement: Object {
-	dynamic let dataPoints = RealmSwift.List<PersistableDataPoint>()
+    let dataPoints = RealmSwift.List<PersistableDataPoint>()
 	@objc dynamic var date: Date = Date.init(timeIntervalSinceReferenceDate: 0)
 	let latCoordinate =  RealmOptional<Float>()
 	let longCoordinate = RealmOptional<Float>()

@@ -48,13 +48,13 @@ class GraphViewController: UIViewController {
 		super.init(nibName: nil, bundle: nil)
 		
 		switch graphType {
-		case .speedTime:
+        case .speedTime:
 			
 			self.graphView = BarChartView(frame: .zero)
 			
-			let xDataSet = BarChartDataSet(entries: [ChartDataEntry](), label: "X")
-			let yDataSet = BarChartDataSet(entries: [ChartDataEntry](), label: "Y")
-			let zDataSet = BarChartDataSet(entries: [ChartDataEntry](), label: "Z")
+            let xDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "X")
+            let yDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Y")
+            let zDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Z")
 			
 			xDataSet.setColor(UIColor.xDimensionColor)
 			yDataSet.setColor(UIColor.yDimensionColor)
@@ -95,9 +95,9 @@ class GraphViewController: UIViewController {
 			
 		case .frequencyTime:
 
-			let xDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "X")
-			let yDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Y")
-			let zDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Z")
+            let xDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "X")
+            let yDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Y")
+            let zDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Z")
 			
 			xDataSet.drawCirclesEnabled = false
 			yDataSet.drawCirclesEnabled = false
@@ -159,9 +159,9 @@ class GraphViewController: UIViewController {
 			
 			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
 				if let fftX = dataPoint?.fft.x, let fftY = dataPoint?.fft.y, let fftZ = dataPoint?.fft.z {
-					let xDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "X")
-					let yDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Y")
-					let zDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Z")
+                    let xDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "X")
+                    let yDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Y")
+                    let zDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Z")
 					
 					xDataSet.drawCirclesEnabled = false
 					yDataSet.drawCirclesEnabled = false
@@ -189,9 +189,9 @@ class GraphViewController: UIViewController {
 			
 			self.graphView = graphView
 			
-			let xDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "X")
-			let yDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Y")
-			let zDataSet = LineChartDataSet(entries: [ChartDataEntry](), label: "Z")
+            let xDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "X")
+            let yDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Y")
+            let zDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Z")
 			
 			xDataSet.drawCirclesEnabled = false
 			yDataSet.drawCirclesEnabled = false
