@@ -67,8 +67,6 @@ class MeasureViewController: UIViewController {
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
-        
-        print("test1")
 		
 		view.backgroundColor = UIColor.white
         
@@ -101,20 +99,6 @@ class MeasureViewController: UIViewController {
 			indicator.centerYAnchor.constraint(equalTo: measuringLabel.centerYAnchor),
 			indicator.leftAnchor.constraint(equalToSystemSpacingAfter: measuringLabel.rightAnchor, multiplier: 1.0)
 		])
-	}
-	
-	func beginMeasurement(completionHandler: @escaping (Measurement) -> Void) {
-		getLocation()
-		
-		self.completionHandler = completionHandler
-		
-		motionDataParser.settings = settings
-		
-		updateHandler = {(dataPoint, error) in
-            print(dataPoint)
-		}
-		
-		motionDataParser.startDataCollection(updateInterval: 0.02, handler: updateHandler!)
 	}
 	
 	private func updateCell(cell: GraphCollectionViewCell, at indexPath: IndexPath, with dataPoint: DataPoint) {

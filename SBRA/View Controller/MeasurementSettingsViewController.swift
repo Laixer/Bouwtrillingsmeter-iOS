@@ -123,12 +123,6 @@ class MeasurementSettingsViewController: UIViewController {
 		let navigationController = UINavigationController(rootViewController: measureViewController)
 		
 		present(navigationController, animated: true, completion: nil)
-		
-		if let completionHandler = completionHandler {
-			measureViewController.beginMeasurement(completionHandler: completionHandler)
-		} else {
-			print("set a completion handler on measurementSettingsViewController to start measurement!")
-		}
 	}
 	
 	private func setupWizardButton() {
