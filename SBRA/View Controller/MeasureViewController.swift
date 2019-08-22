@@ -9,11 +9,7 @@
 import UIKit
 import CoreLocation
 
-class MeasureViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-	
-	var collectionView: UICollectionView
-    
-    private var pageView: UIPageViewController!
+class MeasureViewController: UIViewController {
 	
 	private var showingGraphs = false
 	private var indicator = UIActivityIndicatorView(style: .gray)
@@ -33,7 +29,6 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 	private var updateHandler: MotionDataHandler?
 	
 	init(settings: MeasurementSettings?) {
-		collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
 		
 		self.settings = settings
 		motionDataParser.settings = settings
@@ -61,31 +56,23 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		fatalError("init(coder:) has not been implemented")
 	}
     
-    func setupPageViewController(){
-        pageView = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
-        
+    func setupGraphs(){
+
         let graphPageViewController = GraphPageViewController()
-        graphPageViewController.initiallyVisibleGraphType = GraphType.allCases[1]
         graphPageViewController.motionDataParser.settings = settings
         
-        let viewControllers = [
-            graphPageViewController
-        ]
-        
-        
-        
-        pageView.setViewControllers(viewControllers, direction: .forward, animated: true, completion: nil)
-        
-        view.addSubview(pageView.view)
+        view.addSubview(graphPageViewController.view)
         
     }
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        
+        print("test1")
 		
 		view.backgroundColor = UIColor.white
         
-        setupPageViewController()
+        setupGraphs()
 		
 //        setupCollectionView()
 //        setupMeasuringLabel()
@@ -123,19 +110,8 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		
 		motionDataParser.settings = settings
 		
-		updateHandler = { [weak self] (dataPoint, error) in
-			if let self = self {
-				for index in 0..<self.collectionView.numberOfItems(inSection: 0) {
-					let indexPath = IndexPath(row: index, section: 0)
-					if let dataPoint = dataPoint {
-						self.dataPoints.append(dataPoint)
-						if let cell = self.collectionView.cellForItem(at: indexPath) as? GraphCollectionViewCell {
-							self.updateCell(cell: cell, at: indexPath, with: dataPoint)
-						}
-					}
-				}
-			}
-			
+		updateHandler = {(dataPoint, error) in
+            print(dataPoint)
 		}
 		
 		motionDataParser.startDataCollection(updateInterval: 0.02, handler: updateHandler!)
@@ -190,48 +166,6 @@ class MeasureViewController: UIViewController, UICollectionViewDataSource, UICol
 		}
 		
 		fatalError("couldn't dequeue cell")
-	}
-	
-	func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-		let graphPageViewController = GraphPageViewController()
-		graphPageViewController.initiallyVisibleGraphType = GraphType.allCases[indexPath.row]
-		graphPageViewController.motionDataParser.settings = settings
-		navigationController?.pushViewController(graphPageViewController, animated: true)
-	}
-	
-	private func setupCollectionView() {
-		collectionView.dataSource = self
-		collectionView.delegate = self
-		view.addSubview(collectionView)
-		setupCollectionViewConstraints()
-		
-		collectionView.reloadData()
-		collectionView.backgroundColor = UIColor.white
-		if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-			layout.minimumInteritemSpacing = 22
-			layout.minimumLineSpacing = 22
-			layout.itemSize = CGSize(width: 120, height: 168)
-			layout.sectionInset = UIEdgeInsets(top: 22, left: 22, bottom: 22, right: 22)
-		}
-		
-		collectionView.register(GraphCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-	}
-	
-	private func setupCollectionViewConstraints() {
-		collectionView.translatesAutoresizingMaskIntoConstraints = false
-		
-		view.addConstraints([
-			collectionView.topAnchor.constraint(equalTo: view.layoutMarginsGuide.topAnchor),
-			collectionView.leftAnchor.constraint(equalTo: view.layoutMarginsGuide.leftAnchor),
-			collectionView.rightAnchor.constraint(equalTo: view.layoutMarginsGuide.rightAnchor),
-			collectionView.bottomAnchor.constraint(equalTo: view.layoutMarginsGuide.bottomAnchor)
-		])
-	}
-	
-	@objc private func toggleGraphs() {
-		collectionView.isHidden = !collectionView.isHidden
-		indicator.isAnimating ? indicator.stopAnimating() : indicator.startAnimating()
-		measuringLabel.isHidden = !measuringLabel.isHidden
 	}
 	
 	@objc private func tappedSaveButton() {
