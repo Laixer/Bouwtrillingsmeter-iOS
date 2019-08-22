@@ -27,7 +27,6 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		
 		if let graphVC = graphViewControllers.filter({$0.graphType == initiallyVisibleGraphType }).first {
 			setViewControllers([graphVC], direction: .forward, animated: true, completion: nil)
-			title = graphVC.graphType.description
 		}
 		dataSource = self
 		delegate = self
