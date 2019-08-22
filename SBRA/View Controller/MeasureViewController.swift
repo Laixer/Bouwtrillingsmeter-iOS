@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 
 class MeasureViewController: UIViewController {
+    
     private var graphPageViewController: GraphPageViewController?
 	
 	private var showingGraphs = false
@@ -72,14 +73,6 @@ class MeasureViewController: UIViewController {
 		view.backgroundColor = UIColor.white
         
         setupGraphs()
-		
-//        setupCollectionView()
-//        setupMeasuringLabel()
-//        collectionView.isHidden = true
-//
-//        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(toggleGraphs))
-//        gestureRecognizer.numberOfTapsRequired = 7
-//        view.addGestureRecognizer(gestureRecognizer)
 		
 	}
 	
