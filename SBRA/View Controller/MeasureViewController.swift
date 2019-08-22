@@ -117,12 +117,17 @@ class MeasureViewController: UIViewController {
 		
 		print("created measurement")
 		
-		if let handler = completionHandler {
-			handler(measurement)
-		}
+        if let handler = completionHandler {
+            handler(measurement)
+        }
 		
 		presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
 	}
+    
+    func setupToSaveDataToDatabase(completionHandler: @escaping (Measurement) -> Void){
+        getLocation()
+        self.completionHandler = completionHandler
+    }
 	
 	private func getLocation() {
 		let locationManager = CLLocationManager()

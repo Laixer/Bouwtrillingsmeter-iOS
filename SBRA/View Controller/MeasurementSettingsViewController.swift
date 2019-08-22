@@ -123,6 +123,12 @@ class MeasurementSettingsViewController: UIViewController {
 		let navigationController = UINavigationController(rootViewController: measureViewController)
 		
 		present(navigationController, animated: true, completion: nil)
+        
+        if let completionHandler = completionHandler {
+            measureViewController.setupToSaveDataToDatabase(completionHandler: completionHandler)
+        } else {
+            print("Something went wrong with the completion handler")
+        }
 	}
 	
 	private func setupWizardButton() {
