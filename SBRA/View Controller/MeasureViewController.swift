@@ -10,6 +10,7 @@ import UIKit
 import CoreLocation
 
 class MeasureViewController: UIViewController {
+    private var graphPageViewController: GraphPageViewController?
 	
 	private var showingGraphs = false
 	private var indicator = UIActivityIndicatorView(style: .gray)
@@ -58,10 +59,10 @@ class MeasureViewController: UIViewController {
     
     func setupGraphs(){
 
-        let graphPageViewController = GraphPageViewController()
-        graphPageViewController.motionDataParser.settings = settings
+        graphPageViewController = GraphPageViewController()
+        graphPageViewController!.motionDataParser.settings = settings
         
-        view.addSubview(graphPageViewController.view)
+        view.addSubview(graphPageViewController!.view)
         
     }
 	
