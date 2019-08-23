@@ -11,6 +11,10 @@ import simd
 import Charts
 
 class GraphViewController: UIViewController {
+    
+    var titleLabel = UILabel()
+    var xTitleLabel = UILabel()
+    var yTitleLabel = UILabel()
 	
 	var graphType: GraphType
 	var motionDataParser = MotionDataParser()
@@ -20,11 +24,12 @@ class GraphViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-		
-		graphView?.frame = view.bounds
+        
+        graphView?.frame = .zero
+        graphView?.translatesAutoresizingMaskIntoConstraints = false
 		
 		if let updateGraphHandler = updateGraphHandler {
-			motionDataParser.startDataCollection(updateInterval: 0.01, handler: updateGraphHandler)
+			motionDataParser.startDataCollection(updateInterval: 0.02, handler: updateGraphHandler)
 		}
 		
 		if let graphView = graphView {
@@ -34,6 +39,40 @@ class GraphViewController: UIViewController {
 				graphView.setNeedsDisplay()
 			}
 		}
+        
+        titleLabel.text = graphType.description
+        view.addSubview(titleLabel)
+        
+        xTitleLabel.text = graphType.xDescription
+        view.addSubview(xTitleLabel)
+        
+        yTitleLabel.text = graphType.yDescription
+        view.addSubview(yTitleLabel)
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        xTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        yTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        // rotate yTitleLabel to put next to yaxis
+        yTitleLabel.transform = CGAffineTransform(rotationAngle: -CGFloat.pi / 2)
+        let yTitleLabelWidth = yTitleLabel.intrinsicContentSize.width / 2 - 10
+        
+        NSLayoutConstraint.activate([
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.topAnchor.constraint(equalTo: view.topAnchor),
+            
+            xTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            xTitleLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+
+            yTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: -yTitleLabelWidth),
+            yTitleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+
+            graphView!.bottomAnchor.constraint(equalTo: xTitleLabel.topAnchor),
+            graphView!.leftAnchor.constraint(equalTo: yTitleLabel.rightAnchor, constant: -yTitleLabelWidth),
+            graphView!.rightAnchor.constraint(equalTo: view.rightAnchor),
+            graphView!.topAnchor.constraint(equalTo: titleLabel.bottomAnchor),
+        ])
+        
     }
 	
 	override func viewDidDisappear(_ animated: Bool) {
@@ -91,6 +130,7 @@ class GraphViewController: UIViewController {
 					maxYSpeed = 0
 					maxZSpeed = 0
 				}
+                
 			}
 			
 		case .frequencyTime:
@@ -219,7 +259,10 @@ class GraphViewController: UIViewController {
 				}
 			}
 		}
+    
 	}
+    
+    
 	
 	override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
 		fatalError("init(nibName: bundle:) has not been implemented, use init(graphType:)")
