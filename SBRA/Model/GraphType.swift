@@ -27,4 +27,34 @@ enum GraphType: CaseIterable, CustomStringConvertible {
 			return "Zwaartekracht/tijd + Versnelling/tijd"
 		}
 	}
+    
+    var xDescription: String {
+        switch self {
+        case .speedTime:
+            return "Snelheid/tijd"
+        case .frequencyTime:
+            return "Frequentie/tijd"
+        case .dominantFrequency:
+            return "Dominante frequentie"
+        case .fft1Second:
+            return "FFT (1 seconde)"
+        case .gravityTimeAccelerationTime:
+            return "Zwaartekracht/tijd + Versnelling/tijd"
+        }
+    }
+    
+    var yDescription: String {
+        switch self {
+        case .speedTime:
+            return "Snelheid/tijd"
+        case .frequencyTime:
+            return "Frequentie/tijd"
+        case .dominantFrequency:
+            return "Dominante frequentie"
+        case .fft1Second:
+            return "FFT (1 seconde)"
+        case .gravityTimeAccelerationTime:
+            return "Zwaartekracht/tijd + Versnelling/tijd"
+        }
+    }
 }
