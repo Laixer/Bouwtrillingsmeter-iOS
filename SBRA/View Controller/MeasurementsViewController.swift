@@ -30,8 +30,8 @@ class MeasurementsViewController: UIViewController {
 		tableView = UITableView()
 		tableView.register(MeasurementTableViewCell.self, forCellReuseIdentifier: "bigcell")
 		tableView.rowHeight = UITableView.automaticDimension
-		tableView.separatorStyle = .none
-		tableView.backgroundColor = backgroundColor
+        tableView.separatorStyle = .none
+        tableView.backgroundColor = backgroundColor
 		super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
 		
 		tableView.delegate = self
@@ -61,7 +61,7 @@ class MeasurementsViewController: UIViewController {
 		
 		updateTableViewVisibility()
 		
-		view.backgroundColor = UIColor.white
+		view.backgroundColor = backgroundColor
 		
 		view.addSubview(rotterdamIconView)
 		view.addSubview(graphIconView)
@@ -163,17 +163,18 @@ class MeasurementsViewController: UIViewController {
 }
 
 extension MeasurementsViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return 1
-	}
-	
-	func numberOfSections(in tableView: UITableView) -> Int {
 		return Database().numberOfMeasurements()
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "bigcell", for: indexPath) as? MeasurementTableViewCell
-		let measurement = measurements[indexPath.section]
+		let measurement = measurements[indexPath.row]
 		if let location = measurement.locationString {
 			cell?.nameLabel.text = "Meting in " + location
 		} else {
@@ -198,7 +199,7 @@ extension MeasurementsViewController: UITableViewDataSource {
 
 extension MeasurementsViewController: UITableViewDelegate {
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let detail = MeasurementDetailViewController(measurement: measurements[indexPath.section])
+		let detail = MeasurementDetailViewController(measurement: measurements[indexPath.row])
 		navigationController?.pushViewController(detail, animated: true)
 	}
 	
@@ -208,9 +209,8 @@ extension MeasurementsViewController: UITableViewDelegate {
 		if editingStyle == .delete {
 			Database().removeMeasurement(measurement: measurements[indexPath.row])
 			measurements = Database().measurements
-			let indexSet = IndexSet(integer: indexPath.section)
 			
-			tableView.deleteSections(indexSet, with: .automatic)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
 			
 			updateTableViewVisibility()
 		}
