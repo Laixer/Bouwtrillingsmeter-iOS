@@ -207,6 +207,8 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 		} else if indexPath.row == 2 {
 			let reuseIdentifier = MeasurementSettingsViewController.switchCellReuseIdentifier
 			let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier)!
+            
+            cell.selectionStyle = UITableViewCell.SelectionStyle.none
 			
 			if let cell = cell as? SwitchTableViewCell {
 				cell.switchElement.addTarget(self, action: #selector(toggleSensitivity), for: .valueChanged)
@@ -257,7 +259,7 @@ extension MeasurementSettingsViewController: UITableViewDelegate, UITableViewDat
 			
 			picker?.reloadAllComponents()
 		} else {
-			tableView.deselectRow(at: indexPath, animated: true)
+			tableView.deselectRow(at: indexPath, animated: false)
 			pickerContainerView?.removeFromSuperview()
 			pickerContainerView = nil
 		}
