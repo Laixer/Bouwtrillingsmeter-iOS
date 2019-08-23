@@ -261,8 +261,14 @@ open class AxisBase: ComponentBase
     /// Removes the specified ChartLimitLine from the axis.
     @objc open func removeLimitLine(_ line: ChartLimitLine)
     {
-        guard let i = _limitLines.firstIndex(of: line) else { return }
-        _limitLines.remove(at: i)
+        for i in 0 ..< _limitLines.count
+        {
+            if _limitLines[i] === line
+            {
+                _limitLines.remove(at: i)
+                return
+            }
+        }
     }
     
     /// Removes all LimitLines from the axis.

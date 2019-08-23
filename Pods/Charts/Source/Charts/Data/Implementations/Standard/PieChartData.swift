@@ -117,8 +117,14 @@ open class PieChartData: ChartData
     @objc open var yValueSum: Double
     {
         guard let dataSet = dataSet else { return 0.0 }
-        return (0..<dataSet.entryCount).reduce(into: 0) {
-            $0 += dataSet.entryForIndex($1)?.y ?? 0
+        
+        var yValueSum: Double = 0.0
+        
+        for i in 0..<dataSet.entryCount
+        {
+            yValueSum += dataSet.entryForIndex(i)?.y ?? 0.0
         }
+        
+        return yValueSum
     }
 }

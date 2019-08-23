@@ -12,18 +12,22 @@
 import Foundation
 import CoreGraphics
 
+#if !os(OSX)
+    import UIKit
+#endif
+
 @objc(ChartDescription)
 open class Description: ComponentBase
 {
     public override init()
     {
         #if os(tvOS)
-        // 23 is the smallest recommended font size on the TV
-        font = .systemFont(ofSize: 23)
+            // 23 is the smallest recommended font size on the TV
+            font = NSUIFont.systemFont(ofSize: 23)
         #elseif os(OSX)
-        font = .systemFont(ofSize: NSUIFont.systemFontSize)
+            font = NSUIFont.systemFont(ofSize: NSUIFont.systemFontSize)
         #else
-        font = .systemFont(ofSize: 8.0)
+            font = NSUIFont.systemFont(ofSize: 8.0)
         #endif
         
         super.init()

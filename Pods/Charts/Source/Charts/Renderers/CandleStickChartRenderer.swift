@@ -12,6 +12,11 @@
 import Foundation
 import CoreGraphics
 
+#if !os(OSX)
+    import UIKit
+#endif
+
+
 open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
 {
     @objc open weak var dataProvider: CandleChartDataProvider?
@@ -38,9 +43,12 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
             accessibleChartElements.append(element)
         }
 
-        for set in candleData.dataSets as! [ICandleChartDataSet] where set.isVisible
+        for set in candleData.dataSets as! [ICandleChartDataSet]
         {
-            drawDataSet(context: context, dataSet: set)
+            if set.isVisible
+            {
+                drawDataSet(context: context, dataSet: set)
+            }
         }
     }
     
@@ -283,10 +291,13 @@ open class CandleStickChartRenderer: LineScatterCandleRadarRenderer
             
             for i in 0 ..< dataSets.count
             {
-                guard let
-                    dataSet = dataSets[i] as? IBarLineScatterCandleBubbleChartDataSet,
-                    shouldDrawValues(forDataSet: dataSet)
+                guard let dataSet = dataSets[i] as? IBarLineScatterCandleBubbleChartDataSet
                     else { continue }
+                
+                if !shouldDrawValues(forDataSet: dataSet)
+                {
+                    continue
+                }
                 
                 let valueFont = dataSet.valueFont
                 

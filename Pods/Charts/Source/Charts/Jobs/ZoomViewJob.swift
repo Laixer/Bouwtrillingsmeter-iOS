@@ -12,6 +12,10 @@
 import Foundation
 import CoreGraphics
 
+#if !os(OSX)
+    import UIKit
+#endif
+
 @objc(ZoomChartViewJob)
 open class ZoomViewJob: ViewPortJob
 {

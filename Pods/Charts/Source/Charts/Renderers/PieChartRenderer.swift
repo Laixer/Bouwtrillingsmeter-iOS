@@ -12,6 +12,10 @@
 import Foundation
 import CoreGraphics
 
+#if !os(OSX)
+    import UIKit
+#endif
+
 open class PieChartRenderer: DataRenderer
 {
     @objc open weak var chart: PieChartView?
@@ -35,9 +39,11 @@ open class PieChartRenderer: DataRenderer
             accessibleChartElements.removeAll()
 
             for set in pieData!.dataSets as! [IPieChartDataSet]
-                where set.isVisible && set.entryCount > 0
             {
-                drawDataSet(context: context, dataSet: set)
+                if set.isVisible && set.entryCount > 0
+                {
+                    drawDataSet(context: context, dataSet: set)
+                }
             }
         }
     }

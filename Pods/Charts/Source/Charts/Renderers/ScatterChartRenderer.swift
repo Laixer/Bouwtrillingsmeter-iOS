@@ -12,6 +12,11 @@
 import Foundation
 import CoreGraphics
 
+#if !os(OSX)
+    import UIKit
+#endif
+
+
 open class ScatterChartRenderer: LineScatterCandleRadarRenderer
 {
     @objc open weak var dataProvider: ScatterChartDataProvider?
@@ -126,12 +131,15 @@ open class ScatterChartRenderer: LineScatterCandleRadarRenderer
             for i in 0 ..< scatterData.dataSetCount
             {
                 let dataSet = dataSets[i]
-                guard let
-                    formatter = dataSet.valueFormatter,
-                    shouldDrawValues(forDataSet: dataSet)
-                    else { continue }
+                
+                if !shouldDrawValues(forDataSet: dataSet)
+                {
+                    continue
+                }
                 
                 let valueFont = dataSet.valueFont
+                
+                guard let formatter = dataSet.valueFormatter else { continue }
                 
                 let trans = dataProvider.getTransformer(forAxis: dataSet.axisDependency)
                 let valueToPixelMatrix = trans.valueToPixelMatrix

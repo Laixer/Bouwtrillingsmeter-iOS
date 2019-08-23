@@ -12,6 +12,11 @@
 import Foundation
 import CoreGraphics
 
+#if !os(OSX)
+    import UIKit
+#endif
+
+
 open class HorizontalBarChartRenderer: BarChartRenderer
 {
     private class Buffer
@@ -330,10 +335,12 @@ open class HorizontalBarChartRenderer: BarChartRenderer
             
             for dataSetIndex in 0 ..< barData.dataSetCount
             {
-                guard let
-                    dataSet = dataSets[dataSetIndex] as? IBarChartDataSet,
-                    shouldDrawValues(forDataSet: dataSet)
-                    else { continue }
+                guard let dataSet = dataSets[dataSetIndex] as? IBarChartDataSet else { continue }
+                
+                if !shouldDrawValues(forDataSet: dataSet) || !(dataSet.isDrawIconsEnabled && dataSet.isVisible)
+                {
+                    continue
+                }
                 
                 let isInverted = dataProvider.isInverted(axis: dataSet.axisDependency)
                 
@@ -386,7 +393,7 @@ open class HorizontalBarChartRenderer: BarChartRenderer
                         // calculate the correct offset depending on the draw position of the value
                         let valueTextWidth = valueText.size(withAttributes: [NSAttributedString.Key.font: valueFont]).width
                         posOffset = (drawValueAboveBar ? valueOffsetPlus : -(valueTextWidth + valueOffsetPlus))
-                        negOffset = (drawValueAboveBar ? -(valueTextWidth + valueOffsetPlus) : valueOffsetPlus) - rect.size.width
+                        negOffset = (drawValueAboveBar ? -(valueTextWidth + valueOffsetPlus) : valueOffsetPlus)
                         
                         if isInverted
                         {

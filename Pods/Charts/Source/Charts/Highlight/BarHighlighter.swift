@@ -98,11 +98,23 @@ open class BarHighlighter: ChartHighlighter
     @objc open func getClosestStackIndex(ranges: [Range]?, value: Double) -> Int
     {
         guard let ranges = ranges else { return 0 }
-        if let stackIndex = ranges.firstIndex(where: { $0.contains(value) }) {
-            return stackIndex
-        } else {
-            let length = max(ranges.count - 1, 0)
-            return (value > ranges[length].to) ? length : 0
+
+        var stackIndex = 0
+        
+        for range in ranges
+        {
+            if range.contains(value)
+            {
+                return stackIndex
+            }
+            else
+            {
+                stackIndex += 1
+            }
         }
+        
+        let length = max(ranges.count - 1, 0)
+        
+        return (value > ranges[length].to) ? length : 0
     }
 }

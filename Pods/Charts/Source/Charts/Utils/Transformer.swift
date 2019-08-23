@@ -69,7 +69,10 @@ open class Transformer: NSObject
     open func pointValuesToPixel(_ points: inout [CGPoint])
     {
         let trans = valueToPixelMatrix
-        points = points.map { $0.applying(trans) }
+        for i in 0 ..< points.count
+        {
+            points[i] = points[i].applying(trans)
+        }
     }
     
     open func pointValueToPixel(_ point: inout CGPoint)
@@ -123,14 +126,22 @@ open class Transformer: NSObject
     open func rectValuesToPixel(_ rects: inout [CGRect])
     {
         let trans = valueToPixelMatrix
-        rects = rects.map { $0.applying(trans) }
+        
+        for i in 0 ..< rects.count
+        {
+            rects[i] = rects[i].applying(trans)
+        }
     }
     
     /// Transforms the given array of touch points (pixels) into values on the chart.
     open func pixelsToValues(_ pixels: inout [CGPoint])
     {
         let trans = pixelToValueMatrix
-        pixels = pixels.map { $0.applying(trans) }
+        
+        for i in 0 ..< pixels.count
+        {
+            pixels[i] = pixels[i].applying(trans)
+        }
     }
     
     /// Transforms the given touch point (pixels) into a value on the chart.

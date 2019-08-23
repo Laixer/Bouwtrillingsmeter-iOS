@@ -12,6 +12,11 @@
 import Foundation
 import CoreGraphics
 
+#if !os(OSX)
+    import UIKit
+#endif
+
+
 open class ChartColorTemplates: NSObject
 {
     @objc open class func liberty () -> [NSUIColor]

@@ -12,6 +12,10 @@
 import Foundation
 import CoreGraphics
 
+#if !os(OSX)
+    import UIKit
+#endif
+
 open class YAxisRendererRadarChart: YAxisRenderer
 {
     private weak var chart: RadarChartView?

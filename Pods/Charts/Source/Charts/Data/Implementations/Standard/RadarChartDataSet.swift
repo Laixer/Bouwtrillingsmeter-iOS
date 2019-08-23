@@ -26,9 +26,9 @@ open class RadarChartDataSet: LineRadarChartDataSet, IRadarChartDataSet
         initialize()
     }
     
-    public required override init(entries: [ChartDataEntry]?, label: String?)
+    public required override init(values: [ChartDataEntry]?, label: String?)
     {
-        super.init(entries: entries, label: label)
+        super.init(values: values, label: label)
         initialize()
     }
     

@@ -21,9 +21,9 @@ open class CandleChartDataSet: LineScatterCandleRadarChartDataSet, ICandleChartD
         super.init()
     }
     
-    public override init(entries: [ChartDataEntry]?, label: String?)
+    public override init(values: [ChartDataEntry]?, label: String?)
     {
-        super.init(entries: entries, label: label)
+        super.init(values: values, label: label)
     }
     
     // MARK: - Data functions and accessors

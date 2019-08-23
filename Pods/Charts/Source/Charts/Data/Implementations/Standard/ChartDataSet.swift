@@ -26,30 +26,30 @@ open class ChartDataSet: ChartBaseDataSet
 {
     public required init()
     {
-        entries = []
+        values = []
 
         super.init()
     }
     
     public override init(label: String?)
     {
-        entries = []
+        values = []
 
         super.init(label: label)
     }
     
-    @objc public init(entries: [ChartDataEntry]?, label: String?)
+    @objc public init(values: [ChartDataEntry]?, label: String?)
     {
-        self.entries = entries ?? []
+        self.values = values ?? []
 
         super.init(label: label)
 
         self.calcMinMax()
     }
     
-    @objc public convenience init(entries: [ChartDataEntry]?)
+    @objc public convenience init(values: [ChartDataEntry]?)
     {
-        self.init(entries: entries, label: "DataSet")
+        self.init(values: values, label: "DataSet")
     }
     
     // MARK: - Data functions and accessors
@@ -57,23 +57,20 @@ open class ChartDataSet: ChartBaseDataSet
     /// - Note: Calls `notifyDataSetChanged()` after setting a new value.
     /// - Returns: The array of y-values that this DataSet represents.
     /// the entries that this dataset represents / holds together
-    @available(*, unavailable, renamed: "entries")
-    @objc
-    open var values: [ChartDataEntry] { return entries }
-
-    @objc
-    open private(set) var entries: [ChartDataEntry]
-
-    /// Used to replace all entries of a data set while retaining styling properties.
-    /// This is a separate method from a setter on `entries` to encourage usage
-    /// of `Collection` conformances.
-    ///
-    /// - Parameter entries: new entries to replace existing entries in the dataset
-    @objc
-    public func replaceEntries(_ entries: [ChartDataEntry]) {
-        self.entries = entries
-        notifyDataSetChanged()
+    @available(*, deprecated, message: "Use `subscript(position:)` instead.")
+    @objc open var values: [ChartDataEntry]
+        {
+        didSet
+        {
+            if isIndirectValuesCall {
+                isIndirectValuesCall = false
+                return
+            }
+            notifyDataSetChanged()
+        }
     }
+    // TODO: Temporary fix for performance. Will be removed in 4.0
+    private var isIndirectValuesCall = false
 
     /// maximum y-value in the value array
     internal var _yMax: Double = -Double.greatestFiniteMagnitude
@@ -215,28 +212,28 @@ open class ChartDataSet: ChartBaseDataSet
     {
         var entries = [ChartDataEntry]()
         
-        var low = startIndex
-        var high = endIndex - 1
+        var low = values.startIndex
+        var high = values.endIndex - 1
         
         while low <= high
         {
             var m = (high + low) / 2
-            var entry = self[m]
+            var entry = values[m]
             
             // if we have a match
             if xValue == entry.x
             {
-                while m > 0 && self[m - 1].x == xValue
+                while m > 0 && values[m - 1].x == xValue
                 {
                     m -= 1
                 }
                 
-                high = endIndex
+                high = values.endIndex
                 
                 // loop over all "equal" entries
                 while m < high
                 {
-                    entry = self[m]
+                    entry = values[m]
                     if entry.x == xValue
                     {
                         entries.append(entry)
@@ -278,16 +275,16 @@ open class ChartDataSet: ChartBaseDataSet
         closestToY yValue: Double,
         rounding: ChartDataSetRounding) -> Int
     {
-        var low = startIndex
-        var high = endIndex - 1
+        var low = values.startIndex
+        var high = values.endIndex - 1
         var closest = high
         
         while low < high
         {
             let m = (low + high) / 2
             
-            let d1 = self[m].x - xValue
-            let d2 = self[m + 1].x - xValue
+            let d1 = values[m].x - xValue
+            let d2 = values[m + 1].x - xValue
             let ad1 = abs(d1), ad2 = abs(d2)
             
             if ad2 < ad1
@@ -323,12 +320,12 @@ open class ChartDataSet: ChartBaseDataSet
         
         if closest != -1
         {
-            let closestXValue = self[closest].x
+            let closestXValue = values[closest].x
             
             if rounding == .up
             {
                 // If rounding up, and found x-value is lower than specified x, and we can go upper...
-                if closestXValue < xValue && closest < endIndex - 1
+                if closestXValue < xValue && closest < values.endIndex - 1
                 {
                     closest += 1
                 }
@@ -345,20 +342,20 @@ open class ChartDataSet: ChartBaseDataSet
             // Search by closest to y-value
             if !yValue.isNaN
             {
-                while closest > 0 && self[closest - 1].x == closestXValue
+                while closest > 0 && values[closest - 1].x == closestXValue
                 {
                     closest -= 1
                 }
                 
-                var closestYValue = self[closest].y
+                var closestYValue = values[closest].y
                 var closestYIndex = closest
                 
                 while true
                 {
                     closest += 1
-                    if closest >= endIndex { break }
+                    if closest >= values.endIndex { break }
                     
-                    let value = self[closest]
+                    let value = values[closest]
                     
                     if value.x != closestXValue { break }
                     if abs(value.y - yValue) <= abs(closestYValue - yValue)
@@ -409,6 +406,7 @@ open class ChartDataSet: ChartBaseDataSet
     {
         calcMinMax(entry: e)
         
+        isIndirectValuesCall = true
         if let last = last, last.x > e.x
         {
             var closestIndex = entryIndex(x: e.x, closestToY: e.y, rounding: .up)
@@ -416,7 +414,7 @@ open class ChartDataSet: ChartBaseDataSet
             {
                 closestIndex += 1
             }
-            entries.insert(e, at: closestIndex)
+            values.insert(e, at: closestIndex)
         }
         else
         {
@@ -480,7 +478,7 @@ open class ChartDataSet: ChartBaseDataSet
     {
         let copy = super.copy(with: zone) as! ChartDataSet
         
-        copy.entries = entries
+        copy.values = values
         copy._yMax = _yMax
         copy._yMin = _yMin
         copy._xMax = _xMax
@@ -496,15 +494,15 @@ extension ChartDataSet: MutableCollection {
     public typealias Element = ChartDataEntry
 
     public var startIndex: Index {
-        return entries.startIndex
+        return values.startIndex
     }
 
     public var endIndex: Index {
-        return entries.endIndex
+        return values.endIndex
     }
 
     public func index(after: Index) -> Index {
-        return entries.index(after: after)
+        return values.index(after: after)
     }
 
     @objc
@@ -512,11 +510,12 @@ extension ChartDataSet: MutableCollection {
         get {
             // This is intentionally not a safe subscript to mirror
             // the behaviour of the built in Swift Collection Types
-            return entries[position]
+            return values[position]
         }
         set {
+            isIndirectValuesCall = true
             calcMinMax(entry: newValue)
-            entries[position] = newValue
+            self.values[position] = newValue
         }
     }
 }
@@ -524,53 +523,47 @@ extension ChartDataSet: MutableCollection {
 // MARK: RandomAccessCollection
 extension ChartDataSet: RandomAccessCollection {
     public func index(before: Index) -> Index {
-        return entries.index(before: before)
+        return values.index(before: before)
     }
 }
 
 // MARK: RangeReplaceableCollection
 extension ChartDataSet: RangeReplaceableCollection {
     public func append(_ newElement: Element) {
+        isIndirectValuesCall = true
         calcMinMax(entry: newElement)
-        entries.append(newElement)
+        self.values.append(newElement)
     }
 
     public func remove(at position: Index) -> Element {
-        let element = entries.remove(at: position)
-        notifyDataSetChanged()
+        let element = self.values.remove(at: position)
         return element
     }
 
     public func removeFirst() -> Element {
-        let element = entries.removeFirst()
-        notifyDataSetChanged()
+        let element = self.values.removeFirst()
         return element
     }
 
     public func removeFirst(_ n: Int) {
-        entries.removeFirst(n)
-        notifyDataSetChanged()
+        self.values.removeFirst(n)
     }
 
     public func removeLast() -> Element {
-        let element = entries.removeLast()
-        notifyDataSetChanged()
+        let element = self.values.removeLast()
         return element
     }
 
     public func removeLast(_ n: Int) {
-        entries.removeLast(n)
-        notifyDataSetChanged()
+        self.values.removeLast(n)
     }
 
     public func removeSubrange<R>(_ bounds: R) where R : RangeExpression, Index == R.Bound {
-        entries.removeSubrange(bounds)
-        notifyDataSetChanged()
+        self.values.removeSubrange(bounds)
     }
 
     @objc
     public func removeAll(keepingCapacity keepCapacity: Bool) {
-        entries.removeAll(keepingCapacity: keepCapacity)
-        notifyDataSetChanged()
+        self.values.removeAll(keepingCapacity: keepCapacity)
     }
 }
