@@ -186,10 +186,7 @@ extension MeasurementsViewController: UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-		if section == 0 {
-			return 0.0
-		}
-		return 16.0
+		return 0.0
 	}
 	
 	func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {

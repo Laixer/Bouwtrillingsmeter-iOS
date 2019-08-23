@@ -12,6 +12,8 @@ class MeasurementSettingsViewController: UIViewController {
 	
 	private static let standardCellReuseIdentifier = "standardcell"
 	private static let switchCellReuseIdentifier = "switchCell"
+    
+    private var alert: UIAlertController?
 	
 	private var selectedBuildingIndex: Int? {
 		didSet {
@@ -71,6 +73,13 @@ class MeasurementSettingsViewController: UIViewController {
 		
 		setupTableView()
 		setupWizardButton()
+        
+        alert = UIAlertController(title: "Fout", message: "Alle instellingen zijn verplicht", preferredStyle: .alert)
+        alert!.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
+        
+        NSLayoutConstraint.activate([
+                tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor)
+            ])
 		
 		// Do any additional setup after loading the view.
 	}
@@ -117,7 +126,10 @@ class MeasurementSettingsViewController: UIViewController {
 			settings = MeasurementSettings(buildingCategory: buildingCategory,
 										   vibrationCategory: vibrationCategory,
 										   isSensitiveToVibrations: sensitiveToVibrations)
-		}
+        } else {
+            present(alert!, animated: true, completion: nil)
+            return
+        }
 		
 		let measureViewController = MeasureViewController(settings: settings)
 		let navigationController = UINavigationController(rootViewController: measureViewController)

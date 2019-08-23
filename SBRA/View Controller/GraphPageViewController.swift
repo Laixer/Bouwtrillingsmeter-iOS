@@ -19,8 +19,8 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		super.viewDidLoad()
         
         let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
-        appearance.pageIndicatorTintColor = UIColor.black
-        appearance.currentPageIndicatorTintColor = UIColor.rotterdamGreen
+        appearance.pageIndicatorTintColor = UIColor.gray
+        appearance.currentPageIndicatorTintColor = UIColor.black
 		
 		graphViewControllers = GraphType.allCases.map { (graphType) -> GraphViewController in
 			let graphVC = GraphViewController(graphType: graphType, settings: motionDataParser.settings)
@@ -65,7 +65,8 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 							previousViewControllers: [UIViewController],
 							transitionCompleted completed: Bool) {
 		let previous = previousViewControllers.first as? GraphViewController
-		previous?.motionDataParser.stopDataCollection()
+        //TODO: stop data collection for view not showing?
+//        previous?.motionDataParser.stopDataCollection()
 		
 		if let graphType = (pageViewController.viewControllers?.first as? GraphViewController)?.graphType {
 			title = graphType.description
