@@ -147,7 +147,7 @@ class MeasurementsViewController: UIViewController {
 	
 	private func updateTableViewVisibility() {
 		// TODO: make this nicer
-		if tableView.numberOfSections == 0 {
+		if Database().numberOfMeasurements() == 0 {
 			self.tableView.isHidden = true
 			title = "Trillingsmeter"
 		} else {
