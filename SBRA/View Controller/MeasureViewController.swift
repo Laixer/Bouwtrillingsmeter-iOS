@@ -29,9 +29,11 @@ class MeasureViewController: UIViewController {
 	private let motionDataParser = MotionDataParser()
 	
 	private var updateHandler: MotionDataHandler?
+    
+    private var tempView: UIView?
 	
 	init(settings: MeasurementSettings?) {
-		
+        
 		self.settings = settings
 		motionDataParser.settings = settings
 		
@@ -63,7 +65,18 @@ class MeasureViewController: UIViewController {
         graphPageViewController = GraphPageViewController()
         graphPageViewController!.motionDataParser.settings = settings
         
-        view.addSubview(graphPageViewController!.view)
+        tempView = graphPageViewController!.view
+        
+        view.addSubview(tempView!)
+        
+        tempView!.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            tempView!.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1.0),
+            tempView!.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            tempView!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tempView!.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
         
     }
 	
