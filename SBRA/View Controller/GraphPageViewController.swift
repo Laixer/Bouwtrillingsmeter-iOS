@@ -17,6 +17,10 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        
+        let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
+        appearance.pageIndicatorTintColor = UIColor.black
+        appearance.currentPageIndicatorTintColor = UIColor.rotterdamGreen
 		
 		graphViewControllers = GraphType.allCases.map { (graphType) -> GraphViewController in
 			let graphVC = GraphViewController(graphType: graphType, settings: motionDataParser.settings)
@@ -66,7 +70,15 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		if let graphType = (pageViewController.viewControllers?.first as? GraphViewController)?.graphType {
 			title = graphType.description
 		}
-	}
+    }
+    
+    func presentationCount(for pageViewController: UIPageViewController) -> Int {
+        return graphViewControllers.count
+    }
+    
+    func presentationIndex(for pageViewController: UIPageViewController) -> Int {
+        return 0
+    }
 	
 	init() {
 		super.init(transitionStyle: .scroll, navigationOrientation: .horizontal, options: nil)
