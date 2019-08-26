@@ -3,24 +3,22 @@
 //  SBRA
 //
 //  Created by Anonymous on 26-08-19.
-//  Copyright © 2019 Wander Siemers. All rights reserved.
+//  Copyright © 2019 James Bal. All rights reserved.
 //
 
 import Foundation
 import Charts
 
-class CBarChart: BarChartView {
-    
-    private let xDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "X")
-    private let yDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Y")
-    private let zDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Z")
+class CBarChart: BarChartView, BaseChart {
+
+    var xDataSet: ChartDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "X")
+    var yDataSet: ChartDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Y")
+    var zDataSet: ChartDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Z")
     
     init() {
         super.init(frame: .zero)
         
-        xDataSet.setColor(xDataSetColor)
-        yDataSet.setColor(yDataSetColor)
-        zDataSet.setColor(zDataSetColor)
+        readyDataSets()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,12 +29,6 @@ class CBarChart: BarChartView {
         let data = BarChartData(dataSets: [xDataSet, yDataSet, zDataSet])
         data.groupBars(fromX: 0, groupSpace: 0.1, barSpace: 0.01)
         self.data = data
-    }
-    
-    func addDataToSets(xDataEntry: ChartDataEntry, yDataEntry: ChartDataEntry, zDataEntry: ChartDataEntry){
-        xDataSet.append(xDataEntry)
-        yDataSet.append(yDataEntry)
-        zDataSet.append(zDataEntry)
     }
     
 }
