@@ -11,15 +11,15 @@ import Charts
 
 class DominantFrequencyGraphView: ScatterChartView {
 	
-    private var xDataSet = ScatterChartDataSet(values: [ChartDataEntry](), label: "X")
-    private var yDataSet = ScatterChartDataSet(values: [ChartDataEntry](), label: "Y")
-    private var zDataSet = ScatterChartDataSet(values: [ChartDataEntry](), label: "Z")
+    private var xDataSet = ScatterChartDataSet(values: [ChartDataEntry](), label: "X").setColor(UIColor.red)
+    private var yDataSet = ScatterChartDataSet(values: [ChartDataEntry](), label: "Y").setColor(UIColor.blue)
+    private var zDataSet = ScatterChartDataSet(values: [ChartDataEntry](), label: "Z").setColor(UIColor.green)
 	
 	var yMax: CGFloat?
 	var xMax: CGFloat?
 	
 	var limitPoints: [LimitPoint]?
-	
+    
 	func addPointForDominantFrequencies(dominantFrequencies: [(DominantFrequency, DominantFrequency, DominantFrequency)]) {
 
 		var maxFrequency = (0, 0, 0)
