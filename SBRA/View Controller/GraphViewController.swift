@@ -109,9 +109,11 @@ class GraphViewController: UIViewController {
 				maxZSpeed = max(maxZSpeed, Double(abs(dataPoint?.speed.z ?? 0.0)))
 				
 				if timer == 100 {
-					(self?.graphView as? CBarChart)!.xDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(maxXSpeed * 1000))))
-					(self?.graphView as? CBarChart)!.yDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(maxYSpeed * 1000))))
-					(self?.graphView as? CBarChart)!.zDataSet.append(BarChartDataEntry(x: Double(count), y: abs(Double(maxZSpeed * 1000))))
+					(self?.graphView as? CBarChart)!.addDataToSets(
+                        xDataEntry: BarChartDataEntry(x: Double(count), y: abs(Double(maxXSpeed * 1000))),
+                        yDataEntry: BarChartDataEntry(x: Double(count), y: abs(Double(maxYSpeed * 1000))),
+                        zDataEntry: BarChartDataEntry(x: Double(count), y: abs(Double(maxZSpeed * 1000)))
+                    )
 					
 					count += 1
 					
@@ -135,9 +137,11 @@ class GraphViewController: UIViewController {
 				if let dataPoint = dataPoint {
 					if let dominantFrequency = dataPoint.dominantFrequency {
 //                        print("dom x \(dominantFrequency.x.frequency) speed \(dominantFrequency.x.velocity)")
-                        (self.graphView as? CLineChart)!.xDataSet.append(ChartDataEntry(x: Double(count), y: Double(dominantFrequency.x.frequency)))
-                        (self.graphView as? CLineChart)!.yDataSet.append(ChartDataEntry(x: Double(count), y: Double(dominantFrequency.y.frequency)))
-                        (self.graphView as? CLineChart)!.zDataSet.append(ChartDataEntry(x: Double(count), y: Double(dominantFrequency.z.frequency)))
+                        (self.graphView as? CLineChart)!.addDataToSets(
+                            xDataEntry: ChartDataEntry(x: Double(count), y: Double(dominantFrequency.x.frequency)),
+                            yDataEntry: ChartDataEntry(x: Double(count), y: Double(dominantFrequency.y.frequency)),
+                            zDataEntry: ChartDataEntry(x: Double(count), y: Double(dominantFrequency.z.frequency))
+                        )
 
                         (self.graphView as? CLineChart)!.addDataToChart()
                         
@@ -179,9 +183,11 @@ class GraphViewController: UIViewController {
 				if let fftX = dataPoint?.fft.x, let fftY = dataPoint?.fft.y, let fftZ = dataPoint?.fft.z {
 					
 					for index in fftX.indices {
-						(self.graphView as? CLineChart)!.xDataSet.append(ChartDataEntry(x: Double(index), y: Double(fftX[index] * 100.0)))
-						(self.graphView as? CLineChart)!.yDataSet.append(ChartDataEntry(x: Double(index), y: Double(fftY[index] * 100.0)))
-						(self.graphView as? CLineChart)!.zDataSet.append(ChartDataEntry(x: Double(index), y: Double(fftZ[index] * 100.0)))
+                        (self.graphView as? CLineChart)!.addDataToSets(
+                            xDataEntry: ChartDataEntry(x: Double(index), y: Double(fftX[index] * 100.0)),
+                            yDataEntry: ChartDataEntry(x: Double(index), y: Double(fftY[index] * 100.0)),
+                            zDataEntry: ChartDataEntry(x: Double(index), y: Double(fftZ[index] * 100.0))
+                        )
 					}
 					
 					(self.graphView as? CLineChart)!.addDataToChart()
@@ -196,9 +202,11 @@ class GraphViewController: UIViewController {
 			
 			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
 				if let dataPoint = dataPoint {
-					(self.graphView as? CLineChart)!.xDataSet.append(ChartDataEntry(x: Double(count), y: dataPoint.acceleration.x))
-					(self.graphView as? CLineChart)!.yDataSet.append(ChartDataEntry(x: Double(count), y: dataPoint.acceleration.y))
-					(self.graphView as? CLineChart)!.zDataSet.append(ChartDataEntry(x: Double(count), y: dataPoint.acceleration.z))
+                    (self.graphView as? CLineChart)!.addDataToSets(
+                        xDataEntry: ChartDataEntry(x: Double(count), y: dataPoint.acceleration.x),
+                        yDataEntry: ChartDataEntry(x: Double(count), y: dataPoint.acceleration.y),
+                        zDataEntry: ChartDataEntry(x: Double(count), y: dataPoint.acceleration.z)
+                    )
 					
 					count += 1
 					
