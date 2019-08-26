@@ -35,4 +35,10 @@ class CLineChart: LineChartView {
         data = LineChartData(dataSets: [xDataSet, yDataSet, zDataSet])
     }
     
+    func addDataToSets(xDataEntry: ChartDataEntry, yDataEntry: ChartDataEntry, zDataEntry: ChartDataEntry){
+        xDataSet.append(xDataEntry)
+        yDataSet.append(yDataEntry)
+        zDataSet.append(zDataEntry)
+    }
+    
 }
