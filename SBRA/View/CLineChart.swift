@@ -11,9 +11,9 @@ import Charts
 
 class CLineChart: LineChartView {
     
-    public let xDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "X")
-    public let yDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Y")
-    public let zDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Z")
+    private let xDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "X")
+    private let yDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Y")
+    private let zDataSet = LineChartDataSet(values: [ChartDataEntry](), label: "Z")
     
     init() {
         super.init(frame: .zero)

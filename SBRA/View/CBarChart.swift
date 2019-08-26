@@ -11,9 +11,9 @@ import Charts
 
 class CBarChart: BarChartView {
     
-    public let xDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "X")
-    public let yDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Y")
-    public let zDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Z")
+    private let xDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "X")
+    private let yDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Y")
+    private let zDataSet = BarChartDataSet(values: [ChartDataEntry](), label: "Z")
     
     init() {
         super.init(frame: .zero)
