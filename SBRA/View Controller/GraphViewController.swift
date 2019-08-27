@@ -25,7 +25,6 @@ class GraphViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        graphView?.frame = .zero
         graphView?.translatesAutoresizingMaskIntoConstraints = false
 		
 		if let updateGraphHandler = updateGraphHandler {
