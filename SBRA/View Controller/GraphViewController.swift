@@ -21,15 +21,17 @@ class GraphViewController: UIViewController {
 	var updateGraphHandler: MotionDataHandler?
 	
 	var graphView: ChartViewBase?
+    
+    var count = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         graphView?.translatesAutoresizingMaskIntoConstraints = false
 		
-		if let updateGraphHandler = updateGraphHandler {
-			motionDataParser.startDataCollection(updateInterval: 0.02, handler: updateGraphHandler)
-		}
+        if let updateGraphHandler = updateGraphHandler {
+            motionDataParser.startDataCollection(updateInterval: 0.02, handler: updateGraphHandler)
+        }
 		
 		if let graphView = graphView {
 			view.addSubview(graphView)
@@ -79,7 +81,7 @@ class GraphViewController: UIViewController {
     }
 	
     override func viewDidDisappear(_ animated: Bool) {
-//        motionDataParser.stopDataCollection()
+        motionDataParser.stopDataCollection()
     }
 	
 	// swiftlint:disable:next function_body_length
@@ -95,7 +97,6 @@ class GraphViewController: UIViewController {
             self.graphView = CBarChart()
 			
 			var timer = 0
-			var count = 0
 			var maxXSpeed = 0.0
 			var maxYSpeed = 0.0
 			var maxZSpeed = 0.0
@@ -109,12 +110,12 @@ class GraphViewController: UIViewController {
 				
 				if timer == 100 {
 					(self?.graphView as? CBarChart)!.addDataToSets(
-                        xDataEntry: BarChartDataEntry(x: Double(count), y: abs(Double(maxXSpeed * 1000))),
-                        yDataEntry: BarChartDataEntry(x: Double(count), y: abs(Double(maxYSpeed * 1000))),
-                        zDataEntry: BarChartDataEntry(x: Double(count), y: abs(Double(maxZSpeed * 1000)))
+                        xDataEntry: BarChartDataEntry(x: Double(self!.count), y: abs(Double(maxXSpeed * 1000))),
+                        yDataEntry: BarChartDataEntry(x: Double(self!.count), y: abs(Double(maxYSpeed * 1000))),
+                        zDataEntry: BarChartDataEntry(x: Double(self!.count), y: abs(Double(maxZSpeed * 1000)))
                     )
 					
-					count += 1
+                    self!.count += 1
 					
 					(self?.graphView as? CBarChart)!.addDataToChart()
 					
@@ -131,28 +132,25 @@ class GraphViewController: UIViewController {
             
             self.graphView = CLineChart()
 			
-			var count = 0
 			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
 				if let dataPoint = dataPoint {
 					if let dominantFrequency = dataPoint.dominantFrequency {
 //                        print("dom x \(dominantFrequency.x.frequency) speed \(dominantFrequency.x.velocity)")
                         (self.graphView as? CLineChart)!.addDataToSets(
-                            xDataEntry: ChartDataEntry(x: Double(count), y: Double(dominantFrequency.x.frequency)),
-                            yDataEntry: ChartDataEntry(x: Double(count), y: Double(dominantFrequency.y.frequency)),
-                            zDataEntry: ChartDataEntry(x: Double(count), y: Double(dominantFrequency.z.frequency))
+                            xDataEntry: ChartDataEntry(x: Double(self.count), y: Double(dominantFrequency.x.frequency)),
+                            yDataEntry: ChartDataEntry(x: Double(self.count), y: Double(dominantFrequency.y.frequency)),
+                            zDataEntry: ChartDataEntry(x: Double(self.count), y: Double(dominantFrequency.z.frequency))
                         )
 
                         (self.graphView as? CLineChart)!.addDataToChart()
                         
-						count += 1
+                        self.count += 1
 					}
 				}
 			}
 
 		case .dominantFrequency:
 			graphView = DominantFrequencyGraphView(frame: .zero)
-			
-			var counter = 0
 			
 			if settings != nil {
 				print("setting limit points")
@@ -165,11 +163,11 @@ class GraphViewController: UIViewController {
 				if let dominantFrequency = dataPoint?.dominantFrequency,
 					let graphView = self?.graphView as? DominantFrequencyGraphView {
 					
-					if counter % 50 == 0 {
+					if self!.count % 50 == 0 {
 						graphView.addPointForDominantFrequencies(dominantFrequencies: [dominantFrequency])
 					}
 					
-					counter += 1
+                    self?.count += 1
 				}
 			}
 			
@@ -197,21 +195,19 @@ class GraphViewController: UIViewController {
 			
 			self.graphView = CLineChart()
 			
-			var count = 0
-			
 			updateGraphHandler = { (dataPoint: DataPoint?, error: Error?) in
 				if let dataPoint = dataPoint {
                     (self.graphView as? CLineChart)!.addDataToSets(
-                        xDataEntry: ChartDataEntry(x: Double(count), y: dataPoint.acceleration.x),
-                        yDataEntry: ChartDataEntry(x: Double(count), y: dataPoint.acceleration.y),
-                        zDataEntry: ChartDataEntry(x: Double(count), y: dataPoint.acceleration.z)
+                        xDataEntry: ChartDataEntry(x: Double(self.count), y: dataPoint.acceleration.x),
+                        yDataEntry: ChartDataEntry(x: Double(self.count), y: dataPoint.acceleration.y),
+                        zDataEntry: ChartDataEntry(x: Double(self.count), y: dataPoint.acceleration.z)
                     )
 					
-					count += 1
+					self.count += 1
 					
 					(self.graphView as? CLineChart)!.setVisibleXRangeMaximum(100)
                     (self.graphView as? CLineChart)!.addDataToChart()
-					(self.graphView as? CLineChart)!.moveViewToX(Double(count))
+					(self.graphView as? CLineChart)!.moveViewToX(Double(self.count))
 				}
 			}
 		}
