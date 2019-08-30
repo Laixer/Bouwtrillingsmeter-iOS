@@ -13,6 +13,18 @@ protocol BaseChart {
     var xDataSet: ChartDataSet {get set}
     var yDataSet: ChartDataSet {get set}
     var zDataSet: ChartDataSet {get set}
+    
+    var arrayOfDataSets: [ChartDataSet]? {get set}
+    
+    var xMultiplier: Double? {get set}
+    
+    var refreshing: Bool? {get set}
+    
+    var cCount:Double {get set}
+    
+    var hasScrolling: Bool {get set}
+    
+    var scrollingValue: Double? {get set}
 }
 
 extension BaseChart {
@@ -20,10 +32,22 @@ extension BaseChart {
         xDataSet.setColor(UIColor.xDimensionColor)
         yDataSet.setColor(UIColor.yDimensionColor)
         zDataSet.setColor(UIColor.zDimensionColor)
+        
+        xDataSet.drawValuesEnabled = false
+        yDataSet.drawValuesEnabled = false
+        zDataSet.drawValuesEnabled = false
     }
-    func addDataToSets(xDataEntry: ChartDataEntry, yDataEntry: ChartDataEntry, zDataEntry: ChartDataEntry){
-        xDataSet.append(xDataEntry)
-        yDataSet.append(yDataEntry)
-        zDataSet.append(zDataEntry)
+    func resetDatasets(){
+        xDataSet.values.removeAll()
+        yDataSet.values.removeAll()
+        zDataSet.values.removeAll()
+    }
+    func scrollingMechanic(xAxis: XAxis) {
+        xAxis.axisMaximum = (cCount == 0.0) ? scrollingValue! : cCount
+        xAxis.axisMinimum = (cCount > scrollingValue!) ? cCount - scrollingValue! : 0.0
+    }
+    mutating func turnOnScrolling(newScrollingValue: Double) {
+        hasScrolling = true
+        scrollingValue = newScrollingValue
     }
 }
