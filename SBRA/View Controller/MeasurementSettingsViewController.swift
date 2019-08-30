@@ -119,7 +119,8 @@ class MeasurementSettingsViewController: UIViewController {
 		line.backgroundColor = tableView.separatorColor
 	}
 	
-	@objc private func tappedBeginButton() {
+    @objc private func tappedBeginButton() {
+        
 		var settings: MeasurementSettings?
 		if let buildingCategory = selectedBuildingCategory,
 			let vibrationCategory = selectedVibrationCategory {
@@ -130,6 +131,12 @@ class MeasurementSettingsViewController: UIViewController {
             present(alert!, animated: true, completion: nil)
             return
         }
+        
+        // all necesarry actions to start measuring
+        MeasurementControl.createNewMeasurement()
+        Calculator.onStartMeasurementCalculations(settings: settings!)
+        MeasurementControl.getCurrentMeasurement()!.start()
+        DataHandler.startMeasuring()
 		
 		let measureViewController = MeasureViewController(settings: settings)
 		let navigationController = UINavigationController(rootViewController: measureViewController)

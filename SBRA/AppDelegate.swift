@@ -26,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		window?.rootViewController = navController
 		
 		window?.makeKeyAndVisible()
+        
+        // getting datahandler ready for the measurement
+        DataHandler.initialize()
 		
 		return true
 	}

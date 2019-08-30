@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Charts
 
 struct LimitPoint {
 	var xValue: Float
@@ -86,6 +87,20 @@ struct PowerLimit {
 		}
 		
 	}
+    
+    static func getLimitAsEntries(settings: MeasurementSettings) -> [ChartDataEntry] {
+        
+        var amplitudes = amplitudesForSettings(settings: settings)
+        var yt = YVFactor(from: settings)
+        
+        var result: [ChartDataEntry] = []
+        for index in 0..<frequencyValues.count {
+            result.append(ChartDataEntry(x: Double(frequencyValues[index]), y: Double(amplitudes![index] * yt!.value)))
+        }
+        
+        return result
+        
+    }
 	
 	private static let frequencyValues: [Float] = [0, 10, 50, 100]
 	

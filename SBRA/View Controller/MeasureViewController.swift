@@ -18,10 +18,7 @@ class MeasureViewController: UIViewController {
 	private var measuringLabel = UILabel()
 	
 	private let numberOfGraphs = 5
-	private var dataPoints = [DataPoint]()
 	private var completionHandler: ((Measurement) -> Void)?
-	private var locationManager: CLLocationManager?
-	private var placemark: CLPlacemark?
 	private var exceededLimit = false
 	
 	private var settings: MeasurementSettings?
@@ -39,11 +36,6 @@ class MeasureViewController: UIViewController {
 		
 		super.init(nibName: nil, bundle: nil)
 		
-		motionDataParser.exceedanceCallback = { [weak self] (frequency, ratio) in
-			print("exceeded limit \(ratio) with dom freq: \(frequency)")
-			self?.exceededLimit = true
-		}
-		
 		let saveButton = UIBarButtonItem(title: "Sla op", style: .done, target: self, action: #selector(tappedSaveButton))
 		
 		navigationItem.title = "Meting"
@@ -60,10 +52,11 @@ class MeasureViewController: UIViewController {
 		fatalError("init(coder:) has not been implemented")
 	}
     
-    func setupGraphs(){
+    func setupGraphs() {
 
         graphPageViewController = GraphPageViewController()
         graphPageViewController!.motionDataParser.settings = settings
+        graphPageViewController!.motionDataParser.graphPageView = graphPageViewController!
         
         tempView = graphPageViewController!.view
         
@@ -85,11 +78,19 @@ class MeasureViewController: UIViewController {
 		
 		view.backgroundColor = UIColor.white
         
-        setupGraphs()
-		
+//        setupMeasuringLabel()
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
+//            self.view.subviews.forEach{$0.removeFromSuperview()}
+//
+//            self.setupGraphs()
+//        })
+        
+        self.setupGraphs()
 	}
 	
 	private func setupMeasuringLabel() {
+        
 		measuringLabel.text = "Aan het meten..."
 		view.addSubview(measuringLabel)
 		
@@ -109,82 +110,14 @@ class MeasureViewController: UIViewController {
 	}
 	
 	@objc private func tappedSaveButton() {
-		var wrappedLat: NSNumber?
-		var wrappedLong: NSNumber?
-		
-		if let lat = placemark?.location?.coordinate.latitude {
-			wrappedLat = NSNumber(value: lat)
-		}
-		
-		if let long = placemark?.location?.coordinate.longitude {
-			wrappedLong = NSNumber(value: long)
-		}
-		
-		let measurement = Measurement(dataPoints: dataPoints,
-									  date: Date(),
-									  latCoordinate: wrappedLat?.floatValue,
-									  longCoordinate: wrappedLong?.floatValue,
-									  locationString: placemark?.locality,
-									  exceededLimit: exceededLimit,
-									  persistableMeasurement: nil)
-		
-		print("created measurement")
-		
-        if let handler = completionHandler {
-            handler(measurement)
-        }
+        
+        DataHandler.stopMeasuring()
+        MeasurementControl.onFinishMeasurement()
 		
 		presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
 	}
     
     func setupToSaveDataToDatabase(completionHandler: @escaping (Measurement) -> Void){
-        getLocation()
         self.completionHandler = completionHandler
     }
-	
-	private func getLocation() {
-		let locationManager = CLLocationManager()
-		
-		locationManager.requestWhenInUseAuthorization()
-		
-		guard CLLocationManager.locationServicesEnabled() else {
-			print("ERROR: Can't retrieve location, reason: location services are disabled")
-			return
-		}
-		
-		locationManager.delegate = self
-		
-		locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-		self.locationManager = locationManager
-	}
-}
-
-extension MeasureViewController: CLLocationManagerDelegate {
-	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		let coder = CLGeocoder()
-		
-		if let location = locations.last {
-			coder.reverseGeocodeLocation(location) { [weak weakSelf = self] (placemarks, error) in
-				weakSelf?.placemark = placemarks?.first
-				
-				if let error = error {
-					print(error)
-				}
-			}
-		}
-		
-	}
-	
-	func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-		print("error \(error)")
-	}
-	
-	func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-		if status == .authorizedWhenInUse {
-			manager.requestLocation()
-		} else {
-			print("error: not authorized to retrieve location")
-		}
-	}
 }

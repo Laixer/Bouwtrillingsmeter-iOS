@@ -13,7 +13,7 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 	
 	var motionDataParser = MotionDataParser()
 	var graphViewControllers = [GraphViewController]()
-	var initiallyVisibleGraphType = GraphType.speedTime
+	var initiallyVisibleGraphType = GraphType.accelerationTime
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -36,6 +36,8 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		delegate = self
 		
 		// Do any additional setup after loading the view.
+        
+        motionDataParser.startDataCollection(updateInterval: 0.005)
 	}
 	
 	func pageViewController(_ pageViewController: UIPageViewController,
@@ -86,10 +88,7 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
-		for graphController in graphViewControllers {
-			graphController.motionDataParser.stopDataCollection()
-		}
-		
+		motionDataParser.stopDataCollection()
 		super.viewWillDisappear(animated)
 	}
 	

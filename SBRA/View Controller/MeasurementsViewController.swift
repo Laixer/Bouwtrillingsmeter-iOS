@@ -181,7 +181,7 @@ extension MeasurementsViewController: UITableViewDataSource {
 			cell?.nameLabel.text = "Meting op onbekende locatie"
 		}
 		
-		cell?.dateLabel.text = formatter.string(from: measurement.date)
+		cell?.dateLabel.text = formatter.string(from: measurement.dateEnd!)
 		
 		return cell!
 	}

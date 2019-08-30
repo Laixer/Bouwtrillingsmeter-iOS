@@ -26,22 +26,8 @@ class PersistableMeasurement: Object {
 									  longCoordinate: longCoordinate.value,
 									  locationString: locationString,
 									  exceededLimit: exceededLimit,
-									  persistableMeasurement: self)
+                                      persistableMeasurement: self, description: "description")
 		return measurement
-	}
-	
-	class func fromMeasurement(measurement: Measurement) -> PersistableMeasurement {
-		let persistable = PersistableMeasurement()
-		persistable.dataPoints.append(objectsIn: measurement.dataPoints.map({
-			PersistableDataPoint.fromDataPoint(dataPoint: $0)
-		}))
-		persistable.date = measurement.date
-		persistable.latCoordinate.value = measurement.latCoordinate
-		persistable.longCoordinate.value = measurement.longCoordinate
-		persistable.locationString = measurement.locationString
-		persistable.exceededLimit = measurement.exceededLimit
-		
-		return persistable
 	}
 	
 	override class func primaryKey() -> String? {

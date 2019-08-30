@@ -7,54 +7,55 @@
 //
 
 enum GraphType: CaseIterable, CustomStringConvertible {
-	case speedTime
-	case frequencyTime
-	case dominantFrequency
-	case fft1Second
-	case gravityTimeAccelerationTime
+    case accelerationTime
+	case highestVelocityTime
+    case dominantFrequencyTime
+	case amplitudeFrequency
+	case dominantFrequencyFrequency
+	
 	
 	var description: String {
 		switch self {
-		case .speedTime:
-			return "Snelheid/tijd"
-		case .frequencyTime:
-			return "Frequentie/tijd"
-		case .dominantFrequency:
+		case .accelerationTime:
+			return "Versnellingsdiagram"
+		case .highestVelocityTime:
+			return "Snelheidsdiagram"
+		case .dominantFrequencyTime:
+			return "Dominante frequentie continu"
+		case .amplitudeFrequency:
+			return "Frequentiespectrum"
+		case .dominantFrequencyFrequency:
 			return "Dominante frequentie"
-		case .fft1Second:
-			return "FFT (1 seconde)"
-		case .gravityTimeAccelerationTime:
-			return "Zwaartekracht/tijd + Versnelling/tijd"
 		}
 	}
     
     var xDescription: String {
         switch self {
-        case .speedTime:
-            return "Snelheid/tijd"
-        case .frequencyTime:
-            return "Frequentie/tijd"
-        case .dominantFrequency:
-            return "Dominante frequentie"
-        case .fft1Second:
-            return "FFT (1 seconde)"
-        case .gravityTimeAccelerationTime:
-            return "Zwaartekracht/tijd + Versnelling/tijd"
+        case .accelerationTime:
+            return "Tijd [s]"
+        case .highestVelocityTime:
+            return "Tijd [s]"
+        case .dominantFrequencyTime:
+            return "Tijd [s]"
+        case .amplitudeFrequency:
+            return "Frequentie [Hz]"
+        case .dominantFrequencyFrequency:
+            return "Frequentie [Hz]"
         }
     }
     
     var yDescription: String {
         switch self {
-        case .speedTime:
-            return "Snelheid/tijd"
-        case .frequencyTime:
-            return "Frequentie/tijd"
-        case .dominantFrequency:
-            return "Dominante frequentie"
-        case .fft1Second:
-            return "FFT (1 seconde)"
-        case .gravityTimeAccelerationTime:
-            return "Zwaartekracht/tijd + Versnelling/tijd"
+        case .accelerationTime:
+            return "Versnelling [mm/s2]"
+        case .highestVelocityTime:
+            return "Snelheid [mm/s]"
+        case .dominantFrequencyTime:
+            return "(Dominante) frequentie [Hz]"
+        case .amplitudeFrequency:
+            return "Amplitude (snelheid) [mm/s]"
+        case .dominantFrequencyFrequency:
+            return "Amplitude (snelheid) [mm/s]"
         }
     }
 }

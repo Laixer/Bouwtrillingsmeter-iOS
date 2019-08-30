@@ -8,12 +8,28 @@
 
 import CoreMotion
 
-struct DataPoint {
-	let acceleration: CMAcceleration
-	let speed: (x: Float, y: Float, z: Float)
-	let dominantFrequency: (x: DominantFrequency, y: DominantFrequency, z: DominantFrequency)?
-	let fft: (x: [Float]?, y: [Float]?, z: [Float]?)
-	let gravity: CMAcceleration?
-	let rotationRate: CMRotationRate
-	let timestamp: TimeInterval
+struct DataPoint<T: Numeric> {
+    var xAxisValue: T
+    var values: [Float]
+    
+    func xAXisValueAsDouble() -> Double {
+        
+        var valueToReturn: Double
+        
+        valueToReturn = Double(parseToLong(number: xAxisValue))
+        if valueToReturn < 0 {
+            valueToReturn = parseToDouble(number: xAxisValue)
+        }
+        
+        return valueToReturn
+    }
+    
+    private func parseToLong(number: T) -> Int64{
+        return xAxisValue as? Int64 ?? -1
+    }
+    
+    private func parseToDouble(number: T) -> Double{
+        return xAxisValue as? Double ?? -1
+    }
+    
 }
