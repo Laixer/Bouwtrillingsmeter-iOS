@@ -13,7 +13,7 @@ class Database {
 	func numberOfMeasurements() -> Int {
 		do {
 			let realm = try Realm()
-			return realm.objects(PersistableMeasurement.self).count
+			return realm.objects(Measurement.self).count
 		} catch {
 			print("turnup " + error.localizedDescription)
 		}
@@ -24,9 +24,8 @@ class Database {
 	func addMeasurement(measurement: Measurement) {
 		do {
 			let realm = try Realm()
-			let persistable = PersistableMeasurement.fromMeasurement(measurement: measurement)
 			try realm.write {
-				realm.add(persistable)
+				realm.add(measurement)
 			}
 			print("added measurement to db")
 		} catch {
@@ -37,9 +36,9 @@ class Database {
 	var measurements: [Measurement] {
 		do {
 			let realm = try Realm()
-			let objs: Results<PersistableMeasurement> = realm.objects(PersistableMeasurement.self)
+			let objs: Results<Measurement> = realm.objects(Measurement.self)
 			
-			return objs.map({$0.toMeasurement()}).reversed()
+			return objs.map({$0}).reversed()
 		} catch {
 			print("error adding measurement: " + error.localizedDescription)
 		}
@@ -47,16 +46,13 @@ class Database {
 		return [Measurement]()
 	}
 	
-	func removeMeasurement(measurement: Measurement) {
-		if let persistable = measurement.persistableMeasurement {
-			do {
-				let realm = try Realm()
-				try realm.write {
-					realm.delete(persistable)
-				}
-			} catch {
-				print("error deleting measurement: " + error.localizedDescription)
-			}
-		}
+	func removeMeasurement(measurement: Measurement) {do {
+        let realm = try Realm()
+        try realm.write {
+            realm.delete(measurement)
+            }
+        } catch {
+            print("error deleting measurement: " + error.localizedDescription)
+        }
 	}
 }
