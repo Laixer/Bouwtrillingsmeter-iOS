@@ -127,7 +127,7 @@ class GraphViewController: UIViewController, DataIntervalClosedListener {
         case .dominantFrequencyFrequency:
             chart = Chart(chartType: .scatter, needScrolling: false, needRefresh: false, xMultiplier: 1)
             chart!.setMaxAndMinXAxis(min: 0, max: 50)
-            chart!.addConstantLine(entries: PowerLimit.getLimitAsEntries(settings: settings!), name: "constant", color: nil)
+            chart!.addConstantLine(entries: PowerLimit.getLimitAsEntries(settings: settings!), name: "constant")
 		}
         
         DataHandler.addDataIntervalClosedListener(listener: self)
