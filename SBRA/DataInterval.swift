@@ -7,12 +7,12 @@
 //
 
 import Foundation
-import Charts
 
 class DataInterval {
     
     private var measurementUID: String
     private var index: Int?
+    private var millisStart: Int64?
     private var millisRelativeStart: Int64?
     private var millisRelativeEnd: Int64?
     
@@ -29,22 +29,25 @@ class DataInterval {
         self.index = index
         
         acceleration = [DataPoint]()
-        millisRelativeStart = NSDate().getCurrentMillis()
+        millisStart = Date().getCurrentMillis()
+        millisRelativeStart = millisStart! - MeasurementControl.getCurrentMeasurement()!.getStartTimeInMillis()
+        
+        lockedByThread = false
     }
     
-    func addDataPoint(dataPoint: DataPoint<Int64>){
+    func addDataPoint(dataPoint: DataPoint<Int64>) {
         acceleration?.append(dataPoint)
     }
     
     func onIntervalEnd() {
-        millisRelativeEnd = NSDate().getCurrentMillis() - millisRelativeStart!
+        millisRelativeEnd = Date().getCurrentMillis() - millisStart!
     }
     
-    func onThreadCalculationsStart(){
+    func onThreadCalculationsStart() {
         lockedByThread = true
     }
     
-    func onThreadCalculationsEnd(){
+    func onThreadCalculationsEnd() {
         lockedByThread = false
     }
     
@@ -57,7 +60,7 @@ class DataInterval {
     }
     
     func isExceedingLimit() -> Bool {
-        for bool in dominantFrequencies!.getExceedsLimit(){
+        for bool in dominantFrequencies!.getExceedsLimit() {
             if bool {
                 return true
             }
@@ -66,7 +69,7 @@ class DataInterval {
     }
     
     func getDominantFrequenciesAsDataPoints() -> [DataPoint<Int64>] {
-        return [DataPoint(xAxisValue: millisRelativeStart!, values: dominantFrequencies!.getVelocities())]
+        return [DataPoint(xAxisValue: millisRelativeStart!, values: dominantFrequencies!.getFrequencies())]
     }
     
     func getExceedingAsDataPoints() -> [DataPoint<Double>] {
@@ -90,17 +93,17 @@ class DataInterval {
         
     }
     
-    func getAllDominantFrequenciesAsEntries() -> [ChartDataEntry] {
+    func getAllDominantFrequenciesAsEntries() -> [[Double]] {
         
-        var result: [ChartDataEntry] = []
+        var data: [[Double]] = []
         
         let frequencies = dominantFrequencies!.getFrequencies()
         let velocities = dominantFrequencies!.getVelocities()
         for dimension in 0..<3 {
-            result.append(ChartDataEntry(x: Double(frequencies[dimension]), y: Double(velocities[dimension])))
+            data.append([Double(frequencies[dimension]), Double(velocities[dimension])])
         }
         
-        return result
+        return data
     }
     
     func getVelocitiesAbsMaxAsDataPoints() -> [DataPoint<Int64>] {
@@ -110,7 +113,7 @@ class DataInterval {
         return result
     }
     
-    func setVelocities(velocities: [DataPoint<Int64>]){
+    func setVelocities(velocities: [DataPoint<Int64>]) {
         if self.velocities == nil {
             self.velocities = velocities
         } else {
@@ -119,7 +122,7 @@ class DataInterval {
         }
     }
     
-    func setVelocitiesAbsoluteMax(velocitiesAbsoluteMax: DataPoint<Int64>){
+    func setVelocitiesAbsoluteMax(velocitiesAbsoluteMax: DataPoint<Int64>) {
         if self.velocitiesAbsoluteMax == nil {
             self.velocitiesAbsoluteMax = velocitiesAbsoluteMax
         } else {
@@ -137,7 +140,7 @@ class DataInterval {
         }
     }
     
-    func setDominantFrequencies(dominantFrequencies: DominantFrequencies){
+    func setDominantFrequencies(dominantFrequencies: DominantFrequencies) {
         if self.dominantFrequencies == nil {
             self.dominantFrequencies = dominantFrequencies
         } else {
@@ -155,6 +158,10 @@ class DataInterval {
     }
     
     func getMillisStart() -> Int64 {
+        return millisStart!
+    }
+    
+    func getMillisRelativeStart() -> Int64 {
         return millisRelativeStart!
     }
     
