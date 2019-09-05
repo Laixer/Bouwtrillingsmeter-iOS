@@ -13,7 +13,7 @@ class MeasureViewController: UIViewController {
     
     private var graphPageViewController: GraphPageViewController?
 	
-	private var showingGraphs = false
+	private var showingGraphs = UserDefaults.standard.bool(forKey: "graphs")
 	private var indicator = UIActivityIndicatorView(style: .gray)
 	private var measuringLabel = UILabel()
 	
@@ -82,33 +82,55 @@ class MeasureViewController: UIViewController {
 		
 		view.backgroundColor = UIColor.white
         
-        self.setupGraphs()
-	}
-    
-    override func viewDidAppear(_ animated: Bool) {
+//        self.setupGraphs()
+        setupMeasuringLabel()
+        
         // get newest location possible
         getLocation()
-    }
+	}
 	
 	private func setupMeasuringLabel() {
         
-		measuringLabel.text = "Aan het meten..."
-		view.addSubview(measuringLabel)
+        measuringLabel.text = "Aan het meten..."
+        view.addSubview(measuringLabel)
 		
 		view.addSubview(indicator)
 		indicator.startAnimating()
-		
+        
+        let showGraph = UIButton()
+        showGraph.tintColor = .black
+        showGraph.setTitleColor(UIColor.black, for: .normal)
+        showGraph.layer.borderWidth = 1
+        showGraph.setTitle("Toon grafieken", for: .normal)
+        showGraph.titleLabel?.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize)
+        view.addSubview(showGraph)
+        
+        showGraph.addTarget(self, action: #selector(clickedShowGraphs), for: .touchUpInside)
+        
 		measuringLabel.translatesAutoresizingMaskIntoConstraints = false
 		indicator.translatesAutoresizingMaskIntoConstraints = false
+        showGraph.translatesAutoresizingMaskIntoConstraints = false
 		
 		view.addConstraints([
 			measuringLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
 			measuringLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
 			
 			indicator.centerYAnchor.constraint(equalTo: measuringLabel.centerYAnchor),
-			indicator.leftAnchor.constraint(equalToSystemSpacingAfter: measuringLabel.rightAnchor, multiplier: 1.0)
+			indicator.leftAnchor.constraint(equalToSystemSpacingAfter: measuringLabel.rightAnchor, multiplier: 1.0),
+            
+            showGraph.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            showGraph.topAnchor.constraint(equalTo: measuringLabel.bottomAnchor, constant: 5),
+            showGraph.heightAnchor.constraint(equalToConstant: 48.0),
+            showGraph.widthAnchor.constraint(equalToConstant: 210.0),
+            
 		])
+        
+        
 	}
+    
+    @objc private func clickedShowGraphs() {
+        setupGraphs()
+    }
     
     private func getLocation() {
         
