@@ -7,12 +7,13 @@
 //
 
 import Foundation
+import CoreLocation
 
 class MeasurementControl {
     
     private static var currentMeasurement: Measurement?
     private static var lastMeasurement: Measurement?
-    private static var allMeasurements: [Measurement]?
+    private static var allMeasurements: [Measurement] = []
     
     static func getCurrentMeasurement() -> Measurement? {
         return currentMeasurement
@@ -23,17 +24,17 @@ class MeasurementControl {
     }
     
     static func getAllMeasurements() -> [Measurement]{
-        return allMeasurements!
+        return allMeasurements
     }
     
     static func createNewMeasurement() {
         currentMeasurement = Measurement()
     }
     
-    static func onFinishMeasurement() {
-        currentMeasurement!.close()
+    static func onFinishMeasurement(placemark: CLPlacemark?) {
+        currentMeasurement!.close(placemark: placemark)
         lastMeasurement = currentMeasurement!
-        allMeasurements!.append(currentMeasurement!)
+        allMeasurements.append(currentMeasurement!)
     }
     
 }
