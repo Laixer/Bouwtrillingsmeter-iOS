@@ -29,9 +29,8 @@ class MeasurementDetailViewController: UIViewController {
 		dateFormatter.dateStyle = .long
 		
 		timeLabel.text = dateFormatter.string(from: measurement.dateEnd!)
-		
-//        limitExceededLabel.text = measurement ? "Overschrijdingen gedetecteerd" : "Geen overschrijdingen"
-        limitExceededLabel.text = "test"
+        // fix
+        limitExceededLabel.text = DataHandler.getLastExceedingPoint() != nil ? "Overschrijdingen gedetecteerd" : "Geen overschrijdingen"
 		
 		super.init(nibName: nil, bundle: nil)
 		

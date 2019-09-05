@@ -57,8 +57,6 @@ class MeasurementsViewController: UIViewController {
 														   target: self,
 														   action: #selector(tappedSettingsButton))
 		
-		measurements = Database().measurements
-		
 		updateTableViewVisibility()
 		
 		view.backgroundColor = backgroundColor
@@ -73,6 +71,8 @@ class MeasurementsViewController: UIViewController {
 	
 	override func viewWillAppear(_ animated: Bool) {
 		super.viewWillAppear(animated)
+        
+        measurements = Database().measurements
 		
 		updateTableViewVisibility()
 		tableView.reloadData()
@@ -175,11 +175,7 @@ extension MeasurementsViewController: UITableViewDataSource {
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "bigcell", for: indexPath) as? MeasurementTableViewCell
 		let measurement = measurements[indexPath.row]
-		if let location = measurement.locationString {
-			cell?.nameLabel.text = "Meting in " + location
-		} else {
-			cell?.nameLabel.text = "Meting op onbekende locatie"
-		}
+		cell?.nameLabel.text = measurement.name
 		
 		cell?.dateLabel.text = formatter.string(from: measurement.dateEnd!)
 		

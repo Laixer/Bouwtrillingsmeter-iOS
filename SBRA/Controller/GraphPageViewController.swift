@@ -67,8 +67,6 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 							previousViewControllers: [UIViewController],
 							transitionCompleted completed: Bool) {
 		let previous = previousViewControllers.first as? GraphViewController
-        //TODO: stop data collection for view not showing?
-//        previous?.motionDataParser.stopDataCollection()
 		
 		if let graphType = (pageViewController.viewControllers?.first as? GraphViewController)?.graphType {
 			title = graphType.description

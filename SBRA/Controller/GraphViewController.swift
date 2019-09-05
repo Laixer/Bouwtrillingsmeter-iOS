@@ -6,9 +6,12 @@
 //  Copyright © 2018 Wander Siemers. All rights reserved.
 //
 
+// swiftlint:disable force_cast
+// swiftlint:disable line_length
+// swiftlint:disable switch_case_alignment
+
 import UIKit
 import simd
-import Charts
 
 class GraphViewController: UIViewController, DataIntervalClosedListener {
     
@@ -17,19 +20,28 @@ class GraphViewController: UIViewController, DataIntervalClosedListener {
     var yTitleLabel = UILabel()
 	
 	var graphType: GraphType
-	
-	var graphView: ChartViewBase?
+    var chartView: AAChartView?
     
-    let MULTIPLIER: Double = 0.001
+    var chart: Chart?
+    
+    var xArrayD: [Double] = []
+    var yArrayD: [Double] = []
+    var zArrayD: [Double] = []
+    
+    var test:[AASeriesElement]?
+    var aaChartModel: AAChartModel?
+    var cCount = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        chart!.drawChart()
         
-        graphView?.translatesAutoresizingMaskIntoConstraints = false
-		
-		if let graphView = graphView {
-			view.addSubview(graphView)
-		}
+        chart!.getChartView().translatesAutoresizingMaskIntoConstraints = false
+        
+        self.view.addSubview(chart!.getChartView())
+        
+        self.view.isUserInteractionEnabled = false
         
         getViewReady()
         
@@ -63,10 +75,10 @@ class GraphViewController: UIViewController, DataIntervalClosedListener {
             yTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: -yTitleLabelWidth),
             yTitleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
-            graphView!.bottomAnchor.constraint(equalTo: xTitleLabel.topAnchor),
-            graphView!.leftAnchor.constraint(equalTo: yTitleLabel.rightAnchor, constant: -yTitleLabelWidth),
-            graphView!.rightAnchor.constraint(equalTo: view.rightAnchor),
-            graphView!.topAnchor.constraint(equalTo: titleLabel.bottomAnchor)
+            chart!.getChartView().bottomAnchor.constraint(equalTo: xTitleLabel.topAnchor),
+            chart!.getChartView().leftAnchor.constraint(equalTo: yTitleLabel.rightAnchor, constant: -yTitleLabelWidth),
+            chart!.getChartView().rightAnchor.constraint(equalTo: view.rightAnchor),
+            chart!.getChartView().topAnchor.constraint(equalTo: titleLabel.bottomAnchor)
         ])
     }
     
@@ -76,19 +88,19 @@ class GraphViewController: UIViewController, DataIntervalClosedListener {
         }
         switch graphType {
         case .accelerationTime:
-            (graphView! as? CLineChart)!.addDataToChart(dataPoint: dataInterval!.getAcceleration())
+            chart!.appendData(data: dataInterval!.getAcceleration())
             return
         case .highestVelocityTime:
-            (graphView! as? CBarChart)!.addDataToChart(dataPoint: dataInterval!.getVelocitiesAbsMaxAsDataPoints())
+            chart!.appendData(data: dataInterval!.getVelocitiesAbsMaxAsDataPoints())
             return
         case .dominantFrequencyTime:
-            (graphView! as? CBarChart)!.addDataToChart(dataPoint: dataInterval!.getDominantFrequenciesAsDataPoints())
+            chart!.appendData(data: dataInterval!.getDominantFrequenciesAsDataPoints())
             return
         case .amplitudeFrequency:
-            (graphView! as? CLineChart)!.addDataToChart(dataPoint: dataInterval!.getFrequencyAmplitudes())
+            chart!.appendData(data: dataInterval!.getFrequencyAmplitudes())
             return
         case .dominantFrequencyFrequency:
-            (graphView! as? CScatterChart)!.addDataToChart(entries: dataInterval!.getAllDominantFrequenciesAsEntries())
+            chart!.appendData(data: dataInterval!.getAllDominantFrequenciesAsEntries())
             return
         }
     }
@@ -101,20 +113,21 @@ class GraphViewController: UIViewController, DataIntervalClosedListener {
 		
 		switch graphType {
         case .accelerationTime:
-            self.graphView = CLineChart(xMultiplier: MULTIPLIER, refreshing: false)
-            if var graphView = graphView as? CLineChart {
-                graphView.turnOnScrolling(newScrollingValue: 300)
-            }
+            chart = Chart(chartType: .line, needScrolling: true, needRefresh: false, xMultiplier: 0.001)
+            chart?.scrollAtSeconds(timeInSeconds: 3)
         case .highestVelocityTime:
-            self.graphView = CBarChart(xMultiplier: MULTIPLIER, refreshing: false)
+            chart = Chart(chartType: .column, needScrolling: true, needRefresh: false, xMultiplier: 0.001)
+            chart?.scrollAtSeconds(timeInSeconds: 300)
         case .dominantFrequencyTime:
-            self.graphView = CBarChart(xMultiplier: MULTIPLIER, refreshing: false)
+            chart = Chart(chartType: .column, needScrolling: true, needRefresh: false, xMultiplier: 0.001)
+            chart?.scrollAtSeconds(timeInSeconds: 300)
         case .amplitudeFrequency:
-            self.graphView = CLineChart(xMultiplier: 1, refreshing: true)
-            (self.graphView as? CLineChart)!.setVisibleXRangeMaximum(500.0)
+            chart = Chart(chartType: .line, needScrolling: false, needRefresh: true, xMultiplier: 1)
+            chart!.setMaxAndMinXAxis(min: 0, max: 50)
         case .dominantFrequencyFrequency:
-            self.graphView = CScatterChart(xMultiplier: 1, refreshing: false)
-            (self.graphView as? CScatterChart)!.addConstantLine(entries: PowerLimit.getLimitAsEntries(settings: settings!), name: "Constant", color: .brown)
+            chart = Chart(chartType: .scatter, needScrolling: false, needRefresh: false, xMultiplier: 1)
+            chart!.setMaxAndMinXAxis(min: 0, max: 50)
+            chart!.addConstantLine(entries: PowerLimit.getLimitAsEntries(settings: settings!), name: "constant", color: nil)
 		}
         
         DataHandler.addDataIntervalClosedListener(listener: self)

@@ -28,6 +28,10 @@ class MeasureViewController: UIViewController {
 	private var updateHandler: MotionDataHandler?
     
     private var tempView: UIView?
+    
+    private var placemark: CLPlacemark?
+    
+    private let locationManager = CLLocationManager()
 	
 	init(settings: MeasurementSettings?) {
         
@@ -78,16 +82,13 @@ class MeasureViewController: UIViewController {
 		
 		view.backgroundColor = UIColor.white
         
-//        setupMeasuringLabel()
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
-//            self.view.subviews.forEach{$0.removeFromSuperview()}
-//
-//            self.setupGraphs()
-//        })
-        
         self.setupGraphs()
 	}
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // get newest location possible
+        getLocation()
+    }
 	
 	private func setupMeasuringLabel() {
         
@@ -108,16 +109,66 @@ class MeasureViewController: UIViewController {
 			indicator.leftAnchor.constraint(equalToSystemSpacingAfter: measuringLabel.rightAnchor, multiplier: 1.0)
 		])
 	}
+    
+    private func getLocation() {
+        
+        locationManager.delegate = self
+        
+        locationManager.requestWhenInUseAuthorization()
+        
+        guard CLLocationManager.locationServicesEnabled() else {
+            print("ERROR: Can't retrieve location, reason: location services are disabled")
+            return
+        }
+        
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+    }
 	
 	@objc private func tappedSaveButton() {
         
         DataHandler.stopMeasuring()
-        MeasurementControl.onFinishMeasurement()
-		
-		presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        MeasurementControl.onFinishMeasurement(placemark: placemark)
+
+        presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
+        
 	}
     
     func setupToSaveDataToDatabase(completionHandler: @escaping (Measurement) -> Void){
         self.completionHandler = completionHandler
+    }
+}
+
+extension MeasureViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        if placemark != nil {
+            return
+        }
+        
+        let coder = CLGeocoder()
+        
+        if let location = locations.last {
+            coder.reverseGeocodeLocation(location) { [weak weakSelf = self] (placemarks, error) in
+                weakSelf?.placemark = placemarks?.first
+                
+                if let error = error {
+                    print(error)
+                }
+            }
+        }
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("error \(error)")
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            manager.requestLocation()
+        } else {
+            print("error: not authorized to retrieve location")
+        }
     }
 }

@@ -98,14 +98,13 @@ class MeasurementSettingsViewController: UIViewController {
 		
 		view.addSubview(tableView)
 		
-		NSLayoutConstraint.activate([
-			tableView.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 3.0),
-			tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 1.0),
-			tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0),
-			tableView.heightAnchor.constraint(equalToConstant: 133)
-			])
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 1.0),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0),
+            tableView.heightAnchor.constraint(equalToConstant: 133)
+        ])
 		
-		tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
 		
 		tableView.separatorInset = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
 		
