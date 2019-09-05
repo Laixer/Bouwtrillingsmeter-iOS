@@ -6,6 +6,8 @@
 //  Copyright © 2019 James Bal. All rights reserved.
 //
 
+//swiftlint:disable line_length
+
 import Foundation
 
 class DataHandler {
@@ -19,7 +21,7 @@ class DataHandler {
     
     private static var dataIntervalClosedListeners: [DataIntervalClosedListener]?
     
-    static func initialize(){
+    static func initialize() {
         currentlyMeasuring = false
         currentDataInterval = nil
         dataIntervalClosedListeners = []
@@ -38,7 +40,7 @@ class DataHandler {
         currentDataInterval = DataInterval(measurementUID: MeasurementControl.getCurrentMeasurement()!.getUID(), index: currentDataIntervalIndex!)
     }
     
-    private static func onStartNewInterval(){
+    private static func onStartNewInterval() {
         currentDataInterval!.onIntervalEnd()
         performIntervalCalculation(dataInterval: currentDataInterval!)
         MeasurementControl.getCurrentMeasurement()!.addDataInterval(dataInterval: currentDataInterval!)
@@ -49,7 +51,7 @@ class DataHandler {
         triggerDataIntervalClosedEvent(dataInterval: lastCalculatedDataInterval)
     }
     
-    public static func addDataIntervalClosedListener(listener: DataIntervalClosedListener?){
+    public static func addDataIntervalClosedListener(listener: DataIntervalClosedListener?) {
         if listener == nil {
             print("Listener to be added to data interval closed listeners can not be null")
             return
@@ -57,7 +59,7 @@ class DataHandler {
         dataIntervalClosedListeners!.append(listener!)
     }
     
-    public static func removeDataIntervalClosedListener(listener: DataIntervalClosedListener){
+    public static func removeDataIntervalClosedListener(listener: DataIntervalClosedListener) {
         for count in 0...dataIntervalClosedListeners!.count {
             if dataIntervalClosedListeners![count] === listener {
                 dataIntervalClosedListeners!.remove(at: count)
@@ -76,7 +78,7 @@ class DataHandler {
         return currentlyMeasuring!
     }
     
-    private static func performIntervalCalculation(dataInterval: DataInterval){
+    private static func performIntervalCalculation(dataInterval: DataInterval) {
         if dataInterval.getAcceleration().count == 0 {
             print("No datapoints were added to this interval.")
             return
@@ -84,10 +86,10 @@ class DataHandler {
         
         let thisDataInterval: DataInterval = dataInterval
         
-        DispatchQueue.global(qos: .background).async {
+        DispatchQueue.global(qos: .userInitiated).async {
             thisDataInterval.onThreadCalculationsStart()
             
-            let dataIntervalStartTime: Int64 = dataInterval.getMillisStart()
+            let dataIntervalStartTime: Int64 = dataInterval.getMillisRelativeStart()
             let velocities: [DataPoint] = Calculator.calculateVelocityFromAcceleration(data: thisDataInterval.getAcceleration())
             let velocitiesAbsMax: DataPoint = Calculator.calculateVelocityAbsMaxFromVelocities(time: dataIntervalStartTime, data: velocities)
             thisDataInterval.setVelocities(velocities: velocities)
@@ -95,36 +97,36 @@ class DataHandler {
             
             let frequencyAmplitudes: [DataPoint<Double>] = Calculator.fft(acceleration: thisDataInterval.getAcceleration())
             thisDataInterval.setFrequencyAplitudes(frequencyAmplitudes: frequencyAmplitudes)
-            
+
             let dominantFrequencies: DominantFrequencies = Calculator.calculateDominantFrequencies(frequencyAmplitudes: frequencyAmplitudes)
             thisDataInterval.setDominantFrequencies(dominantFrequencies: dominantFrequencies)
-            
-            if thisDataInterval.isExceedingLimit(){
+
+            if thisDataInterval.isExceedingLimit() {
                 lastExceedingIndex = thisDataInterval.getIndex()
                 // backend.onexceededlimit
             }
-            
+
             thisDataInterval.onThreadCalculationsEnd()
-            
+
             lastCalculatedDataInterval = thisDataInterval
         }
     }
     
-    public static func onReceivedData(xLine: Float, yLine: Float, zLine: Float){
+    public static func onReceivedData(xLine: Float, yLine: Float, zLine: Float) {
         if isCurrentlyMeasuring() && currentDataInterval != nil {
-            let timePassed: Int64 = NSDate().getCurrentMillis() - currentDataInterval!.getMillisStart()
+            let timePassed: Int64 = Date().getCurrentMillis() - currentDataInterval!.getMillisStart()
             // TODO: declare somewhere else
-            let interval: Int64 = 1000
+            let interval: Int64 = Const.WAITING_TIME
             
             if timePassed > interval {
                 onStartNewInterval()
             }
             
             let startTime: Int64 = MeasurementControl.getCurrentMeasurement()!.getStartTimeInMillis()
-            let currentTime: Int64 = NSDate().getCurrentMillis()
+            let currentTime: Int64 = Date().getCurrentMillis()
             let dataPointTime: Int64 = currentTime - startTime
             
-            currentDataInterval?.addDataPoint(dataPoint: DataPoint(xAxisValue: dataPointTime, values: [xLine,yLine,zLine]))
+            currentDataInterval?.addDataPoint(dataPoint: DataPoint(xAxisValue: dataPointTime, values: [xLine, yLine, zLine]))
         }
     }
     
@@ -135,6 +137,10 @@ class DataHandler {
         }
         
         currentlyMeasuring = false
+    }
+    
+    public static func getLastExceedingPoint() -> Int? {
+        return lastExceedingIndex
     }
     
 }
