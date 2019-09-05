@@ -6,6 +6,10 @@
 //  Copyright © 2019 James Bal. All rights reserved.
 //
 
+//swiftlint:disable identifier_name
+//swiftlint:disable line_length
+//swiftlint:disable colon
+
 import Foundation
 import Accelerate
 import Surge
@@ -20,9 +24,8 @@ class Calculator {
     
     // start measurring with default values
     static func onStartMeasurementCalculations(settings: MeasurementSettings) {
-        accelerationPrevious = DataPoint(xAxisValue: 0, values: [0,0,0])
-        velocity = [0,0,0]
-        
+        accelerationPrevious = DataPoint(xAxisValue: 0, values: [0, 0, 0])
+        velocity = [0, 0, 0]
         
         limitValuesAsFloatPoints = PowerLimit.limitForSettings(settings: settings)
     }
@@ -30,7 +33,7 @@ class Calculator {
     static func calculateVelocityFromAcceleration(data: [DataPoint<Int64>]) -> [DataPoint<Int64>] {
         var result: [DataPoint<Int64>] = []
         var timePrevious: Double = 0
-        velocity = [0,0,0]
+        velocity = [0, 0, 0]
         
         for count in 0..<data.count {
             
@@ -61,7 +64,7 @@ class Calculator {
     
     private static func getAbsMaxIndexesInArray3D<T>(dataPoints: [DataPoint<T>]) -> [Int] {
         var highestValue: [Float] = [Float.leastNormalMagnitude, Float.leastNormalMagnitude, Float.leastNormalMagnitude]
-        var index: [Int] = [-1,-1,-1]
+        var index: [Int] = [-1, -1, -1]
         
         for count in 0..<dataPoints.count {
             for dimension in 0..<3 {
@@ -76,53 +79,43 @@ class Calculator {
         return index
     }
     
-    // TODO const interval
     static func fft(acceleration: [DataPoint<Int64>]) -> [DataPoint<Double>] {
         let accelerationCount = acceleration.count
-        let sampleRate: Double = Double(accelerationCount) / (1000 / 1000)
+        let sampleRate: Double = Double(accelerationCount) / (Double(Const.WAITING_TIME) / 1000)
         
         var accelerationSplit: [[Float]] = [[]]
         accelerationSplit.insert([], at: 0)
         accelerationSplit.insert([], at: 1)
         accelerationSplit.insert([], at: 2)
         
-        for count in 0..<acceleration.count {
+        for count in 0..<accelerationCount {
             accelerationSplit[0].insert(acceleration[count].values[0], at: count)
             accelerationSplit[1].insert(acceleration[count].values[1], at: count)
             accelerationSplit[2].insert(acceleration[count].values[2], at: count)
         }
         
         // use surge to implement fft
-//        var fft: TempiFFT = TempiFFT(withSize: 4, sampleRate: Float(sampleRate))
-//        fft.fftForward(accelerationSplit[0])
-//        fft.fftForward(accelerationSplit[1])
-//        fft.fftForward(accelerationSplit[2])
-
-        accelerationSplit[0] = Surge.fft(accelerationSplit[0])
-        accelerationSplit[1] = Surge.fft(accelerationSplit[1])
-        accelerationSplit[2] = Surge.fft(accelerationSplit[2])
+        let magnitudesX = FFT.create(accelerationSplit[0])
+        let magnitudesY = FFT.create(accelerationSplit[1])
+        let magnitudesZ = FFT.create(accelerationSplit[2])
         
-        var magnitude: [Float] = []
         var result: [DataPoint<Double>] = []
         
-        for count in 0..<accelerationCount/2 {
-            for dimension in 0..<3 {
-                let re: Double = Double(accelerationSplit[dimension][2 * count])
-                let im: Double = Double(accelerationSplit[dimension][2 * count + 1])
-                magnitude.insert(Float(hypot(im, re)), at: dimension)
-            }
+        for count in 0..<magnitudesX.count {
             let frequency: Double = (sampleRate * Double(count)) / (Double(accelerationCount))
-            result.append(DataPoint(xAxisValue: frequency, values: magnitude))
+            result.append(DataPoint(xAxisValue: frequency, values: [magnitudesX[count], magnitudesY[count], magnitudesZ[count]]))
         }
+
         return result
         
     }
     
     // Create a new dominant frequency with the given fft data
-    static func calculateDominantFrequencies(frequencyAmplitudes: [DataPoint<Double>]) -> DominantFrequencies{
-        var maxIndexes: [Int] = [0,0,0]
+    static func calculateDominantFrequencies(frequencyAmplitudes: [DataPoint<Double>]) -> DominantFrequencies {
+        var maxIndexes: [Int] = [0, 0, 0]
         for dimension in 0..<3 {
             var highestRatio: Float = 0
+            
             for count in 1..<frequencyAmplitudes.count - 1 {
                 let xAxisValue: Double = frequencyAmplitudes[count].xAxisValue
                 let frequency: Float = Float(xAxisValue)
