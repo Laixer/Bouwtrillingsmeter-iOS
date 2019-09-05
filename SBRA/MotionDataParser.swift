@@ -6,6 +6,10 @@
 //  Copyright © 2018 Wander Siemers. All rights reserved.
 //
 
+//swiftlint:disable identifier_name
+//swiftlint:disable line_length
+
+
 import UIKit
 import CoreMotion
 import Accelerate
@@ -22,24 +26,14 @@ class MotionDataParser: NSObject {
     func startDataCollection(updateInterval: TimeInterval) {
 
         if manager.isDeviceMotionAvailable {
+            
             manager.deviceMotionUpdateInterval = updateInterval
-
-            manager.startAccelerometerUpdates(to: OperationQueue.main) { (motion, error) in
-                if error != nil {
-                    return
-                }
-            }
-
-            manager.startDeviceMotionUpdates(to: OperationQueue.main) { (motion, error) in
-                if error != nil {
-                    return
-                }
-
-                if let motion = motion {
-                    DataHandler.onReceivedData(xLine: Float(motion.userAcceleration.x), yLine: Float(motion.userAcceleration.y), zLine: Float(motion.userAcceleration.z))
-                } else {
-                    return
-                }
+            
+            manager.startDeviceMotionUpdates(to: .main) { (motion, err) in
+                let x = motion!.userAcceleration.x * 9.81
+                let y = motion!.userAcceleration.y * 9.81
+                let z = motion!.userAcceleration.z * 9.81
+                DataHandler.onReceivedData(xLine: Float(x), yLine: Float(y), zLine: Float(z))
             }
         }
     }
