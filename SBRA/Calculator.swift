@@ -121,7 +121,7 @@ class Calculator {
                 let frequency: Float = Float(xAxisValue)
                 let amplitude: Float = frequencyAmplitudes[count].values[dimension]
                 
-                if amplitude > frequencyAmplitudes[count-1].values[dimension] && amplitude > frequencyAmplitudes[count + 1].values[dimension]{
+                if amplitude > frequencyAmplitudes[count-1].values[dimension] && amplitude > frequencyAmplitudes[count + 1].values[dimension] {
                     let limitAmplitude = getLimitAmplitudeFromFrequency(frequency: frequency)
                     let ratio: Float = amplitude / limitAmplitude
                     
@@ -144,7 +144,15 @@ class Calculator {
             exceeded.insert(maxAmplitudes[dimension] > getLimitAmplitudeFromFrequency(frequency: maxFrequencies[dimension]), at: dimension)
         }
         
-        return DominantFrequencies(frequencies: maxFrequencies, velocities: maxAmplitudes, exceedsLimit: exceeded)
+        
+        
+        let result = DominantFrequencies(frequencies: maxFrequencies, velocities: maxAmplitudes, exceedsLimit: exceeded)
+        
+        if frequencyAmplitudes.count > 80 {
+            
+        }
+        
+        return result
     }
     
     private static func getLimitAmplitudeFromFrequency(frequency: Float) -> Float {
