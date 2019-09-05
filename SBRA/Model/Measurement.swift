@@ -12,7 +12,7 @@ import CoreLocation
 /*
     the measurement object that collects all necessary data about the take nmeasurement
  
-    objects with 'dynamic' are stored in the phones db
+    objects with '@objc dynamic' are stored in the phones db
 */
 
 class Measurement: Object {
@@ -21,8 +21,8 @@ class Measurement: Object {
     @objc dynamic var name: String = "Meting op onbekende locatie"
     @objc dynamic var dateStart: Date?
     @objc dynamic var dateEnd: Date?
-    var longitude: Double = DBL_MAX
-    var latitude: Double = DBL_MAX
+    var longitude: Double = Double.greatestFiniteMagnitude
+    var latitude: Double = Double.greatestFiniteMagnitude
     var locationAccuracy: Double?
     // address = locationString
     var locationString: String?
@@ -40,9 +40,7 @@ class Measurement: Object {
     private var closed: Bool = false
     private var bitmapFileName: String?
     
-    private var placemark: CLPlacemark?
-    
-    func addDataInterval(dataInterval: DataInterval){
+    func addDataInterval(dataInterval: DataInterval) {
         if closed {
             print("Current measurement is already closed! No more data can be added.")
             return
@@ -58,10 +56,10 @@ class Measurement: Object {
         open = true
     }
     
-    func close(){
+    func close(placemark: CLPlacemark?) {
         dateEnd = Date()
         closed = true
-        getLocation()
+        
         locationString = placemark?.locality
         if let lat = placemark?.location?.coordinate.latitude {
             latitude = Double(lat)
@@ -70,6 +68,10 @@ class Measurement: Object {
         if let long = placemark?.location?.coordinate.longitude {
             longitude = Double(long)
         }
+        if locationString != nil {
+            self.name = "Meting in " + locationString!
+        }
+        Database().addMeasurement(measurement: self)
     }
     
     public func getStartTimeInMillis() -> Int64 {
@@ -80,53 +82,12 @@ class Measurement: Object {
         return uid
     }
     
-    private func getLocation() {
-        let locationManager = CLLocationManager()
-        
-        locationManager.requestWhenInUseAuthorization()
-        
-        guard CLLocationManager.locationServicesEnabled() else {
-            print("ERROR: Can't retrieve location, reason: location services are disabled")
-            return
-        }
-        
-        locationManager.delegate = self
-        
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.startUpdatingLocation()
-    }
-    
     override static func primaryKey() -> String? {
         return "uid"
     }
     
-}
-
-extension Measurement: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let coder = CLGeocoder()
-        
-        if let location = locations.last {
-            coder.reverseGeocodeLocation(location) { [weak weakSelf = self] (placemarks, error) in
-                weakSelf?.placemark = placemarks?.first
-                
-                if let error = error {
-                    print(error)
-                }
-            }
-        }
-        
+    override static func ignoredProperties() -> [String] {
+        return ["longitude", "latitude", "locationAccuracy", "locationString", "settings", "dataIntervalCount", "dataIntervalCount", "dateStartObject", "open", "closed", "bitmapFileName"]
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("error \(error)")
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            manager.requestLocation()
-        } else {
-            print("error: not authorized to retrieve location")
-        }
-    }
 }
