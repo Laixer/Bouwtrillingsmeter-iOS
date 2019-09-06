@@ -41,14 +41,16 @@ class AdvancedAppSettingsViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = SwitchTableViewCell(style: .default, reuseIdentifier: "cell")
 		cell.textLabel?.text = "Toon grafieken"
+        
+        cell.selectionStyle = UITableViewCell.SelectionStyle.none
 		
+        cell.switchElement.setOn(UserDefaults.standard.bool(forKey: "graphs"), animated: true)
 		cell.switchElement.addTarget(self, action: #selector(toggleGraphs), for: .valueChanged)
 		
 		return cell
 	}
 	
 	@objc func toggleGraphs(sender: UISwitch) {
-		print(sender.isOn ? "Enabled graphs" : "Disabled graphs")
-		UserDefaults.standard.set(sender.isOn, forKey: PreferencesKeys.enabledGraphsPreferenceKey)
+		UserDefaults.standard.set(sender.isOn, forKey: "graphs")
 	}
 }
