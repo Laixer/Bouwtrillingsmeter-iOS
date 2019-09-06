@@ -8,6 +8,7 @@
 
 import RealmSwift
 import CoreLocation
+import Contacts
 
 /*
     the measurement object that collects all necessary data about the take nmeasurement
@@ -15,17 +16,20 @@ import CoreLocation
     objects with '@objc dynamic' are stored in the phones db
 */
 
+// swiftlint:disable identifier_name
+
 class Measurement: Object {
     
     @objc dynamic var uid: String = UUID().uuidString
     @objc dynamic var name: String = "Meting op onbekende locatie"
     @objc dynamic var dateStart: Date?
     @objc dynamic var dateEnd: Date?
+    @objc dynamic var exceededText: String = "Geen overschrijdingen"
     var longitude: Double = Double.greatestFiniteMagnitude
     var latitude: Double = Double.greatestFiniteMagnitude
     var locationAccuracy: Double?
-    // address = locationString
     var locationString: String?
+    @objc dynamic var address: String?
     override var description: String {
         return "Voeg een beschrijving toe"
     }
@@ -71,7 +75,21 @@ class Measurement: Object {
         if locationString != nil {
             self.name = "Meting in " + locationString!
         }
+        
+        var address = CNPostalAddressFormatter.string(from:placemark!.postalAddress!, style: .mailingAddress)
+        address = address.replacingOccurrences(of: "\n", with: ", ")
+        
+        self.address = address
+        
+        for dataInterval in self.dataIntervals {
+            if dataInterval.isExceedingLimit() {
+                self.exceededText = "Overschrijdingen gedetecteerd"
+                break
+            }
+        }
+        
         Database().addMeasurement(measurement: self)
+        
     }
     
     public func getStartTimeInMillis() -> Int64 {
