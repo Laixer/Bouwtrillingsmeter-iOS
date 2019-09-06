@@ -32,17 +32,17 @@ class Calculator {
     
     static func calculateVelocityFromAcceleration(data: [DataPoint<Int64>]) -> [DataPoint<Int64>] {
         var result: [DataPoint<Int64>] = []
-        var timePrevious: Double = 0
+        var timePrevious: Int64 = data[0].xAxisValue
         velocity = [0, 0, 0]
         
         for count in 0..<data.count {
             
-            let timeCurrent: Double = Double(data[count].xAxisValue)
-            let dtSeconds: Double = (timeCurrent - timePrevious) / 1000
+            let timeCurrent: Int64 = data[count].xAxisValue
+            let dtSeconds: Float = Float(timeCurrent - timePrevious) / 1000
             
-            velocity![0] += data[count].values[0] * Float(dtSeconds)
-            velocity![1] += data[count].values[1] * Float(dtSeconds)
-            velocity![2] += data[count].values[2] * Float(dtSeconds)
+            velocity![0] += data[count].values[0] * dtSeconds
+            velocity![1] += data[count].values[1] * dtSeconds
+            velocity![2] += data[count].values[2] * dtSeconds
             
             result.append(DataPoint(xAxisValue: data[count].xAxisValue, values: velocity!))
             
@@ -143,8 +143,6 @@ class Calculator {
             maxAmplitudes.insert(frequencyAmplitudes[maxIndexes[dimension]].values[dimension], at: dimension)
             exceeded.insert(maxAmplitudes[dimension] > getLimitAmplitudeFromFrequency(frequency: maxFrequencies[dimension]), at: dimension)
         }
-        
-        
         
         let result = DominantFrequencies(frequencies: maxFrequencies, velocities: maxAmplitudes, exceedsLimit: exceeded)
         
