@@ -21,12 +21,18 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
         let appearance = UIPageControl.appearance(whenContainedInInstancesOf: [UIPageViewController.self])
         appearance.pageIndicatorTintColor = UIColor.gray
         appearance.currentPageIndicatorTintColor = UIColor.black
+        
+        self.navigationItem.title = initiallyVisibleGraphType.description
 		
 		graphViewControllers = GraphType.allCases.map { (graphType) -> GraphViewController in
 			let graphVC = GraphViewController(graphType: graphType, settings: motionDataParser.settings)
 			return graphVC
 		}
 		
+        view.addConstraints([
+            view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+        ])
+        
 		view.backgroundColor = UIColor.white
 		
 		if let graphVC = graphViewControllers.filter({$0.graphType == initiallyVisibleGraphType }).first {
@@ -36,8 +42,6 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 		delegate = self
 		
 		// Do any additional setup after loading the view.
-        
-        motionDataParser.startDataCollection(updateInterval: 0.005)
 	}
 	
 	func pageViewController(_ pageViewController: UIPageViewController,
@@ -86,7 +90,6 @@ class GraphPageViewController: UIPageViewController, UIPageViewControllerDataSou
 	}
 	
 	override func viewWillDisappear(_ animated: Bool) {
-		motionDataParser.stopDataCollection()
 		super.viewWillDisappear(animated)
 	}
 	
