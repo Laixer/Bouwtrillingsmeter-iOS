@@ -20,17 +20,8 @@ class GraphViewController: UIViewController, DataIntervalClosedListener {
     var yTitleLabel = UILabel()
 	
 	var graphType: GraphType
-    var chartView: AAChartView?
     
     var chart: Chart?
-    
-    var xArrayD: [Double] = []
-    var yArrayD: [Double] = []
-    var zArrayD: [Double] = []
-    
-    var test:[AASeriesElement]?
-    var aaChartModel: AAChartModel?
-    var cCount = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -126,8 +117,8 @@ class GraphViewController: UIViewController, DataIntervalClosedListener {
             chart!.setMaxAndMinXAxis(min: 0, max: 50)
         case .dominantFrequencyFrequency:
             chart = Chart(chartType: .scatter, needScrolling: false, needRefresh: false, xMultiplier: 1)
-            chart!.setMaxAndMinXAxis(min: 0, max: 50)
             chart!.addConstantLine(entries: PowerLimit.getLimitAsEntries(settings: settings!), name: "constant")
+            chart!.setMaxAndMinXAxis(min: 0, max: 50)
 		}
         
         DataHandler.addDataIntervalClosedListener(listener: self)
