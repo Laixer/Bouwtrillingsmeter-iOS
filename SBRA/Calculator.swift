@@ -148,10 +148,6 @@ class Calculator {
         
         let result = DominantFrequencies(frequencies: maxFrequencies, velocities: maxAmplitudes, exceedsLimit: exceeded)
         
-        if frequencyAmplitudes.count > 80 {
-            
-        }
-        
         return result
     }
     
