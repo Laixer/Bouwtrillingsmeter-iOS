@@ -57,6 +57,10 @@ class MeasureViewController: UIViewController {
 	}
     
     func setupGraphs() {
+        
+        let cover = UIView()
+        cover.backgroundColor = UIColor.white
+        cover.tag = 100
 
         graphPageViewController = GraphPageViewController()
         graphPageViewController!.motionDataParser.settings = settings
@@ -65,45 +69,62 @@ class MeasureViewController: UIViewController {
         tempView = graphPageViewController!.view
         
         view.addSubview(tempView!)
+        view.addSubview(cover)
         
         tempView!.translatesAutoresizingMaskIntoConstraints = false
+        cover.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             tempView!.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1.0),
             tempView!.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
             tempView!.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            tempView!.rightAnchor.constraint(equalTo: view.rightAnchor)
+            tempView!.rightAnchor.constraint(equalTo: view.rightAnchor),
+            
+            cover.topAnchor.constraint(equalToSystemSpacingBelow: view.topAnchor, multiplier: 1.0),
+            cover.leftAnchor.constraint(equalTo: view.leftAnchor),
+            cover.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            cover.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
         
     }
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
+        
+        print(UserDefaults.standard.bool(forKey: "graphs"))
 		
 		view.backgroundColor = UIColor.white
         
-//        self.setupGraphs()
+        if showingGraphs {
+            setupGraphs()
+        }
         setupMeasuringLabel()
         
         // get newest location possible
         getLocation()
+        
 	}
 	
 	private func setupMeasuringLabel() {
         
         measuringLabel.text = "Aan het meten..."
+        measuringLabel.tag = 101
         view.addSubview(measuringLabel)
 		
+        indicator.tag = 101
 		view.addSubview(indicator)
 		indicator.startAnimating()
         
         let showGraph = UIButton()
+        showGraph.tag = 101
         showGraph.tintColor = .black
         showGraph.setTitleColor(UIColor.black, for: .normal)
         showGraph.layer.borderWidth = 1
         showGraph.setTitle("Toon grafieken", for: .normal)
         showGraph.titleLabel?.font = UIFont.boldSystemFont(ofSize: UIFont.preferredFont(forTextStyle: .body).pointSize)
-        view.addSubview(showGraph)
+        if showingGraphs {
+            view.addSubview(showGraph)
+        }
         
         showGraph.addTarget(self, action: #selector(clickedShowGraphs), for: .touchUpInside)
         
@@ -118,18 +139,28 @@ class MeasureViewController: UIViewController {
 			indicator.centerYAnchor.constraint(equalTo: measuringLabel.centerYAnchor),
 			indicator.leftAnchor.constraint(equalToSystemSpacingAfter: measuringLabel.rightAnchor, multiplier: 1.0),
             
-            showGraph.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            showGraph.topAnchor.constraint(equalTo: measuringLabel.bottomAnchor, constant: 5),
-            showGraph.heightAnchor.constraint(equalToConstant: 48.0),
-            showGraph.widthAnchor.constraint(equalToConstant: 210.0),
-            
 		])
+        
+        if showingGraphs {
+            view.addConstraints([
+                showGraph.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                showGraph.topAnchor.constraint(equalTo: measuringLabel.bottomAnchor, constant: 5),
+                showGraph.heightAnchor.constraint(equalToConstant: 48.0),
+                showGraph.widthAnchor.constraint(equalToConstant: 210.0),
+            ])
+        }
         
         
 	}
     
+    //swiftlint:disable identifier_name
     @objc private func clickedShowGraphs() {
-        setupGraphs()
+        if let viewWithTag = self.view.viewWithTag(101) {
+            viewWithTag.removeFromSuperview()
+        }
+        if let viewWithTag = self.view.viewWithTag(100) {
+            viewWithTag.removeFromSuperview()
+        }
     }
     
     private func getLocation() {
