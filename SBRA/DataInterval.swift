@@ -60,6 +60,9 @@ class DataInterval {
     }
     
     func isExceedingLimit() -> Bool {
+        if dominantFrequencies == nil {
+            return false
+        }
         for bool in dominantFrequencies!.getExceedsLimit() {
             if bool {
                 return true
