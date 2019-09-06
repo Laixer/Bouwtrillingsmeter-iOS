@@ -13,6 +13,7 @@ class MeasurementDetailViewController: UIViewController {
 	var measurement: Measurement
 	
 	private var titleLabel = UILabel()
+    private var addressLabel = UILabel()
 	private var locationLabel = UILabel()
 	private var timeLabel = UILabel()
 	private var limitExceededLabel = UILabel()
@@ -20,29 +21,31 @@ class MeasurementDetailViewController: UIViewController {
 	init(measurement: Measurement) {
 		self.measurement = measurement
 		
-		titleLabel.text = measurement.locationString == nil
-			? "Meting op onbekende locatie"
-			: "Meting in \(measurement.locationString!)"
+		titleLabel.text = measurement.name
+        addressLabel.text = (measurement.address != nil) ? measurement.address! : "Onbekend"
 		
 		let dateFormatter = DateFormatter()
 		dateFormatter.timeStyle = .short
 		dateFormatter.dateStyle = .long
+        dateFormatter.locale = Locale(identifier: "nl_NL")
 		
 		timeLabel.text = dateFormatter.string(from: measurement.dateEnd!)
-        // fix
-        limitExceededLabel.text = DataHandler.getLastExceedingPoint() != nil ? "Overschrijdingen gedetecteerd" : "Geen overschrijdingen"
-		
+        limitExceededLabel.text = measurement.exceededText
+
 		super.init(nibName: nil, bundle: nil)
 		
 		titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        addressLabel.translatesAutoresizingMaskIntoConstraints = false
 		timeLabel.translatesAutoresizingMaskIntoConstraints = false
 		limitExceededLabel.translatesAutoresizingMaskIntoConstraints = false
 		
 		NSLayoutConstraint.activate([
 			titleLabel.leftAnchor.constraint(equalToSystemSpacingAfter: view.safeAreaLayoutGuide.leftAnchor, multiplier: 1.0),
 			titleLabel.topAnchor.constraint(equalToSystemSpacingBelow: view.safeAreaLayoutGuide.topAnchor, multiplier: 1.0),
-			timeLabel.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 1.0),
-			timeLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor),
+            addressLabel.topAnchor.constraint(equalToSystemSpacingBelow: titleLabel.bottomAnchor, multiplier: 1.0),
+            addressLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor),
+			timeLabel.topAnchor.constraint(equalToSystemSpacingBelow: addressLabel.bottomAnchor, multiplier: 1.0),
+			timeLabel.leftAnchor.constraint(equalTo: addressLabel.leftAnchor),
 			limitExceededLabel.topAnchor.constraint(equalToSystemSpacingBelow: timeLabel.bottomAnchor, multiplier: 1.0),
 			limitExceededLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor)
 			
@@ -61,6 +64,7 @@ class MeasurementDetailViewController: UIViewController {
 		view.backgroundColor = .white
 		
 		view.addSubview(titleLabel)
+        view.addSubview(addressLabel)
 		view.addSubview(locationLabel)
 		view.addSubview(timeLabel)
 		view.addSubview(limitExceededLabel)
