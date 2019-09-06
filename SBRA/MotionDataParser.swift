@@ -39,7 +39,6 @@ class MotionDataParser: NSObject {
     }
     
     internal func stopDataCollection() {
-        manager.stopAccelerometerUpdates()
         manager.stopDeviceMotionUpdates()
     }
 }
