@@ -15,7 +15,6 @@ import simd
 
 class GraphViewController: UIViewController, DataIntervalClosedListener {
     
-    var titleLabel = UILabel()
     var xTitleLabel = UILabel()
     var yTitleLabel = UILabel()
 	
@@ -38,9 +37,12 @@ class GraphViewController: UIViewController, DataIntervalClosedListener {
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.title = graphType.description
+    }
+    
     private func getViewReady() {
-        titleLabel.text = graphType.description
-        view.addSubview(titleLabel)
         
         xTitleLabel.text = graphType.xDescription
         view.addSubview(xTitleLabel)
@@ -48,7 +50,6 @@ class GraphViewController: UIViewController, DataIntervalClosedListener {
         yTitleLabel.text = graphType.yDescription
         view.addSubview(yTitleLabel)
         
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         xTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         yTitleLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -57,19 +58,17 @@ class GraphViewController: UIViewController, DataIntervalClosedListener {
         let yTitleLabelWidth = yTitleLabel.intrinsicContentSize.width / 2 - 10
         
         NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.topAnchor.constraint(equalTo: view.topAnchor),
             
             xTitleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             xTitleLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            yTitleLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: -yTitleLabelWidth),
+            yTitleLabel.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: -yTitleLabelWidth),
             yTitleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             
             chart!.getChartView().bottomAnchor.constraint(equalTo: xTitleLabel.topAnchor),
             chart!.getChartView().leftAnchor.constraint(equalTo: yTitleLabel.rightAnchor, constant: -yTitleLabelWidth),
             chart!.getChartView().rightAnchor.constraint(equalTo: view.rightAnchor),
-            chart!.getChartView().topAnchor.constraint(equalTo: titleLabel.bottomAnchor)
+            chart!.getChartView().topAnchor.constraint(equalTo: view.topAnchor)
         ])
     }
     
