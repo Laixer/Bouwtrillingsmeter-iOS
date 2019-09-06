@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 class Database {
-	func numberOfMeasurements() -> Int {
+    func numberOfMeasurements() -> Int {
 		do {
 			let realm = try Realm()
 			return realm.objects(Measurement.self).count

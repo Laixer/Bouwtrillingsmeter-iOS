@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		670611325E4EE8EC8A6E3873 /* Pods_SBRA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C7648575BC029CAF6421FB1 /* Pods_SBRA.framework */; };
-		C108A00921CC48A900C6CCB2 /* DominantFrequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C108A00821CC48A900C6CCB2 /* DominantFrequency.swift */; };
 		C11C019D22B2987B003CE368 /* AppSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C11C019C22B2987B003CE368 /* AppSettingsViewController.swift */; };
 		C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */; };
 		C137A92322BD072100770750 /* UIColor+Graphs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C137A92222BD072100770750 /* UIColor+Graphs.swift */; };
 		C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B38882180C36300B03F99 /* MotionDataParser.swift */; };
 		C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14B388C2180CB3500B03F99 /* DataPoint.swift */; };
-		C15F79A222A576AB00FFD334 /* DominantFrequencyGraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C15F79A122A576AB00FFD334 /* DominantFrequencyGraphView.swift */; };
 		C162EFF0228862CD005E71CE /* PowerLimit.swift in Sources */ = {isa = PBXBuildFile; fileRef = C162EFEF228862CD005E71CE /* PowerLimit.swift */; };
 		C17447EA2208732B00287C3E /* BuildingCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447E92208732B00287C3E /* BuildingCategory.swift */; };
 		C17447EC2208734200287C3E /* VibrationCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447EB2208734200287C3E /* VibrationCategory.swift */; };
@@ -24,8 +22,6 @@
 		C17447F42208926700287C3E /* WizardOutcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447F32208926700287C3E /* WizardOutcome.swift */; };
 		C17447F62208A15300287C3E /* CategoryWizardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17447F52208A15300287C3E /* CategoryWizardViewController.swift */; };
 		C17A3FA1224FC7DE00575905 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17A3FA0224FC7DE00575905 /* Database.swift */; };
-		C17A3FA3224FFC8400575905 /* PersistableMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17A3FA2224FFC8400575905 /* PersistableMeasurement.swift */; };
-		C17A3FA5225006F300575905 /* PersistableDataPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17A3FA4225006F300575905 /* PersistableDataPoint.swift */; };
 		C17CDC94220B76C800F008E8 /* CategoryWizardResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C17CDC93220B76C800F008E8 /* CategoryWizardResultsView.swift */; };
 		C1856312220B37540073999B /* CategoryWizardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1856311220B37540073999B /* CategoryWizardView.swift */; };
 		C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B2195421AC014900F7D004 /* GraphViewController.swift */; };
@@ -40,16 +36,49 @@
 		C1D1C4C722307D40000B7D99 /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D1C4C622307D40000B7D99 /* Measurement.swift */; };
 		C1D8A15B21F1349000921AE5 /* SwitchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D8A15A21F1349000921AE5 /* SwitchTableViewCell.swift */; };
 		C1EA6B3121AAEFCC000841A3 /* MeasureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EA6B3021AAEFCC000841A3 /* MeasureViewController.swift */; };
-		C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EA6B3221AAF383000841A3 /* GraphCollectionViewCell.swift */; };
 		C1EE40CE219F6599004776F0 /* MeasurementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */; };
-		C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE40CF219F6E0E004776F0 /* GraphView.swift */; };
-		C1EE40D2219F6EC2004776F0 /* GraphSegment.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EE40D1219F6EC2004776F0 /* GraphSegment.swift */; };
 		C1F188B822CBB28A0056B77B /* MeasurementDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F188B722CBB28A0056B77B /* MeasurementDetailViewController.swift */; };
 		C1FB6FD4220A371800D7BE5A /* CategoryWizardDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */; };
 		C1FB6FD6220A376700D7BE5A /* MeasurementSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB6FD5220A376700D7BE5A /* MeasurementSettings.swift */; };
 		C1FE93A021EBAB21000B90FC /* MeasurementSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FE939F21EBAB21000B90FC /* MeasurementSettingsViewController.swift */; };
 		C1FF889122B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF889022B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift */; };
 		C1FF889322B6C5F100E1EDB5 /* PreferencesKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FF889222B6C5F100E1EDB5 /* PreferencesKeys.swift */; };
+		C20FA50323155531009C0BC2 /* DataHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20FA50223155531009C0BC2 /* DataHandler.swift */; };
+		C20FA50523155564009C0BC2 /* DataInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20FA50423155564009C0BC2 /* DataInterval.swift */; };
+		C20FA50723155670009C0BC2 /* DominantFrequencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20FA50623155670009C0BC2 /* DominantFrequencies.swift */; };
+		C20FA5092315639F009C0BC2 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20FA5082315639F009C0BC2 /* Calculator.swift */; };
+		C20FA50B23167438009C0BC2 /* Date+Epoch.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20FA50A23167438009C0BC2 /* Date+Epoch.swift */; };
+		C20FA50D2316804A009C0BC2 /* MeasurementControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = C20FA50C2316804A009C0BC2 /* MeasurementControl.swift */; };
+		C2DE214C231D013A00BF772D /* Chart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE214B231D013A00BF772D /* Chart.swift */; };
+		C2DE215C231E57E400BF772D /* AAEasyTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2154231E57E300BF772D /* AAEasyTool.swift */; };
+		C2DE215D231E57E400BF772D /* AAChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2155231E57E300BF772D /* AAChartModel.swift */; };
+		C2DE215E231E57E400BF772D /* AASerializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2156231E57E300BF772D /* AASerializable.swift */; };
+		C2DE215F231E57E400BF772D /* AAChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2157231E57E300BF772D /* AAChartView.swift */; };
+		C2DE2160231E57E400BF772D /* AASeriesElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2158231E57E300BF772D /* AASeriesElement.swift */; };
+		C2DE2161231E57E400BF772D /* AAColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2159231E57E400BF772D /* AAColor.swift */; };
+		C2DE2162231E57E400BF772D /* AAOptionsComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE215A231E57E400BF772D /* AAOptionsComposer.swift */; };
+		C2DE2163231E57E400BF772D /* AAGradientColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE215B231E57E400BF772D /* AAGradientColor.swift */; };
+		C2DE2176231E57F400BF772D /* AAXAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2164231E57F200BF772D /* AAXAxis.swift */; };
+		C2DE2177231E57F400BF772D /* AAMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2165231E57F300BF772D /* AAMarker.swift */; };
+		C2DE2178231E57F400BF772D /* AAPlotLinesElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2166231E57F300BF772D /* AAPlotLinesElement.swift */; };
+		C2DE2179231E57F400BF772D /* AADataLabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2167231E57F300BF772D /* AADataLabels.swift */; };
+		C2DE217A231E57F400BF772D /* AASubtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2168231E57F300BF772D /* AASubtitle.swift */; };
+		C2DE217B231E57F400BF772D /* AAOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2169231E57F300BF772D /* AAOptions.swift */; };
+		C2DE217C231E57F400BF772D /* AATooltip.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE216A231E57F300BF772D /* AATooltip.swift */; };
+		C2DE217D231E57F400BF772D /* AAYAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE216B231E57F300BF772D /* AAYAxis.swift */; };
+		C2DE217E231E57F400BF772D /* AALegend.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE216C231E57F300BF772D /* AALegend.swift */; };
+		C2DE217F231E57F400BF772D /* AACrosshair.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE216D231E57F300BF772D /* AACrosshair.swift */; };
+		C2DE2180231E57F400BF772D /* AASeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE216E231E57F300BF772D /* AASeries.swift */; };
+		C2DE2181231E57F400BF772D /* AAChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE216F231E57F300BF772D /* AAChart.swift */; };
+		C2DE2182231E57F400BF772D /* AALabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2170231E57F300BF772D /* AALabel.swift */; };
+		C2DE2183231E57F400BF772D /* AATitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2171231E57F400BF772D /* AATitle.swift */; };
+		C2DE2184231E57F400BF772D /* AAPlotBandsElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2172231E57F400BF772D /* AAPlotBandsElement.swift */; };
+		C2DE2185231E57F400BF772D /* AAPlotOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2173231E57F400BF772D /* AAPlotOptions.swift */; };
+		C2DE2186231E57F400BF772D /* AAAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2174231E57F400BF772D /* AAAnimation.swift */; };
+		C2DE2187231E57F400BF772D /* AALabels.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE2175231E57F400BF772D /* AALabels.swift */; };
+		C2DE2189231E57FA00BF772D /* AAJSFiles.bundle in Resources */ = {isa = PBXBuildFile; fileRef = C2DE2188231E57F900BF772D /* AAJSFiles.bundle */; };
+		C2DE218B231FD14800BF772D /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE218A231FD14700BF772D /* Const.swift */; };
+		C2DE218D231FEDE100BF772D /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2DE218C231FEDE100BF772D /* FFT.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,13 +95,11 @@
 		2C7648575BC029CAF6421FB1 /* Pods_SBRA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SBRA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F511BD27B300B9783B5BA4F /* Pods-SBRA.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBRA.release.xcconfig"; path = "Pods/Target Support Files/Pods-SBRA/Pods-SBRA.release.xcconfig"; sourceTree = "<group>"; };
 		81B42AC13935647DFC95260F /* Pods-SBRA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SBRA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SBRA/Pods-SBRA.debug.xcconfig"; sourceTree = "<group>"; };
-		C108A00821CC48A900C6CCB2 /* DominantFrequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DominantFrequency.swift; path = Model/DominantFrequency.swift; sourceTree = "<group>"; };
 		C11C019C22B2987B003CE368 /* AppSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsViewController.swift; sourceTree = "<group>"; };
 		C12D4E6B21AECD2300AC2118 /* GraphPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphPageViewController.swift; sourceTree = "<group>"; };
 		C137A92222BD072100770750 /* UIColor+Graphs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Graphs.swift"; sourceTree = "<group>"; };
 		C14B38882180C36300B03F99 /* MotionDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionDataParser.swift; sourceTree = "<group>"; };
 		C14B388C2180CB3500B03F99 /* DataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataPoint.swift; sourceTree = "<group>"; };
-		C15F79A122A576AB00FFD334 /* DominantFrequencyGraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DominantFrequencyGraphView.swift; sourceTree = "<group>"; };
 		C162EFEF228862CD005E71CE /* PowerLimit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PowerLimit.swift; sourceTree = "<group>"; };
 		C17447E92208732B00287C3E /* BuildingCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuildingCategory.swift; sourceTree = "<group>"; };
 		C17447EB2208734200287C3E /* VibrationCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibrationCategory.swift; sourceTree = "<group>"; };
@@ -82,8 +109,6 @@
 		C17447F32208926700287C3E /* WizardOutcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WizardOutcome.swift; sourceTree = "<group>"; };
 		C17447F52208A15300287C3E /* CategoryWizardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizardViewController.swift; sourceTree = "<group>"; };
 		C17A3FA0224FC7DE00575905 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
-		C17A3FA2224FFC8400575905 /* PersistableMeasurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableMeasurement.swift; sourceTree = "<group>"; };
-		C17A3FA4225006F300575905 /* PersistableDataPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistableDataPoint.swift; sourceTree = "<group>"; };
 		C17CDC93220B76C800F008E8 /* CategoryWizardResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizardResultsView.swift; sourceTree = "<group>"; };
 		C1856311220B37540073999B /* CategoryWizardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizardView.swift; sourceTree = "<group>"; };
 		C1B2195421AC014900F7D004 /* GraphViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewController.swift; sourceTree = "<group>"; };
@@ -102,16 +127,49 @@
 		C1D1C4C622307D40000B7D99 /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
 		C1D8A15A21F1349000921AE5 /* SwitchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableViewCell.swift; sourceTree = "<group>"; };
 		C1EA6B3021AAEFCC000841A3 /* MeasureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewController.swift; sourceTree = "<group>"; };
-		C1EA6B3221AAF383000841A3 /* GraphCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphCollectionViewCell.swift; sourceTree = "<group>"; };
 		C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementsViewController.swift; sourceTree = "<group>"; };
-		C1EE40CF219F6E0E004776F0 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
-		C1EE40D1219F6EC2004776F0 /* GraphSegment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphSegment.swift; sourceTree = "<group>"; };
 		C1F188B722CBB28A0056B77B /* MeasurementDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementDetailViewController.swift; sourceTree = "<group>"; };
 		C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryWizardDelegate.swift; sourceTree = "<group>"; };
 		C1FB6FD5220A376700D7BE5A /* MeasurementSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSettings.swift; sourceTree = "<group>"; };
 		C1FE939F21EBAB21000B90FC /* MeasurementSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementSettingsViewController.swift; sourceTree = "<group>"; };
 		C1FF889022B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvancedAppSettingsViewController.swift; sourceTree = "<group>"; };
 		C1FF889222B6C5F100E1EDB5 /* PreferencesKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesKeys.swift; sourceTree = "<group>"; };
+		C20FA50223155531009C0BC2 /* DataHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataHandler.swift; sourceTree = "<group>"; };
+		C20FA50423155564009C0BC2 /* DataInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInterval.swift; sourceTree = "<group>"; };
+		C20FA50623155670009C0BC2 /* DominantFrequencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DominantFrequencies.swift; sourceTree = "<group>"; };
+		C20FA5082315639F009C0BC2 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		C20FA50A23167438009C0BC2 /* Date+Epoch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Epoch.swift"; sourceTree = "<group>"; };
+		C20FA50C2316804A009C0BC2 /* MeasurementControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasurementControl.swift; sourceTree = "<group>"; };
+		C2DE214B231D013A00BF772D /* Chart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
+		C2DE2154231E57E300BF772D /* AAEasyTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAEasyTool.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAChartCreator/AAEasyTool.swift"; sourceTree = "<group>"; };
+		C2DE2155231E57E300BF772D /* AAChartModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAChartModel.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAChartCreator/AAChartModel.swift"; sourceTree = "<group>"; };
+		C2DE2156231E57E300BF772D /* AASerializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AASerializable.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAChartCreator/AASerializable.swift"; sourceTree = "<group>"; };
+		C2DE2157231E57E300BF772D /* AAChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAChartView.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAChartCreator/AAChartView.swift"; sourceTree = "<group>"; };
+		C2DE2158231E57E300BF772D /* AASeriesElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AASeriesElement.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAChartCreator/AASeriesElement.swift"; sourceTree = "<group>"; };
+		C2DE2159231E57E400BF772D /* AAColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAColor.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAChartCreator/AAColor.swift"; sourceTree = "<group>"; };
+		C2DE215A231E57E400BF772D /* AAOptionsComposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAOptionsComposer.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAChartCreator/AAOptionsComposer.swift"; sourceTree = "<group>"; };
+		C2DE215B231E57E400BF772D /* AAGradientColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAGradientColor.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAChartCreator/AAGradientColor.swift"; sourceTree = "<group>"; };
+		C2DE2164231E57F200BF772D /* AAXAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAXAxis.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AAXAxis.swift"; sourceTree = "<group>"; };
+		C2DE2165231E57F300BF772D /* AAMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAMarker.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AAMarker.swift"; sourceTree = "<group>"; };
+		C2DE2166231E57F300BF772D /* AAPlotLinesElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAPlotLinesElement.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AAPlotLinesElement.swift"; sourceTree = "<group>"; };
+		C2DE2167231E57F300BF772D /* AADataLabels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AADataLabels.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AADataLabels.swift"; sourceTree = "<group>"; };
+		C2DE2168231E57F300BF772D /* AASubtitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AASubtitle.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AASubtitle.swift"; sourceTree = "<group>"; };
+		C2DE2169231E57F300BF772D /* AAOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAOptions.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AAOptions.swift"; sourceTree = "<group>"; };
+		C2DE216A231E57F300BF772D /* AATooltip.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AATooltip.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AATooltip.swift"; sourceTree = "<group>"; };
+		C2DE216B231E57F300BF772D /* AAYAxis.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAYAxis.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AAYAxis.swift"; sourceTree = "<group>"; };
+		C2DE216C231E57F300BF772D /* AALegend.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AALegend.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AALegend.swift"; sourceTree = "<group>"; };
+		C2DE216D231E57F300BF772D /* AACrosshair.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AACrosshair.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AACrosshair.swift"; sourceTree = "<group>"; };
+		C2DE216E231E57F300BF772D /* AASeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AASeries.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AASeries.swift"; sourceTree = "<group>"; };
+		C2DE216F231E57F300BF772D /* AAChart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAChart.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AAChart.swift"; sourceTree = "<group>"; };
+		C2DE2170231E57F300BF772D /* AALabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AALabel.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AALabel.swift"; sourceTree = "<group>"; };
+		C2DE2171231E57F400BF772D /* AATitle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AATitle.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AATitle.swift"; sourceTree = "<group>"; };
+		C2DE2172231E57F400BF772D /* AAPlotBandsElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAPlotBandsElement.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AAPlotBandsElement.swift"; sourceTree = "<group>"; };
+		C2DE2173231E57F400BF772D /* AAPlotOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAPlotOptions.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AAPlotOptions.swift"; sourceTree = "<group>"; };
+		C2DE2174231E57F400BF772D /* AAAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AAAnimation.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AAAnimation.swift"; sourceTree = "<group>"; };
+		C2DE2175231E57F400BF772D /* AALabels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AALabels.swift; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAOptionsModel/AALabels.swift"; sourceTree = "<group>"; };
+		C2DE2188231E57F900BF772D /* AAJSFiles.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AAJSFiles.bundle; path = "../../../../../Downloads/AAChartKit-Swift-5ac6694a2536ca8e1723b1d50f9a75d83da357b4/AAInfographics/AAJSFiles.bundle"; sourceTree = "<group>"; };
+		C2DE218A231FD14700BF772D /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
+		C2DE218C231FEDE100BF772D /* FFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFT.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,10 +231,10 @@
 		C1BA12EB217CBD0A0024F2DA /* SBRA */ = {
 			isa = PBXGroup;
 			children = (
+				C2DE2153231E57C600BF772D /* AAInfoGraph */,
 				C1BA12EC217CBD0A0024F2DA /* AppDelegate.swift */,
 				C14B38882180C36300B03F99 /* MotionDataParser.swift */,
-				C108A00821CC48A900C6CCB2 /* DominantFrequency.swift */,
-				C1C9619F21B6B08B003A7396 /* View Controller */,
+				C1C9619F21B6B08B003A7396 /* Controller */,
 				C1C961A221B6B0C0003A7396 /* Model */,
 				C1C961A321B6B0CD003A7396 /* View */,
 				C1C961A121B6B0AD003A7396 /* Extensions */,
@@ -184,6 +242,13 @@
 				C1BA12F3217CBD0D0024F2DA /* Assets.xcassets */,
 				C1BA12F5217CBD0D0024F2DA /* LaunchScreen.storyboard */,
 				C1BA12F8217CBD0D0024F2DA /* Info.plist */,
+				C20FA50223155531009C0BC2 /* DataHandler.swift */,
+				C20FA50423155564009C0BC2 /* DataInterval.swift */,
+				C20FA50623155670009C0BC2 /* DominantFrequencies.swift */,
+				C20FA5082315639F009C0BC2 /* Calculator.swift */,
+				C20FA50C2316804A009C0BC2 /* MeasurementControl.swift */,
+				C2DE218A231FD14700BF772D /* Const.swift */,
+				C2DE218C231FEDE100BF772D /* FFT.swift */,
 			);
 			path = SBRA;
 			sourceTree = "<group>";
@@ -197,7 +262,7 @@
 			path = SBRATests;
 			sourceTree = "<group>";
 		};
-		C1C9619F21B6B08B003A7396 /* View Controller */ = {
+		C1C9619F21B6B08B003A7396 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				C1EE40CD219F6599004776F0 /* MeasurementsViewController.swift */,
@@ -210,7 +275,7 @@
 				C11C019C22B2987B003CE368 /* AppSettingsViewController.swift */,
 				C1FF889022B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift */,
 			);
-			path = "View Controller";
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		C1C961A121B6B0AD003A7396 /* Extensions */ = {
@@ -219,6 +284,7 @@
 				C1C9619B21B5CB34003A7396 /* UIColor+Rotterdam.swift */,
 				C137A92222BD072100770750 /* UIColor+Graphs.swift */,
 				C1C9619D21B5CD40003A7396 /* UIFont+Rotterdam.swift */,
+				C20FA50A23167438009C0BC2 /* Date+Epoch.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -226,16 +292,14 @@
 		C1C961A221B6B0C0003A7396 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */,
 				C17A3FA0224FC7DE00575905 /* Database.swift */,
 				C1D1C4C622307D40000B7D99 /* Measurement.swift */,
-				C17A3FA2224FFC8400575905 /* PersistableMeasurement.swift */,
-				C1FB6FD3220A371800D7BE5A /* CategoryWizardDelegate.swift */,
 				C1FB6FD5220A376700D7BE5A /* MeasurementSettings.swift */,
 				C17447E92208732B00287C3E /* BuildingCategory.swift */,
 				C17447EB2208734200287C3E /* VibrationCategory.swift */,
 				C1B2195621AC04AB00F7D004 /* GraphType.swift */,
 				C14B388C2180CB3500B03F99 /* DataPoint.swift */,
-				C17A3FA4225006F300575905 /* PersistableDataPoint.swift */,
 				C17447ED22088F8000287C3E /* CategoryWizard.swift */,
 				C17447EF22088FA600287C3E /* WizardQuestion.swift */,
 				C17447F32208926700287C3E /* WizardOutcome.swift */,
@@ -252,10 +316,7 @@
 				C1856311220B37540073999B /* CategoryWizardView.swift */,
 				C17CDC93220B76C800F008E8 /* CategoryWizardResultsView.swift */,
 				C1D8A15A21F1349000921AE5 /* SwitchTableViewCell.swift */,
-				C1EA6B3221AAF383000841A3 /* GraphCollectionViewCell.swift */,
-				C1EE40CF219F6E0E004776F0 /* GraphView.swift */,
-				C15F79A122A576AB00FFD334 /* DominantFrequencyGraphView.swift */,
-				C1EE40D1219F6EC2004776F0 /* GraphSegment.swift */,
+				C2DE214B231D013A00BF772D /* Chart.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -266,6 +327,40 @@
 				C1FF889222B6C5F100E1EDB5 /* PreferencesKeys.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		C2DE2153231E57C600BF772D /* AAInfoGraph */ = {
+			isa = PBXGroup;
+			children = (
+				C2DE2188231E57F900BF772D /* AAJSFiles.bundle */,
+				C2DE2174231E57F400BF772D /* AAAnimation.swift */,
+				C2DE216F231E57F300BF772D /* AAChart.swift */,
+				C2DE216D231E57F300BF772D /* AACrosshair.swift */,
+				C2DE2167231E57F300BF772D /* AADataLabels.swift */,
+				C2DE2170231E57F300BF772D /* AALabel.swift */,
+				C2DE2175231E57F400BF772D /* AALabels.swift */,
+				C2DE216C231E57F300BF772D /* AALegend.swift */,
+				C2DE2165231E57F300BF772D /* AAMarker.swift */,
+				C2DE2169231E57F300BF772D /* AAOptions.swift */,
+				C2DE2172231E57F400BF772D /* AAPlotBandsElement.swift */,
+				C2DE2166231E57F300BF772D /* AAPlotLinesElement.swift */,
+				C2DE2173231E57F400BF772D /* AAPlotOptions.swift */,
+				C2DE216E231E57F300BF772D /* AASeries.swift */,
+				C2DE2168231E57F300BF772D /* AASubtitle.swift */,
+				C2DE2171231E57F400BF772D /* AATitle.swift */,
+				C2DE216A231E57F300BF772D /* AATooltip.swift */,
+				C2DE2164231E57F200BF772D /* AAXAxis.swift */,
+				C2DE216B231E57F300BF772D /* AAYAxis.swift */,
+				C2DE2155231E57E300BF772D /* AAChartModel.swift */,
+				C2DE2157231E57E300BF772D /* AAChartView.swift */,
+				C2DE2159231E57E400BF772D /* AAColor.swift */,
+				C2DE2154231E57E300BF772D /* AAEasyTool.swift */,
+				C2DE215B231E57E400BF772D /* AAGradientColor.swift */,
+				C2DE215A231E57E400BF772D /* AAOptionsComposer.swift */,
+				C2DE2156231E57E300BF772D /* AASerializable.swift */,
+				C2DE2158231E57E300BF772D /* AASeriesElement.swift */,
+			);
+			path = AAInfoGraph;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -317,7 +412,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
 				LastUpgradeCheck = 1000;
-				ORGANIZATIONNAME = "Wander Siemers";
+				ORGANIZATIONNAME = "James Bal";
 				TargetAttributes = {
 					C1BA12E8217CBD0A0024F2DA = {
 						CreatedOnToolsVersion = 10.0;
@@ -355,6 +450,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1BA12F7217CBD0D0024F2DA /* LaunchScreen.storyboard in Resources */,
+				C2DE2189231E57FA00BF772D /* AAJSFiles.bundle in Resources */,
 				C1BA12F4217CBD0D0024F2DA /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,39 +529,67 @@
 			buildActionMask = 2147483647;
 			files = (
 				C17447EA2208732B00287C3E /* BuildingCategory.swift in Sources */,
-				C1EE40D2219F6EC2004776F0 /* GraphSegment.swift in Sources */,
+				C2DE218B231FD14800BF772D /* Const.swift in Sources */,
+				C2DE2161231E57E400BF772D /* AAColor.swift in Sources */,
+				C2DE2184231E57F400BF772D /* AAPlotBandsElement.swift in Sources */,
 				C1FB6FD6220A376700D7BE5A /* MeasurementSettings.swift in Sources */,
 				C1FE93A021EBAB21000B90FC /* MeasurementSettingsViewController.swift in Sources */,
 				C1C9619E21B5CD40003A7396 /* UIFont+Rotterdam.swift in Sources */,
 				C162EFF0228862CD005E71CE /* PowerLimit.swift in Sources */,
 				C17CDC94220B76C800F008E8 /* CategoryWizardResultsView.swift in Sources */,
+				C2DE2162231E57E400BF772D /* AAOptionsComposer.swift in Sources */,
 				C1B2195521AC014900F7D004 /* GraphViewController.swift in Sources */,
 				C1FF889322B6C5F100E1EDB5 /* PreferencesKeys.swift in Sources */,
 				C14B38892180C36300B03F99 /* MotionDataParser.swift in Sources */,
+				C2DE2180231E57F400BF772D /* AASeries.swift in Sources */,
+				C2DE217A231E57F400BF772D /* AASubtitle.swift in Sources */,
+				C2DE217C231E57F400BF772D /* AATooltip.swift in Sources */,
 				C1EE40CE219F6599004776F0 /* MeasurementsViewController.swift in Sources */,
-				C15F79A222A576AB00FFD334 /* DominantFrequencyGraphView.swift in Sources */,
+				C20FA50B23167438009C0BC2 /* Date+Epoch.swift in Sources */,
 				C17447F62208A15300287C3E /* CategoryWizardViewController.swift in Sources */,
+				C2DE215C231E57E400BF772D /* AAEasyTool.swift in Sources */,
+				C2DE2179231E57F400BF772D /* AADataLabels.swift in Sources */,
 				C1B2195721AC04AB00F7D004 /* GraphType.swift in Sources */,
 				C1C9619C21B5CB34003A7396 /* UIColor+Rotterdam.swift in Sources */,
 				C14B388D2180CB3500B03F99 /* DataPoint.swift in Sources */,
 				C1D8A15B21F1349000921AE5 /* SwitchTableViewCell.swift in Sources */,
-				C108A00921CC48A900C6CCB2 /* DominantFrequency.swift in Sources */,
+				C2DE218D231FEDE100BF772D /* FFT.swift in Sources */,
+				C2DE217B231E57F400BF772D /* AAOptions.swift in Sources */,
 				C17447F022088FA600287C3E /* WizardQuestion.swift in Sources */,
-				C17A3FA3224FFC8400575905 /* PersistableMeasurement.swift in Sources */,
 				C1BA12ED217CBD0A0024F2DA /* AppDelegate.swift in Sources */,
-				C1EE40D0219F6E0E004776F0 /* GraphView.swift in Sources */,
+				C2DE2160231E57E400BF772D /* AASeriesElement.swift in Sources */,
+				C20FA50723155670009C0BC2 /* DominantFrequencies.swift in Sources */,
+				C2DE2178231E57F400BF772D /* AAPlotLinesElement.swift in Sources */,
+				C2DE2177231E57F400BF772D /* AAMarker.swift in Sources */,
+				C2DE2183231E57F400BF772D /* AATitle.swift in Sources */,
 				C1FF889122B6953000E1EDB5 /* AdvancedAppSettingsViewController.swift in Sources */,
 				C17A3FA1224FC7DE00575905 /* Database.swift in Sources */,
+				C20FA50323155531009C0BC2 /* DataHandler.swift in Sources */,
+				C2DE215D231E57E400BF772D /* AAChartModel.swift in Sources */,
+				C2DE217F231E57F400BF772D /* AACrosshair.swift in Sources */,
 				C1F188B822CBB28A0056B77B /* MeasurementDetailViewController.swift in Sources */,
+				C2DE2176231E57F400BF772D /* AAXAxis.swift in Sources */,
+				C2DE217E231E57F400BF772D /* AALegend.swift in Sources */,
+				C2DE214C231D013A00BF772D /* Chart.swift in Sources */,
+				C2DE2186231E57F400BF772D /* AAAnimation.swift in Sources */,
+				C2DE2181231E57F400BF772D /* AAChart.swift in Sources */,
+				C20FA50D2316804A009C0BC2 /* MeasurementControl.swift in Sources */,
 				C1856312220B37540073999B /* CategoryWizardView.swift in Sources */,
-				C1EA6B3321AAF383000841A3 /* GraphCollectionViewCell.swift in Sources */,
+				C2DE2182231E57F400BF772D /* AALabel.swift in Sources */,
+				C2DE2187231E57F400BF772D /* AALabels.swift in Sources */,
+				C2DE2185231E57F400BF772D /* AAPlotOptions.swift in Sources */,
+				C2DE217D231E57F400BF772D /* AAYAxis.swift in Sources */,
 				C1FB6FD4220A371800D7BE5A /* CategoryWizardDelegate.swift in Sources */,
-				C17A3FA5225006F300575905 /* PersistableDataPoint.swift in Sources */,
 				C12D4E6C21AECD2300AC2118 /* GraphPageViewController.swift in Sources */,
 				C1BA5876221A15CF00EF2480 /* MeasurementTableViewCell.swift in Sources */,
 				C17447EE22088F8000287C3E /* CategoryWizard.swift in Sources */,
+				C20FA50523155564009C0BC2 /* DataInterval.swift in Sources */,
 				C17447EC2208734200287C3E /* VibrationCategory.swift in Sources */,
+				C2DE2163231E57E400BF772D /* AAGradientColor.swift in Sources */,
+				C2DE215E231E57E400BF772D /* AASerializable.swift in Sources */,
+				C20FA5092315639F009C0BC2 /* Calculator.swift in Sources */,
 				C1EA6B3121AAEFCC000841A3 /* MeasureViewController.swift in Sources */,
+				C2DE215F231E57E400BF772D /* AAChartView.swift in Sources */,
 				C17447F22208902700287C3E /* WizardItem.swift in Sources */,
 				C11C019D22B2987B003CE368 /* AppSettingsViewController.swift in Sources */,
 				C1D1C4C722307D40000B7D99 /* Measurement.swift in Sources */,
