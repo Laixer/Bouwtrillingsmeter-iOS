@@ -39,6 +39,7 @@ class MeasurementsViewController: UIViewController {
 		
 		formatter.dateStyle = .long
 		formatter.timeStyle = .short
+        formatter.locale = Locale(identifier: "nl_NL")
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -129,6 +130,7 @@ class MeasurementsViewController: UIViewController {
 		rotterdamIconView.translatesAutoresizingMaskIntoConstraints = false
 		graphIconView.translatesAutoresizingMaskIntoConstraints = false
 		noMeasurementsLabel.translatesAutoresizingMaskIntoConstraints = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
 		
 		NSLayoutConstraint.activate([
 			rotterdamIconView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -141,7 +143,13 @@ class MeasurementsViewController: UIViewController {
 			graphIconView.centerYAnchor.constraint(equalTo: aboveRotterdamIconLayoutGuide.centerYAnchor),
 			
 			noMeasurementsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-			noMeasurementsLabel.topAnchor.constraint(equalToSystemSpacingBelow: graphIconView.bottomAnchor, multiplier: 1.0)
+			noMeasurementsLabel.topAnchor.constraint(equalToSystemSpacingBelow: graphIconView.bottomAnchor, multiplier: 1.0),
+            
+            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
 		])
 	}
 	
@@ -155,10 +163,6 @@ class MeasurementsViewController: UIViewController {
 			tableView.isHidden = false
 			tableView.frame = view.bounds
 		}
-	}
-	
-	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-		return .portrait
 	}
 }
 

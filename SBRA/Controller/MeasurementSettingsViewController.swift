@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class MeasurementSettingsViewController: UIViewController {
 	
@@ -99,8 +100,8 @@ class MeasurementSettingsViewController: UIViewController {
 		view.addSubview(tableView)
 		
         NSLayoutConstraint.activate([
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 1.0),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 0.0),
+            tableView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            tableView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
             tableView.heightAnchor.constraint(equalToConstant: 133)
         ])
 		
@@ -179,10 +180,6 @@ class MeasurementSettingsViewController: UIViewController {
 	
 	@objc private func dismissTapped() {
 		navigationController?.dismiss(animated: true, completion: nil)
-	}
-	
-	override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-		return .portrait
 	}
 	
 }

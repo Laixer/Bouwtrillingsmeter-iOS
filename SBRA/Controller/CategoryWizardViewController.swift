@@ -69,6 +69,7 @@ class CategoryWizardViewController: UIViewController {
 					
 					if outcome.successful == false {
 						delegate?.categoryWizardDelegateDidFailWithMessage(message: outcome.text)
+                        wizardView?.secondaryTextLabel.text = ""
 						showFailureResultsView()
 					}
 					
@@ -108,8 +109,8 @@ class CategoryWizardViewController: UIViewController {
 		resultsView.translatesAutoresizingMaskIntoConstraints = false
 		
 		NSLayoutConstraint.activate([
-			resultsView.leftAnchor.constraint(equalTo: view.leftAnchor),
-			resultsView.rightAnchor.constraint(equalTo: view.rightAnchor),
+			resultsView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+			resultsView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
 			resultsView.topAnchor.constraint(equalToSystemSpacingBelow: view.layoutMarginsGuide.topAnchor, multiplier: 3.0),
 			resultsView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
 			])

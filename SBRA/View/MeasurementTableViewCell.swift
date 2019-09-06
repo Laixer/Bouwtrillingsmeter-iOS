@@ -80,10 +80,10 @@ class MeasurementTableViewCell: UITableViewCell {
 		}
 		
 		NSLayoutConstraint.activate([
-			nameLabel.leftAnchor.constraint(equalToSystemSpacingAfter: contentView.leftAnchor, multiplier: 1.0),
+			nameLabel.leftAnchor.constraint(equalToSystemSpacingAfter: contentView.safeAreaLayoutGuide.leftAnchor, multiplier: 1.0),
 			
 			dateLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 1.0),
-			dateLabel.leftAnchor.constraint(equalToSystemSpacingAfter: contentView.leftAnchor, multiplier: 1.0),
+			dateLabel.leftAnchor.constraint(equalToSystemSpacingAfter: contentView.safeAreaLayoutGuide.leftAnchor, multiplier: 1.0),
 			dateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16.0)
 		])
 	}
