@@ -48,6 +48,9 @@ class FFT {
             magnitudesResult.append(magnitudes[i])
         }
         
+        // set first magnitude to 0 so linear offset does not show
+        magnitudesResult[0] = 0
+        
         return magnitudesResult
     //    return normalizedMagnitudes
     }
