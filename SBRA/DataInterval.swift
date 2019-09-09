@@ -134,9 +134,9 @@ class DataInterval {
         }
     }
     
-    func setFrequencyAplitudes(frequencyAmplitudes: [DataPoint<Double>]) {
+    func setFrequencyVelocities(frequencyVelocities: [DataPoint<Double>]) {
         if self.frequencyAmplitudes == nil {
-            self.frequencyAmplitudes = frequencyAmplitudes
+            self.frequencyAmplitudes = frequencyVelocities
         } else {
             print("Cannot change frequency amplitudes once they have been set.")
             return

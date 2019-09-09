@@ -95,10 +95,11 @@ class DataHandler {
             thisDataInterval.setVelocities(velocities: velocities)
             thisDataInterval.setVelocitiesAbsoluteMax(velocitiesAbsoluteMax: velocitiesAbsMax)
             
-            let frequencyAmplitudes: [DataPoint<Double>] = Calculator.fft(acceleration: thisDataInterval.getAcceleration())
-            thisDataInterval.setFrequencyAplitudes(frequencyAmplitudes: frequencyAmplitudes)
+            let frequencyVelocities: [DataPoint<Double>] = Calculator.fft(velocities: velocities)
+            thisDataInterval.setFrequencyVelocities(frequencyVelocities: frequencyVelocities)
 
-            let dominantFrequencies: DominantFrequencies = Calculator.calculateDominantFrequencies(frequencyAmplitudes: frequencyAmplitudes)
+            // calculate dominant frequencies using frequency amplitudes and the max velocities
+            let dominantFrequencies: DominantFrequencies = Calculator.calculateDominantFrequencies(frequencyVelocities: frequencyVelocities, absoluteMaxVelocities: velocitiesAbsMax)
             thisDataInterval.setDominantFrequencies(dominantFrequencies: dominantFrequencies)
 
             if thisDataInterval.isExceedingLimit() {
