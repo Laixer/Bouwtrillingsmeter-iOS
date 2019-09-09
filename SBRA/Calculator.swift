@@ -12,7 +12,6 @@
 
 import Foundation
 import Accelerate
-import Surge
 
 class Calculator {
     
@@ -30,6 +29,7 @@ class Calculator {
         limitValuesAsFloatPoints = PowerLimit.limitForSettings(settings: settings)
     }
     
+    // refactor velocity * 1000 to convert given acceleration data from m/sec to mm/sec
     static func calculateVelocityFromAcceleration(data: [DataPoint<Int64>]) -> [DataPoint<Int64>] {
         var result: [DataPoint<Int64>] = []
         var timePrevious: Int64 = data[0].xAxisValue
@@ -40,9 +40,9 @@ class Calculator {
             let timeCurrent: Int64 = data[count].xAxisValue
             let dtSeconds: Float = Float(timeCurrent - timePrevious) / 1000
             
-            velocity![0] += data[count].values[0] * dtSeconds
-            velocity![1] += data[count].values[1] * dtSeconds
-            velocity![2] += data[count].values[2] * dtSeconds
+            velocity![0] += data[count].values[0] * dtSeconds * 1000
+            velocity![1] += data[count].values[1] * dtSeconds * 1000
+            velocity![2] += data[count].values[2] * dtSeconds * 1000
             
             result.append(DataPoint(xAxisValue: data[count].xAxisValue, values: velocity!))
             
@@ -79,8 +79,8 @@ class Calculator {
         return index
     }
     
-    static func fft(acceleration: [DataPoint<Int64>]) -> [DataPoint<Double>] {
-        let accelerationCount = acceleration.count
+    static func fft(velocities: [DataPoint<Int64>]) -> [DataPoint<Double>] {
+        let accelerationCount = velocities.count
         let sampleRate: Double = Double(accelerationCount) / (Double(Const.WAITING_TIME) / 1000)
         
         var accelerationSplit: [[Float]] = [[]]
@@ -89,12 +89,12 @@ class Calculator {
         accelerationSplit.insert([], at: 2)
         
         for count in 0..<accelerationCount {
-            accelerationSplit[0].insert(acceleration[count].values[0], at: count)
-            accelerationSplit[1].insert(acceleration[count].values[1], at: count)
-            accelerationSplit[2].insert(acceleration[count].values[2], at: count)
+            accelerationSplit[0].insert(velocities[count].values[0], at: count)
+            accelerationSplit[1].insert(velocities[count].values[1], at: count)
+            accelerationSplit[2].insert(velocities[count].values[2], at: count)
         }
         
-        // use surge to implement fft
+        // implement fft by calculating magnitudes
         let magnitudesX = FFT.create(accelerationSplit[0])
         let magnitudesY = FFT.create(accelerationSplit[1])
         let magnitudesZ = FFT.create(accelerationSplit[2])
@@ -111,17 +111,17 @@ class Calculator {
     }
     
     // Create a new dominant frequency with the given fft data
-    static func calculateDominantFrequencies(frequencyAmplitudes: [DataPoint<Double>]) -> DominantFrequencies {
+    static func calculateDominantFrequencies(frequencyVelocities: [DataPoint<Double>], absoluteMaxVelocities: DataPoint<Int64>) -> DominantFrequencies {
         var maxIndexes: [Int] = [0, 0, 0]
         for dimension in 0..<3 {
             var highestRatio: Float = 0
             
-            for count in 1..<frequencyAmplitudes.count - 1 {
-                let xAxisValue: Double = frequencyAmplitudes[count].xAxisValue
+            for count in 1..<frequencyVelocities.count - 1 {
+                let xAxisValue: Double = frequencyVelocities[count].xAxisValue
                 let frequency: Float = Float(xAxisValue)
-                let amplitude: Float = frequencyAmplitudes[count].values[dimension]
+                let amplitude: Float = frequencyVelocities[count].values[dimension]
                 
-                if amplitude > frequencyAmplitudes[count-1].values[dimension] && amplitude > frequencyAmplitudes[count + 1].values[dimension] {
+                if amplitude > frequencyVelocities[count-1].values[dimension] && amplitude > frequencyVelocities[count + 1].values[dimension] {
                     let limitAmplitude = getLimitAmplitudeFromFrequency(frequency: frequency)
                     let ratio: Float = amplitude / limitAmplitude
                     
@@ -133,18 +133,18 @@ class Calculator {
             }
         }
         
-        var maxAmplitudes: [Float] = []
         var maxFrequencies: [Float] = []
+        var maxVelocities: [Float] = []
         var exceeded: [Bool] = []
         
         for dimension in 0..<3 {
-            let xAxisValue: Double = frequencyAmplitudes[maxIndexes[dimension]].xAxisValue
+            let xAxisValue: Double = frequencyVelocities[maxIndexes[dimension]].xAxisValue
             maxFrequencies.insert(Float(xAxisValue), at: dimension)
-            maxAmplitudes.insert(frequencyAmplitudes[maxIndexes[dimension]].values[dimension], at: dimension)
-            exceeded.insert(maxAmplitudes[dimension] > getLimitAmplitudeFromFrequency(frequency: maxFrequencies[dimension]), at: dimension)
+            maxVelocities.insert(frequencyVelocities[maxIndexes[dimension]].values[dimension], at: dimension)
+            exceeded.insert(maxVelocities[dimension] > getLimitAmplitudeFromFrequency(frequency: maxFrequencies[dimension]), at: dimension)
         }
         
-        let result = DominantFrequencies(frequencies: maxFrequencies, velocities: maxAmplitudes, exceedsLimit: exceeded)
+        let result = DominantFrequencies(frequencies: maxFrequencies, velocities: maxVelocities, exceedsLimit: exceeded)
         
         return result
     }
